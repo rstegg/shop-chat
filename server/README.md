@@ -1,16 +1,12 @@
 # kuwau
 
-## Now with App & Server!
+## Now with Server!
 
 ## Running production:
 
-`cd app && npm run build` (to build app)
-`npm run staging` (to update app without restarting server)
-`npm i && npm start` (to start server)
-
 ## Running development
 
-`cd app && npm start` (starts at localhost:3000)
+`cd server && npm run dev` (starts at localhost:3000)
 
 ## General TODO:
 

@@ -1,5 +1,16 @@
 # kuwau
 
+## .env
+
+- DATABASE_URL=postgres://steggie:@localhost:5432/luvpay-i
+- JWT_SECRET=poopielol (any string)
+- API_HOST=/api/v1 (this is what the client will be proxying)
+
+- AWS_ACCESS_KEY_ID=AKIAIVSW5JCRV7UQE5AQ
+- AWS_SECRET_ACCESS_KEY=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
+
+- MAILGUN_SECRET="key-ab72f757c533aea9d48f641d95c488fd"
+
 ## BUGS
 
 - Tablet needs fixing

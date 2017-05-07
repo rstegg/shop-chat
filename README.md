@@ -2,7 +2,7 @@
 
 ## .env
 
-- DATABASE_URL=postgres://steggie:@localhost:5432/luvpay-i
+- DATABASE_URL=postgres://steggie:@localhost:5432/kuwau
 - JWT_SECRET=poopielol (any string)
 - API_HOST=/api/v1 (this is what the client will be proxying)
 

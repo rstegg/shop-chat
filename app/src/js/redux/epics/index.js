@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable'
 import loginSubmit from './login'
 import signupSubmit from './signup'
-import { fetchProducts, fetchSingleProduct, createProduct, uploadProductImage, uploadFreeProductImage, editProduct, deleteProduct, shareProduct } from './products'
+import { fetchProducts, fetchSingleProduct, createProduct, uploadProductImage, editProduct, deleteProduct, shareProduct } from './products'
 import { fetchShops, fetchSingleShop, createShop, uploadShopImage, uploadEditShopImage, editShop, deleteShop } from './shops'
 import { uploadAvatar, editProfile, fetchProfile } from './profile'
 
@@ -21,7 +21,6 @@ export default combineEpics(
   signupSubmit,
   uploadAvatar,
   uploadProductImage,
-  uploadFreeProductImage,
   uploadShopImage,
   uploadEditShopImage,
   editProfile,

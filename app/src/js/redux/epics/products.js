@@ -47,12 +47,6 @@ const api = {
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  uploadFreeProductImage: ({image}) => {
-    const request = su.product(`${API_HOST}/image/product/free`)
-      .attach('image', image)
-      .set('Accept', 'application/json')
-    return Observable.fromPromise(request)
-  },
   editProduct: ({id, name, description, image, amount, product_type, is_public, token}) => {
    const request = su.put(`${API_HOST}/product/${id}`)
       .send({name, description, image, amount, product_type, is_public})
@@ -115,16 +109,6 @@ export const uploadProductImage = action$ =>
         .map(onUploadProductImageSuccess)
         .catch(error => Observable.of({
           type: 'UPLOAD_PRODUCT_IMAGE_FAILURE'
-        }))
-    )
-
-export const uploadFreeProductImage = action$ =>
-  action$.ofType('UPLOAD_FREE_PRODUCT_IMAGE')
-    .mergeMap(action =>
-      api.uploadFreeProductImage(action.payload)
-        .map(onUploadFreeProductImageSuccess)
-        .catch(error => Observable.of({
-          type: 'UPLOAD_FREE_PRODUCT_IMAGE_FAILURE'
         }))
     )
 

@@ -31,10 +31,9 @@ class SuccessMessage extends Component {
   }
 }
 
-const mapStateToProps = ({user, products}) =>
+const mapStateToProps = ({user}) =>
 ({
   user,
-  product: products.free,
   visible: user.isRegistered
 })
 

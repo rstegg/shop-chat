@@ -125,22 +125,6 @@ export const onUploadProductImageSuccess = res =>
   }
 })
 
-export const uploadFreeProductImage = image =>
-({
-  type: 'UPLOAD_FREE_PRODUCT_IMAGE',
-  payload: {
-    image
-  }
-})
-
-export const onUploadFreeProductImageSuccess = res =>
-({
-  type: 'UPLOAD_FREE_PRODUCT_IMAGE_SUCCESS',
-  payload: {
-    image: res.body.image
-  }
-})
-
 export const editProduct = ({id, name, description, image, amount, product_type, is_public}, {token}) =>
 ({
   type: 'EDIT_PRODUCT',

@@ -3,7 +3,6 @@ const signup = require('./signup')
 const shops = require('./shops')
 const profile = require('./profile')
 const images = require('./images')
-const feed = require('./feed')
 
 module.exports = [
   login,
@@ -11,5 +10,4 @@ module.exports = [
   shops,
   profile,
   images,
-  feed
 ]

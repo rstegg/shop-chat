@@ -17,6 +17,8 @@ const s3 = new AWS.S3({
   region: 'us-east-1'
 });
 
+const uploadAvatar = require('../helpers/images/uploadAvatar')
+const uploadAvatar = require('../helpers/images/uploadShopImage')
 module.exports = () => {
 
   const upload = multer({
@@ -33,34 +35,35 @@ module.exports = () => {
       }
     })
   })
-
-  router.post(`/profile/avatar`, passport.authenticate('jwt', { session: false }), upload.single('avatar'), function(req, res) {
-    User.update({image: req.file.location}, { where: { id: req.user.id }, returning: true, plain: true })
-      .then(function(profile) {
-        res.status(200).json({image: req.file.location})
-      })
-      .catch(function(err) {
-        res.status(400).json({error: 'Bad request'})
-      })
-  })
-
-  router.post(`/image/post`, passport.authenticate('jwt', { session: false }), upload.single('image'), function(req, res) {
+  const success =
+    function(req, res) {
       res.status(200).json({image: req.file.location})
-  })
+    }
 
-  router.post(`/image/post/free`, upload.single('image'), function(req, res) {
-      res.status(200).json({image: req.file.location})
-  })
-
-  router.post(`/image/shop`, passport.authenticate('jwt', { session: false }), upload.single('image'), function(req, res) {
-      res.status(200).json({image: req.file.location})
-  })
-
-  router.post(`/image/shop/:id`, passport.authenticate('jwt', { session: false }), upload.single('image'), function(req, res) {
-    Shop.update({ image: req.file.location }, { where: { id: req.params.id, userId: req.user.id }, returning: true, plain: true })
-      .then(shop => res.status(200).json({image: req.file.location}))
-      .catch(error => res.status(400).json({error}))
-  })
+  router.post(`/image/post/free`,
+    upload.single('image'),
+    success
+  )
+  .post(`/image/shop/:id`,
+      upload.single('image'),
+      uploadShopImage
+  )
+  .use(passport.authenticate('jwt', { session: false }))
+  router.post(`/profile/avatar`,
+    passport.authenticate('jwt', { session: false }),
+    upload.single('avatar'),
+    uploadAvatar
+  )
+  .post(`/image/post`,
+    passport.authenticate('jwt', { session: false }),
+    upload.single('image'),
+    success
+  )
+  .post(`/image/shop`,
+    passport.authenticate('jwt', { session: false }),
+    upload.single('image'),
+    success
+  )
 
   return router
 }

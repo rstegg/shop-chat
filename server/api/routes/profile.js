@@ -8,7 +8,7 @@ module.exports = () => {
   router.get(`/profile/:id`,
     getProfileHandler
   )
-  router.put(`/profile`,
+  .put(`/profile`,
     passport.authenticate('jwt', { session: false }),
     editProfileHandler
   )

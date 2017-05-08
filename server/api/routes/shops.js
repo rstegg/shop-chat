@@ -13,29 +13,20 @@ module.exports = () => {
   router.get(`/shop/:id`,
     getShopHandler
   )
-
-  router.get(`/shops`,
-    passport.authenticate('jwt', { session: false }),
+  .use(passport.authenticate('jwt', { session: false })),
+    .get(`/shops`,
     getShopsHandler
   )
-
-  router.post(`/shops`,
-    passport.authenticate('jwt', { session: false }),
+  .post(`/shops`,
     createShopHandler
   )
-
-  router.put(`/shop/:id`,
-    passport.authenticate('jwt', { session: false }),
+  .put(`/shop/:id`,
     editShopHandler
   )
-
-  router.post(`/share/shop`,
-    passport.authenticate('jwt', { session: false }),
+  .post(`/share/shop`,
     shareShopHandler
   )
-
-  router.delete(`/shop/:id`,
-    passport.authenticate('jwt', { session: false }),
+  .delete(`/shop/:id`,
     deleteShopHandler
   )
 

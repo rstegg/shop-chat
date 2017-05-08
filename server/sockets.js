@@ -2,104 +2,86 @@
 
 const R = require('ramda')
 
+const { models } = require('./db')
+const { User, Room } = models
+
 // socket.io -> startSockets
 module.exports = io => {
   io.on('connection', socket => {
     //name, device -> registerUserOnline
     socket.on('joinserver', (name, device) => {
-		let exists = false
-		let ownerRoomID = inRoomID = null
-
-		R.find(people, (key,value) => {
-			if (key.name.toLowerCase() === name.toLowerCase()) {
-				return exists = true
-      }
-		})
-		if (exists) {//provide unique username:
-			var randomNumber=Math.floor(Math.random()*1001)
-			do {
-				proposedName = name+randomNumber
-				R.find(people, (key,value) => {
-					if (key.name.toLowerCase() === proposedName.toLowerCase())
-						return exists = true
-				})
-			} while (!exists)
-			socket.emit('exists', {msg: 'The username already exists, please pick another one.', proposedName: proposedName})
-		} else {
-			people[socket.id] = {'name' : name, 'owns' : ownerRoomID, 'inroom': inRoomID, 'device': device}
-			socket.emit('update', 'You have connected to the server.')
-			io.sockets.emit('update', people[socket.id].name + ' is online.')
-			sizePeople = R.size(people)
-			sizeRooms = R.size(rooms)
-			io.sockets.emit('update-people', {people: people, count: sizePeople})
-			socket.emit('roomList', {rooms: rooms, count: sizeRooms})
-			socket.emit('joined') //extra emit for GeoLocation
-			sockets.push(socket)
-		}
-	})
-
-	socket.on('getOnlinePeople', (fn) => {
-                fn({people: people})
+			User.findOne({where: { username: name }})
+        .then(user =>
+          !user ?
+            Promise.reject('No user')
+            : user
+        )
+        .then(validatedUser => {
+          /*
+          * do socket stuff about connecting
+          * AKA this is where we cache the user, store the relative info (socketId, userId, username, etc) and device? "in"rooms? (rooms the user is in)
+          */
+          socket.emit('update', 'You have connected to the server.') //Tell the user that they are connected to chat
+          io.sockets.emit('update', validatedUser.username + ' is online.') //Tell the world that the user is connected to chat (TODO: Maybe not?)
+          Room.findAll()
+            .then(rooms => {
+              socket.emit('roomList', {rooms, count: R.size(rooms)})
+            })
+          User.findAll({where: { online: true }})
+            .then(users => {
+              io.sockets.emit('update-onliners', {users, count: R.size(users)})
+            })
+          socket.emit('joined') //extra emit for GeoLocation
+          SocketList.findOrCreate(socket, { where: { socketId: socket.id } }) //Store a list of all the sockets? TODO: maybe a better approach
+            .then(socket => console.log(socket))
         })
+  	})
 
-	socket.on('countryUpdate', (data) => { //we know which country the user is from
-		country = data.country.toLowerCase()
-		people[socket.id].country = country
-		io.sockets.emit('update-people', {people: people, count: sizePeople})
-	})
+	  socket.on('getOnlineUsers', fn =>
+      User.findAll({where: { online: true }})
+        .then(fn) //getOnlineusers gives a function, returns the list of online users mapped to the fn ? TODO: maybe better approach
+      )
 
-	socket.on('typing', (data) => {
-		if (typeof people[socket.id] !== 'undefined')
-			io.sockets.in(socket.room).emit('isTyping', {isTyping: data, person: people[socket.id].name})
+  	socket.on('countryUpdate', data =>
+      User.update({country: data.country.toLowerCase()}, { where: { socketId: socket.id }, returning: true, plain: true })
+        .then(user =>
+          User.findAll({where: { online: true }})
+            .then(users =>
+            io.sockets.emit('update-users', {users: people, count: R.size(users)})
+          )
+        )
+  	  )
+
+	socket.on('typing', data => {
+    User.findOne({where: { socketId: socket.id } })
+      .then(user =>
+        user ?
+          io.sockets.in(socket.room).emit('isTyping', {isTyping: data, username: user.username})
+          : null
+      )
 	})
 
 	socket.on('send', (msTime, msg) => {
-		//test for whisper
-		var re = /^[w]:.*:/
-		var whisper = re.test(msg)
-		var whisperStr = msg.split(':')
-		var found = false
-		if (whisper) {
-			var whisperTo = whisperStr[1]
-			var keys = Object.keys(people)
-			if (keys.length != 0) {
-				for (var i = 0 i<keys.length i++) {
-					if (people[keys[i]].name === whisperTo) {
-						var whisperId = keys[i]
-						found = true
-						if (socket.id === whisperId) { //can't whisper to ourselves
-							socket.emit('update', `You can't whisper to yourself`)
-						}
-						break
-					}
-				}
-			}
-			if (found && socket.id !== whisperId) {
-				var whisperTo = whisperStr[1]
-				var whisperMsg = whisperStr[2]
-				socket.emit('whisper', {name: 'You'}, whisperMsg)
-				io.sockets.socket(whisperId).emit('whisper', msTime, people[socket.id], whisperMsg)
+		if (io.sockets.manager.roomClients[socket.id]['/'+socket.room] !== undefined ) {
+      //Update room with msTime and msg?
+			io.sockets.in(socket.room).emit('chat', msTime, people[socket.id], msg)
+			socket.emit('isTyping', false)
+			if (R.size(chatHistory[socket.room]) > 10) {
+				chatHistory[socket.room].splice(0,1)
 			} else {
-				socket.emit('update', `Can't find ${whisperTo}`)
+				chatHistory[socket.room].push(people[socket.id].name + ': ' + msg)
 			}
-		} else {
-			if (io.sockets.manager.roomClients[socket.id]['/'+socket.room] !== undefined ) {
-				io.sockets.in(socket.room).emit('chat', msTime, people[socket.id], msg)
-				socket.emit('isTyping', false)
-				if (R.size(chatHistory[socket.room]) > 10) {
-					chatHistory[socket.room].splice(0,1)
-				} else {
-					chatHistory[socket.room].push(people[socket.id].name + ': ' + msg)
-				}
-		    	} else {
-				socket.emit('update', 'Please connect to a room.')
-		    	}
-		}
+	  } else {
+			socket.emit('update', 'Please connect to a room.')
+	  }
 	})
 
 	socket.on('disconnect', () => {
 		if (typeof people[socket.id] !== 'undefined') { //this handles the refresh of the name screen
-			purge(socket, 'disconnect')
+			// purge(socket, 'disconnect')
+      /*
+      * handle socket disconnect (update users, etc)
+      */
 		}
 	})
 
@@ -137,12 +119,9 @@ module.exports = io => {
 	})
 
 	socket.on('removeRoom', id => {
-		 var room = rooms[id]
-		 if (socket.id === room.owner) {
-			purge(socket, 'removeRoom')
-		} else {
-      socket.emit('update', 'Only the owner can remove a room.')
-		}
+		 /*
+     * TODO: add remove room functionality?
+     */
 	})
 
 	socket.on('joinRoom', id => {
@@ -178,9 +157,11 @@ module.exports = io => {
 	})
 
 	socket.on('leaveRoom', id => {
-		const room = rooms[id]
-		if (room) {
-			purge(socket, 'leaveRoom')
-    }
+		Room.findOne({where: { id }})
+      .then(room =>
+        room ?
+          updateOnlineUsers()
+          : null
+      )
 	})
 }

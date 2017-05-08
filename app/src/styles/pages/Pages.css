@@ -1,0 +1,22 @@
+.pages--list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pages {
+  min-height: 20%;
+  height: 88.5%;
+  height: auto;
+  overflow: auto;
+}
+
+@media (min-width:768px)  {
+  .pages {
+    min-height: 20%;
+    max-height: 80%;
+    height: auto;
+    overflow: auto;
+  }
+}

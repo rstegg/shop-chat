@@ -13,18 +13,17 @@ module.exports = () => {
   router.post(`/signup`,
     signupHandler
   )
-
-  router.post(`/signup/validate_email`,
+ .post(`/signup/validate_email`,
     validateBody(prop('email'), 'missing email'),
     validateEmailHandler
   )
-
-  router.post(`/signup/validate_username`,
+  .post(`/signup/validate_username`,
     validateBody(prop('username'), 'missing username'),
     validateUsernameHandler
   )
-
-  router.get(`/signup/email_confirmation/:permalink/:verify_token`, verifyTokenHandler)
+  .get(`/signup/email_confirmation/:permalink/:verify_token`,
+    verifyTokenHandler
+  )
 
   return router
 }

@@ -13,11 +13,11 @@ import RouterButton from '../../elements/RouterButton'
 
 const Signup = ({
   user,
-  post,
+  product,
   onSignupSubmit
 }) =>
   user.isAuthenticated ?
-    <Redirect to='/posts' from='/signup' />
+    <Redirect to='/products' from='/signup' />
   : user.isRegistered ?
     <Redirect to='/' from='/signup' />
   :
@@ -26,7 +26,7 @@ const Signup = ({
         <Card.Content>
           <Card.Header>Signup</Card.Header>
           <Card.Description>
-            {post.name && <Label ribbon>Signup to share your post!</Label>}
+            {product.name && <Label ribbon>Signup to share your product!</Label>}
             <SignupForm onSubmit={onSignupSubmit} />
           </Card.Description>
         </Card.Content>
@@ -36,10 +36,10 @@ const Signup = ({
       </Card>
     
 
-const mapStateToProps = ({user, posts}) =>
+const mapStateToProps = ({user, products}) =>
 ({
   user,
-  post: posts.free
+  product: products.free
 })
 
 const mapDispatchToProps = dispatch =>

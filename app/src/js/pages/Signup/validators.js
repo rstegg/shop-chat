@@ -31,7 +31,7 @@ export const validate = values => {
 export const asyncValidate = (values, dispatch, props, field) => {
   const previousErrors = props.asyncErrors;
   if(field === 'username') {
-  return su.post(`${API_HOST}/signup/validate_username`)
+  return su.product(`${API_HOST}/signup/validate_username`)
     .send({ username: values.username })
     .set('Accept', 'application/json')
     .then(res => {
@@ -41,7 +41,7 @@ export const asyncValidate = (values, dispatch, props, field) => {
       }
     })
   } else if(field === 'email') {
-    return su.post(`${API_HOST}/signup/validate_email`)
+    return su.product(`${API_HOST}/signup/validate_email`)
     .send({ email: values.email })
     .set('Accept', 'application/json')
     .then(res => {

@@ -12,7 +12,7 @@ const api = {
     return Observable.fromPromise(request)
   },
   uploadAvatar: ({image, token}) => {
-    const request = su.post(`${API_HOST}/profile/avatar`)
+    const request = su.product(`${API_HOST}/profile/avatar`)
       .attach('avatar', image)
       .set('Accept', 'application/json')
       .set('Authorization', token)

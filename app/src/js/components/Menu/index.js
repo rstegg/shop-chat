@@ -6,6 +6,7 @@ import { push } from 'react-router-redux'
 import TabletMenu from './TabletMenu'
 import DesktopMenu from './DesktopMenu'
 
+//Only renders if this is a tablet or desktop
 const BottomNav =
 ({
   isMobile,
@@ -28,12 +29,12 @@ const mapDispatchToProps = dispatch =>
 ({
   toLogin:      () => dispatch(push('/login')),
   toSignup:     () => dispatch(push('/signup')),
-  toPages:      () => dispatch(push('/pages')),
+  toShops:      () => dispatch(push('/shops')),
   toArticles:   () => dispatch(push('/articles')),
-  toPosts:      () => dispatch(push('/posts')),
-  toPublicFeed: () => dispatch(push('/')),
+  toProducts:   () => dispatch(push('/products')),
+  toGlobe:      () => dispatch(push('/')),
   toFeed:       () => dispatch(push('/feed')),
-  toPencil:     () => dispatch(push('/posts/new')),
+  toPencil:     () => dispatch(push('/products/new')),
   toSettings:   username => dispatch(push(`/user/${username}`)),
   toPower:      () => dispatch({type: 'LOGOUT'})
 })

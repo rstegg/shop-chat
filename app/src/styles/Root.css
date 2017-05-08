@@ -33,7 +33,7 @@
   overflow: hidden;
 }
 
-.postimg {
+.productimg {
   width: 100%;
   align-self: center;
 }
@@ -83,7 +83,7 @@
     overflow: hidden;
   }
 
-  .postimg {
+  .productimg {
     width: 35%;
     align-self: center;
   }

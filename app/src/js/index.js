@@ -8,23 +8,17 @@ import { Route, Switch } from 'react-router'
 import { ConnectedRouter as Router } from 'react-router-redux'
 
 import Home from './pages/Home'
-import Feed from './pages/Feed'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Posts from './pages/Posts'
+import Products from './pages/Products'
 
-import CreatePost from './pages/CreatePost'
-import ViewPost from './pages/ViewPost'
-import EditPost from './pages/EditPost'
+import CreateProduct from './pages/CreateProduct'
+import ViewProduct from './pages/ViewProduct'
+import EditProduct from './pages/EditProduct'
 
-import Pages from './pages/Pages'
-import CreatePage from './pages/CreatePage'
-import ViewPage from './pages/ViewPage'
-import EditPage from './pages/EditPage'
-
-import Articles from './pages/Articles'
-import CreateArticle from './pages/CreateArticle'
-import ViewArticle from './pages/ViewArticle'
+import Shops from './pages/Shops'
+import CreateShop from './pages/CreateShop'
+import ViewShop from './pages/ViewShop'
 
 import ViewProfile from './pages/ViewProfile'
 
@@ -40,18 +34,13 @@ render(
             <Route exact path='/' component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Signup} />
-            <Route exact path='/feed' component={Feed} />
-            <Route exact path='/posts' component={Posts} />
-            <Route exact path='/posts/new' component={CreatePost} />
-            <Route exact path='/posts/edit/:id' component={EditPost} />
-            <Route exact path='/post/:id' component={ViewPost} />
-            <Route exact path='/pages' component={Pages} />
-            <Route exact path='/pages/new' component={CreatePage} />
-            <Route exact path='/pages/edit/:id' component={EditPage} />
-            <Route exact path='/page/:id' component={ViewPage} />
-            <Route exact path='/articles' component={Articles} />
-            <Route exact path='/articles/new' component={CreateArticle} />
-            <Route exact path='/article/:id' component={ViewArticle} />
+            <Route exact path='/products' component={Products} />
+            <Route exact path='/products/new' component={CreateProduct} />
+            <Route exact path='/products/edit/:id' component={EditProduct} />
+            <Route exact path='/product/:id' component={ViewProduct} />
+            <Route exact path='/shops' component={Shops} />
+            <Route exact path='/pages/new' component={CreateShop} />
+            <Route exact path='/shop/:id' component={ViewShop} />
             <Route exact path='/user/:id' component={ViewProfile} />
           </Switch>
         </RootLayout>

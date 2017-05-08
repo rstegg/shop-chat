@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 import { resetSignup } from '../redux/actions/signup'
-import { createPost } from '../redux/actions/posts'
+import { createProduct } from '../redux/actions/products'
 
 class SuccessMessage extends Component {
   componentWillUpdate() {
     if(this.props.visible) {
-      if(this.props.post.isSaved) {
-        this.props.createPost(this.props.post, this.props.user)
+      if(this.props.product.isSaved) {
+        this.props.createProduct(this.props.product, this.props.user)
       }
     }
   }
@@ -31,17 +31,17 @@ class SuccessMessage extends Component {
   }
 }
 
-const mapStateToProps = ({user, posts}) =>
+const mapStateToProps = ({user, products}) =>
 ({
   user,
-  post: posts.free,
+  product: products.free,
   visible: user.isRegistered
 })
 
 const mapDispatchToProps = dispatch =>
 ({
   resetSignup: () => dispatch(resetSignup()),
-  createPost: (post, user) => dispatch(createPost(post, user)),
+  createProduct: (product, user) => dispatch(createProduct(product, user)),
 })
 
 export default connect(

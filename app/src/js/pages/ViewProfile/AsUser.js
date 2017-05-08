@@ -8,7 +8,7 @@ const UserView = ({
   <Grid celled className='main-container'>
     <Grid.Row>
       <Grid.Column width={3}>
-        <Image src={profile.image || '/images/postholder.png'} className='profile--image' />
+        <Image src={profile.image || '/images/productholder.png'} className='profile--image' />
       </Grid.Column>
       <Grid.Column width={10}>
         <Header as='h4'>{profile.description}</Header>

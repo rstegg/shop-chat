@@ -4,11 +4,11 @@
 @import 'components/Menu.css';
 /*Elements*/
 @import 'elements/InputField.css';
-@import 'elements/PostItem.css';
-/*Pages*/
+@import 'elements/ProductItem.css';
+/*Shops*/
 @import 'pages/EditProfile.css';
 @import 'pages/Home.css';
-@import 'pages/Posts.css';
-@import 'pages/Pages.css';
-@import 'pages/ViewPost.css';
-@import 'pages/ViewPage.css';
+@import 'pages/Products.css';
+@import 'pages/Shops.css';
+@import 'pages/ViewProduct.css';
+@import 'pages/ViewShop.css';

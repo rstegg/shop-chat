@@ -11,7 +11,7 @@ import { editProfile, uploadAvatar, editProfileField } from '../../redux/actions
 
 const Avatar = ({image, uploadAvatar}) =>
   <Dropzone className='ui image editable' onDrop={uploadAvatar}>
-    <Image src={image || '/images/postholder.png'} />
+    <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
 const AdminView = ({

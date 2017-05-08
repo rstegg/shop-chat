@@ -14,7 +14,7 @@ const Login = ({
   onLoginSubmit
 }) =>
   user.isAuthenticated ?
-    <Redirect to='/posts' from='/login' />
+    <Redirect to='/products' from='/login' />
   :
     <Card>
       <Card.Content>

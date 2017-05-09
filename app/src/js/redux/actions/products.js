@@ -3,14 +3,6 @@ export const refreshProducts = () =>
   type: 'REFRESH_PRODUCTS'
 })
 
-export const saveFreeProduct = product =>
-({
-  type: 'SAVE_FREE_PRODUCT',
-  payload: {
-    product
-  }
-})
-
 export const shareProduct = ({name, email, message, productId}, user, url) =>
 ({
   type: 'SHARE_PRODUCT',

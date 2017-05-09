@@ -9,37 +9,29 @@ import { onSignupSubmit } from '../../redux/actions/signup'
 import SignupForm from './form'
 import RouterButton from '../../elements/RouterButton'
 
-
-
 const Signup = ({
   user,
-  product,
   onSignupSubmit
 }) =>
-  user.isAuthenticated ?
-    <Redirect to='/products' from='/signup' />
-  : user.isRegistered ?
-    <Redirect to='/' from='/signup' />
+  (user.isAuthenticated || user.isRegistered) ?
+    <Redirect to='/' />
   :
-    
-      <Card>
-        <Card.Content>
-          <Card.Header>Signup</Card.Header>
-          <Card.Description>
-            {product.name && <Label ribbon>Signup to share your product!</Label>}
-            <SignupForm onSubmit={onSignupSubmit} />
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <RouterButton to="/login" from="/signup" prefix="Have an account?" label="Login" />
-        </Card.Content>
-      </Card>
-    
+    <Card>
+      <Card.Content>
+        <Card.Header>Signup</Card.Header>
+        <Card.Description>
+          <SignupForm onSubmit={onSignupSubmit} />
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <RouterButton to="/login" from="/signup" prefix="Have an account?" label="Login" />
+      </Card.Content>
+    </Card>
 
-const mapStateToProps = ({user, products}) =>
+
+const mapStateToProps = ({user}) =>
 ({
-  user,
-  product: products.free
+  user
 })
 
 const mapDispatchToProps = dispatch =>

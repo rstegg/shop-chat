@@ -18,7 +18,7 @@ const api = {
     return Observable.fromPromise(request)
   },
   createShop: ({shop, user}) => {
-   const request = su.product(`${API_HOST}/shops`)
+   const request = su.post(`${API_HOST}/shops`)
       .send({shop})
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
@@ -38,14 +38,14 @@ const api = {
     return Observable.fromPromise(request)
   },
   uploadShopImage: ({image, token}) => {
-    const request = su.product(`${API_HOST}/image/shop`)
+    const request = su.post(`${API_HOST}/image/shop`)
       .attach('image', image)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   uploadEditShopImage: ({image, shopId, token}) => {
-    const request = su.product(`${API_HOST}/image/shop/${shopId}`)
+    const request = su.post(`${API_HOST}/image/shop/${shopId}`)
       .attach('image', image)
       .set('Accept', 'application/json')
       .set('Authorization', token)

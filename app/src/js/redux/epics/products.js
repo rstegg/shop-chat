@@ -27,21 +27,21 @@ const api = {
     return Observable.fromPromise(request)
   },
   createProduct: ({product, token}) => {
-   const request = su.product(`${API_HOST}/products`)
+   const request = su.post(`${API_HOST}/products`)
       .send({product})
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   shareProduct: ({name, email, message, token, url, productId}) => {
-   const request = su.product(`${API_HOST}/share/product`)
+   const request = su.post(`${API_HOST}/share/product`)
       .send({name, email, message, token, url, productId})
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   uploadProductImage: ({image, token}) => {
-    const request = su.product(`${API_HOST}/image/product`)
+    const request = su.post(`${API_HOST}/image/product`)
       .attach('image', image)
       .set('Accept', 'application/json')
       .set('Authorization', token)

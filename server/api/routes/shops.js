@@ -13,8 +13,8 @@ module.exports = () => {
   router.get(`/shop/:id`,
     getShopHandler
   )
-  .use(passport.authenticate('jwt', { session: false })),
-    .get(`/shops`,
+  .use(passport.authenticate('jwt', { session: false }))
+  .get(`/shops`,
     getShopsHandler
   )
   .post(`/shops`,

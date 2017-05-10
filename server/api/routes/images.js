@@ -17,8 +17,9 @@ const s3 = new AWS.S3({
   region: 'us-east-1'
 });
 
-const uploadAvatar = require('../helpers/images/uploadAvatar')
-const uploadAvatar = require('../helpers/images/uploadShopImage')
+const uploadAvatar = require('../handlers/images/uploadAvatar')
+const uploadShopImage = require('../handlers/images/uploadShopImage')
+
 module.exports = () => {
 
   const upload = multer({

@@ -5,7 +5,6 @@ import {
   onDeleteProductSuccess,
   onCreateProductSuccess,
   onUploadProductImageSuccess,
-  onUploadFreeProductImageSuccess,
   onShareProductSuccess
 } from '../actions/products'
 import su from 'superagent'

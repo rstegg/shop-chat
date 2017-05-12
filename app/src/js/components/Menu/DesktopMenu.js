@@ -11,7 +11,6 @@ export default
   toShops,
   toGlobe,
   toPencil,
-  toFreePencil,
   toSettings,
   toPower
 }) =>

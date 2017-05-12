@@ -13,6 +13,51 @@
 (MAILGUN [email verfication])
 - MAILGUN_SECRET=key-ab72f757c533aea9d48f641d95c488fd
 
+## TODO
+
+- Socket Authentication
+- Shop Chat Styling
+
+- CreateProduct (should be inside ViewShop/AsOwner)
+- CreateShop
+- EditProduct (should be ViewProduct/AsOwner)
+- EditProfile (should be ViewProfile/AsOwner)
+- Home
+- Login
+- Products (should be ViewShop/Products? or remove?)
+- Shops
+- Signup
+- ViewProduct
+- ViewProfile
+- ViewShop
+
+### TODO: Low Priority
+
+- Fix styling
+- Add aliases to common file paths
+
+### TODO: End goals
+
+- Abstract for white-label
+- Fix inconsistencies as possible
+
+### Pages
+
+- CreateProduct
+- CreateShop
+- EditProduct
+- EditProfile
+- Home
+- Login
+- Products
+- Shops
+- Signup
+- ViewProduct
+- ViewProfile
+- ViewShop
+
+# Below this point are old/legacy notes
+
 ## BUGS
 
 - Tablet needs fixing

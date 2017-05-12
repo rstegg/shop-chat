@@ -19,7 +19,6 @@ const Flydown = ({
   toShops,
   toGlobe,
   toPencil,
-  toFreePencil,
   toSettings,
   toPower
 }) =>

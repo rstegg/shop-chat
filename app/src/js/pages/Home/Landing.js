@@ -1,0 +1,24 @@
+import React from 'react'
+import { connect } from 'react-redux'
+
+import { Card } from 'semantic-ui-react'
+
+const Home = ({user}) =>
+  <Card className='products'>
+    <Card.Content>
+      <Card.Header>Shop App</Card.Header>
+    </Card.Content>
+    <Card.Content>
+      Shop. Chat. Stuff.
+    </Card.Content>
+  </Card>
+
+
+const mapStateToProps = ({user}) =>
+({
+  user
+})
+
+export default connect(
+  mapStateToProps
+)(Home)

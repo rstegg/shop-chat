@@ -1,20 +1,20 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import { Card } from 'semantic-ui-react'
+import LandingPage from './Landing'
+import HomeChatPage from './Chat'
 
-import RouterButton from '../../elements/RouterButton'
+const Home = ({user}) =>
+  user.isAuthenticated ?
+    <HomeChatPage />
+  :
+    <LandingPage />
 
-const Home = () =>
-  <Card className='products'>
-    <Card.Content>
-      <Card.Header>Shop App</Card.Header>
-    </Card.Content>
-    <Card.Content>
-      Shop. Chat. Stuff.
-    </Card.Content>
-    <Card.Content extra>
-      <RouterButton to='/shops/new' from='/' label='start a shop' />
-    </Card.Content>
-  </Card>
+const mapStateToProps = ({user}) =>
+({
+  user
+})
 
-export default Home
+export default connect(
+  mapStateToProps
+)(Home)

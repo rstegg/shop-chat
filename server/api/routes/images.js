@@ -37,17 +37,11 @@ module.exports = () => {
     })
   })
   const success =
-    function(req, res) {
-      res.status(200).json({image: req.file.location})
-    }
+    (req, res) => res.status(200).json({image: req.file.location})
 
-  router.post(`/image/post/free`,
+  router.post(`/image/shop/:id`,
     upload.single('image'),
-    success
-  )
-  .post(`/image/shop/:id`,
-      upload.single('image'),
-      uploadShopImage
+    uploadShopImage
   )
   .use(passport.authenticate('jwt', { session: false }))
   router.post(`/profile/avatar`,

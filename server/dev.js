@@ -8,6 +8,8 @@ const bodyParser = require('body-parser')
 const http = require('http').Server(app)
 const passport = require('passport')
 const db = require('./db')
+const startSockets = require('./sockets')
+const io = require('socket.io')(http)
 
 const API_HOST = process.env.API_HOST || '/api/v1'
 
@@ -15,6 +17,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(passport.initialize())
 app.use(cors())
+
+startSockets(io)
 
 const port = process.env.PORT || 3030
 http.listen(port, function() {

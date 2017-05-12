@@ -11,6 +11,8 @@ import EditorField from '../../elements/EditorField'
 
 import { editShop, uploadEditShopImage, editShopField } from '../../redux/actions/shops'
 
+import ShopChatPage from './Chat'
+
 const Avatar = ({image, uploadEditShopImage}) =>
   <Dropzone className='ui image editable' onDrop={uploadEditShopImage}>
     <Image src={image || '/images/productholder.png'} />
@@ -58,6 +60,9 @@ const AdminView = ({
           onClick={() => editShopField('description')} onSubmit={v => editShop({...shop, description: v}, user)}>
           <Header as='h4'>{shop.description || 'Add a description'}</Header>
         </EditField>
+      </Grid.Column>
+      <Grid.Column width={3}>
+        <ShopChatPage />
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>

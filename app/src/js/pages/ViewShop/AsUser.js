@@ -1,8 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { Image, Button, Grid, Header, Label } from 'semantic-ui-react'
+import { Image, Button, Grid, Header } from 'semantic-ui-react'
 
-import ShopMenu from '../../components/ProductMenu'
+import ShopMenu from 'components/ProductMenu'
+import ProfileLabel from 'elements/ProfileLabel'
+
+import ShopChatPage from 'components/Chat'
 
 const UserView = ({
   shop,
@@ -17,6 +19,9 @@ const UserView = ({
       <Grid.Column width={10}>
         <Header as='h4'>{shop.description}</Header>
       </Grid.Column>
+      <Grid.Column width={3}>
+        <ShopChatPage room={shop} roomType='shop' />
+      </Grid.Column>
     </Grid.Row>
     <Grid.Row>
       <Grid.Column width={3}>
@@ -24,11 +29,7 @@ const UserView = ({
         <Button onClick={() => joinShop(shop.id, user)} basic color='green'>Join Shop</Button>
       </Grid.Column>
       <Grid.Column width={10}>
-        {shop.user &&
-          <Label to={`/user/${shop.user.username}`} from={`/shop/${shop.slug}`} as={NavLink} basic image>
-            <img src={shop.user.image || '/images/placeholder.png'} alt={user.username} /> {shop.user.username}
-          </Label>
-        }
+        { shop.user && <ProfileLabel username={shop.user.username} image={shop.user.image} /> }
       </Grid.Column>
       <Grid.Column width={3}>
         <ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />

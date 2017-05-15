@@ -1,0 +1,13 @@
+.chat__container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.room-chat {
+  max-height: 50vh !important;
+}
+
+.chat-scroll {
+  float: left;
+  clear: both;
+}

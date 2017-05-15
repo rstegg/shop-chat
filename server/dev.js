@@ -21,7 +21,7 @@ app.use(cors())
 startSockets(io)
 
 const port = process.env.PORT || 3030
-http.listen(port, function() {
+http.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
 

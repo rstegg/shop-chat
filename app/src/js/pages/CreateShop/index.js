@@ -5,9 +5,9 @@ import { Redirect } from 'react-router-dom'
 import { Card, Image } from 'semantic-ui-react'
 import CreateShopForm from './form'
 
-import { createShop, uploadShopImage } from '../../redux/actions/shops'
+import { createShop, uploadShopImage } from 'actions/shops'
 
-import Dropzone from '../../components/Dropzone'
+import Dropzone from 'components/Dropzone'
 
 const Avatar = ({image, uploadShopImage}) =>
   <Dropzone className='ui image editable' onDrop={uploadShopImage}>
@@ -16,10 +16,10 @@ const Avatar = ({image, uploadShopImage}) =>
 
 const CreateShop = ({ user, shop, createShop, uploadShopImage, image }) =>
   !user.isAuthenticated ?
-    <Redirect to='/login' from='/pages/new' />
+    <Redirect to='/login' />
   :
   shop.isCreated ?
-    <Redirect to='/shops' from='/pages/new' />
+    <Redirect to='/shops' />
   :
     <Card>
       <Avatar image={image || shop.image} uploadShopImage={img => uploadShopImage(img[0], user)} />

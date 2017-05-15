@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MenuButton from '../../elements/MenuButton'
+import MenuButton from 'elements/MenuButton'
 
 export default
 ({
@@ -15,12 +15,12 @@ export default
   toPower
 }) =>
   <div>
-    <div className='menu--container--left'>
+    <div className='menu__container--left'>
       <MenuButton onClick={toGlobe} icon='globe' text='public products' />
       {user.isAuthenticated && <MenuButton onClick={toProducts} icon='sticky note' text='your products' />}
       {user.isAuthenticated && <MenuButton onClick={toShops} icon='book' text='your shops' />}
     </div>
-    <div className='menu--container--right'>
+    <div className='menu__container--right'>
       {!user.isAuthenticated && <MenuButton onClick={toLogin} icon='sign in' text='login' />}
       {!user.isAuthenticated && <MenuButton onClick={toSignup} icon='add user' text='sign up' />}
       {user.isAuthenticated && <MenuButton onClick={toPencil} icon='edit' text='start a product' />}

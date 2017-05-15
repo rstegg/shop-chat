@@ -1,35 +1,26 @@
 # kuwau
 
-## .env
-
-- DATABASE_URL=postgres://username:password@POSTGRES_DATABASE_URL
-- JWT_SECRET=anything
-- API_HOST=/api/v1
-
-(AWS [image hosting])
-- AWS_ACCESS_KEY_ID=AKIAIVSW5JCRV7UQE5AQ
-- AWS_SECRET_ACCESS_KEY=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
-
-(MAILGUN [email verfication])
-- MAILGUN_SECRET=key-ab72f757c533aea9d48f641d95c488fd
-
 ## TODO
 
+### [HIGH PRIORITY]
+
+- Style View Product
+  - Add chat to View Product
+- Prepare for payment model
+- Prepare for a launch
+
+### [sockets]
+
 - Socket Authentication
+- rooms authentication (permissions)
 - Shop Chat Styling
 
-- CreateProduct (should be inside ViewShop/AsOwner)
-- CreateShop
-- EditProduct (should be ViewProduct/AsOwner)
-- EditProfile (should be ViewProfile/AsOwner)
-- Home
-- Login
-- Products (should be ViewShop/Products? or remove?)
-- Shops
-- Signup
-- ViewProduct
-- ViewProfile
-- ViewShop
+### [structure]
+
+- CreateProduct: should be inside ViewShop/AsOwner (idea)
+- EditProduct: should be ViewProduct/AsOwner (fix)
+- EditProfile: should be ViewProfile/AsOwner (fix)
+- Products: should be ViewShop/Products? or remove? (idea)
 
 ### TODO: Low Priority
 

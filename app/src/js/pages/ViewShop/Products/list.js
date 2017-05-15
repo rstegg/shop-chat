@@ -1,7 +1,7 @@
 import React from 'react'
-
-import ProductItem from '../../elements/ProductItem'
 import { Feed } from 'semantic-ui-react'
+
+import ProductItem from 'elements/ProductItem'
 
 const ProductsList =
 ({
@@ -9,7 +9,7 @@ const ProductsList =
   setCurrentProduct
 }) =>
     <Feed>
-      {products.length ? products.map((product, i) =>
+      {!!products.length ? products.map((product, i) =>
         <ProductItem key={`product-${i}`} product={product} onClick={() => setCurrentProduct(product)} />
       ) :
       <Feed.Event>

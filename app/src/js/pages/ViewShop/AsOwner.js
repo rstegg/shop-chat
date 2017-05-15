@@ -1,92 +1,68 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { Image, Grid, Header, Label, Button } from 'semantic-ui-react'
-import { Field, reduxForm } from 'redux-form'
+import { Image, Header } from 'semantic-ui-react'
+import { reduxForm } from 'redux-form'
 
-import ShopMenu from '../../components/ProductMenu'
-import Dropzone from '../../components/Dropzone'
-import InputField from '../../elements/InputField'
-import EditorField from '../../elements/EditorField'
+import ShopMenu from 'components/ProductMenu'
+import Dropzone from 'components/Dropzone'
 
-import { editShop, uploadEditShopImage, editShopField } from '../../redux/actions/shops'
+import ProfileLabel from 'elements/ProfileLabel'
+import EditorField from 'elements/EditorField'
 
-import ShopChatPage from './Chat'
+import { editShop, uploadEditShopImage, editShopField } from 'actions/shops'
+
+import ShopChatPage from 'components/Chat'
+import GridLayout from 'components/layouts/Grid'
+
+import Products from './Products'
 
 const Avatar = ({image, uploadEditShopImage}) =>
   <Dropzone className='ui image editable' onDrop={uploadEditShopImage}>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
-const EditField = ({children, fieldComponent, onClick, isEditing, placeholder, label, name, value, type, onSubmit}) =>
-  isEditing ?
-  <Field
-    component={fieldComponent || InputField}
-    type={type || 'text'}
-    label={label}
-    placeholder={placeholder}
-    name={name}
-    onKeyUp={e => {
-      if(e.keyCode === 13) {
-        onSubmit(e.target.value)
-      }}
-    }
-    onClick={v => onSubmit(v)}
-    />
-  :
-  <div onClick={onClick}>
-    {children}
-  </div>
+const NameField = ({isEditing, shop, editShop, editShopField}) =>
+  <EditorField
+    isEditing={shop.focused === 'name'}
+    placeholder='Name' name='name'
+    onClick={() => editShopField('name')} onSubmit={v => editShop({...shop, name: v}, shop)}>
+    <Header as='h1'>{shop.name}</Header>
+  </EditorField>
 
-const AdminView = ({
-  editShop,
-  editShopField,
-  uploadEditShopImage,
-  image,
-  shop,
-  user,
-  deleteShop
-}) =>
-  <Grid celled className='main-container'>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <Avatar image={image || shop.image} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />
-      </Grid.Column>
-      <Grid.Column width={10}>
-        <EditField
-          fieldComponent={EditorField}
-          isEditing={shop.focused === 'description'}
-          placeholder='Description' name='description'
-          onClick={() => editShopField('description')} onSubmit={v => editShop({...shop, description: v}, user)}>
-          <Header as='h4'>{shop.description || 'Add a description'}</Header>
-        </EditField>
-      </Grid.Column>
-      <Grid.Column width={3}>
-        <ShopChatPage />
-      </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <EditField
-          isEditing={shop.focused === 'name'}
-          placeholder='Name' name='name'
-          onClick={() => editShopField('name')} onSubmit={v => editShop({...shop, name: v}, user)}>
-          <Header as='h1'>{shop.name}</Header>
-        </EditField>
-        <Button onClick={() => deleteShop(shop.id, user)} basic color='red'>Delete Shop</Button>
-      </Grid.Column>
-      <Grid.Column width={10}>
-        {shop.user &&
-          <Label to={`/user/${shop.user.username}`} from={`/shop/${shop.slug}`} as={NavLink} basic image>
-            <img src={shop.user.image || '/images/placeholder.png'} alt={user.username} /> {shop.user.username}
-          </Label>
-        }
-      </Grid.Column>
-      <Grid.Column width={3}>
-        <ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
-      </Grid.Column>
-    </Grid.Row>
-  </Grid>
+const DescriptionField = ({isEditing, shop, editShop, editShopField}) =>
+  <EditorField
+    isEditing={isEditing}
+    placeholder='Description' name='description'
+    onClick={() => editShopField('description')} onSubmit={v => editShop({...shop, description: v}, shop)}>
+    <Header as='h4'>{shop.description || 'Add a description'}</Header>
+  </EditorField>
+
+class AdminView extends Component {
+  componentWillUnmount() {
+    this.props.editShopField(null)
+  }
+  render() {
+    const {
+      editShop,
+      editShopField,
+      uploadEditShopImage,
+      image,
+      shop,
+      user,
+      params
+    } = this.props
+    return (
+      <GridLayout
+        Image={<Avatar image={image || shop.image} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />}
+        Canopy={<Products />}
+        ChatBox={<ShopChatPage room={shop} roomType='shop' />}
+        Header={<NameField isEditing={shop.focused === 'name'} shop={shop} editShop={editShop} editShopField={editShopField} />}
+        SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} editShop={editShop} editShopField={editShopField} />}
+        Gutter={<ProfileLabel username={shop.user.username} image={shop.user.image} />}
+        GutterRight={<ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />} />
+    )
+  }
+}
 
 
 const ConnectedAdminView = reduxForm({

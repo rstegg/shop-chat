@@ -9,12 +9,12 @@ export const sendMessage = (text, user) =>
   }
 })
 
-export const sendShopChatMessage = (text, user, shop) =>
+export const sendRoomChatMessage = (text, user, roomId) =>
 ({
-  type: 'WS/SEND_SHOP_CHAT_MESSAGE',
+  type: 'WS/SEND_ROOM_CHAT_MESSAGE',
   payload: {
     text,
-    roomId: shop.slug,
+    roomId,
     username: user.username,
     avatar: user.image || '',
     token: user.token
@@ -29,9 +29,9 @@ export const fetchMessages = user =>
   }
 })
 
-export const fetchShopChatMessages = (user, shop) =>
+export const fetchRoomChatMessages = (user, shop) =>
 ({
-  type: 'WS/FETCH_SHOP_CHAT_MESSAGES',
+  type: 'WS/FETCH_ROOM_CHAT_MESSAGES',
   payload: {
     token: user.token,
     roomId: shop.slug

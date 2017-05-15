@@ -12,14 +12,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    topic: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    topic_other: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -39,6 +31,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate () {
         this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        this.hasMany(sequelize.models['products'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
       }
     }
   })

@@ -1,60 +1,62 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Grid, Button, Input } from 'semantic-ui-react'
+import { Image, Header } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 
-import Dropzone from '../../components/Dropzone'
-import TextAreaField from '../../elements/AreaField'
-import EditorField from '../../elements/EditorField'
+import Dropzone from 'components/Dropzone'
+import EditorField from 'elements/EditorField'
 
-import { editProfile, uploadAvatar, editProfileField } from '../../redux/actions/profile'
+import ProfileChatPage from 'components/Chat'
+
+import { editProfile, uploadAvatar, editProfileField } from 'actions/profile'
+import GridLayout from 'components/layouts/Grid'
 
 const Avatar = ({image, uploadAvatar}) =>
   <Dropzone className='ui image editable' onDrop={uploadAvatar}>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
-const AdminView = ({
-  editProfile,
-  editProfileField,
-  uploadAvatar,
-  image,
-  profile,
-  user
-}) =>
-  <Grid celled className='main-container'>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />
-      </Grid.Column>
-      <Grid.Column width={10}>
-        <EditorField
-          fieldComponent={TextAreaField}
-          isEditing={profile.focused === 'bio'}
-          placeholder='Bio' name='bio'
-          onClick={() => editProfileField('bio')} onSubmit={v => editProfile({...user, bio: v}, user)}>
-          <Input value={user.bio || 'Add a bio'} readOnly />
-        </EditorField>
-      </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <EditorField
-          isEditing={profile.focused === 'username'}
-          placeholder='Name' name='username'
-          onClick={() => editProfileField('username')} onSubmit={v => editProfile({...user, username: v}, user)}>
-          <Input value={user.username} readOnly />
-        </EditorField>
-        <Button onClick={() => {}} basic color='red'>Close account</Button>
-      </Grid.Column>
-      <Grid.Column width={10}>
-        sumtang
-      </Grid.Column>
-      <Grid.Column width={3}>
-        something
-      </Grid.Column>
-    </Grid.Row>
-  </Grid>
+const NameField = ({isEditing, user, editProfile, editProfileField}) =>
+  <EditorField
+    isEditing={isEditing}
+    placeholder='Name'
+    name='username'
+    onClick={() => editProfileField('username')} onSubmit={v => editProfile({...user, username: v}, user)}>
+    <Header as='h1'>{user.username}</Header>
+  </EditorField>
+
+const BioField = ({isEditing, user, editProfile, editProfileField}) =>
+  <EditorField
+    isEditing={isEditing}
+    placeholder='Bio' name='bio'
+    onClick={() => editProfileField('bio')} onSubmit={v => editProfile({...user, bio: v}, user)}>
+    <Header as='h4'>{user.bio || 'Add a bio'}</Header>
+  </EditorField>
+
+class AdminView extends Component {
+  componentWillUnmount() {
+    this.props.editProfileField(null)
+  }
+  render() {
+    const {
+      editProfile,
+      editProfileField,
+      uploadAvatar,
+      profile,
+      user
+    } = this.props
+    return (
+      <GridLayout
+        Image={<Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />}
+        Canopy={'something'}
+        ChatBox={<ProfileChatPage room={profile} roomType='profile' />}
+        Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
+        SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
+        Gutter={'sumtang'}
+        GutterRight={'something'} />
+    )
+  }
+}
 
 
 const ConnectedAdminView = reduxForm({
@@ -66,7 +68,6 @@ const mapStateToProps = ({user, profile}) =>
 ({
   user,
   profile,
-  image: user.image,
   initialValues: user
 })
 

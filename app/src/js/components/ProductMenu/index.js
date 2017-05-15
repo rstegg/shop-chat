@@ -17,7 +17,7 @@ const {
 
 import ProductMenuForm from './form'
 
-import { shareProduct } from '../../redux/actions/products'
+import { shareProduct } from 'actions/products'
 
 const ProductMenu = ({url, user, shareProduct, productId}) =>
   <Segment.Group compact horizontal>

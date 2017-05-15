@@ -6,9 +6,9 @@ import { Form } from 'semantic-ui-react'
 
 import { validate } from './validators'
 
-import InputField from '../../elements/InputField'
-import AreaField from '../../elements/AreaField'
-import SelectField from '../../elements/SelectField'
+import InputField from 'elements/InputField'
+import AreaField from 'elements/AreaField'
+import SelectField from 'elements/SelectField'
 
 const options = [
   { key: 'topic', value: 'topic', text: 'Topic' },

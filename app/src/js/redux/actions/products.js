@@ -49,11 +49,12 @@ export const setCurrentProduct = product =>
   }
 })
 
-export const fetchProducts = user =>
+export const fetchProducts = (shopId, user) =>
 ({
   type: 'FETCH_PRODUCTS',
   payload: {
-    token: user.token
+    token: user.token,
+    shopId
   }
 })
 
@@ -66,11 +67,12 @@ export const onFetchProductsSuccess = res =>
 })
 
 
-export const fetchSingleProduct = (id, user) =>
+export const fetchSingleProduct = (id, shopId, user) =>
 ({
   type: 'FETCH_SINGLE_PRODUCT',
   payload: {
     productId: id,
+    shopId,
     token: user.token
   }
 })

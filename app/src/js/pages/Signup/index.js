@@ -4,10 +4,10 @@ import { Redirect } from 'react-router-dom'
 
 import { Card } from 'semantic-ui-react'
 
-import { onSignupSubmit } from '../../redux/actions/signup'
+import { onSignupSubmit } from 'actions/signup'
 
 import SignupForm from './form'
-import RouterButton from '../../elements/RouterButton'
+import RouterButton from 'elements/RouterButton'
 
 const Signup = ({
   user,
@@ -24,7 +24,7 @@ const Signup = ({
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <RouterButton to="/login" from="/signup" prefix="Have an account?" label="Login" />
+        <RouterButton to="/login" prefix="Have an account?" label="Login" />
       </Card.Content>
     </Card>
 

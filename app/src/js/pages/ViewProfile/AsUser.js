@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, Button, Grid, Header } from 'semantic-ui-react'
 
+import ProfileChatPage from 'components/Chat'
+
 const UserView = ({
   profile,
   user
@@ -12,6 +14,9 @@ const UserView = ({
       </Grid.Column>
       <Grid.Column width={10}>
         <Header as='h4'>{profile.description}</Header>
+      </Grid.Column>
+      <Grid.Column width={3}>
+        <ProfileChatPage room={profile} roomType='profile' />
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>

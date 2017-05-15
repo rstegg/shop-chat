@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Field, reduxForm } from 'redux-form'
-import InputField from '../../elements/InputField'
+import InputField from 'elements/InputField'
 import { Form } from 'semantic-ui-react'
 
-import AreaField from '../../elements/AreaField'
+import AreaField from 'elements/AreaField'
 import MaskedInput from 'react-maskedinput'
 
 import { validate } from './validators'

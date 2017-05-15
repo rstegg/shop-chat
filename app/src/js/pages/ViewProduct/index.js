@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom'
 import { Card, Image, Button, Grid } from 'semantic-ui-react'
 
-import ProductMenu from '../../components/ProductMenu'
+import ProductMenu from 'components/ProductMenu'
 
-import { fetchSingleProduct, deleteProduct } from '../../redux/actions/products'
+import { fetchSingleProduct, deleteProduct } from 'actions/products'
 
 const renderType = (product_type, topic) =>
   product_type === 'topic' ? `Topic in ${topic}` : 'Open product'
@@ -14,7 +14,7 @@ const renderType = (product_type, topic) =>
 class ViewProduct extends Component {
   componentWillMount() {
     const { match: { params }, fetchSingleProduct, user } = this.props
-    fetchSingleProduct(params.id, user)
+    fetchSingleProduct(params.id, params.shopId, user)
   }
   render() {
     const { product, user, deleteProduct } = this.props
@@ -30,7 +30,7 @@ class ViewProduct extends Component {
               <Card.Content>
                 <Card.Header>{product.name}</Card.Header>
                 {product.user &&
-                  <NavLink to={`/user/${product.user.username}`} from={`/product/${product.slug}`}>
+                  <NavLink to={`/user/${product.user.username}`}>
                     started by <Image avatar src={product.user.image || '/images/placeholder.png'} /> {product.user.username}
                   </NavLink>
                 }
@@ -38,13 +38,11 @@ class ViewProduct extends Component {
                 <Card.Description>{product.description}</Card.Description>
               </Card.Content>
               <Card.Content extra>
-                { product.userId === user.id ?
+                { product.userId === user.id &&
                   <div className='ui two buttons'>
-                    <Button as={NavLink} to={`/products/edit/${product.slug}`} from={`/product/${product.slug}`} basic color='green'>Edit</Button>
+                    <Button as={NavLink} to={`/products/edit/${product.slug}`} basic color='green'>Edit</Button>
                     <Button basic color='red' onClick={() => deleteProduct(product.id, user)}>Delete</Button>
                   </div>
-                  :
-                  <Button as={NavLink} to={`/pages/new/${product.slug}`} from={`/product/${product.slug}`} basic color='green'>Comments</Button>
                 }
               </Card.Content>
             </Card>
@@ -58,7 +56,7 @@ class ViewProduct extends Component {
   }
 }
 
-const mapStateToProps = ({products, user}) =>
+const mapStateToProps = ({products, user, shop}) =>
 ({
   product: products.current,
   user,
@@ -66,7 +64,7 @@ const mapStateToProps = ({products, user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchSingleProduct: (id, user) => dispatch(fetchSingleProduct(id, user)),
+  fetchSingleProduct: (id, shopId, user) => dispatch(fetchSingleProduct(id, shopId, user)),
   deleteProduct: (id, user) => dispatch(deleteProduct(id, user))
 })
 

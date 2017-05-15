@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
-import { fetchProfile, refreshProfileEditing } from '../../redux/actions/profile'
+import { fetchProfile, refreshProfileEditing } from 'actions/profile'
 
 class ViewProfile extends Component {
   componentWillMount() {

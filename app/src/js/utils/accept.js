@@ -1,4 +1,4 @@
-export default function(file, acceptedFiles) {
+export default (file, acceptedFiles) => {
     if (file && acceptedFiles) {
         const acceptedFilesArray = (Array.isArray(acceptedFiles) ?
                                         acceptedFiles :

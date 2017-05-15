@@ -1,17 +1,19 @@
 const { models } = require('../../../db')
 const { Shop, User } = models
 
+const { pick } = require('ramda')
+
+const shopParams = ['id', 'name', 'description', 'shop_type', 'is_public', 'slug', 'image', 'userId']
+
 module.exports = (req, res) => {
   Shop.findOne({
     include: [{
       model: User,
       attributes: ['image', 'username']
     }],
-    where: { slug: req.params.id }
+    where: { slug: req.params.id },
+    attributes: shopParams
   })
-  .then(shop => {
-    //TODO: return error if no shop found
-    res.status(200).json({shop})
-  })
+  .then(shop => res.status(200).json({shop}))
   .catch(error => res.status(400).json({error}))
 }

@@ -1,0 +1,21 @@
+.dropdown--mobile {
+  margin-right: -45% !important;
+  width: 100vw;
+  height: 90vh;
+  right: 0;
+  left: auto;
+}
+
+.dropdown--mobile__item {
+  margin: 5vh 5vw !important;
+  font-size: 2em !important;
+  text-transform: none !important;
+}
+
+.dropdown--mobile__item:hover {
+  background-color: #ccc;
+}
+
+.header__container {
+  height: 63px;
+}

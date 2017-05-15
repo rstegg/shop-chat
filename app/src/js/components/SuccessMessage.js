@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
-import { resetSignup } from '../redux/actions/signup'
-import { createProduct } from '../redux/actions/products'
+import { resetSignup } from 'actions/signup'
+import { createProduct } from 'actions/products'
 
 const SuccessMessage = ({visible, resetSignup}) =>
   <Modal open={visible} onClose={resetSignup} basic size='small'>

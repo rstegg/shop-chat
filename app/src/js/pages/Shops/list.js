@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ShopItem from '../../elements/ShopItem'
+import ShopItem from 'elements/ShopItem'
 import { Feed } from 'semantic-ui-react'
 
 const ShopsList =

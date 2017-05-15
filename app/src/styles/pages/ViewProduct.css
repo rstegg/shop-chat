@@ -12,7 +12,7 @@
   align-self: center;
 }
 
-.product--container {
+.product__container {
   min-height: 20%;
   height: 88.5%;
   height: auto;
@@ -27,7 +27,7 @@
     align-self: center;
   }
 
-  .product--container {
+  .product__container {
     min-width: 30%;
     max-width: 75%;
     width: auto;

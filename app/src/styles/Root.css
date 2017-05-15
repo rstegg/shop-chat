@@ -23,6 +23,7 @@
 
 .ui.card>.content:first-child {
   overflow: hidden;
+  flex: 0 0 auto;
 }
 
 .ui.card>.content {
@@ -31,6 +32,7 @@
 
 .ui.card>.content.extra {
   overflow: hidden;
+  flex: 0 0 auto;
 }
 
 .productimg {

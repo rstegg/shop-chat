@@ -13,14 +13,14 @@ import { Observable } from 'rxjs/Rx'
 const API_HOST = '/api/v1'
 
 const api = {
-  fetchProducts: ({token}) => {
-    const request = su.get(`${API_HOST}/products`)
+  fetchProducts: ({shopId, token}) => {
+    const request = su.get(`${API_HOST}/shop/${shopId}/products`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  fetchSingleProduct: ({productId, token}) => {
-    const request = su.get(`${API_HOST}/product/${productId}`)
+  fetchSingleProduct: ({shopId, productId, token}) => {
+    const request = su.get(`${API_HOST}/shop/${shopId}/product/${productId}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)

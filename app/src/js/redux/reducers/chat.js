@@ -1,5 +1,6 @@
 const initialState = {
-  messages: []
+  messages: [],
+  rooms: []
 }
 
 export default function(state = initialState, action) {
@@ -8,16 +9,21 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         messages: [...state.messages, action.payload.message]
       })
-    case 'RECEIVE_SHOP_CHAT_MESSAGE':
-      return Object.assign({}, state, {
-        messages: [...state.messages, action.payload.message]
-      })
     case 'RECEIVE_HOME_CHAT_MESSAGES':
       return Object.assign({}, state, {
         messages: action.payload.messages || []
       })
-    case 'RECEIVE_SHOP_CHAT_MESSAGES':
+    case 'RECEIVE_ROOM_CHAT_MESSAGE':
       return Object.assign({}, state, {
+        messages: [...state.messages, action.payload.message]
+      })
+    case 'RECEIVE_ROOM_CHAT_MESSAGES':
+      return Object.assign({}, state, {
+        messages: action.payload.messages || []
+      })
+    case 'JOIN_ROOM_SUCCESS':
+      return Object.assign({}, state, {
+        rooms: [...state.rooms, action.payload.room],
         messages: action.payload.messages || []
       })
     case 'SEND_MESSAGE_FAILURE':

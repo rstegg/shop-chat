@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom'
 
 import { Feed, Header } from 'semantic-ui-react'
 
-const ShopItem = ({className, onClick, shop}) =>
-  <Feed.Event as={NavLink} to={`/shop/${shop.slug}`}>
+const ProductItem = ({onClick, shopId, product}) =>
+  <Feed.Event as={NavLink} to={`/shop/${product.shop.slug}/product/${product.slug}`}>
     <Feed.Label>
-      <img src={shop.image || '/images/productholder.png'} alt={shop.name} />
+      <img src={product.image || '/images/productholder.png'} alt={product.name} />
     </Feed.Label>
     <Feed.Content>
-      <Header>{shop.name}</Header>
+      <Header>{product.name}</Header>
     </Feed.Content>
   </Feed.Event>
 
-export default ShopItem
+export default ProductItem

@@ -1,4 +1,4 @@
-export default function getDataTransferFiles(event, isMultipleAllowed = true) {
+export default (event, isMultipleAllowed = true) => {
   let dataTransferItemsList = []
   if (event.dataTransfer) {
     const dt = event.dataTransfer

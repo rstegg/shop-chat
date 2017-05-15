@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch =>
   toShops:    () => dispatch(push('/shops')),
   toArticles: () => dispatch(push('/articles')),
   toFeed:     () => dispatch(push('/')),
-  toPencil:   () => dispatch(push('/products/new')),
+  toPencil:   () => dispatch(push('/shops/new')),
   toSettings: username => dispatch(push(`/user/${username}`)),
   toPower:    () => dispatch({type: 'LOGOUT'})
 })

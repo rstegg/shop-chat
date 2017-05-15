@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Field, reduxForm } from 'redux-form'
 import { Form } from 'semantic-ui-react'
-import InputField from '../../../elements/InputField'
+import InputField from 'elements/InputField'
 
 const HomeChatForm = ({handleSubmit, resetForm}) =>
   <Form onSubmit={handleSubmit}>

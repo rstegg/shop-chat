@@ -1,4 +1,4 @@
-export default function() {
+export default () => {
   let mql = window.matchMedia('(max-width: 768px)');
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && mql.matches ) {
       return true;
@@ -6,7 +6,7 @@ export default function() {
   return false;
 }
 
-export function isTablet() {
+export const isTablet = () => {
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       return true;
   }

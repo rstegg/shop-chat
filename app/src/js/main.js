@@ -8,11 +8,9 @@ import { ConnectedRouter as Router } from 'react-router-redux'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Products from './pages/Products'
 
 import CreateProduct from './pages/CreateProduct'
 import ViewProduct from './pages/ViewProduct'
-import EditProduct from './pages/EditProduct'
 
 import Shops from './pages/Shops'
 import CreateShop from './pages/CreateShop'
@@ -22,7 +20,7 @@ import ViewProfile from './pages/ViewProfile'
 
 import store, { history } from './store'
 
-import RootLayout from './components/layouts/Root'
+import RootLayout from 'components/layouts/Root'
 
 export default class AppProvider extends Component {
 
@@ -49,14 +47,12 @@ export default class AppProvider extends Component {
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/signup' component={Signup} />
-                <Route exact path='/products' component={Products} />
-                <Route exact path='/products/new' component={CreateProduct} />
-                <Route exact path='/products/edit/:id' component={EditProduct} />
-                <Route exact path='/product/:id' component={ViewProduct} />
                 <Route exact path='/shops' component={Shops} />
-                <Route exact path='/pages/new' component={CreateShop} />
+                <Route exact path='/shop/:id/products/new' component={CreateProduct} />
+                <Route exact path='/shops/new' component={CreateShop} />
                 <Route exact path='/shop/:id' component={ViewShop} />
                 <Route exact path='/user/:id' component={ViewProfile} />
+                <Route exact path='/shop/:shopId/product/:id' component={ViewProduct} />
               </Switch>
             </RootLayout>
         </Router>

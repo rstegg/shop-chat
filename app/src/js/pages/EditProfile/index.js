@@ -5,11 +5,11 @@ import { Redirect } from 'react-router-dom'
 import { Card, Image } from 'semantic-ui-react'
 import EditProfileForm from './form'
 
-import { editProfile, uploadAvatar } from '../../redux/actions/profile'
+import { editProfile, uploadAvatar } from 'actions/profile'
 
 
 
-import Dropzone from '../../components/Dropzone'
+import Dropzone from 'components/Dropzone'
 
 const Avatar = ({image, name, className, uploadAvatar}) =>
   <Dropzone className='ui image editable profimg' onDrop={uploadAvatar}>
@@ -18,11 +18,11 @@ const Avatar = ({image, name, className, uploadAvatar}) =>
 
 const EditProfile = ({ user, profile, editProfile, uploadAvatar }) =>
   !user.isAuthenticated ?
-    <Redirect to='/login' from='/profile/edit' />
+    <Redirect to='/login' />
   : profile.isEdited ?
-    <Redirect to={`/user/${user.username}`} from='/profile/edit' />
+    <Redirect to={`/user/${user.username}`} />
   :
-  
+
     <Card>
       <Avatar image={user.image} name={`${user.name}`} uploadAvatar={img => uploadAvatar(img[0], user)} />
       <Card.Content>
@@ -33,7 +33,7 @@ const EditProfile = ({ user, profile, editProfile, uploadAvatar }) =>
         </Card.Description>
       </Card.Content>
     </Card>
-  
+
 
 const mapStateToProps = ({user, profile}) =>
 ({

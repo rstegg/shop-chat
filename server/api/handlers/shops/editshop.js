@@ -10,8 +10,7 @@ const validField = p => obj => Boolean(path([p], obj))
 const validBody = pipe(
   path(['body', 'shop']),
   allPass([
-      validField('name'),
-      validField('is_public')
+      validField('name')
   ]))
 
 const getValidSlug = (slug, id) =>
@@ -51,6 +50,9 @@ module.exports = (req, res) => {
       }, pick(['name', 'shop_type', 'is_public', 'topic', 'topic_other', 'image', 'description'], req.body.shop))
       return Shop.update(updatedShop, { where: { id: req.params.id, userId: req.user.id }, returning: true, plain: true })
     })
-    .then(shop => res.status(200).json({shop: shop[1][0]}))
+    .then(savedShop => {
+      const shop = pick(['id', 'name', 'description', 'is_public', 'slug', 'image', 'user', 'userId'], savedShop[1])
+      res.status(200).json({shop})
+    })
     .catch(error => res.status(400).json({error}))
 }

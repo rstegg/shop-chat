@@ -1,25 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 
 import { Card } from 'semantic-ui-react'
 import ProductsList from './list'
-import RouterButton from '../../elements/RouterButton'
+import RouterButton from 'elements/RouterButton'
 
-import { fetchProducts, refreshProducts, setCurrentProduct } from '../../redux/actions/products'
+import { fetchProducts, refreshProducts, setCurrentProduct } from 'actions/products'
 
 class Products extends Component {
-  componentDidMount() {
-    if(this.props.user.isAuthenticated) {
-      this.props.fetchProducts(this.props.user)
-    }
+  componentWillMount() {
     this.props.refreshProducts()
   }
-  render() {
-    const { products, setCurrentProduct, user } = this.props
-    if(!user.isAuthenticated) {
-      return <Redirect to="/login" from="/products" />
+  componentWillUpdate(nextProps) {
+    const { user } = this.props
+    if(user.isAuthenticated && nextProps.shop.id && nextProps.products.fetchable) {
+      this.props.fetchProducts(nextProps.shop.id, user)
     }
+  }
+  render() {
+    const { products, shop, user, setCurrentProduct } = this.props
     return (
       <Card className='products'>
         <Card.Content>
@@ -31,22 +30,26 @@ class Products extends Component {
               setCurrentProduct={setCurrentProduct}
             />
         </Card.Content>
-        <Card.Content extra>
-          <RouterButton to='/products/new' from='/products' label='start a product' />
-        </Card.Content>
+        {
+          shop.userId === user.id &&
+          <Card.Content extra>
+            <RouterButton to={`/shop/${shop.slug}/products/new`} label='new product' />
+          </Card.Content>
+        }
       </Card>
     )
   }
 }
-const mapStateToProps = ({products, user}) =>
+const mapStateToProps = ({products, user, shops}) =>
 ({
   products,
-  user
+  user,
+  shop: shops.current
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchProducts: user => dispatch(fetchProducts(user)),
+  fetchProducts: (shopId, user) => dispatch(fetchProducts(shopId, user)),
   refreshProducts: () => dispatch(refreshProducts()),
   setCurrentProduct: Product => dispatch(setCurrentProduct(Product)),
 })

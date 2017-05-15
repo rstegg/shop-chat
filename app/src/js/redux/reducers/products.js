@@ -1,11 +1,16 @@
 const initialState = {
   current: {},
   new: {},
-  list: []
+  list: [],
+  fetchable: true
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'FETCH_PRODUCTS':
+      return Object.assign({}, state, {
+        fetchable: false
+      })
     case 'FETCH_PRODUCTS_SUCCESS':
       return Object.assign({}, state, {
         list: action.payload.products
@@ -42,10 +47,7 @@ export default function(state = initialState, action) {
         current: action.payload.product
       })
     case 'REFRESH_PRODUCTS':
-      return Object.assign({}, state, {
-        current: initialState.current,
-        new: initialState.new
-      })
+      return initialState
     case 'FETCH_PRODUCTS_FAILURE':
     case 'FETCH_SINGLE_PRODUCT_FAILURE':
     case 'CREATE_PRODUCT_FAILURE':

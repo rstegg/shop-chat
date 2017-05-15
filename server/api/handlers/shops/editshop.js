@@ -30,7 +30,7 @@ const getValidSlug = (slug, id) =>
     })
   )
 
-const validate = (req) => {
+const validate = req => {
   if (!validBody(req)) return Promise.reject('missing fields')
 
   const slug =

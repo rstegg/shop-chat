@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header } from 'semantic-ui-react'
-import { reduxForm } from 'redux-form'
+import { Image, Header, Checkbox } from 'semantic-ui-react'
+import { Field, reduxForm } from 'redux-form'
 
 import ShopMenu from 'components/ProductMenu'
 import Dropzone from 'components/Dropzone'
 
-import ProfileLabel from 'elements/ProfileLabel'
 import EditorField from 'elements/EditorField'
 
 import { editShop, uploadEditShopImage, editShopField } from 'actions/shops'
@@ -21,21 +20,34 @@ const Avatar = ({image, uploadEditShopImage}) =>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
-const NameField = ({isEditing, shop, editShop, editShopField}) =>
+const CheckboxField = ({ input: { value, onChange }, onSubmit }) =>
+  <Checkbox
+    label='Public'
+    toggle
+    checked={!!value}
+    onChange={(_,data) => {
+      onChange(data.checked)
+      onSubmit(data.checked)
+    }} />
+
+const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
   <EditorField
     isEditing={shop.focused === 'name'}
     placeholder='Name' name='name'
-    onClick={() => editShopField('name')} onSubmit={v => editShop({...shop, name: v}, shop)}>
+    onClick={() => editShopField('name')} onSubmit={v => editShop({...shop, name: v}, user)}>
     <Header as='h1'>{shop.name}</Header>
   </EditorField>
 
-const DescriptionField = ({isEditing, shop, editShop, editShopField}) =>
+const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Description' name='description'
-    onClick={() => editShopField('description')} onSubmit={v => editShop({...shop, description: v}, shop)}>
+    onClick={() => editShopField('description')} onSubmit={v => editShop({...shop, description: v}, user)}>
     <Header as='h4'>{shop.description || 'Add a description'}</Header>
   </EditorField>
+
+const PublicField = ({shop, user, editShop}) =>
+  <Field component={CheckboxField} name='is_public' onSubmit={v => editShop({...shop, is_public: v}, user)} />
 
 class AdminView extends Component {
   componentWillUnmount() {
@@ -55,9 +67,9 @@ class AdminView extends Component {
         Image={<Avatar image={image || shop.image} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />}
         Canopy={<Products />}
         ChatBox={<ShopChatPage room={shop} roomType='shop' />}
-        Header={<NameField isEditing={shop.focused === 'name'} shop={shop} editShop={editShop} editShopField={editShopField} />}
-        SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} editShop={editShop} editShopField={editShopField} />}
-        Gutter={shop.user && <ProfileLabel username={shop.user.username} image={shop.user.image} />}
+        Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
+        SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
+        Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}
         GutterRight={<ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />} />
     )
   }
@@ -71,12 +83,12 @@ const ConnectedAdminView = reduxForm({
   // validate
 })(AdminView)
 
-const mapStateToProps = state =>
+const mapStateToProps = ({shops, user}) =>
 ({
-  user: state.user,
-  shop: state.shops.current,
-  image: state.shops.image,
-  initialValues: state.shops.current
+  user: user,
+  shop: shops.current,
+  image: shops.image,
+  initialValues: shops.current
 })
 
 const mapDispatchToProps = dispatch =>

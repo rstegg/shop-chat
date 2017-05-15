@@ -47,7 +47,8 @@ const selector = formValueSelector('newProduct')
 
 const mapStateToProps = state =>
 ({
-  priceTypeValue: selector(state, 'price_type')
+  priceTypeValue: selector(state, 'price_type'),
+  initialValues: state.products.new
 })
 
 export default connect(mapStateToProps)(connectedCreateProductForm)

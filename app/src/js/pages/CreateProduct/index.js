@@ -25,7 +25,7 @@ const CreateProduct = ({ user, shop, product, image, createProduct, uploadProduc
       <Card.Content>
         <Card.Header>New Product</Card.Header>
         <Card.Description>
-          <CreateProductForm onSubmit={values => createProduct(({...values, image: product.image, shopId: shop.id}), user)} />
+          <CreateProductForm onSubmit={values => createProduct(({...values, image: product.image}), shop.id, user)} />
         </Card.Description>
       </Card.Content>
     </Card>
@@ -40,7 +40,7 @@ const mapStateToProps = ({user, shops, products}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  createProduct: (product, user) => dispatch(createProduct(product, user)),
+  createProduct: (product, shopId, user) => dispatch(createProduct(product, shopId, user)),
   uploadProductImage: (img, user) => dispatch(uploadProductImage(img, user))
 })
 

@@ -3,14 +3,15 @@ const { Shop } = models
 
 const shortId = require('shortid')
 
-const { allPass, merge, path, pick, pipe } = require('ramda')
+const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
-const validField = p => obj => Boolean(path([p], obj))
+const validField = p => obj => !isNil(path([p], obj))
 
 const validBody = pipe(
   path(['body', 'shop']),
   allPass([
-      validField('name')
+      validField('name'),
+      validField('is_public')
   ]))
 
 const getValidSlug = (slug, id) =>

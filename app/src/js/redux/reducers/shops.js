@@ -1,6 +1,9 @@
 const initialState = {
   current: {},
-  new: {},
+  new: {
+    name: '',
+    is_public: false
+  },
   list: []
 }
 
@@ -12,9 +15,8 @@ export default function(state = initialState, action) {
       })
     case 'CREATE_SHOP_SUCCESS':
       return Object.assign({}, state, {
-        list: [...state.list, action.payload.shop],
         new: {
-          ...state.new,
+          ...initialState.new,
           isCreated: true
         }
       })

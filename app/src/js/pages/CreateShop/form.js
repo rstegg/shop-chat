@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import { Field, reduxForm } from 'redux-form'
 
@@ -8,23 +9,29 @@ import InputField from 'elements/InputField'
 
 import { Form } from 'semantic-ui-react'
 
-const CheckboxField = ({ input: { value, onChange } }) =>
+const CheckboxField = ({ input: { value, onChange }, meta: { initial } }) =>
   <Form.Checkbox
     label='Public'
     toggle
     checked={!!value}
+    value={initial}
     onChange={(_,data) => onChange(data.checked)} />
 
-const AmountForm = ({handleSubmit, shop}) =>
+const CreateShopForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>
-    <Field component={InputField} name='name' type='text' label='Organization or project name' control='input' placeholder='Name' />
+    <Field component={InputField} name='name' type='text' label='Organization or project name' placeholder='Name' />
     <Field component={CheckboxField} name='is_public' />
     <Form.Button type='submit' primary>Create</Form.Button>
   </Form>
 
-export default reduxForm({
+const ConnectedCreateShopForm = reduxForm({
   form: 'newShop',
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
   validate
-})(AmountForm)
+})(CreateShopForm)
+
+const mapStateToProps = ({shops}) =>
+({
+  initialValues: shops.new
+})
+
+export default connect(mapStateToProps)(ConnectedCreateShopForm)

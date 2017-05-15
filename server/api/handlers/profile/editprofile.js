@@ -1,9 +1,9 @@
 const { models } = require('../../../db')
 const { User } = models
 
-const { allPass, path, pick, pipe, merge } = require('ramda')
+const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 
-const validField = (p) => (obj) => Boolean(path([p], obj))
+const validField = p => obj => !isNil(path([p], obj))
 
 const validProfile = pipe(
     path(['body', 'profile']),

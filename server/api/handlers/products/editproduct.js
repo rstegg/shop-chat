@@ -3,32 +3,53 @@ const { Product } = models
 
 const shortId = require('shortid')
 
-const { allPass, merge, path, pick, pipe } = require('ramda')
+const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
+
+const validField = p => obj => !isNil(path([p], obj))
 
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'category', 'sub_category', 'price_type', 'price', 'image', 'shopId']
-
-const validField = p => obj => Boolean(path([p], obj))
 
 const validBody = pipe(
   path(['body', 'product']),
   allPass([
       validField('name'),
-      validField('shopId')
+      validField('is_public')
   ]))
 
-const getValidPermission = (id, userId) =>
+const getValidSlug = (slug, shopId, productId) =>
+  new Promise(resolve =>
+    Product.findOne({
+      where: { slug, shopId, id: { $ne: productId } }
+    })
+    .then(product =>
+      product ?
+        resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`), shopId, productId)
+        : resolve(slug)
+    )
+  )
+
+const getValidParams = (productId, shopId, userId, slug) =>
   Shop.findOne({
-    where: { id, userId }
+    where: { id: shopId, userId }
   })
   .then(shop =>
     !shop ? Promise.reject('Invalid permission')
-    : shop
+    : getValidSlug(slug, shopId, productId)
   )
 
 const validate = req => {
   if (!validBody(req)) return Promise.reject('missing fields')
 
-  return getValidPermission(req.body.product.shopId, req.user.id)
+  const { shopId, id } = req.params
+
+  const slug =
+    req.body.product.name
+      .replace("'", '')
+      .replace(/[^a-z0-9]/gi, '-')
+      .toLowerCase()
+      .trim()
+
+  return getValidParams(id, shopId, req.user.id)
 }
 
 module.exports = (req, res) => {
@@ -37,7 +58,7 @@ module.exports = (req, res) => {
       const updatedProduct = merge({
         shopId: shop.id
       }, pick(productParams, req.body.product))
-      return Product.update(updatedProduct, { where: { id: req.params.id, userId: req.user.id }, returning: true, plain: true })
+      return Product.update(updatedProduct, { where: { id: req.params.id, shopId: req.params.shopId, userId: req.user.id }, returning: true, plain: true })
     })
     .then(savedProduct => {
       const product = pick(productParams, savedProduct[1])

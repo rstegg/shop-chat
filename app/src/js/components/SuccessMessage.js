@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 import { resetSignup } from 'actions/signup'
-import { createProduct } from 'actions/products'
 
 const SuccessMessage = ({visible, resetSignup}) =>
   <Modal open={visible} onClose={resetSignup} basic size='small'>
@@ -26,8 +25,7 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  resetSignup: () => dispatch(resetSignup()),
-  createProduct: (product, user) => dispatch(createProduct(product, user)),
+  resetSignup: () => dispatch(resetSignup())
 })
 
 export default connect(

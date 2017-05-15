@@ -28,7 +28,7 @@ const CreateShop = ({ user, shop, createShop, uploadShopImage, image }) =>
         <Card.Description>
           <CreateShopForm
             shop={shop}
-            onSubmit={shop => createShop({...shop, image: shop.image}, user)}
+            onSubmit={values => createShop({...values, image: shop.image}, user)}
           />
         </Card.Description>
       </Card.Content>

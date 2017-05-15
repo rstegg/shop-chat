@@ -17,16 +17,16 @@ module.exports = () => {
   .get(`/shop/:shopId/products`,
     getProductsHandler
   )
-  .post(`/products`,
+  .post(`/shop/:shopId/products`,
     createProductHandler
   )
-  .put(`/product/:id`,
+  .put(`/shop/:shopId/product/:id`,
     editProductHandler
   )
   .post(`/share/product`,
     shareProductHandler
   )
-  .delete(`/product/:id`,
+  .delete(`/shop/:shopId/product/:id`,
     deleteProductHandler
   )
 

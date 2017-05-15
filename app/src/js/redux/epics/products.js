@@ -19,14 +19,14 @@ const api = {
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  fetchSingleProduct: ({shopId, productId, token}) => {
+  fetchSingleProduct: ({productId, shopId, token}) => {
     const request = su.get(`${API_HOST}/shop/${shopId}/product/${productId}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  createProduct: ({product, token}) => {
-   const request = su.post(`${API_HOST}/products`)
+  createProduct: ({product, shopId, token}) => {
+   const request = su.post(`${API_HOST}/shop/${shopId}/products`)
       .send({product})
       .set('Accept', 'application/json')
       .set('Authorization', token)
@@ -46,15 +46,15 @@ const api = {
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  editProduct: ({id, name, description, image, amount, product_type, is_public, token}) => {
-   const request = su.put(`${API_HOST}/product/${id}`)
-      .send({name, description, image, amount, product_type, is_public})
+  editProduct: ({product, shopId, token}) => {
+   const request = su.put(`${API_HOST}/shop/${shopId}/product/${product.id}`)
+      .send({product})
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  deleteProduct: ({id, token}) => {
-   const request = su.delete(`${API_HOST}/product/${id}`)
+  deleteProduct: ({id, shopId, token}) => {
+   const request = su.delete(`${API_HOST}/shop/${shopId}/product/${id}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)

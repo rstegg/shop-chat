@@ -1,4 +1,4 @@
-import { onLoginSuccess } from '../actions/login'
+import { onLoginSuccess, onLoginFailure } from 'actions/login'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
@@ -18,9 +18,7 @@ const onLoginSubmit = action$ =>
     .mergeMap(action =>
       api.login(action.payload)
         .map(onLoginSuccess)
-        .catch(error => Observable.of({
-          type: 'LOGIN_FAILURE'
-        }))
+        .catch(error => Observable.of(onLoginFailure(error.response.text)))
     )
 
 export default onLoginSubmit

@@ -13,15 +13,15 @@ class ViewShop extends Component {
     this.props.fetchSingleShop(params.id, user)
   }
   render() {
-    const { shop, user, joinShop, deleteShop, match: { params } } = this.props
+    const { shop, user, joinShop, deleteShop } = this.props
     if(!shop) {
       return <Redirect to='/' />
     }
     if(shop.userId === user.id) {
-      const adminViewProps = { shop, user, deleteShop, params }
+      const adminViewProps = { shop, user, deleteShop }
       return <AdminView {...adminViewProps} />
     }
-    const userViewProps = { shop, user, joinShop, params }
+    const userViewProps = { shop, user, joinShop }
     return <UserView {...userViewProps} />
   }
 }

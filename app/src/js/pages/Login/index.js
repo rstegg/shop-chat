@@ -1,33 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { Card } from 'semantic-ui-react'
+import { Card, Message } from 'semantic-ui-react'
 
-import { onLoginSubmit } from 'actions/login'
+import { onLoginSubmit, resetLogin } from 'actions/login'
 
 import LoginForm from './form'
 import RouterButton from 'elements/RouterButton'
 
-const Login = ({
-  user,
-  onLoginSubmit
-}) =>
-  user.isAuthenticated ?
-    <Redirect to='/' />
-  :
-    <Card>
-      <Card.Content>
-        <Card.Header>Login</Card.Header>
-        <Card.Description>
-          <LoginForm onSubmit={onLoginSubmit} />
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <RouterButton to="/signup" prefix="Don't have an account?" label="Sign up" />
-      </Card.Content>
-    </Card>
-
+class Login extends Component {
+  componentWillMount() {
+    const { user, resetLogin } = this.props
+    if(user.isAuthenticated) {
+      return <Redirect to='/' />
+    }
+    resetLogin()
+  }
+  render() {
+    const { user, onLoginSubmit } = this.props
+    if(user.isAuthenticated) {
+      return <Redirect to='/' />
+    }
+    return (
+      <Card>
+        <Card.Content>
+          <Card.Header>Login</Card.Header>
+          <Card.Description>
+            <LoginForm onSubmit={onLoginSubmit} />
+            {!!user.error && <Message error header='Login failed!' content={user.error} />}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <RouterButton to="/signup" prefix="Don't have an account?" label="Sign up" />
+        </Card.Content>
+      </Card>
+    )
+  }
+}
 
 const mapStateToProps = ({user}) =>
 ({
@@ -37,6 +47,7 @@ const mapStateToProps = ({user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   onLoginSubmit: user => dispatch(onLoginSubmit(user)),
+  resetLogin: () => dispatch(resetLogin()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

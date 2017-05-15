@@ -74,13 +74,13 @@
   }
 
   .card {
-    width: 290px;
+    width: 350px;
     max-width: 100%;
     overflow: hidden;
   }
 
   .ui.card {
-    width: 290px;
+    width: 350px;
     max-width: 100%;
     overflow: hidden;
   }

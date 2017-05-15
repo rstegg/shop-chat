@@ -12,15 +12,11 @@ const ProductsList =
       {!!products.length ? products.map((product, i) =>
         <ProductItem key={`product-${i}`} product={product} onClick={() => setCurrentProduct(product)} />
       ) :
-      <Feed.Event>
-        <Feed.Label image='/images/productholder.png' />
-        <Feed.Content content='No Products!' />
-      </Feed.Event>
+        <Feed.Event>
+          <Feed.Label image='/images/productholder.png' />
+          <Feed.Content content='No Products!' />
+        </Feed.Event>
       }
-  </Feed>
-
-
-
-
+    </Feed>
 
 export default ProductsList

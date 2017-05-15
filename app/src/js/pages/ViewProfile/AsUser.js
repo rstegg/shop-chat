@@ -1,36 +1,22 @@
 import React from 'react'
-import { Image, Button, Grid, Header } from 'semantic-ui-react'
+import { Image, Header } from 'semantic-ui-react'
 
 import ProfileChatPage from 'components/Chat'
+
+import GridLayout from 'components/layouts/Grid'
+import ProfileLabel from 'elements/ProfileLabel'
 
 const UserView = ({
   profile,
   user
 }) =>
-  <Grid celled className='main-container'>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <Image src={profile.image || '/images/productholder.png'} className='profile--image' />
-      </Grid.Column>
-      <Grid.Column width={10}>
-        <Header as='h4'>{profile.description}</Header>
-      </Grid.Column>
-      <Grid.Column width={3}>
-        <ProfileChatPage room={profile} roomType='profile' />
-      </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <Header as='h1'>{profile.username}</Header>
-        <Button onClick={() => {}} basic color='green'>Send friend request</Button>
-      </Grid.Column>
-      <Grid.Column width={10}>
-        something
-      </Grid.Column>
-      <Grid.Column width={3}>
-        something
-      </Grid.Column>
-    </Grid.Row>
-  </Grid>
+  <GridLayout
+    Image={<Image src={profile.image || '/images/productholder.png'} className='profile--image' />}
+    Canopy={<Header as='h4'>{'user activity'}</Header>}
+    ChatBox={<ProfileChatPage room={profile} roomType='profile' />}
+    Header={<Header as='h1'>{profile.username}</Header>}
+    SubHeader={<Header as='h4'>{profile.bio}</Header>}
+    Gutter={<ProfileLabel username={profile.username} image={profile.image} />}
+    GutterRight={'something'} />
 
 export default UserView

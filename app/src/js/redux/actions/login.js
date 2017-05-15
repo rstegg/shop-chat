@@ -1,3 +1,8 @@
+export const resetLogin = () =>
+({
+  type: 'RESET_LOGIN'
+})
+
 export const onLoginSubmit = ({username, password}) =>
 ({
   type: 'LOGIN_SUBMIT',
@@ -13,5 +18,13 @@ export const onLoginSuccess = res =>
   payload: {
     user: res.body.user,
     token: res.body.token
+  }
+})
+
+export const onLoginFailure = error =>
+({
+  type: 'LOGIN_FAILURE',
+  payload: {
+    error
   }
 })

@@ -76,9 +76,6 @@ module.exports = (req, res) => {
           verify_token
         }, pick(['email', 'name', 'username'], validatedUser))
 
-        //We can return this Promise to un-nest the mail sending stuff, and then we don't need to
-        //duplicate the error handling.
-
         return User.create(user, { plain: true })
       })
       .then(createdUser => {
@@ -90,5 +87,5 @@ module.exports = (req, res) => {
         const token = jwt.sign({ id: createdUser.id }, process.env.JWT_SECRET)
         res.status(200).json({user: resUser, token})
       })
-      .catch((error) => res.status(400).json({error})) //TODO: return custom error handling
+      .catch(error => res.status(400).json({error}))
 }

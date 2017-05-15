@@ -48,8 +48,7 @@ class AdminView extends Component {
       uploadEditShopImage,
       image,
       shop,
-      user,
-      params
+      user
     } = this.props
     return (
       <GridLayout
@@ -58,7 +57,7 @@ class AdminView extends Component {
         ChatBox={<ShopChatPage room={shop} roomType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} editShop={editShop} editShopField={editShopField} />}
         SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} editShop={editShop} editShopField={editShopField} />}
-        Gutter={<ProfileLabel username={shop.user.username} image={shop.user.image} />}
+        Gutter={shop.user && <ProfileLabel username={shop.user.username} image={shop.user.image} />}
         GutterRight={<ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />} />
     )
   }

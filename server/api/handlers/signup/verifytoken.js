@@ -8,11 +8,9 @@ const {pathEq} = require('ramda')
 module.exports = (req, res) => {
     User.findOne({ where: { permalink: req.params.permalink }})
       .then(user => {
-        //Use pathEq in case the user doesn't exist. Also just return early.
         if (!pathEq(['verify_token'], req.params.verify_token, user)) {
           return res.status(200).send('Invalid verification token. Please try again or contact support.')
         }
-        //return your resultant Promise chain so that errors bubble out to the catch
         return User.update({ verified: true }, { where: { permalink: req.params.permalink }, returning: true, plain: true })
       })
       .then(updatedUser => {
@@ -28,7 +26,5 @@ module.exports = (req, res) => {
           res.redirect('/')
         })
       })
-    .catch(err => {
-      res.redirect('/')
-    })
+    .catch(err => res.redirect('/')) //TODO: if this fails, we want to know
 }

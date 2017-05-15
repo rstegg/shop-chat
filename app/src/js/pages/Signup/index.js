@@ -1,32 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { Card } from 'semantic-ui-react'
+import { Card, Message } from 'semantic-ui-react'
 
-import { onSignupSubmit } from 'actions/signup'
+import { onSignupSubmit, resetSignup } from 'actions/signup'
 
 import SignupForm from './form'
 import RouterButton from 'elements/RouterButton'
 
-const Signup = ({
-  user,
-  onSignupSubmit
-}) =>
-  (user.isAuthenticated || user.isRegistered) ?
-    <Redirect to='/' />
-  :
-    <Card>
-      <Card.Content>
-        <Card.Header>Signup</Card.Header>
-        <Card.Description>
-          <SignupForm onSubmit={onSignupSubmit} />
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <RouterButton to="/login" prefix="Have an account?" label="Login" />
-      </Card.Content>
-    </Card>
+class Signup extends Component {
+  componentWillMount() {
+    const { user, resetSignup } = this.props
+    if(user.isAuthenticated) {
+      return <Redirect to='/' />
+    }
+    resetSignup()
+  }
+  render() {
+    const { user, onSignupSubmit } = this.props
+    if(user.isAuthenticated || user.isRegistered) {
+      return (
+        <Redirect to='/' />
+      )
+    }
+    return (
+      <Card>
+        <Card.Content>
+          <Card.Header>Signup</Card.Header>
+          <Card.Description>
+            <SignupForm onSubmit={onSignupSubmit} error={user.error} />
+            {!!user.error && <Message error header='Signup failed' content={user.error} />}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <RouterButton to="/login" prefix="Have an account?" label="Login" />
+        </Card.Content>
+      </Card>
+    )
+  }
+}
 
 
 const mapStateToProps = ({user}) =>
@@ -37,6 +50,7 @@ const mapStateToProps = ({user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   onSignupSubmit: user => dispatch(onSignupSubmit(user)),
+  resetSignup: () => dispatch(resetSignup()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

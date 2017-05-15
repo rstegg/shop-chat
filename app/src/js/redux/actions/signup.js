@@ -1,3 +1,8 @@
+export const resetSignup = () =>
+({
+  type: 'RESET_SIGNUP'
+})
+
 export const onSignupSubmit = user =>
 ({
   type: 'SIGNUP_SUBMIT',
@@ -15,7 +20,10 @@ export const onSignupSuccess = res =>
   }
 })
 
-export const resetSignup = () =>
+export const onSignupFailure = error =>
 ({
-  type: 'RESET_SIGNUP'
+  type: 'SIGNUP_FAILURE',
+  payload: {
+    error
+  }
 })

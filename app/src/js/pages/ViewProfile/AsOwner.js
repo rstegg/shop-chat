@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import { Image, Header } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 
-import Dropzone from 'components/Dropzone'
-import EditorField from 'elements/EditorField'
-
 import ProfileChatPage from 'components/Chat'
+import Dropzone from 'components/Dropzone'
+
+import EditorField from 'elements/EditorField'
+import ProfileLabel from 'elements/ProfileLabel'
 
 import { editProfile, uploadAvatar, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
+
 
 const Avatar = ({image, uploadAvatar}) =>
   <Dropzone className='ui image editable' onDrop={uploadAvatar}>
@@ -48,11 +50,11 @@ class AdminView extends Component {
     return (
       <GridLayout
         Image={<Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />}
-        Canopy={'something'}
+        Canopy={'user activity'}
         ChatBox={<ProfileChatPage room={profile} roomType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
-        Gutter={'sumtang'}
+        Gutter={<ProfileLabel username={profile.username} image={profile.image} />}
         GutterRight={'something'} />
     )
   }

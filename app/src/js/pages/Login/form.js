@@ -4,15 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import { Form } from 'semantic-ui-react'
 
-const InputField = ({ input: { value, onChange }, name, type, label, control, placeholder }) =>
-  <Form.Field
-    value={value}
-    onChange={onChange}
-    name={name}
-    type={type}
-    label={label}
-    control={control}
-    placeholder={placeholder} />
+import InputField from 'elements/InputField'
 
 const LoginForm = ({handleSubmit, submitting}) =>
   <Form onSubmit={handleSubmit}>

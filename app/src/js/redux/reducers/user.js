@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
         ...action.payload.user,
         isAuthenticated: true,
         token: 'JWT ' + action.payload.token,
-        error: false,
+        error: null,
         isLoading: false
       })
     case 'SIGNUP_SUCCESS':
@@ -30,29 +30,32 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         token: 'JWT ' + action.payload.token,
         isRegistered: true,
-        error: false,
+        error: null,
         isLoading: false
       })
     case 'EDIT_PROFILE_SUCCESS':
       return Object.assign({}, state, {
         ...state,
         ...action.payload.user,
-        error: false,
+        error: null,
         isLoading: false,
       })
     case 'UPLOAD_AVATAR_SUCCESS':
       return Object.assign({}, state, {
         image: action.payload.image
       })
+    case 'RESET_LOGIN':
     case 'RESET_SIGNUP':
       return Object.assign({}, state, {
         isRegistered: false,
-        isLoading: false
+        isLoading: false,
+        error: null,
       })
     case 'LOGIN_FAILURE':
     case 'SIGNUP_FAILURE':
+      const error = action.payload.error === 'Unauthorized' ? 'Wrong username or password' : action.payload.error
       return Object.assign({}, state, {
-        error: true,
+        error,
         isLoading: false
       })
     case 'LOGOUT':

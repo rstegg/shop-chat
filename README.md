@@ -6,8 +6,16 @@
 
 - Style View Product
   - Add chat to View Product
-- Prepare for payment model
-- Prepare for a launch
+- Fix styling in general
+- Add:
+  - 'feed'
+  - 'account'/'user settings'
+  - 'payments'
+- Finish:
+  - 'products'
+  - 'shops'
+  - 'profiles'
+  - 'chat'
 
 ### [sockets]
 

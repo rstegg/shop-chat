@@ -1,10 +1,27 @@
 const initialState = {
   messages: [],
-  rooms: []
+  rooms: [],
+  offer: {
+    isOpen: false
+  }
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'OPEN_OFFER_WINDOW':
+      return Object.assign({}, state, {
+        offer: {
+          ...state.offer,
+          isOpen: true
+        }
+      })
+    case 'CLOSE_OFFER_WINDOW':
+      return Object.assign({}, state, {
+        offer: {
+          ...state.offer,
+          isOpen: false
+        }
+      })
     case 'RECEIVE_HOME_CHAT_MESSAGE':
       return Object.assign({}, state, {
         messages: [...state.messages, action.payload.message]

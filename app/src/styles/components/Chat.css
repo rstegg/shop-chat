@@ -7,6 +7,10 @@
   max-height: 50vh !important;
 }
 
+.offer-button {
+  flex-grow: 0.25 !important;
+}
+
 .chat-scroll {
   float: left;
   clear: both;

@@ -21,6 +21,29 @@ export const sendRoomChatMessage = (text, user, roomId) =>
   }
 })
 
+export const openOffer = () =>
+({
+  type: 'OPEN_OFFER_WINDOW',
+})
+
+export const closeOffer = () =>
+({
+  type: 'CLOSE_OFFER_WINDOW',
+})
+
+export const sendOffer = (product, price, roomId, user) =>
+({
+  type: 'WS/SEND_SHOP_OFFER',
+  payload: {
+    product,
+    price,
+    roomId,
+    username: user.username,
+    avatar: user.image || '',
+    token: user.token
+  }
+})
+
 export const fetchMessages = user =>
 ({
   type: 'WS/FETCH_HOME_CHAT_MESSAGES',

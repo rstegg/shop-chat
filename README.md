@@ -13,9 +13,13 @@
   - 'payments'
 - Finish:
   - 'products'
+    - add 'buy'
   - 'shops'
+    - add 'shop history'?
   - 'profiles'
+    - canvas: image?
   - 'chat'
+    - add 'haggle'
 
 ### [sockets]
 

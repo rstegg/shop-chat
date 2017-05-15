@@ -48,7 +48,9 @@ class RoomChat extends Component {
           </Comment.Group>
         </Card.Content>
         <Card.Content extra>
-          <RoomChatForm onSubmit={v => {
+          <RoomChatForm
+            roomType={roomType}
+            onSubmit={v => {
             if(!!v.text) {
               sendRoomChatMessage(v.text, user, roomType + room.id)
               clearRoomChat()

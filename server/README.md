@@ -4,9 +4,11 @@
 
 ## Running production:
 
+`npm start` (starts at localhost:3000)
+
 ## Running development
 
-`cd server && npm run dev` (starts at localhost:3000)
+`npm run dev` (starts at localhost:3030)
 
 ## General TODO:
 

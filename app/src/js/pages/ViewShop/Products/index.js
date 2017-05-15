@@ -5,7 +5,7 @@ import { Card } from 'semantic-ui-react'
 import ProductsList from './list'
 import RouterButton from 'elements/RouterButton'
 
-import { fetchProducts, refreshProducts, setCurrentProduct } from 'actions/products'
+import { fetchProducts, refreshProducts } from 'actions/products'
 
 class Products extends Component {
   componentWillMount() {
@@ -18,7 +18,7 @@ class Products extends Component {
     }
   }
   render() {
-    const { products, shop, user, setCurrentProduct } = this.props
+    const { products, shop, user } = this.props
     return (
       <Card className='products'>
         <Card.Content>
@@ -27,7 +27,6 @@ class Products extends Component {
         <Card.Content>
             <ProductsList
               products={products.list}
-              setCurrentProduct={setCurrentProduct}
             />
         </Card.Content>
         {
@@ -50,8 +49,7 @@ const mapStateToProps = ({products, user, shops}) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchProducts: (shopId, user) => dispatch(fetchProducts(shopId, user)),
-  refreshProducts: () => dispatch(refreshProducts()),
-  setCurrentProduct: Product => dispatch(setCurrentProduct(Product)),
+  refreshProducts: () => dispatch(refreshProducts())
 })
 
 export default connect(

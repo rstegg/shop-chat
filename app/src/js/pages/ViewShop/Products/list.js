@@ -5,12 +5,11 @@ import ProductItem from 'elements/ProductItem'
 
 const ProductsList =
 ({
-  products,
-  setCurrentProduct
+  products
 }) =>
     <Feed>
       {!!products.length ? products.map((product, i) =>
-        <ProductItem key={`product-${i}`} product={product} onClick={() => setCurrentProduct(product)} />
+        <ProductItem key={`product-${i}`} product={product} />
       ) :
         <Feed.Event>
           <Feed.Label image='/images/productholder.png' />

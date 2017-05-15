@@ -41,14 +41,6 @@ export const onDeleteProductSuccess = res =>
   }
 })
 
-export const setCurrentProduct = product =>
-({
-  type: 'SET_CURRENT_PRODUCT',
-  payload: {
-    product
-  }
-})
-
 export const fetchProducts = (shopId, user) =>
 ({
   type: 'FETCH_PRODUCTS',

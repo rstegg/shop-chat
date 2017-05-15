@@ -146,12 +146,3 @@ export const onUploadEditShopImageSuccess = res =>
     image: res.body.image
   }
 })
-
-
-export const setCurrentShop = shop =>
-({
-  type: 'SET_CURRENT_SHOP',
-  payload: {
-    shop
-  }
-})

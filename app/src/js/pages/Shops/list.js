@@ -5,12 +5,11 @@ import { Feed } from 'semantic-ui-react'
 
 const ShopsList =
 ({
-  shops,
-  setCurrentShop
+  shops
 }) =>
   <Feed>
     {shops.length ? shops.map((shop, i) =>
-      <ShopItem key={`shop-${i}`} shop={shop} onClick={() => setCurrentShop(shop)} />
+      <ShopItem key={`shop-${i}`} shop={shop} />
     ) :
     <Feed.Event>
       <Feed.Label image='/images/productholder.png' />

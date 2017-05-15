@@ -18,14 +18,11 @@
 ### [structure]
 
 - CreateProduct: should be inside ViewShop/AsOwner (idea)
-- EditProduct: should be ViewProduct/AsOwner (fix)
-- EditProfile: should be ViewProfile/AsOwner (fix)
-- Products: should be ViewShop/Products? or remove? (idea)
+- EditProduct: should be ViewProduct/AsOwner (idea/fix)
 
 ### TODO: Low Priority
 
 - Fix styling
-- Add aliases to common file paths
 
 ### TODO: End goals
 

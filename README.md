@@ -4,6 +4,11 @@
 
 ### [HIGH PRIORITY]
 
+- Postgres:
+  - Add Chat Message model
+- Socket.io:
+  - Add accept & reject offer handlers
+
 - Style View Product
   - Add chat to View Product
 - Fix styling in general
@@ -18,8 +23,6 @@
     - add 'shop history'?
   - 'profiles'
     - canvas: image?
-  - 'chat'
-    - add 'haggle'
 
 ### [sockets]
 

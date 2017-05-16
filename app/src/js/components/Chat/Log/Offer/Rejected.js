@@ -18,7 +18,7 @@ const RejectedOffer = ({ offer }) =>
     <Card.Description>
       <Message info>
         <Message.Header>Offer rejected 😲</Message.Header>
-        <p>Offer for {offer.product} at <strong style={{textDecoration: 'line-through'}}>{offer.price}</strong></p>
+        <p>Offer for {offer.product} at <strong style={{textDecoration: 'line-through'}}>${offer.price}</strong></p>
       </Message>
     </Card.Description>
   </Card.Content>

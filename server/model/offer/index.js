@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     sellerId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {

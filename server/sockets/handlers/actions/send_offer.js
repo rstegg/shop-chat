@@ -27,7 +27,6 @@ const sendShopOffer = (pub, sub, store, socket, action) => {
           : product
         )
         .then(validatedProduct => {
-
           const userId = user.id
           const sellerId = validatedProduct.user.id
           const product_name = validatedProduct.name
@@ -38,7 +37,7 @@ const sendShopOffer = (pub, sub, store, socket, action) => {
           const timestamp = moment.utc().format()
           const { state, productId, product_name, userId, sellerId, price } = offer
           const is_offer = true
-          const newOffer = { is_offer, state, productId, product_name, userId, sellerId, price, username, avatar, timestamp }
+          const newOffer = { id: offer.id, is_offer, state, productId, product_name, userId, sellerId, price, username, avatar, timestamp }
           store.hmset('room_chat_message:' + `${roomId}_${msgId}`, newOffer, (e, r) => {
             store.rpush('room_chat_messages' + roomId, JSON.stringify(newOffer))
             pub.publish('room_chat' + roomId, 'room_chat_message:' + `${roomId}_${msgId}`)

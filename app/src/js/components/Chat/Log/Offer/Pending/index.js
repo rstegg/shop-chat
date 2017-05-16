@@ -9,7 +9,7 @@ import { fetchPendingOffer } from 'actions/chat'
 class PendingOffer extends Component {
   render() {
     const { offer, user } = this.props
-    if(offer.userId === user.id) {
+    if(offer.sellerId === user.id) {
       return <AdminView offer={offer} />
     }
     return <UserView offer={offer} />

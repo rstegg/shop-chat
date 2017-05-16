@@ -16,7 +16,7 @@ const AcceptedOffer = ({ offer }) =>
       <Card.Description>
         <Message info>
           <Message.Header>Offer accepted! 😍</Message.Header>
-          <p>{offer.product} sold at <strong>{offer.price}</strong></p>
+          <p>{offer.product} sold at <strong>${offer.price}</strong></p>
         </Message>
       </Card.Description>
     </Card.Content>

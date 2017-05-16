@@ -38,6 +38,26 @@ export const sendOffer = (productId, price, roomId, user) =>
   }
 })
 
+export const acceptOffer = (offerId, roomId, user) =>
+({
+  type: 'WS/ACCEPT_OFFER',
+  payload: {
+    offerId,
+    roomId,
+    user
+  }
+})
+
+export const rejectOffer = (offerId, roomId, user) =>
+({
+  type: 'WS/REJECT_OFFER',
+  payload: {
+    offerId,
+    roomId,
+    user
+  }
+})
+
 export const fetchMessages = user =>
 ({
   type: 'WS/FETCH_HOME_CHAT_MESSAGES',

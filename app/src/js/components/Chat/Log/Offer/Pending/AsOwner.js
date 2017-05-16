@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { Button, Card, Image } from 'semantic-ui-react'
 
-import { approveOffer, rejectOffer } from 'actions/chat' //TODO[ACTION] actions/offer
+import { acceptOffer, rejectOffer } from 'actions/chat' //TODO[ACTION] actions/offer
 
 const AdminView = ({ offer, user }) =>
   <Card>
@@ -18,13 +18,13 @@ const AdminView = ({ offer, user }) =>
         {moment(offer.timestamp).fromNow()}
       </Card.Meta>
       <Card.Description>
-        Offer for {offer.product_name} at <strong>{offer.price}</strong>
+        Offer for <strong>{offer.product_name}</strong> at <strong>${offer.price}</strong>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
       <div className='ui two buttons'>
-        <Button basic color='green' onClick={() => approveOffer(offer.id, user)}>Approve</Button>
-        <Button basic color='red' onClick={() => rejectOffer(offer.id, user)}>Decline</Button>
+        <Button basic color='green' onClick={() => acceptOffer(offer.id, user)}>Accept</Button>
+        <Button basic color='red' onClick={() => rejectOffer(offer.id, user)}>Reject</Button>
       </div>
     </Card.Content>
   </Card>
@@ -36,7 +36,7 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  approveOffer: (offerId, user) => dispatch(approveOffer(offerId, user)),
+  acceptOffer: (offerId, user) => dispatch(acceptOffer(offerId, user)),
   rejectOffer: (offerId, user) => dispatch(rejectOffer(offerId, user))
 })
 

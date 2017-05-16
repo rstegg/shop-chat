@@ -12,7 +12,7 @@ const fetchHomeChatMessages = (pub, sub, store, socket, action) => {
 
 const fetchRoomChatMessages = (pub, sub, store, socket, action) => {
   const { roomId } = action.payload
-  store.lrange('room_chat_messages'+roomId, 0, -1, (e, msgs) => {
+  store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
     const messages = msgs.map(msg => JSON.parse(msg))
     socket.emit('action', {
       type: 'RECEIVE_ROOM_CHAT_MESSAGES',

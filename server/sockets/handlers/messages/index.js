@@ -14,11 +14,11 @@ module.exports = (store, socket, message) => {
       })
     })
   } else if(isRoomMessage(message)) {
-    store.hgetall(message, (err, obj) => {
+    store.hgetall(message, (err, msg) => {
       socket.emit('action', {
         type: 'RECEIVE_ROOM_CHAT_MESSAGE',
         payload: {
-          message: parsedObj
+          message: msg
         }
       })
     })

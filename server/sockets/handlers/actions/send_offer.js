@@ -30,7 +30,9 @@ const sendShopOffer = (pub, sub, store, socket, action) => {
           const userId = user.id
           const sellerId = validatedProduct.user.id
           const product_name = validatedProduct.name
-          const savedOffer = { state: 'open', productId: validatedProduct.id, product_name, userId, sellerId, price }
+          const productId = validatedProduct.id
+          const msgId = `room_chat_message:${roomId}_${msgId}`
+          const savedOffer = { state: 'open', product_name, sellerId, price, msgId, productId, userId }
           return Offer.create(savedOffer, { plain: true })
         })
         .then(offer => {
@@ -39,7 +41,7 @@ const sendShopOffer = (pub, sub, store, socket, action) => {
           const is_offer = true
           const newOffer = { id: offer.id, is_offer, state, productId, product_name, userId, sellerId, price, username, avatar, timestamp }
           store.hmset(`room_chat_message:${roomId}_${msgId}`, newOffer, (e, r) => {
-            store.rpush('room_chat_messages' + roomId, JSON.stringify(newOffer))
+            store.rpush(`room_chat_messages_${roomId}`, JSON.stringify(newOffer))
             pub.publish('room_chat' + roomId, `room_chat_message:${roomId}_${msgId}`)
           })
         })
@@ -59,7 +61,7 @@ const sendProductOffer = (pub, sub, store, socket, action) => {
     // When a new message gets pushed through the socket, it should add the new message to the redis store with the user info too
     store.hmset('room_chat_message:' + `${roomId}_${id}`, { is_offer: true, username, avatar, text, timestamp }, (e, r) => {
     // When a new message gets pushed through the socket a chat event should be published to all subscribers
-      store.rpush('room_chat_messages' + roomId, JSON.stringify({ is_offer: true, offer_state: 'open', product, price, username, avatar, text: '', timestamp }))
+      store.rpush(`room_chat_messages_${roomId}`, JSON.stringify({ is_offer: true, offer_state: 'open', product, price, username, avatar, text: '', timestamp }))
       pub.publish('room_chat' + roomId, 'room_chat_message:' + `${roomId}_${id}`)
     })
   })

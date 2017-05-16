@@ -15,7 +15,7 @@ const AcceptedOffer = ({ offer }) =>
       </Card.Meta>
       <Card.Description>
         <Message info>
-          <Message.Header>Offer accepted! 😍</Message.Header>
+          <Message.Header style={{textAlign: 'center'}}>Offer accepted! 😍</Message.Header>
           <p>{offer.product} sold at <strong>${offer.price}</strong></p>
         </Message>
       </Card.Description>

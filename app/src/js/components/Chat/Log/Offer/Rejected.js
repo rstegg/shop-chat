@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { Card, Image, Message } from 'semantic-ui-react'
 
-// offer: { avatar, username, timestamp, product, price }
-
 const RejectedOffer = ({ offer }) =>
 <Card>
   <Card.Content>
@@ -17,7 +15,7 @@ const RejectedOffer = ({ offer }) =>
     </Card.Meta>
     <Card.Description>
       <Message info>
-        <Message.Header>Offer rejected 😲</Message.Header>
+        <Message.Header style={{textAlign: 'center'}}>Offer rejected 😲</Message.Header>
         <p>Offer for {offer.product} at <strong style={{textDecoration: 'line-through'}}>${offer.price}</strong></p>
       </Message>
     </Card.Description>

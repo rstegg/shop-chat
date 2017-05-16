@@ -7,7 +7,7 @@ import { Button, Card, Image } from 'semantic-ui-react'
 
 import { acceptOffer, rejectOffer } from 'actions/chat' //TODO[ACTION] actions/offer
 
-const AdminView = ({ offer, user }) =>
+const AdminView = ({ offer, user, acceptOffer, rejectOffer }) =>
   <Card>
     <Card.Content>
       <Image floated='left' size='mini' src={offer.avatar || '/images/placeholder.png'} />

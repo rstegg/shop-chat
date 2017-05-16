@@ -13,7 +13,7 @@ const UserView = ({ offer }) =>
       <Card.Meta>
         {moment(offer.timestamp).fromNow()}
       </Card.Meta>
-      <Card.Description>
+      <Card.Description style={{textAlign: 'center'}}>
         Offer for <strong>{offer.product_name}</strong> at <strong>${offer.price}</strong>
       </Card.Description>
     </Card.Content>

@@ -15,7 +15,7 @@ class ShopChatMenu extends Component {
     const { user, products, sendOffer, shop, chat, openOffer, closeOffer } = this.props
     return (
       <Popup wide position='top right' on='click'
-        trigger={<Button icon='dollar' className='offer-button' />}
+        trigger={<Button icon='dollar' className='offer-button' disabled={!products.list.length} />}
         open={chat.offer.isOpen}
         onOpen={openOffer} onClose={closeOffer}>
           <Popup.Header>Make an Offer</Popup.Header>
@@ -23,7 +23,7 @@ class ShopChatMenu extends Component {
             <ShopChatMenuForm
               products={products.list}
               onSubmit={values => {
-                sendOffer(values.product, values.price, `shop${shop.id}`, user)
+                sendOffer(values.productId, values.price, `shop${shop.id}`, user)
                 closeOffer()
               }} />
           </Popup.Content>

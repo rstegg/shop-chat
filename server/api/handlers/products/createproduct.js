@@ -63,6 +63,7 @@ module.exports = (req, res) => {
       const newProduct = merge({
         slug,
         shopId: req.params.shopId,
+        userId: req.user.id
       }, pick(productParams, req.body.product))
       return Product.create(newProduct, { plain: true })
     })

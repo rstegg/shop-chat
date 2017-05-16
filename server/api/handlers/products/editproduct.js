@@ -1,5 +1,5 @@
 const { models } = require('../../../db')
-const { Product } = models
+const { Product, Shop } = models
 
 const shortId = require('shortid')
 

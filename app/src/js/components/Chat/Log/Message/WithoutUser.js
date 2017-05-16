@@ -1,7 +1,7 @@
 import React from 'react'
 import { Comment } from 'semantic-ui-react'
 
-const CommentWithUser = ({ message }) =>
+const MessageWithoutUserInfo = ({ message }) =>
   <Comment>
     <Comment.Avatar />
     <Comment.Content>
@@ -9,4 +9,4 @@ const CommentWithUser = ({ message }) =>
     </Comment.Content>
   </Comment>
 
-export default CommentWithUser
+export default MessageWithoutUserInfo

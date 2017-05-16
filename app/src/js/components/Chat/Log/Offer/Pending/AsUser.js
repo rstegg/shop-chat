@@ -14,7 +14,7 @@ const UserView = ({ offer }) =>
         {moment(offer.timestamp).fromNow()}
       </Card.Meta>
       <Card.Description>
-        Offer for {offer.product} at <strong>{offer.price}</strong>
+        Offer for {offer.product_name} at <strong>{offer.price}</strong>
       </Card.Description>
     </Card.Content>
   </Card>

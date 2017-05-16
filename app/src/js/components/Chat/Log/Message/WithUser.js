@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { Comment } from 'semantic-ui-react'
 
-const CommentWithUser = ({ message }) =>
+const MessageWithUserInfo = ({ message }) =>
   <Comment>
     <Comment.Avatar src={message.avatar || '/images/placeholder.png'} />
     <Comment.Content>
@@ -15,4 +15,4 @@ const CommentWithUser = ({ message }) =>
     </Comment.Content>
   </Comment>
 
-export default CommentWithUser
+export default MessageWithUserInfo

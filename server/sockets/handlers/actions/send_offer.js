@@ -1,29 +1,59 @@
-
+const jwt = require('jsonwebtoken')
 const moment = require('moment')
 
-// const { models } = require('../../../db')
-// const { Offer } = models
+const { models } = rootRequire('db')
+const { User, Offer, Product } = models
 
 const sendShopOffer = (pub, sub, store, socket, action) => {
-  // TODO: use ramda to get params from payload
-  const { username, avatar, product, price, roomId } = action.payload
-  store.incr('roomMessageNextId' + roomId, (e, id) => {
-    const timestamp = moment.utc().format()
-    const is_offer = true
-    const offer_state = 'open'
-    const newOffer = { is_offer, offer_state, product, price, username, avatar, timestamp }
-    store.hmset('room_chat_message:' + `${roomId}_${id}`, newOffer, (e, r) => {
-      store.rpush('room_chat_messages' + roomId, JSON.stringify(newOffer))
-      pub.publish('room_chat' + roomId, 'room_chat_message:' + `${roomId}_${id}`)
-      // TODO: postgres
-      // Offer.create(newOffer)
-    })
+  const { user, productId, price, roomId } = action.payload
+  const { username, image, token } = user
+  const avatar = image
+  jwt.verify(token.slice(4), process.env.JWT_SECRET, (err, token) => {
+    if(err) {
+      console.log(err);
+    }
+    if(!err) {
+      //TODO: check if user is in roomId
+      store.incr('roomMessageNextId' + roomId, (e, msgId) => {
+        Product.findOne({
+          include: [{
+            model: User,
+            attributes: ['id']
+          }],
+          where: { id: productId }
+        })
+        .then(product =>
+          !product ? Promise.reject('Invalid product id')
+          : product
+        )
+        .then(validatedProduct => {
+
+          const userId = user.id
+          const sellerId = validatedProduct.user.id
+          const product_name = validatedProduct.name
+          const savedOffer = { state: 'open', productId: validatedProduct.id, product_name, userId, sellerId, price }
+          return Offer.create(savedOffer, { plain: true })
+        })
+        .then(offer => {
+          const timestamp = moment.utc().format()
+          const { state, productId, product_name, userId, sellerId, price } = offer
+          const is_offer = true
+          const newOffer = { is_offer, state, productId, product_name, userId, sellerId, price, username, avatar, timestamp }
+          store.hmset('room_chat_message:' + `${roomId}_${msgId}`, newOffer, (e, r) => {
+            store.rpush('room_chat_messages' + roomId, JSON.stringify(newOffer))
+            pub.publish('room_chat' + roomId, 'room_chat_message:' + `${roomId}_${msgId}`)
+          })
+        })
+        .catch(error => console.log(error))
+      })
+    }
   })
+
 }
 
 const sendProductOffer = (pub, sub, store, socket, action) => {
   // TODO: use ramda to get params from payload
-  const { username, avatar, product, price, roomId } = action.payload
+  const { username, image, product, price, roomId } = action.payload
   store.incr('roomMessageNextId' + roomId, (e, id) => {
     // TODO: store users with their socketIds
     const timestamp = moment.utc().format()

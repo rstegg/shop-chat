@@ -1,22 +1,33 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import moment from 'moment'
-import { Card, Image } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-const PendingOffer = ({ offer }) =>
-  <Card>
-    <Card.Content>
-      <Image floated='left' size='mini' src={offer.avatar || '/images/placeholder.png'} />
-      <Card.Header as={NavLink} to={`/user/${offer.username}`}>
-        {offer.username}
-      </Card.Header>
-      <Card.Meta>
-        {moment(offer.timestamp).fromNow()}
-      </Card.Meta>
-      <Card.Description>
-        Offer for {offer.product} at $<strong>{offer.price}</strong>
-      </Card.Description>
-    </Card.Content>
-  </Card>
+import AdminView from './AsOwner'
+import UserView from './AsUser'
 
-export default PendingOffer
+import { fetchPendingOffer } from 'actions/chat'
+
+class PendingOffer extends Component {
+  render() {
+    const { offer, user } = this.props
+    if(offer.userId === user.id) {
+      return <AdminView offer={offer} />
+    }
+    return <UserView offer={offer} />
+  }
+}
+
+
+const mapStateToProps = ({user}) =>
+({
+  user
+})
+
+const mapDispatchToProps = dispatch =>
+({
+  fetchPendingOffer: (message, user) => dispatch(fetchPendingOffer(message, user))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PendingOffer)

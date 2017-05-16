@@ -3,9 +3,7 @@ export const sendMessage = (text, user) =>
   type: 'WS/SEND_HOME_CHAT_MESSAGE',
   payload: {
     text,
-    username: user.username,
-    avatar: user.image || '',
-    token: user.token
+    user
   }
 })
 
@@ -14,10 +12,8 @@ export const sendRoomChatMessage = (text, user, roomId) =>
   type: 'WS/SEND_ROOM_CHAT_MESSAGE',
   payload: {
     text,
-    roomId,
-    username: user.username,
-    avatar: user.image || '',
-    token: user.token
+    user,
+    roomId
   }
 })
 
@@ -31,16 +27,14 @@ export const closeOffer = () =>
   type: 'CLOSE_OFFER_WINDOW',
 })
 
-export const sendOffer = (product, price, roomId, user) =>
+export const sendOffer = (productId, price, roomId, user) =>
 ({
   type: 'WS/SEND_SHOP_OFFER',
   payload: {
-    product,
+    productId,
     price,
     roomId,
-    username: user.username,
-    avatar: user.image || '',
-    token: user.token
+    user
   }
 })
 
@@ -48,7 +42,7 @@ export const fetchMessages = user =>
 ({
   type: 'WS/FETCH_HOME_CHAT_MESSAGES',
   payload: {
-    token: user.token
+    user
   }
 })
 
@@ -56,7 +50,7 @@ export const fetchRoomChatMessages = (user, shop) =>
 ({
   type: 'WS/FETCH_ROOM_CHAT_MESSAGES',
   payload: {
-    token: user.token,
+    user,
     roomId: shop.slug
   }
 })
@@ -66,8 +60,6 @@ export const joinChatRoom = (roomId, user) =>
   type: 'WS/JOIN_ROOM',
   payload: {
     roomId,
-    token: user.token,
-    username: user.username,
-    avatar: user.image || ''
+    user
   }
 })

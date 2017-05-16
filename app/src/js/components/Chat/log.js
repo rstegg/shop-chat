@@ -57,13 +57,13 @@ const ChatMessages = messages => {
   let timeAcc = 0
   const renderedMessages = messages.map((message, i) => {
     if(message.is_offer) {
-      if(message.offer_state === 'accepted') {
+      if(message.state === 'accepted') {
         return <AcceptedOffer key={i} offer={message} />
       }
-      if(message.offer_state === 'rejected') {
+      if(message.state === 'rejected') {
         return <RejectedOffer key={i} offer={message} />
       }
-      if(message.offer_state === 'open') {
+      if(message.state === 'open') {
         return <PendingOffer key={i} offer={message} />
       }
     }

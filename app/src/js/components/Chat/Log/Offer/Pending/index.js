@@ -9,7 +9,7 @@ import { fetchPendingOffer } from 'actions/chat'
 class PendingOffer extends Component {
   render() {
     const { offer, user } = this.props
-    if(offer.sellerId === user.id) {
+    if(parseInt(offer.sellerId) === user.id) { //TODO: figure out why it's a string when it's initially sent?
       return <AdminView offer={offer} />
     }
     return <UserView offer={offer} />

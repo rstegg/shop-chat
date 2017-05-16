@@ -3,6 +3,7 @@
 const { sendHomeChatMessage, sendRoomChatMessage } = require('./send_message')
 const { fetchHomeChatMessages, fetchRoomChatMessages } = require('./fetch_messages')
 const { joinChatRoom, leaveChatRoom } = require('./rooms')
+const { sendShopOffer, sendProductOffer } = require('./send_offer')
 
 module.exports = (pub, sub, store, socket, action) => {
   // TODO: use ramda to check the type of action
@@ -20,6 +21,14 @@ module.exports = (pub, sub, store, socket, action) => {
 
   if(action.type === 'WS/FETCH_ROOM_CHAT_MESSAGES') {
     fetchRoomChatMessages(pub, sub, store, socket, action)
+  }
+
+  if(action.type === 'WS/SEND_SHOP_OFFER') {
+    sendShopOffer(pub, sub, store, socket, action)
+  }
+
+  if(action.type === 'WS/SEND_PRODUCT_OFFER') {
+    sendProductOffer(pub, sub, store, socket, action)
   }
 
   if(action.type === 'WS/JOIN_ROOM') {

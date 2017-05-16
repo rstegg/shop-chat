@@ -6,7 +6,6 @@ import InputField from 'elements/InputField'
 
 import { validate, asyncValidate } from './validators'
 
-
 const SignupForm = ({handleSubmit, submitting, error}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name="name" label='Name' placeholder='Name' />

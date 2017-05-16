@@ -12,7 +12,6 @@ import ProfileLabel from 'elements/ProfileLabel'
 import { editProfile, uploadAvatar, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
 
-
 const Avatar = ({image, uploadAvatar}) =>
   <Dropzone className='ui image editable' onDrop={uploadAvatar}>
     <Image src={image || '/images/productholder.png'} />

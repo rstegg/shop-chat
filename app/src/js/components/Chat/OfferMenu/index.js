@@ -23,7 +23,7 @@ class ShopChatMenu extends Component {
             <ShopChatMenuForm
               products={products.list}
               onSubmit={values => {
-                sendOffer(values.product, values.price, shop.id, user)
+                sendOffer(values.product, values.price, `shop${shop.id}`, user)
                 closeOffer()
               }} />
           </Popup.Content>

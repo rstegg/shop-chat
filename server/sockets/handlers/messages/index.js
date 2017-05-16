@@ -18,7 +18,7 @@ module.exports = (store, socket, message) => {
       socket.emit('action', {
         type: 'RECEIVE_ROOM_CHAT_MESSAGE',
         payload: {
-          message: obj
+          message: parsedObj
         }
       })
     })

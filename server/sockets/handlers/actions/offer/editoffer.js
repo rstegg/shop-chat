@@ -23,11 +23,11 @@ const acceptOffer = (pub, sub, store, socket, action) => {
       })
       .then(updatedOffer => {
         const { state, productId, product_name, userId, roomId, msgId, sellerId, price } = updatedOffer[1]
-        const getMsgIndex = findIndex(propEq('id', String(updatedOffer.id)))
         const is_offer = true
         const acceptedOffer = { id: offer.id, is_offer, state, productId, product_name, userId, sellerId, price, username, avatar, timestamp }
         store.hmset(msgId, acceptedOffer, (e, r) => {
           store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
+            const getMsgIndex = findIndex(propEq('id', String(offer.id)))
             const msgIndex = getMsgIndex(msgs)
             store.lset(`room_chat_messages_${roomId}`, msgIndex, JSON.stringify(acceptedOffer), (e, r) => {
               store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
@@ -65,14 +65,13 @@ const rejectOffer = (pub, sub, store, socket, action) => {
       })
       .then(updatedOffer => {
         const { state, productId, product_name, userId, roomId, msgId, sellerId, price } = updatedOffer[1]
-        const getMsgIndex = findIndex(propEq('id', String(updatedOffer.id)))
         const is_offer = true
         const rejectedOffer = { id: offer.id, is_offer, state, productId, product_name, userId, sellerId, price, username, avatar, timestamp }
+        console.log(msgId);
         store.hmset(msgId, rejectedOffer, (e, r) => {
           store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
-            console.log(msgs);
+            const getMsgIndex = findIndex(propEq('id', String(offer.id)))
             const msgIndex = getMsgIndex(msgs)
-            console.log(msgIndex);
             store.lset(`room_chat_messages_${roomId}`, msgIndex, JSON.stringify(rejectedOffer), (e, r) => {
               store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
                 const messages = msgs.map(msg => JSON.parse(msg))

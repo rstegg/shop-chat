@@ -17,6 +17,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
+    roomId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     msgId: {
       type: DataTypes.STRING,
       allowNull: false

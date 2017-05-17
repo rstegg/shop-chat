@@ -38,22 +38,20 @@ export const sendOffer = (productId, price, roomId, user) =>
   }
 })
 
-export const acceptOffer = (offerId, roomId, user) =>
+export const acceptOffer = (offer, user) =>
 ({
   type: 'WS/ACCEPT_OFFER',
   payload: {
-    offerId,
-    roomId,
+    offer,
     user
   }
 })
 
-export const rejectOffer = (offerId, roomId, user) =>
+export const rejectOffer = (offer, user) =>
 ({
   type: 'WS/REJECT_OFFER',
   payload: {
-    offerId,
-    roomId,
+    offer,
     user
   }
 })

@@ -23,8 +23,8 @@ const AdminView = ({ offer, user, acceptOffer, rejectOffer }) =>
     </Card.Content>
     <Card.Content extra>
       <div className='ui two buttons'>
-        <Button basic color='green' onClick={() => acceptOffer(offer.id, user)}>Accept</Button>
-        <Button basic color='red' onClick={() => rejectOffer(offer.id, user)}>Reject</Button>
+        <Button basic color='green' onClick={() => acceptOffer(offer, user)}>Accept</Button>
+        <Button basic color='red' onClick={() => rejectOffer(offer, user)}>Reject</Button>
       </div>
     </Card.Content>
   </Card>
@@ -36,8 +36,8 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  acceptOffer: (offerId, user) => dispatch(acceptOffer(offerId, user)),
-  rejectOffer: (offerId, user) => dispatch(rejectOffer(offerId, user))
+  acceptOffer: (offer, user) => dispatch(acceptOffer(offer, user)),
+  rejectOffer: (offer, user) => dispatch(rejectOffer(offer, user))
 })
 
 export default connect(

@@ -4,10 +4,10 @@
 
 ### [HIGH PRIORITY]
 
+- Clean up tech debt [chat]
+
 - Postgres:
-  - Add Chat Message model
-- Socket.io:
-  - Add accept & reject offer handlers
+  - Add Chat Message model [maybe]
 
 - Style View Product
   - Add chat to View Product

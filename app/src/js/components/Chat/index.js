@@ -41,7 +41,7 @@ class RoomChat extends Component {
             RoomChatMessages(chat.messages)
             : <Message info>
                 <Message.Header style={{textAlign: 'center'}}>No chat activity 😞</Message.Header>
-                <p style={{fontSize: '9.5pt'}}>Share the link for others to join!</p>
+                <p style={{textAlign: 'center'}}>Share the link for others to join!</p>
               </Message>
           }
             <div className='chat-scroll' ref={el => this.messagesEnd = el}></div>

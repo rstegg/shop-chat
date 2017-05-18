@@ -33,7 +33,7 @@
 
 ### [HIGH PRIORITY]
 
-
+- Clean up inline styling [chat]
 - Clean up tech debt [chat]
 
 - Postgres:

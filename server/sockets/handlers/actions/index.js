@@ -1,8 +1,8 @@
 'use strict'
 
-const { sendHomeChatMessage, sendRoomChatMessage } = require('./send_message')
-const { fetchHomeChatMessages, fetchRoomChatMessages } = require('./fetch_messages')
-const { joinChatRoom, leaveChatRoom } = require('./rooms')
+const { sendHomeChatMessage, sendRoomChatMessage } = require('./message/sendmessage')
+const { fetchHomeChatMessages, fetchRoomChatMessages } = require('./message/fetchall')
+const { joinChatRoom, leaveChatRoom } = require('./rooms/join')
 const { sendShopOffer, sendProductOffer } = require('./offer/createoffer')
 const { acceptOffer, rejectOffer } = require('./offer/editoffer')
 

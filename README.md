@@ -37,6 +37,7 @@
 
 - Clean up inline styling [chat]
 - Clean up tech debt [chat]
+  - idea: use jsonb datatypes in postgres?
 
 - Postgres:
   - Add Chat Message model [maybe]

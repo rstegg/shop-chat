@@ -6,8 +6,8 @@
   "license": "MIT",
   "repository": "",
   "scripts": {
-    "dev": "nodemon dev.js",
-    "start": "nodemon index.js"
+    "dev": "nodemon dev.js > kuwau-server.log",
+    "start": "nodemon index.js > log.txt"
   },
   "dependencies": {
     "aws-sdk": "^2.40.0",

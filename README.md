@@ -33,6 +33,8 @@
 
 ### [HIGH PRIORITY]
 
+- Profile/Shop are not mobile-friendly
+
 - Clean up inline styling [chat]
 - Clean up tech debt [chat]
 

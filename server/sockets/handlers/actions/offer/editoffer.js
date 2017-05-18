@@ -28,7 +28,7 @@ const acceptOffer = (pub, sub, store, socket, action) => {
         store.hmset(msgId, acceptedOffer, (e, r) => {
           store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
             const parsedMsgs = msgs.map(msg => JSON.parse(msg))
-            const getMsgIndex = findIndex(propEq('id',parseInt(offer.id, 10)))
+            const getMsgIndex = findIndex(propEq('id', parseInt(offer.id, 10)))
             const msgIndex = getMsgIndex(parsedMsgs)
             store.lset(`room_chat_messages_${roomId}`, msgIndex, JSON.stringify(acceptedOffer), (e, r) => {
               store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {

@@ -10,7 +10,7 @@ const sendShopOffer = (pub, sub, store, socket, action) => {
   const avatar = image
   jwt.verify(token.slice(4), process.env.JWT_SECRET, (err, token) => {
     if(err) {
-      console.log(err);
+      console.log(err)
     }
     if(!err) {
       //TODO: check if user is in roomId
@@ -49,7 +49,6 @@ const sendShopOffer = (pub, sub, store, socket, action) => {
       })
     }
   })
-
 }
 
 const sendProductOffer = (pub, sub, store, socket, action) => {

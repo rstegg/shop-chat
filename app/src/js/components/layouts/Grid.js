@@ -8,10 +8,10 @@ export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}
       <Grid.Column width={3}>
         {Image}
       </Grid.Column>
-      <Grid.Column width={10}>
+      <Grid.Column width={8}>
         {Canopy}
       </Grid.Column>
-      <Grid.Column width={3}>
+      <Grid.Column width={5}>
         {ChatBox}
       </Grid.Column>
     </Grid.Row>
@@ -24,10 +24,10 @@ export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}
           {SubHeader}
         </Grid.Row>
       </Grid.Column>
-      <Grid.Column width={10}>
+      <Grid.Column width={8}>
         {Gutter}
       </Grid.Column>
-      <Grid.Column width={3}>
+      <Grid.Column width={5}>
         {GutterRight}
       </Grid.Column>
     </Grid.Row>

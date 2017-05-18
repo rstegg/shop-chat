@@ -15,7 +15,7 @@ class ShopChatMenu extends Component {
     const { user, products, sendOffer, shop, chat, openOffer, closeOffer } = this.props
     return (
       <Popup wide position='top right' on='click'
-        trigger={<Button icon='dollar' className='offer-button' disabled={!products.list.length} />}
+        trigger={<Button icon='dollar' className='offer-button' type='button' disabled={!products.list.length} />}
         open={chat.offer.isOpen}
         onOpen={openOffer} onClose={closeOffer}>
           <Popup.Header>Make an Offer</Popup.Header>

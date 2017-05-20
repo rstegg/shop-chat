@@ -1,7 +1,7 @@
 const { models } = rootRequire('db')
 const { Message, User, Offer, Product } = models
 
-const { merge, path, pick, isNil } = require('ramda')
+const { merge, pick } = require('ramda')
 
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
 

@@ -2,9 +2,7 @@ const jwt = require('jsonwebtoken')
 const moment = require('moment')
 
 const { models } = rootRequire('db')
-const { User, Offer, Product, Thread, Message } = models
-
-const { findIndex, propEq } = require('ramda')
+const { User, Offer, Message } = models
 
 const offerParams = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
 

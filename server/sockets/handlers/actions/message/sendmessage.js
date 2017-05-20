@@ -2,9 +2,7 @@ const jwt = require('jsonwebtoken')
 const moment = require('moment')
 
 const { models } = rootRequire('db')
-const { User, Offer, Product, Message } = models
-
-const { merge, path, pick, isNil } = require('ramda')
+const { User, Message } = models
 
 const sendRoomChatMessage = (socket, action) => {
   // TODO: use ramda to get params from payload

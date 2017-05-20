@@ -21,7 +21,7 @@ const CreateProduct = ({ user, shop, product, image, createProduct, uploadProduc
     <Redirect to={`/shop/${shop.slug}`} />
   :
     <Card>
-      <Avatar image={image || product.image} uploadProductImage={img => uploadProductImage(img[0], user)} />
+      <Avatar image={product.image} uploadProductImage={img => uploadProductImage(img[0], user)} />
       <Card.Content>
         <Card.Header>New Product</Card.Header>
         <Card.Description>
@@ -34,8 +34,7 @@ const mapStateToProps = ({user, shops, products}) =>
 ({
   user,
   shop: shops.current,
-  product: products.new,
-  image: products.image
+  product: products.new
 })
 
 const mapDispatchToProps = dispatch =>

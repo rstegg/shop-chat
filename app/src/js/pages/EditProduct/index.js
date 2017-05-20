@@ -14,18 +14,18 @@ const Avatar = ({image, uploadProductImage}) =>
     <Image src={image || '/images/shopholder.png'} />
   </Dropzone>
 
-const EditProduct = ({ user, shop, image, editProduct, uploadProductImage }) =>
+const EditProduct = ({ user, shop, editProduct, uploadProductImage }) =>
   !user.isAuthenticated ?
     <Redirect to='/login' />
   : shop.isEdited ?
     <Redirect to='/shops' />
   :
     <Card>
-      <Avatar image={image || shop.image} uploadProductImage={img => uploadProductImage(img[0], user)} />
+      <Avatar image={shop.image} uploadProductImage={img => uploadProductImage(img[0], user)} />
       <Card.Content>
         <Card.Header>Editing {shop.name}</Card.Header>
         <Card.Description>
-          <EditProductForm onSubmit={values => editProduct(({...values, image: image || shop.image, id: shop.id}), user)} />
+          <EditProductForm onSubmit={values => editProduct(({...values, image: shop.image, id: shop.id}), user)} />
         </Card.Description>
       </Card.Content>
     </Card>
@@ -33,8 +33,7 @@ const EditProduct = ({ user, shop, image, editProduct, uploadProductImage }) =>
 const mapStateToProps = ({user, shops}) =>
 ({
   user,
-  shop: shops.current,
-  image: shops.image
+  shop: shops.current
 })
 
 const mapDispatchToProps = dispatch =>

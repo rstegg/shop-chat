@@ -14,7 +14,7 @@ const Avatar = ({image, uploadShopImage}) =>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
-const CreateShop = ({ user, shop, createShop, uploadShopImage, image }) =>
+const CreateShop = ({ user, shop, createShop, uploadShopImage }) =>
   !user.isAuthenticated ?
     <Redirect to='/login' />
   :
@@ -22,7 +22,7 @@ const CreateShop = ({ user, shop, createShop, uploadShopImage, image }) =>
     <Redirect to='/shops' />
   :
     <Card>
-      <Avatar image={image || shop.image} uploadShopImage={img => uploadShopImage(img[0], user)} />
+      <Avatar image={shop.image} uploadShopImage={img => uploadShopImage(img[0], user)} />
       <Card.Content>
         <Card.Header>New Shop</Card.Header>
         <Card.Description>
@@ -38,8 +38,7 @@ const CreateShop = ({ user, shop, createShop, uploadShopImage, image }) =>
 const mapStateToProps = ({user, shops}) =>
 ({
   user,
-  shop: shops.new,
-  image: shops.image
+  shop: shops.new
 })
 
 const mapDispatchToProps = dispatch =>

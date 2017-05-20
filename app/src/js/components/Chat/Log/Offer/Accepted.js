@@ -23,7 +23,7 @@ const AcceptedOffer = ({ offer }) =>
         { getUsername(offer) }
       </Card.Header>
       <Card.Meta>
-        {moment(getTimestamp(offer)).fromNow()}
+        { moment(getTimestamp(offer)).fromNow() }
       </Card.Meta>
       <Card.Description>
         <Message info>

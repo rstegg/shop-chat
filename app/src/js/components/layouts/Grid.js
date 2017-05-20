@@ -4,7 +4,7 @@ import { Grid, Segment } from 'semantic-ui-react'
 import isMobile from 'utils/isMobile'
 
 export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}) =>
-  isMobile ?
+  isMobile() ?
     <Grid className='main-container'>
       <Grid.Row columns={1} stretched>
         <Grid.Column>

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { path } from 'ramda'
 
 import { Button, Popup } from 'semantic-ui-react'
 
 import ShopChatMenuForm from './form'
 
 import { sendOffer, openOffer, closeOffer } from 'actions/chat'
+
+const getThreadId = path(['thread', 'id'])
 
 class ShopChatMenu extends Component {
   componentWillMount() {
@@ -23,7 +26,7 @@ class ShopChatMenu extends Component {
             <ShopChatMenuForm
               products={products.list}
               onSubmit={values => {
-                sendOffer(values.productId, values.price, shop.id, user)
+                sendOffer(values.productId, values.price, getThreadId(shop), user)
                 closeOffer()
               }} />
           </Popup.Content>

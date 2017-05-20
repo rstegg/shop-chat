@@ -26,7 +26,6 @@
 ### Styling
 
 - Clean up inline styling [chat]
-- Profile/Shop are not mobile-friendly
 
 ### Sockets
 

@@ -1,26 +1,36 @@
-const fetchHomeChatMessages = (pub, sub, store, socket, action) => {
-  store.lrange('home_chat_messages', 0, -1, (e, msgs) => {
-    const messages = msgs.map(msg => JSON.parse(msg))
-    socket.emit('action', {
-      type: 'RECEIVE_HOME_CHAT_MESSAGES',
-      payload: {
-        messages
-      }
-    })
-  })
-}
+const jwt = require('jsonwebtoken')
+const moment = require('moment')
 
-const fetchRoomChatMessages = (pub, sub, store, socket, action) => {
-  const { roomId } = action.payload
-  store.lrange(`room_chat_messages_${roomId}`, 0, -1, (e, msgs) => {
-    const messages = msgs.map(msg => JSON.parse(msg))
+const { models } = rootRequire('db')
+const { User, Offer, Product, Message, TextMessage } = models
+
+const { merge, path, pick, isNil } = require('ramda')
+
+const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
+
+const fetchRoomChatMessages = (socket, action) => {
+  const { threadId } = action.payload
+  Message.findAll({
+    include: [
+      {
+        model: Offer,
+        attributes: offerAttributes
+      },
+      {
+        model: User,
+        attributes: ['username', 'image']
+      }
+    ],
+    where: { threadId }
+  })
+  .then(messages =>
     socket.emit('action', {
       type: 'RECEIVE_ROOM_CHAT_MESSAGES',
       payload: {
         messages
       }
     })
-  })
+  )
 }
 
-module.exports = { fetchHomeChatMessages, fetchRoomChatMessages }
+module.exports = { fetchRoomChatMessages }

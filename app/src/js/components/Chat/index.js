@@ -13,9 +13,9 @@ import { sendRoomChatMessage, fetchRoomChatMessages, joinChatRoom } from 'action
 
 class RoomChat extends Component {
   componentWillMount() {
-    const { user, chat, room, roomType, joinChatRoom } = this.props
-    if(!chat.rooms.includes(roomType + room.id)) {
-      joinChatRoom(roomType + room.id, user)
+    const { user, chat, room, joinChatRoom } = this.props
+    if(!chat.rooms.includes(room.id)) {
+      joinChatRoom(room.id, user)
     }
   }
   scrollEnd() {
@@ -52,7 +52,7 @@ class RoomChat extends Component {
             roomType={roomType}
             onSubmit={v => {
             if(!!v.text) {
-              sendRoomChatMessage(v.text, user, roomType + room.id)
+              sendRoomChatMessage(v.text, user, room.id)
               clearRoomChat()
             }
           }} />
@@ -71,8 +71,8 @@ const mapStateToProps = ({user, chat}) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchRoomChatMessages: user => dispatch(fetchRoomChatMessages(user)),
-  sendRoomChatMessage: (msg, user, roomId) => dispatch(sendRoomChatMessage(msg, user, roomId)),
-  joinChatRoom: (roomId, user) => dispatch(joinChatRoom(roomId, user)),
+  sendRoomChatMessage: (msg, user, threadId) => dispatch(sendRoomChatMessage(msg, user, threadId)),
+  joinChatRoom: (threadId, user) => dispatch(joinChatRoom(threadId, user)),
   clearRoomChat: () => dispatch(reset('sendRoomChatMessage')),
 })
 

@@ -6,15 +6,15 @@ import { Card, Image } from 'semantic-ui-react'
 const UserView = ({ offer }) =>
   <Card>
     <Card.Content>
-      <Image floated='left' size='mini' src={offer.avatar || '/images/placeholder.png'} />
-      <Card.Header as={NavLink} to={`/user/${offer.username}`}>
-        {offer.username}
-      </Card.Header>
+      <Image floated='left' size='mini' src={offer.user && (offer.user.image || '/images/placeholder.png')} />
+      { offer.user && <Card.Header as={NavLink} to={`/user/${offer.user.username}`}>
+        { offer.user.username }
+      </Card.Header> }
       <Card.Meta>
-        {moment(offer.timestamp).fromNow()}
+        {moment(offer.createdAt).fromNow()}
       </Card.Meta>
       <Card.Description style={{textAlign: 'center'}}>
-        Offer for <strong>{offer.product_name}</strong> at <strong>${offer.price}</strong>
+        Offer for <strong>{offer.offer && offer.offer.product_name}</strong> at <strong>${offer.offer && offer.offer.price}</strong>
       </Card.Description>
     </Card.Content>
   </Card>

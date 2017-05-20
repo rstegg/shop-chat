@@ -1,36 +1,40 @@
-
+const jwt = require('jsonwebtoken')
 const moment = require('moment')
 
-const sendHomeChatMessage = (pub, sub, store, socket, action) => {
+const { models } = rootRequire('db')
+const { User, Offer, Product, Message } = models
+
+const { merge, path, pick, isNil } = require('ramda')
+
+const sendRoomChatMessage = (socket, action) => {
   // TODO: use ramda to get params from payload
-  const { user, text } = action.payload
+  const { user, text, threadId } = action.payload
   const { username, image } = user
-  store.incr('homeMessageNextId', (e, id) => {
-    // TODO: store users with their socketIds
-    const timestamp = moment.utc().format()
-    // When a new message gets pushed through the socket, it should add the new message to the redis store with the user info too
-    store.hmset('home_chat_message:' + id, { username, avatar: image, text, timestamp }, (e, r) => {
-    // When a new message gets pushed through the socket a chat event should be published to all subscribers
-      store.rpush('home_chat_messages', JSON.stringify({ username, avatar: image, text, timestamp }))
-      pub.publish('home_chat', 'home_chat_message:' + id)
-    })
-  })
+  if(!text.length) {
+    return //TODO: user tries to send empty string
+  }
+  // TODO: store users with their socketIds
+  const newMessage = { text, content_type: 'text', userId: socket.userId, threadId }
+  Message.create(newMessage, { plain: true })
+    .then(savedMessage =>
+      Message.findOne({
+        include: [
+          {
+            model: User,
+            attributes: ['username', 'image']
+          }
+      ],
+        where: { id: savedMessage.id }
+      })
+    )
+    .then(message =>
+      socket.emit('action', {
+        type: 'RECEIVE_ROOM_CHAT_MESSAGE',
+        payload: {
+          message
+        }
+      })
+    )
 }
 
-const sendRoomChatMessage = (pub, sub, store, socket, action) => {
-  // TODO: use ramda to get params from payload
-  const { user, text, roomId } = action.payload
-  const { username, image } = user
-  store.incr(`roomMessageNextId${roomId}`, (e, id) => {
-    // TODO: store users with their socketIds
-    const timestamp = moment.utc().format()
-    // When a new message gets pushed through the socket, it should add the new message to the redis store with the user info too
-    store.hmset(`room_chat_message:${roomId}_${id}`, { username, avatar: image, text, timestamp }, (e, r) => {
-    // When a new message gets pushed through the socket a chat event should be published to all subscribers
-      store.rpush(`room_chat_messages_${roomId}`, JSON.stringify({ username, avatar: image, text, timestamp }))
-      pub.publish(`room_chat${roomId}`, `room_chat_message:${roomId}_${id}`)
-    })
-  })
-}
-
-module.exports = { sendHomeChatMessage, sendRoomChatMessage }
+module.exports = { sendRoomChatMessage }

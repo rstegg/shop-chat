@@ -23,7 +23,7 @@ class ShopChatMenu extends Component {
             <ShopChatMenuForm
               products={products.list}
               onSubmit={values => {
-                sendOffer(values.productId, values.price, `shop${shop.id}`, user)
+                sendOffer(values.productId, values.price, shop.id, user)
                 closeOffer()
               }} />
           </Popup.Content>
@@ -43,7 +43,7 @@ const mapStateToProps = ({user, products, shops, chat}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  sendOffer: (product, price, roomId, user) => dispatch(sendOffer(product, price, roomId, user)),
+  sendOffer: (product, price, threadId, user) => dispatch(sendOffer(product, price, threadId, user)),
   openOffer: () => dispatch(openOffer()),
   closeOffer: () => dispatch(closeOffer()),
 })

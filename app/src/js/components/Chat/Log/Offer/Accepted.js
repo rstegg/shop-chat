@@ -3,20 +3,32 @@ import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { Card, Image, Message } from 'semantic-ui-react'
 
+import { path } from 'ramda'
+
+const getUserImage = path(['user', 'image'])
+
+const getUsername = path(['user', 'username'])
+
+const getTimestamp = path(['createdAt'])
+
+const getProductName = path(['offer', 'product_name'])
+
+const getOfferPrice = path(['offer', 'price'])
+
 const AcceptedOffer = ({ offer }) =>
   <Card>
     <Card.Content>
-      <Image floated='left' size='mini' src={offer.avatar || '/images/placeholder.png'} />
-      <Card.Header as={NavLink} to={`/user/${offer.username}`}>
-        {offer.username}
+      <Image floated='left' size='mini' src={getUserImage(offer) || '/images/placeholder.png'} />
+      <Card.Header as={NavLink} to={`/user/${getUsername(offer)}`}>
+        { getUsername(offer) }
       </Card.Header>
       <Card.Meta>
-        {moment(offer.timestamp).fromNow()}
+        {moment(getTimestamp(offer)).fromNow()}
       </Card.Meta>
       <Card.Description>
         <Message info>
           <Message.Header style={{textAlign: 'center'}}>Offer accepted! 😍</Message.Header>
-          <p style={{textAlign: 'center'}}><strong>{offer.product_name}</strong> sold at <strong>${offer.price}</strong></p>
+          <p style={{textAlign: 'center'}}><strong>{getProductName(offer)}</strong> sold at <strong>${getOfferPrice(offer)}</strong></p>
         </Message>
       </Card.Description>
     </Card.Content>

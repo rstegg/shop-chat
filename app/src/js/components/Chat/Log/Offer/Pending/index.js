@@ -5,7 +5,7 @@ import AdminView from './AsOwner'
 import UserView from './AsUser'
 
 const PendingOffer = ({offer, user}) =>
-    parseInt(offer.sellerId, 10) === user.id ?
+    offer.offer && offer.offer.seller_id === user.id ?
       <AdminView offer={offer} />
     :
       <UserView offer={offer} />

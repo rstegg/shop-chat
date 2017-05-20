@@ -1,34 +1,20 @@
 import React from 'react'
 
-import { Grid } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 
 export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}) =>
-  <Grid celled className='main-container'>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        {Image}
-      </Grid.Column>
-      <Grid.Column width={8}>
-        {Canopy}
-      </Grid.Column>
-      <Grid.Column width={5}>
-        {ChatBox}
-      </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <Grid.Row>
-          {Header}
-        </Grid.Row>
-        <Grid.Row>
-          {SubHeader}
-        </Grid.Row>
-      </Grid.Column>
-      <Grid.Column width={8}>
-        {Gutter}
-      </Grid.Column>
-      <Grid.Column width={5}>
-        {GutterRight}
-      </Grid.Column>
-    </Grid.Row>
+  <Grid celled='internally' className='main-container'>
+    <Grid.Column width={3}>
+      <Segment>{Image}</Segment>
+      <Segment>{Header}</Segment>
+      <Segment>{SubHeader}</Segment>
+      <Segment>{Gutter}</Segment>
+      <Segment>{GutterRight}</Segment>
+    </Grid.Column>
+    <Grid.Column width={8} stretched>
+      {Canopy}
+    </Grid.Column>
+    <Grid.Column width={5}>
+      {ChatBox}
+    </Grid.Column>
   </Grid>

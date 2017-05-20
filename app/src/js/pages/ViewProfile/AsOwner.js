@@ -22,7 +22,8 @@ const NameField = ({isEditing, user, editProfile, editProfileField}) =>
     isEditing={isEditing}
     placeholder='Name'
     name='username'
-    onClick={() => editProfileField('username')} onSubmit={v => editProfile({...user, username: v}, user)}>
+    onClick={() => editProfileField('username')} onClickOutside={() => editProfileField(null)}
+    onSubmit={v => editProfile({...user, username: v}, user)}>
     <Header as='h1'>{user.username}</Header>
   </EditorField>
 
@@ -30,7 +31,8 @@ const BioField = ({isEditing, user, editProfile, editProfileField}) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Bio' name='bio'
-    onClick={() => editProfileField('bio')} onSubmit={v => editProfile({...user, bio: v}, user)}>
+    onClick={() => editProfileField('bio')} onClickOutside={() => editProfileField(null)}
+    onSubmit={v => editProfile({...user, bio: v}, user)}>
     <Header as='h4'>{user.bio || 'Add a bio'}</Header>
   </EditorField>
 

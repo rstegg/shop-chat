@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
+module.exports = (sequelize, DataTypes) =>
+  sequelize.define('users', {
     interest_types: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
@@ -123,6 +123,7 @@ module.exports = function(sequelize, DataTypes) {
       associate () {
         this.hasMany(sequelize.models['shops'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['products'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        this.hasMany(sequelize.models['messages'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['offers'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
       }
     },
@@ -137,4 +138,3 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   })
-}

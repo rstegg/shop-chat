@@ -1,26 +1,21 @@
-const redis = require('redis')
-const store = redis.createClient()
-const pub = redis.createClient()
+const jwt = require('jsonwebtoken')
+const moment = require('moment')
+
+const { models } = rootRequire('db')
+const { User, Offer, Product, Message, Thread } = models
+
+const { merge, path, pick, isNil } = require('ramda')
+
+const messageParams = ['id', 'text', 'state', 'product_name', 'price', 'price_type', 'threadId']
 
 const actionHandler = require('./handlers/actions')
-const messageHandler = require('./handlers/messages')
-
-// uncomment this line for fresh db
-// store.flushdb()
 
 // socket.io -> startSockets
 module.exports = io => {
   io.on('connection', socket => {
-    const sub = redis.createClient()
-    sub.subscribe('home_chat') // TODO: move this subscribe to a 'JOIN_HOME' action?
-
-    socket.on('action', action => actionHandler(pub, sub, store, socket, action))
-
-    sub.on('message', (pattern, message) => messageHandler(store, socket, message))
-
+    socket.on('action', action => actionHandler(socket, action))
     socket.on('disconnect', () => {
-      sub.unsubscribe()
-      sub.quit()
+
     })
   })
 }

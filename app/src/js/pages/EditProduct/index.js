@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { Card, Image } from 'semantic-ui-react'
-import EditProfileForm from './form'
+import EditProductForm from './form'
 
 import { editProduct, uploadProductImage } from 'actions/products'
 
@@ -14,7 +14,7 @@ const Avatar = ({image, uploadProductImage}) =>
     <Image src={image || '/images/shopholder.png'} />
   </Dropzone>
 
-const EditProfile = ({ user, shop, image, editProduct, uploadProductImage }) =>
+const EditProduct = ({ user, shop, image, editProduct, uploadProductImage }) =>
   !user.isAuthenticated ?
     <Redirect to='/login' />
   : shop.isEdited ?
@@ -25,7 +25,7 @@ const EditProfile = ({ user, shop, image, editProduct, uploadProductImage }) =>
       <Card.Content>
         <Card.Header>Editing {shop.name}</Card.Header>
         <Card.Description>
-          <EditProfileForm onSubmit={values => editProduct(({...values, image: image || shop.image, id: shop.id}), user)} />
+          <EditProductForm onSubmit={values => editProduct(({...values, image: image || shop.image, id: shop.id}), user)} />
         </Card.Description>
       </Card.Content>
     </Card>
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(EditProfile)
+)(EditProduct)

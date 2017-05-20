@@ -1,34 +1,5 @@
 # kuwau
 
-## Schemes
-
-### Offer
-
-- redis:
-  - id
-  - is_offer (differ)
-  - price
-  - state
-  - productId
-  - product_name
-  - userId
-  - sellerId
-  - username (differ)
-  - avatar (differ)
-  - timestamp (differ)
-
-- pg:
-  - id
-  - state
-  - price
-  - price_type (differ)
-  - productId
-  - product_name
-  - userId (differ)
-  - sellerId
-  - roomId (differ)
-  - msgId (differ, "redisId")
-
 ## TODO
 
 ### [HIGH PRIORITY]
@@ -83,7 +54,6 @@
 - CreateProduct
 - CreateShop
 - EditProduct
-- EditProfile
 - Home
 - Login
 - Products

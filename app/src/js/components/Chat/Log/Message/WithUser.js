@@ -5,11 +5,11 @@ import { Comment } from 'semantic-ui-react'
 
 const MessageWithUserInfo = ({ message }) =>
   <Comment>
-    <Comment.Avatar src={message.avatar || '/images/placeholder.png'} />
+    <Comment.Avatar src={message.user && (message.user.image || '/images/placeholder.png')} />
     <Comment.Content>
-      <Comment.Author as={NavLink} to={`/user/${message.username}`}>{message.username}</Comment.Author>
+      {message.user && <Comment.Author as={NavLink} to={`/user/${message.user.username}`}>{message.user.username}</Comment.Author>}
       <Comment.Metadata>
-        <div>{moment(message.timestamp).fromNow()}</div>
+        <div>{moment(message.createdAt).fromNow()}</div>
       </Comment.Metadata>
       <Comment.Text>{message.text}</Comment.Text>
     </Comment.Content>

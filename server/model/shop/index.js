@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('shops', {
+module.exports = (sequelize, DataTypes) =>
+  sequelize.define('shops', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -31,8 +31,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate () {
         this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        this.belongsTo(sequelize.models['threads'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['products'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
       }
     }
   })
-}

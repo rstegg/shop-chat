@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Card } from 'semantic-ui-react'
 
 const Home = ({user}) =>
-  <Card className='products'>
+  <Card>
     <Card.Content>
       <Card.Header>Shop App</Card.Header>
     </Card.Content>

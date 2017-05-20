@@ -1,5 +1,5 @@
 const { models } = require('../../../db')
-const { Shop } = models
+const { Shop, Thread } = models
 
 const shortId = require('shortid')
 
@@ -14,19 +14,25 @@ const validBody = pipe(
         validField('is_public')
     ]))
 
-const getValidSlug = slug =>
+
+const getValidSlug = (slug, thread) =>
   new Promise(resolve =>
     Shop.findOne({
       where: { slug }
     })
-    .then(shop => {
-      if(shop) {
-        return resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`))
-      } else {
-        return resolve(slug)
-      }
-    })
+    .then(shop =>
+      shop ?
+        resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`), thread)
+        : resolve({slug, thread})
+    )
   )
+
+const createThread = (name, ownerId, slug) =>
+  Thread.create({ title: name, owner: ownerId }, { plain: true })
+    .then(thread =>
+      !thread ? Promise.reject('Thread not created')
+      : getValidSlug(slug, thread)
+    )
 
 const validate = req => {
   if (!validBody(req)) return Promise.reject('missing fields')
@@ -38,14 +44,15 @@ const validate = req => {
       .toLowerCase()
       .trim()
 
-  return getValidSlug(slug)
+  return createThread(req.body.shop.name, req.user.id, slug)
 }
 
 module.exports = (req, res) => {
   validate(req)
-    .then(slug => {
+    .then(({slug, thread}) => {
       const newShop = merge({
         userId: req.user.id,
+        threadId: thread.id,
         slug
       }, pick(['name', 'is_public'], req.body.shop))
       return Shop.create(newShop, { plain: true })

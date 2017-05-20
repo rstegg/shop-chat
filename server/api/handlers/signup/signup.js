@@ -83,7 +83,7 @@ module.exports = (req, res) => {
         const permalink_url = `https://kuwau.com/api/v1/signup/email_confirmation/${permalink}/${verify_token}`
         const mail = confirmationMail(createdUser, permalink_url)
         sendConfirmation(mail, createdUser)
-        const resUser = pick(['id', 'email', 'name', 'username'], createdUser)
+        const resUser = pick(['id', 'email', 'name', 'username'], createdUser) //TODO: remove sending of userID, change userId checks to username (frontend)
         const token = jwt.sign({ id: createdUser.id }, process.env.JWT_SECRET)
         res.status(200).json({user: resUser, token})
       })

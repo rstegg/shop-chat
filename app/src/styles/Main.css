@@ -6,9 +6,9 @@
 @import 'components/Chat.css';
 /*Elements*/
 @import 'elements/InputField.css';
+@import 'elements/EditorField.css';
 @import 'elements/ProductItem.css';
 /*Pages*/
-@import 'pages/EditProfile.css';
 @import 'pages/Home.css';
 @import 'pages/Products.css';
 @import 'pages/Shops.css';

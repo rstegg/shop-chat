@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": "",
   "scripts": {
-    "dev": "nodemon dev.js > kuwau-server.log",
+    "dev": "nodemon dev.js",
     "start": "nodemon index.js > kuwau-server.log"
   },
   "dependencies": {

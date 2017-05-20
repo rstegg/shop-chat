@@ -1,8 +1,8 @@
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('offers', {
+module.exports = (sequelize, DataTypes) =>
+  sequelize.define('offers', {
     state: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 'open'
     },
     product_name: {
@@ -15,17 +15,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     price_type: {
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    roomId: {
-      type: DataTypes.STRING,
       allowNull: false
     },
-    msgId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    sellerId: {
+    seller_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
@@ -34,8 +26,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate () {
         this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.belongsTo(sequelize.models['products'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        this.belongsTo(sequelize.models['products'], { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
+        this.hasMany(sequelize.models['messages'], { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
       }
     }
   })
-}

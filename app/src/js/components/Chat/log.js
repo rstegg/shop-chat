@@ -6,32 +6,30 @@ import RejectedOffer from './Log/Offer/Rejected'
 import PendingOffer from './Log/Offer/Pending'
 import TextMessage from './Log/Message'
 
-import { propEq } from 'ramda'
-
-const sameUsername = propEq('username')
-
 const ChatMessages = messages => {
   //FIXME: this function uses a map to calculate an accumulation of time differences between messages
   // Show user info (username, avatar and timestamp) if:
   // usernames are different between messages, OR if 15 seconds has passed between showing user info
   let timeAcc = 0
   const renderedMessages = messages.map((message, i) => {
-    if(message.is_offer) {
-      switch(message.state) {
-        case 'accepted':
-          return <AcceptedOffer key={i} offer={message} />
-        case 'rejected':
-          return <RejectedOffer key={i} offer={message} />
-        case 'open':
-        default:
-          return <PendingOffer key={i} offer={message} />
+    if(message.content_type === 'offer') {
+      if(message.offer) {
+        switch(message.offer.state) {
+          case 'accepted':
+            return <AcceptedOffer key={i} offer={message} />
+          case 'rejected':
+            return <RejectedOffer key={i} offer={message} />
+          case 'open':
+          default:
+            return <PendingOffer key={i} offer={message} />
+        }
       }
     }
     const prevMessage = messages[i-1]
     let shouldShow = true
-      if(sameUsername(message.username, prevMessage) && !prevMessage.is_offer) {
+      if(prevMessage && (message.user && prevMessage.user && message.user.username === prevMessage.user.username) && prevMessage.content_type !== 'offer') {
         shouldShow = false
-        const timeDiff = moment.duration(moment(prevMessage.timestamp).diff(moment(message.timestamp)))
+        const timeDiff = moment.duration(moment(prevMessage.createdAt).diff(moment(message.createdAt)))
         timeAcc += Math.abs(timeDiff.asMilliseconds())
         if(timeAcc >= 15000) {
           shouldShow = true

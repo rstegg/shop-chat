@@ -7,13 +7,13 @@ export const sendMessage = (text, user) =>
   }
 })
 
-export const sendRoomChatMessage = (text, user, roomId) =>
+export const sendRoomChatMessage = (text, user, threadId) =>
 ({
   type: 'WS/SEND_ROOM_CHAT_MESSAGE',
   payload: {
     text,
     user,
-    roomId
+    threadId
   }
 })
 
@@ -27,13 +27,13 @@ export const closeOffer = () =>
   type: 'CLOSE_OFFER_WINDOW',
 })
 
-export const sendOffer = (productId, price, roomId, user) =>
+export const sendOffer = (productId, price, threadId, user) =>
 ({
   type: 'WS/SEND_SHOP_OFFER',
   payload: {
     productId,
     price,
-    roomId,
+    threadId,
     user
   }
 })
@@ -42,7 +42,8 @@ export const acceptOffer = (offer, user) =>
 ({
   type: 'WS/ACCEPT_OFFER',
   payload: {
-    offer,
+    offer: offer.offer,
+    threadId: offer.threadId,
     user
   }
 })
@@ -51,7 +52,8 @@ export const rejectOffer = (offer, user) =>
 ({
   type: 'WS/REJECT_OFFER',
   payload: {
-    offer,
+    offer: offer.offer,
+    threadId: offer.threadId,
     user
   }
 })
@@ -69,15 +71,15 @@ export const fetchRoomChatMessages = (user, shop) =>
   type: 'WS/FETCH_ROOM_CHAT_MESSAGES',
   payload: {
     user,
-    roomId: shop.slug
+    threadId: shop.slug
   }
 })
 
-export const joinChatRoom = (roomId, user) =>
+export const joinChatRoom = (threadId, user) =>
 ({
   type: 'WS/JOIN_ROOM',
   payload: {
-    roomId,
+    threadId,
     user
   }
 })

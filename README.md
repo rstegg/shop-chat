@@ -1,5 +1,40 @@
 # kuwau
 
+## install:
+
+1 - `[in server directory] npm install`
+2 - `[in app directory] npm install`
+
+## deps:
+
+`server/.env` needs:
+
+DATABASE_URL="postgres://username:password@localhost:5432/dbName" (posgresURL)
+
+- if you prefer to not use in-line user:pass, you can change this in `server/db.js`:
+
+```js
+const db = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  logging: false
+})
+```
+
+JWT_SECRET="SomeSecretString" (can be any value)
+API_HOST="/api/v1" (must be this value)
+
+(aws with s3 read/write access, you can use mine if you don't use it in production :smile:)
+AWS_ACCESS_KEY_ID=AKIAIVSW5JCRV7UQE5AQ
+AWS_SECRET_ACCESS_KEY=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
+
+(same as above; bonus points if you respond to the e-mails sent so I don't get listed as spam :smile:)
+MAILGUN_SECRET="key-ab72f757c533aea9d48f641d95c488fd"
+
+## start [development]:
+
+1 - `[in server directory] npm run dev`
+2 - `[in app directory] npm start`
+
 ## TODO: End goals
 
 - TODO

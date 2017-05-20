@@ -34,7 +34,8 @@ const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
   <EditorField
     isEditing={shop.focused === 'name'}
     placeholder='Name' name='name'
-    onClick={() => editShopField('name')} onSubmit={v => editShop({...shop, name: v}, user)}>
+    onClick={() => editShopField('name')} onClickOutside={() => editShopField(null)}
+    onSubmit={v => editShop({...shop, name: v}, user)}>
     <Header as='h1'>{shop.name}</Header>
   </EditorField>
 
@@ -42,7 +43,8 @@ const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Description' name='description'
-    onClick={() => editShopField('description')} onSubmit={v => editShop({...shop, description: v}, user)}>
+    onClick={() => editShopField('description')} onClickOutside={() => editShopField(null)}
+    onSubmit={v => editShop({...shop, description: v}, user)}>
     <Header as='h4'>{shop.description || 'Add a description'}</Header>
   </EditorField>
 

@@ -1,12 +1,12 @@
 # kuwau
 
+## TODO: End goals
+
+- TODO
+
 ## TODO
 
-### [HIGH PRIORITY]
-
-- Profile/Shop are not mobile-friendly
-
-- Clean up inline styling [chat]
+### General
 
 - Style View Product
   - Add chat to View Product
@@ -23,23 +23,24 @@
   - 'profiles'
     - 'canvas': image?
 
-### [sockets]
+### Styling
+
+- Clean up inline styling [chat]
+- Profile/Shop are not mobile-friendly
+
+### Sockets
 
 - rooms authentication (permissions)
 - private rooms
-
-### [structure]
-
-- CreateProduct: should be inside ViewShop/AsOwner (idea)
-- EditProduct: should be ViewProduct/AsOwner (idea/fix)
 
 ### TODO: Low Priority
 
 - Fix styling
 
-### TODO: End goals
+## Structure
 
-- TODO
+- CreateProduct: should be inside ViewShop/AsOwner (idea)
+- EditProduct: should be ViewProduct/AsOwner (idea/fix)
 
 ### Pages
 

@@ -7,9 +7,6 @@
 - Profile/Shop are not mobile-friendly
 
 - Clean up inline styling [chat]
-- Clean up tech debt [chat]
-  - idea: use jsonb datatypes in postgres?
-  - idea: use mongodb for document store?
 
 - Postgres:
   - Add Chat Message model [maybe]

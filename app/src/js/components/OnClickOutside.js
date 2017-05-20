@@ -12,7 +12,7 @@ export default function onClickOutsideHOC(WrappedComponent, config) {
     static defaultProps = {
       eventTypes: ['mousedown', 'touchstart'],
       excludeScrollbar: (config && config.excludeScrollbar) || false,
-      outsideClickIgnoreClass: 'ignore-react-onclickoutside',
+      outsideClickIgnoreClass: 'ignore-onclickoutside',
       preventDefault: false,
       stopPropagation: false,
     }

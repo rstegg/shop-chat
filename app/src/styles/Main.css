@@ -4,6 +4,7 @@
 @import 'components/Menu.css';
 @import 'components/Header.css';
 @import 'components/Chat.css';
+@import 'components/Dropzone.css';
 /*Elements*/
 @import 'elements/InputField.css';
 @import 'elements/EditorField.css';

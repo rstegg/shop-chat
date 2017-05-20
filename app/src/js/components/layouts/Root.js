@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Menu from '../Menu'
-import Header from '../Header'
-import SignupSuccess from '../SuccessMessage'
+import Menu from 'components/Menu'
+import Header from 'components/Header'
+import SignupSuccess from 'components/SuccessMessage'
 
-import isMobile, { isTablet } from '../../utils/isMobile'
+import isMobile, { isTablet } from 'utils/isMobile'
 
 export default ({children}) =>
   <div className='root'>

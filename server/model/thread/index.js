@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('threads', {
-    title: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true
     },
     owner: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }
   }, {
     freezeTableName: true,

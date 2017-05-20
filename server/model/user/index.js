@@ -121,6 +121,7 @@ module.exports = (sequelize, DataTypes) =>
     freezeTableName: true,
     classMethods: {
       associate () {
+        this.belongsTo(sequelize.models['threads'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['shops'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['products'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['messages'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })

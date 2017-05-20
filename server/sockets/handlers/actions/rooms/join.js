@@ -9,18 +9,18 @@ const { findIndex, propEq } = require('ramda')
 const offerParams = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
 
 const joinChatRoom = (socket, action) => {
-  const { threadId, username } = action.payload
+  const { threadId, user } = action.payload
   Message.findAll({
     include: [
-    {
-      model: Offer,
-      attributes: offerParams
-    },
-    {
-      model: User,
-      attributes: ['username', 'image']
-    }
-  ],
+      {
+        model: Offer,
+        attributes: offerParams
+      },
+      {
+        model: User,
+        attributes: ['username', 'image']
+      }
+    ],
     where: { threadId }
   })
   .then(messages =>

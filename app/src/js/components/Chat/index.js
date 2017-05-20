@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
+import { path } from 'ramda'
 
 import { reset } from 'redux-form'
 
@@ -11,11 +12,14 @@ import RoomChatMessages from './log'
 
 import { sendRoomChatMessage, fetchRoomChatMessages, joinChatRoom } from 'actions/chat'
 
+const getThreadId = path(['thread', 'id'])
+
 class RoomChat extends Component {
   componentWillMount() {
     const { user, chat, room, joinChatRoom } = this.props
-    if(!chat.rooms.includes(room.id)) {
-      joinChatRoom(room.id, user)
+    const threadId = getThreadId(room)
+    if(!chat.rooms.includes(threadId)) {
+      joinChatRoom(threadId, user)
     }
   }
   scrollEnd() {
@@ -52,7 +56,7 @@ class RoomChat extends Component {
             roomType={roomType}
             onSubmit={v => {
             if(!!v.text) {
-              sendRoomChatMessage(v.text, user, room.id)
+              sendRoomChatMessage(v.text, user, getThreadId(room))
               clearRoomChat()
             }
           }} />

@@ -1,5 +1,5 @@
 const { models } = require('../../../db')
-const { User } = models
+const { User, Thread } = models
 const jwt = require('jsonwebtoken')
 
 const crypto = require('crypto')
@@ -40,6 +40,13 @@ const createPermalink = (email) =>
         .replace(/[^\w\s]/gi, '')
         .trim()
 
+const createThread = user =>
+  Thread.create({ title: user.username }, { plain: true })
+    .then(thread =>
+      !thread ? Promise.reject('Thread not created')
+      : { thread, validatedUser: user }
+    )
+
 const validate = req => {
   if (!validBody(req)) return Promise.reject('missing fields')
 
@@ -48,34 +55,30 @@ const validate = req => {
   })
   .then(user =>
       user ?
-          Promise.reject('email registered') :
-          User.findOne({ where: { username: req.body.user.username } })
+        Promise.reject('email registered')
+        : User.findOne({ where: { username: req.body.user.username } })
   )
   .then(user =>
       user ?
-          Promise.reject('username taken') :
-          req.body.user
+        Promise.reject('username taken')
+        : createThread(req.body.user)
   )
 }
 
 module.exports = (req, res) => {
     validate(req)
-      .then(validatedUser => {
-
+      .then(({thread, validatedUser}) => {
         const salt = (Math.floor(Math.random() * 1000000000)).toString(36)
         const hash = crypto.createHash('md5').update(validatedUser.password + salt).digest('hex')
-        const ip = getIp(req)
-        const permalink = createPermalink(validatedUser.email)
-        const verify_token = bytes(20)
         const user = merge({
           password: hash,
           salt,
-          ip_address: ip,
+          ip_address: getIp(req),
           verified: false,
-          permalink,
-          verify_token
+          permalink: createPermalink(validatedUser.email),
+          verify_token: bytes(20),
+          threadId: thread.id
         }, pick(['email', 'name', 'username'], validatedUser))
-
         return User.create(user, { plain: true })
       })
       .then(createdUser => {
@@ -86,6 +89,7 @@ module.exports = (req, res) => {
         const resUser = pick(['id', 'email', 'name', 'username'], createdUser) //TODO: remove sending of userID, change userId checks to username (frontend)
         const token = jwt.sign({ id: createdUser.id }, process.env.JWT_SECRET)
         res.status(200).json({user: resUser, token})
+        return Thread.update({ owner: createdUser.id }, { where: { id: createdUser.threadId } })
       })
       .catch(error => res.status(400).json({error}))
 }

@@ -1,11 +1,17 @@
 const { models } = require('../../../db')
-const { User } = models
+const { User, Thread } = models
 
 const { pick } = require('ramda')
 
 const validate = req => {
   return User.findOne({
-      where: { username: req.params.id }
+    include: [
+      {
+        model: Thread,
+        attributes: ['id', 'name', 'owner']
+      }
+    ],
+    where: { username: req.params.id }
   })
   .then(user =>
       !user ?

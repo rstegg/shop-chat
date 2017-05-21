@@ -1,7 +1,7 @@
 import React from 'react'
 import { Feed } from 'semantic-ui-react'
 
-import ProductItem from 'elements/ProductItem'
+import ProductListItem from 'elements/ProductListItem'
 
 const ProductsList =
 ({
@@ -9,7 +9,7 @@ const ProductsList =
 }) =>
     <Feed>
       {!!products.length ? products.map((product, i) =>
-        <ProductItem key={`product-${i}`} product={product} />
+        <ProductListItem key={`product-${i}`} product={product} />
       ) :
         <Feed.Event>
           <Feed.Label image='/images/productholder.png' />

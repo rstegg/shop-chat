@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import { Feed, Header } from 'semantic-ui-react'
 
-const ProductItem = ({onClick, shopId, product}) =>
+const ProductListItem = ({onClick, shopId, product}) =>
   <Feed.Event as={NavLink} to={`/shop/${product.shop.slug}/product/${product.slug}`}>
     <Feed.Label>
       <img src={product.image || '/images/productholder.png'} alt={product.name} />
@@ -13,4 +13,4 @@ const ProductItem = ({onClick, shopId, product}) =>
     </Feed.Content>
   </Feed.Event>
 
-export default ProductItem
+export default ProductListItem

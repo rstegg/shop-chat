@@ -1,9 +1,8 @@
-const jwt = require('jsonwebtoken')
-
 const { models } = rootRequire('db')
 const { Message, User, Offer } = models
 
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
+const userAttributes = ['id', 'username', 'image']
 
 const acceptOffer = (socket, action) => {
   const { user, offer, threadId } = action.payload
@@ -27,7 +26,7 @@ const acceptOffer = (socket, action) => {
             },
             {
               model: User,
-              attributes: ['username', 'image']
+              attributes: userAttributes
             }
         ],
           where: { threadId }
@@ -66,7 +65,7 @@ const rejectOffer = (socket, action) => {
             },
             {
               model: User,
-              attributes: ['username', 'image']
+              attributes: userAttributes
             }
         ],
           where: { threadId }

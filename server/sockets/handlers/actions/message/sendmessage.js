@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken')
-
 const { models } = rootRequire('db')
 const { User, Message } = models
+
+const userAttributes = ['id', 'username', 'image']
 
 const sendRoomChatMessage = (socket, action) => {
   // TODO: use ramda to get params from payload
@@ -18,7 +18,7 @@ const sendRoomChatMessage = (socket, action) => {
         include: [
           {
             model: User,
-            attributes: ['username', 'image']
+            attributes: userAttributes
           }
       ],
         where: { id: savedMessage.id }

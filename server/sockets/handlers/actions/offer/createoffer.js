@@ -4,6 +4,7 @@ const { Message, User, Offer, Product } = models
 const { merge, pick } = require('ramda')
 
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
+const userAttributes = ['id', 'username', 'image']
 
 const validate = productId =>
   Product.findOne({
@@ -61,7 +62,7 @@ const sendShopOffer = (socket, action) => {
           },
           {
             model: User,
-            attributes: ['username', 'image']
+            attributes: userAttributes
           }
       ],
         where: { id: validatedMessage.id }

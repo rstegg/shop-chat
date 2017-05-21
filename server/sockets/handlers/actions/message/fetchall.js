@@ -4,6 +4,7 @@ const { models } = rootRequire('db')
 const { User, Offer, Message } = models
 
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
+const userAttributes = ['id', 'username', 'image']
 
 const fetchRoomChatMessages = (socket, action) => {
   const { threadId } = action.payload
@@ -15,7 +16,7 @@ const fetchRoomChatMessages = (socket, action) => {
       },
       {
         model: User,
-        attributes: ['username', 'image']
+        attributes: userAttributes
       }
     ],
     where: { threadId }

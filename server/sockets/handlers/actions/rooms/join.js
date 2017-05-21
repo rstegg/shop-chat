@@ -1,9 +1,8 @@
-const jwt = require('jsonwebtoken')
-
 const { models } = rootRequire('db')
 const { User, Offer, Message } = models
 
-const offerParams = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
+const offerAttributes = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
+const userAttributes = ['id', 'username', 'image']
 
 const joinChatRoom = (socket, action) => {
   const { threadId, user } = action.payload
@@ -11,11 +10,11 @@ const joinChatRoom = (socket, action) => {
     include: [
       {
         model: Offer,
-        attributes: offerParams
+        attributes: offerAttributes
       },
       {
         model: User,
-        attributes: ['username', 'image']
+        attributes: userAttributes
       }
     ],
     where: { threadId }
@@ -24,8 +23,7 @@ const joinChatRoom = (socket, action) => {
     socket.emit('action', {
       type: 'JOIN_ROOM_SUCCESS',
       payload: {
-        messages,
-        threadId
+        messages
       }
     })
   )

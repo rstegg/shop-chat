@@ -9,7 +9,11 @@ import { fetchProducts, refreshProducts } from 'actions/products'
 
 class Products extends Component {
   componentWillMount() {
-    this.props.refreshProducts()
+    const { user, shop, products, refreshProducts, fetchProducts } = this.props
+    refreshProducts()
+    if(user.isAuthenticated && shop.id && products.fetchable) {
+      fetchProducts(shop.id, user)
+    }
   }
   componentWillUpdate(nextProps) {
     const { user } = this.props

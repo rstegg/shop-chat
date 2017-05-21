@@ -8,8 +8,8 @@ import ProductMenu from 'components/ProductMenu'
 
 import { fetchSingleProduct, deleteProduct } from 'actions/products'
 
-const renderType = (product_type, topic) =>
-  product_type === 'topic' ? `Topic in ${topic}` : 'Open product'
+const renderType = (price_type, price) =>
+  price_type === 'fixed' ? `Price: $${price}` : 'Offers welcome'
 
 class ViewProduct extends Component {
   componentWillMount() {
@@ -34,7 +34,7 @@ class ViewProduct extends Component {
                     started by <Image avatar src={product.user.image || '/images/placeholder.png'} /> {product.user.username}
                   </NavLink>
                 }
-                <Card.Meta>{renderType(product.product_type, product.topic)} {product.topic === 'other' && ` - ${product.topic_other}`}</Card.Meta>
+                <Card.Meta>{renderType(product.price_type, product.price)}</Card.Meta>
                 <Card.Description>{product.description}</Card.Description>
               </Card.Content>
               <Card.Content extra>

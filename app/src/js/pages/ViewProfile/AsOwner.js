@@ -51,7 +51,7 @@ class AdminView extends Component {
     return (
       <GridLayout
         Image={<Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />}
-        Canopy={'user activity'}
+        Canopy={'welcome to your profile'}
         ChatBox={<ProfileChatPage room={profile} roomType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}

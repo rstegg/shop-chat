@@ -22,6 +22,14 @@ class RoomChat extends Component {
       joinChatRoom(threadId, user)
     }
   }
+  componentWillReceiveProps(nextProps) {
+    const { user, chat, joinChatRoom } = this.props
+    const { room } = nextProps
+    const threadId = getThreadId(room)
+    if(threadId !== chat.threadId) {
+      joinChatRoom(threadId, user)
+    }
+  }
   scrollEnd() {
     const node = findDOMNode(this.messagesEnd)
     node.scrollIntoView({behavior: "smooth"})

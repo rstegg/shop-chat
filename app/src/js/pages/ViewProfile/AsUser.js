@@ -12,7 +12,7 @@ const UserView = ({
 }) =>
   <GridLayout
     Image={<Image src={profile.image || '/images/productholder.png'} className='profile--image' />}
-    Canopy={<Header as='h4'>{'user activity'}</Header>}
+    Canopy={<Header as='h4'>{'this isnt your profile'}</Header>}
     ChatBox={<ProfileChatPage room={profile} roomType='profile' />}
     Header={<Header as='h1'>{profile.username}</Header>}
     SubHeader={<Header as='h4'>{profile.bio}</Header>}

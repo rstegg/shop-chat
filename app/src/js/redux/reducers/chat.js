@@ -1,5 +1,6 @@
 const initialState = {
   messages: [],
+  threadId: null,
   offer: {
     isOpen: false
   }

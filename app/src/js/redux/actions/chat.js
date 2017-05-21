@@ -70,8 +70,7 @@ export const fetchRoomChatMessages = (user, shop) =>
 ({
   type: 'WS/FETCH_ROOM_CHAT_MESSAGES',
   payload: {
-    user,
-    threadId: shop.slug
+    user
   }
 })
 

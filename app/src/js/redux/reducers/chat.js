@@ -1,6 +1,5 @@
 const initialState = {
   messages: [],
-  rooms: [],
   offer: {
     isOpen: false
   }
@@ -40,7 +39,6 @@ export default function(state = initialState, action) {
       })
     case 'JOIN_ROOM_SUCCESS':
       return Object.assign({}, state, {
-        rooms: [...state.rooms, action.payload.room],
         messages: action.payload.messages || []
       })
     case 'SEND_MESSAGE_FAILURE':

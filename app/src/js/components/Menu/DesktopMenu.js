@@ -16,7 +16,7 @@ export default
 }) =>
   <div>
     <div className='ui fluid bottom fixed menu menu__container'>
-      <MenuButton onClick={toGlobe} icon='globe' text='public products' />
+      <MenuButton onClick={toGlobe} icon='home' text='home' />
       {!user.isAuthenticated && <MenuButton onClick={toLogin} icon='sign in' text='login' />}
       {!user.isAuthenticated && <MenuButton onClick={toSignup} icon='add user' text='sign up' />}
       {user.isAuthenticated && <MenuButton onClick={toProducts} icon='sticky note' text='your products' />}

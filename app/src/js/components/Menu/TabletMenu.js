@@ -16,7 +16,7 @@ export default
 }) =>
   <div>
     <div className='menu__container--left'>
-      <MenuButton onClick={toGlobe} icon='globe' text='public products' />
+      <MenuButton onClick={toGlobe} icon='home' text='home' />
       {user.isAuthenticated && <MenuButton onClick={toProducts} icon='sticky note' text='your products' />}
       {user.isAuthenticated && <MenuButton onClick={toShops} icon='book' text='your shops' />}
     </div>

@@ -26,7 +26,7 @@ const Flydown = ({
     <Dropdown.Menu className='dropdown--mobile'>
       {!user.isAuthenticated && <DropItem onClick={toLogin} icon='sign in' text='login' />}
       {!user.isAuthenticated && <DropItem onClick={toSignup}  icon='add user' text='sign up' />}
-      <DropItem onClick={toGlobe} text='public product' icon='globe' />
+      <DropItem onClick={toGlobe} text='home' icon='home' />
       {user.isAuthenticated && <DropItem onClick={toProducts} text='products' icon='sticky note' />}
       {user.isAuthenticated && <DropItem onClick={toShops} text='shops' icon='book' />}
       {user.isAuthenticated && <DropItem onClick={toPencil} text='start a product' icon='edit' />}

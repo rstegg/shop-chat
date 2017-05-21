@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const moment = require('moment')
 
 const { models } = rootRequire('db')
 const { User, Offer, Product, Message, Thread } = models

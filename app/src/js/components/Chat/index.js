@@ -7,28 +7,38 @@ import { reset } from 'redux-form'
 
 import { Card, Comment, Message } from 'semantic-ui-react'
 
-import RoomChatForm from './form'
-import RoomChatMessages from './log'
+import ThreadChatForm from './form'
+import ThreadChatMessages from './log'
 
-import { sendRoomChatMessage, fetchRoomChatMessages, joinChatRoom } from 'actions/chat'
+import { sendThreadChatMessage, fetchThreadChatMessages, joinChatThread, leaveChatThread } from 'actions/chat'
 
 const getThreadId = path(['thread', 'id'])
 
-class RoomChat extends Component {
+class ThreadChat extends Component {
   componentWillMount() {
-    const { user, chat, room, joinChatRoom, fetchable } = this.props
-    const threadId = getThreadId(room)
-    if(threadId !== chat.threadId && fetchable) {
-      joinChatRoom(threadId, user)
+    const { user, thread, chat, joinChatThread, isFetching } = this.props
+    const threadId = getThreadId(thread)
+    if(!!threadId && threadId !== chat.threadId && isFetching !== threadId) {
+      console.log(threadId);
+      console.log(chat.threadId);
+      console.log(isFetching);
+      joinChatThread(threadId, user)
     }
   }
   componentWillReceiveProps(nextProps) {
-    const { user, chat, joinChatRoom, fetchable } = this.props
-    const { room } = nextProps
-    const threadId = getThreadId(room)
-    if(threadId !== chat.threadId && fetchable) {
-      joinChatRoom(threadId, user)
+    const { user, thread, chat, joinChatThread, isFetching } = nextProps
+    const threadId = getThreadId(thread)
+
+    console.log(threadId);
+    console.log(chat.threadId);
+    console.log(isFetching);
+    if(!!threadId && threadId !== chat.threadId && isFetching !== threadId) {
+      joinChatThread(threadId, user)
     }
+  }
+  componentWillUnmount() {
+    const { chat, user } = this.props
+    this.props.leaveChatThread(chat.threadId, user)
   }
   scrollEnd() {
     const node = findDOMNode(this.messagesEnd)
@@ -41,16 +51,16 @@ class RoomChat extends Component {
     this.scrollEnd()
   }
   render() {
-    const { user, chat, room, roomType, sendRoomChatMessage, clearRoomChat } = this.props
+    const { user, chat, thread, threadType, sendThreadChatMessage, clearThreadChat } = this.props
     return (
-      <Card className='chat__container room-chat'>
+      <Card className='chat__container thread-chat'>
         <Card.Content>
-          <Card.Header>{!!room && room.name} chat</Card.Header>
+          <Card.Header>{!!thread && thread.name} chat</Card.Header>
         </Card.Content>
         <Card.Content>
           <Comment.Group>
           { !!chat.messages.length ?
-            RoomChatMessages(chat.messages)
+            ThreadChatMessages(chat.messages)
             : <Message info>
                 <Message.Header style={{textAlign: 'center'}}>No chat activity 😞</Message.Header>
                 <p style={{textAlign: 'center'}}>Share the link for others to join!</p>
@@ -60,12 +70,12 @@ class RoomChat extends Component {
           </Comment.Group>
         </Card.Content>
         <Card.Content extra>
-          <RoomChatForm
-            roomType={roomType}
+          <ThreadChatForm
+            threadType={threadType}
             onSubmit={v => {
             if(!!v.text) {
-              sendRoomChatMessage(v.text, user, getThreadId(room))
-              clearRoomChat()
+              sendThreadChatMessage(v.text, user, getThreadId(thread))
+              clearThreadChat()
             }
           }} />
         </Card.Content>
@@ -78,18 +88,19 @@ const mapStateToProps = ({user, chat}) =>
 ({
   user,
   chat,
-  fetchable: chat.fetchable
+  isFetching: chat.isFetching
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchRoomChatMessages: user => dispatch(fetchRoomChatMessages(user)),
-  sendRoomChatMessage: (msg, user, threadId) => dispatch(sendRoomChatMessage(msg, user, threadId)),
-  joinChatRoom: (threadId, user) => dispatch(joinChatRoom(threadId, user)),
-  clearRoomChat: () => dispatch(reset('sendRoomChatMessage')),
+  fetchThreadChatMessages: user => dispatch(fetchThreadChatMessages(user)),
+  sendThreadChatMessage: (msg, user, threadId) => dispatch(sendThreadChatMessage(msg, user, threadId)),
+  joinChatThread: (threadId, user) => dispatch(joinChatThread(threadId, user)),
+  leaveChatThread: (threadId, user) => dispatch(leaveChatThread(threadId, user)),
+  clearThreadChat: () => dispatch(reset('sendThreadChatMessage')),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RoomChat)
+)(ThreadChat)

@@ -2,7 +2,7 @@ const initialState = {
   userId: null,
   isLoading: false,
   isEdited: false,
-  fetchable: true,
+  isFetching: null,
   focused: null
 }
 
@@ -19,19 +19,18 @@ export default function(state = initialState, action) {
     case 'EDIT_PROFILE':
       return Object.assign({}, state, {
         isLoading: true,
-        fetchable: false,
         isEdited: false
       })
     case 'FETCH_PROFILE':
       return Object.assign({}, state, {
-        isLoading: true
+        isFetching: action.payload.threadId
       })
     case 'FETCH_PROFILE_SUCCESS':
       return Object.assign({}, state, {
         ...action.payload.profile,
         userId: action.payload.profile.id,
         isLoading: false,
-        fetchable: true,
+        isFetching: null,
         isEdited: false
       })
     case 'EDIT_PROFILE_SUCCESS':

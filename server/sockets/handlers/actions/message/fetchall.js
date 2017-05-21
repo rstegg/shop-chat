@@ -6,7 +6,7 @@ const { User, Offer, Message } = models
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
 const userAttributes = ['id', 'username', 'image']
 
-const fetchRoomChatMessages = (io, socket, action) => {
+const fetchThreadChatMessages = (io, socket, action) => {
   const { threadId } = action.payload
   Message.findAll({
     include: [
@@ -23,7 +23,7 @@ const fetchRoomChatMessages = (io, socket, action) => {
   })
   .then(messages =>
     socket.emit('action', {
-      type: 'RECEIVE_ROOM_CHAT_MESSAGES',
+      type: 'RECEIVE_THREAD_CHAT_MESSAGES',
       payload: {
         messages
       }
@@ -31,4 +31,4 @@ const fetchRoomChatMessages = (io, socket, action) => {
   )
 }
 
-module.exports = { fetchRoomChatMessages }
+module.exports = { fetchThreadChatMessages }

@@ -38,6 +38,8 @@ const joinChatThread = (io, socket, action) => {
 const leaveChatThread = (io, socket, action) => {
   if(action.payload && action.payload.threadId) {
     socket.leave(action.payload.threadId)
+  } else if(socket.room) {
+    socket.leave(socket.room)
   }
 }
 

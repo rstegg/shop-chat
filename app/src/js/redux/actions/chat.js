@@ -1,15 +1,15 @@
-export const sendMessage = (text, user) =>
+export const leaveChatThread = (threadId, user) =>
 ({
-  type: 'WS/SEND_HOME_CHAT_MESSAGE',
+  type: 'WS/LEAVE_THREAD',
   payload: {
-    text,
+    threadId,
     user
   }
 })
 
-export const sendRoomChatMessage = (text, user, threadId) =>
+export const sendThreadChatMessage = (text, user, threadId) =>
 ({
-  type: 'WS/SEND_ROOM_CHAT_MESSAGE',
+  type: 'WS/SEND_THREAD_CHAT_MESSAGE',
   payload: {
     text,
     user,
@@ -58,25 +58,17 @@ export const rejectOffer = (offer, user) =>
   }
 })
 
-export const fetchMessages = user =>
+export const fetchThreadChatMessages = (user, shop) =>
 ({
-  type: 'WS/FETCH_HOME_CHAT_MESSAGES',
+  type: 'WS/FETCH_THREAD_CHAT_MESSAGES',
   payload: {
     user
   }
 })
 
-export const fetchRoomChatMessages = (user, shop) =>
+export const joinChatThread = (threadId, user) =>
 ({
-  type: 'WS/FETCH_ROOM_CHAT_MESSAGES',
-  payload: {
-    user
-  }
-})
-
-export const joinChatRoom = (threadId, user) =>
-({
-  type: 'WS/JOIN_ROOM',
+  type: 'WS/JOIN_THREAD',
   payload: {
     threadId,
     user

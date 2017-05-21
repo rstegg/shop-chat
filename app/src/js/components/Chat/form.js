@@ -6,15 +6,15 @@ import InputField from 'elements/InputField'
 
 import OfferMenu from './OfferMenu'
 
-const ShopChatForm = ({handleSubmit, resetForm, roomType}) =>
+const ShopChatForm = ({handleSubmit, resetForm, threadType}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} label='Message' name='text' placeholder='Type a chat message' />
     <Button.Group fluid>
       <Button type='submit' primary>Send</Button>
-      {roomType === 'shop' && <OfferMenu />}
+      {threadType === 'shop' && <OfferMenu />}
     </Button.Group>
   </Form>
 
 export default reduxForm({
-  form: 'sendRoomChatMessage'
+  form: 'sendThreadChatMessage'
 })(ShopChatForm)

@@ -52,7 +52,7 @@ class AdminView extends Component {
       <GridLayout
         Image={<Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />}
         Canopy={'welcome to your profile'}
-        ChatBox={<ProfileChatPage room={profile} roomType='profile' />}
+        ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         Gutter={<ProfileLabel username={profile.username} image={profile.image} />}

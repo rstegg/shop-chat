@@ -69,7 +69,7 @@ const sendShopOffer = (io, socket, action) => {
       })
       .then(message =>
         io.to(threadId).emit('action', {
-          type: 'RECEIVE_ROOM_CHAT_MESSAGE',
+          type: 'RECEIVE_THREAD_CHAT_MESSAGE',
           payload: {
             message
           }

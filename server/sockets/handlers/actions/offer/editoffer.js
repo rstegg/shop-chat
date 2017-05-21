@@ -33,7 +33,7 @@ const acceptOffer = (io, socket, action) => {
       )
       .then(messages =>
         socket.emit('action', {
-          type: 'RECEIVE_ROOM_CHAT_MESSAGES',
+          type: 'RECEIVE_THREAD_CHAT_MESSAGES',
           payload: {
             messages
           }
@@ -71,7 +71,7 @@ const rejectOffer = (io, socket, action) => {
       )
       .then(messages =>
         io.to(threadId).emit('action', {
-          type: 'RECEIVE_ROOM_CHAT_MESSAGES',
+          type: 'RECEIVE_THREAD_CHAT_MESSAGES',
           payload: {
             messages
           }

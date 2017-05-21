@@ -4,7 +4,7 @@ const initialState = {
   offer: {
     isOpen: false
   },
-  fetchable: true
+  isFetching: null
 }
 
 export default function(state = initialState, action) {
@@ -23,25 +23,30 @@ export default function(state = initialState, action) {
           isOpen: false
         }
       })
-    case 'RECEIVE_ROOM_CHAT_MESSAGE':
+    case 'RECEIVE_THREAD_CHAT_MESSAGE':
       return Object.assign({}, state, {
-        messages: [...state.messages, action.payload.message],
-        fetchable: true
+        messages: [...state.messages, action.payload.message]
       })
-    case 'RECEIVE_ROOM_CHAT_MESSAGES':
+    case 'RECEIVE_THREAD_CHAT_MESSAGES':
       return Object.assign({}, state, {
         messages: action.payload.messages || [],
-        fetchable: true
+        isFetching: null
       })
-    case 'JOIN_ROOM':
+    case 'WS/JOIN_THREAD':
       return Object.assign({}, state, {
-        fetchable: false
+        isFetching: action.payload.threadId,
+        threadId: action.payload.threadId
       })
-    case 'JOIN_ROOM_SUCCESS':
+    case 'WS/LEAVE_THREAD':
+      return Object.assign({}, state, {
+        isFetching: null,
+        threadId: null
+      })
+    case 'JOIN_THREAD_SUCCESS':
       return Object.assign({}, state, {
         messages: action.payload.messages || [],
         threadId: action.payload.threadId,
-        fetchable: true
+        isFetching: null
       })
     case 'SEND_MESSAGE_FAILURE':
     default:

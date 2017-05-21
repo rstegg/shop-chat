@@ -5,20 +5,19 @@ const initialState = {
     is_public: false
   },
   list: [],
-  fetchable: true
+  isFetching: null
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
     case 'FETCH_SINGLE_SHOP':
       return Object.assign({}, state, {
-        list: action.payload.shops,
-        fetchable: false
+        isFetching: action.payload.shopId
       })
     case 'FETCH_SINGLE_SHOP_SUCCESS':
       return Object.assign({}, state, {
         current: action.payload.shop,
-        fetchable: true
+        isFetching: null
       })
     case 'FETCH_SHOPS_SUCCESS':
       return Object.assign({}, state, {

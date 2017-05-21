@@ -44,6 +44,7 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 
 ### General
 
+- Add loading screens
 - Style View Product
   - Add chat to View Product
 - Fix styling in general
@@ -65,8 +66,8 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 
 ### Sockets
 
-- rooms authentication (permissions)
-- private rooms
+- Threads authentication (permissions)
+- private Threads
 
 ### TODO: Low Priority
 

@@ -35,7 +35,7 @@ const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
     isEditing={shop.focused === 'name'}
     placeholder='Name' name='name'
     onClick={() => editShopField('name')} onClickOutside={() => editShopField(null)}
-    onSubmit={v => editShop({...shop, name: v}, user)}>
+    onSubmit={name => editShop({...shop, name}, user)}>
     <Header as='h1'>{shop.name}</Header>
   </EditorField>
 
@@ -44,7 +44,7 @@ const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
     isEditing={isEditing}
     placeholder='Description' name='description'
     onClick={() => editShopField('description')} onClickOutside={() => editShopField(null)}
-    onSubmit={v => editShop({...shop, description: v}, user)}>
+    onSubmit={description => editShop({...shop, description}, user)}>
     <Header as='h4'>{shop.description || 'Add a description'}</Header>
   </EditorField>
 
@@ -68,7 +68,7 @@ class AdminView extends Component {
       <GridLayout
         Image={<Avatar image={image || shop.image} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />}
         Canopy={<Products />}
-        ChatBox={<ShopChatPage room={shop} roomType='shop' />}
+        ChatBox={<ShopChatPage thread={shop} threadType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}

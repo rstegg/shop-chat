@@ -4,11 +4,22 @@ const initialState = {
     name: '',
     is_public: false
   },
-  list: []
+  list: [],
+  fetchable: true
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'FETCH_SINGLE_SHOP':
+      return Object.assign({}, state, {
+        list: action.payload.shops,
+        fetchable: false
+      })
+    case 'FETCH_SINGLE_SHOP_SUCCESS':
+      return Object.assign({}, state, {
+        current: action.payload.shop,
+        fetchable: true
+      })
     case 'FETCH_SHOPS_SUCCESS':
       return Object.assign({}, state, {
         list: action.payload.shops
@@ -44,10 +55,6 @@ export default function(state = initialState, action) {
     case 'UPLOAD_EDIT_SHOP_IMAGE_SUCCESS':
       return Object.assign({}, state, {
         image: action.payload.image,
-      })
-    case 'FETCH_SINGLE_SHOP_SUCCESS':
-      return Object.assign({}, state, {
-        current: action.payload.shop
       })
     case 'SET_CURRENT_SHOP':
       return Object.assign({}, state, {

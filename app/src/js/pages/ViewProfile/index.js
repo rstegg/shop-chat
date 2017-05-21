@@ -14,10 +14,13 @@ class ViewProfile extends Component {
     this.props.refreshProfileEditing()
   }
   componentWillUpdate(nextProps) {
-    const { profile } = nextProps
-    if(profile.newUsername) {
-      this.props.history.replace(`/user/${profile.username}`)
-      this.props.refreshProfileEditing()
+    const { profile, match: { params }, history, user, fetchable, fetchProfile, refreshProfileEditing } = this.props
+    if(nextProps.profile.newUsername) {
+      history.replace(`/user/${nextProps.profile.username}`)
+      refreshProfileEditing()
+    }
+    if(profile.username !== params.id && fetchable) {
+      fetchProfile(params.id, user)
     }
   }
   render() {
@@ -35,7 +38,8 @@ class ViewProfile extends Component {
 const mapStateToProps = ({user, profile}) =>
 ({
   user,
-  profile
+  profile,
+  fetchable: profile.fetchable
 })
 
 const mapDispatchToProps = dispatch =>

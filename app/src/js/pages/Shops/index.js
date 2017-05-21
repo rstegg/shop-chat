@@ -20,6 +20,9 @@ class Shops extends Component {
     if(!this.props.user.isAuthenticated) {
       return <Redirect to='/login' />
     }
+    if(!shops) {
+      return <div>Loading...</div>
+    }
     return (
       <Card className='products'>
         <Card.Content className='card__list'>

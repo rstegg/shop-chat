@@ -3,7 +3,8 @@ const initialState = {
   threadId: null,
   offer: {
     isOpen: false
-  }
+  },
+  fetchable: true
 }
 
 export default function(state = initialState, action) {
@@ -22,26 +23,25 @@ export default function(state = initialState, action) {
           isOpen: false
         }
       })
-    case 'RECEIVE_HOME_CHAT_MESSAGE':
-      return Object.assign({}, state, {
-        messages: [...state.messages, action.payload.message]
-      })
-    case 'RECEIVE_HOME_CHAT_MESSAGES':
-      return Object.assign({}, state, {
-        messages: action.payload.messages || []
-      })
     case 'RECEIVE_ROOM_CHAT_MESSAGE':
       return Object.assign({}, state, {
-        messages: [...state.messages, action.payload.message]
+        messages: [...state.messages, action.payload.message],
+        fetchable: true
       })
     case 'RECEIVE_ROOM_CHAT_MESSAGES':
       return Object.assign({}, state, {
-        messages: action.payload.messages || []
+        messages: action.payload.messages || [],
+        fetchable: true
+      })
+    case 'JOIN_ROOM':
+      return Object.assign({}, state, {
+        fetchable: false
       })
     case 'JOIN_ROOM_SUCCESS':
       return Object.assign({}, state, {
         messages: action.payload.messages || [],
-        threadId: action.payload.threadId
+        threadId: action.payload.threadId,
+        fetchable: true
       })
     case 'SEND_MESSAGE_FAILURE':
     default:

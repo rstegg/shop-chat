@@ -12,6 +12,12 @@ class ViewShop extends Component {
     const { match: { params }, user } = this.props
     this.props.fetchSingleShop(params.id, user)
   }
+  componentWillUpdate(nextProps) {
+    const { shop, match: { params }, user, fetchable } = this.props
+    if(shop.slug !== params.id && fetchable) {
+      this.props.fetchSingleShop(params.id, user)
+    }
+  }
   render() {
     const { shop, user, joinShop, deleteShop } = this.props
     if(!shop) {
@@ -29,7 +35,8 @@ class ViewShop extends Component {
 const mapStateToProps = ({shops, user}) =>
 ({
   shop: shops.current,
-  user
+  user,
+  fetchable: shops.fetchable
 })
 
 const mapDispatchToProps = dispatch =>

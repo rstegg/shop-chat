@@ -16,17 +16,17 @@ const getThreadId = path(['thread', 'id'])
 
 class RoomChat extends Component {
   componentWillMount() {
-    const { user, chat, room, joinChatRoom } = this.props
+    const { user, chat, room, joinChatRoom, fetchable } = this.props
     const threadId = getThreadId(room)
-    if(threadId !== chat.threadId) {
+    if(threadId !== chat.threadId && fetchable) {
       joinChatRoom(threadId, user)
     }
   }
   componentWillReceiveProps(nextProps) {
-    const { user, chat, joinChatRoom } = this.props
+    const { user, chat, joinChatRoom, fetchable } = this.props
     const { room } = nextProps
     const threadId = getThreadId(room)
-    if(threadId !== chat.threadId) {
+    if(threadId !== chat.threadId && fetchable) {
       joinChatRoom(threadId, user)
     }
   }
@@ -77,7 +77,8 @@ class RoomChat extends Component {
 const mapStateToProps = ({user, chat}) =>
 ({
   user,
-  chat
+  chat,
+  fetchable: chat.fetchable
 })
 
 const mapDispatchToProps = dispatch =>

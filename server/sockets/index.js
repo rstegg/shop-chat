@@ -5,7 +5,9 @@ module.exports = io => {
   io.on('connection', socket => {
     socket.on('action', action => actionHandler(io, socket, action))
     socket.on('disconnect', () => {
-      //TODO: cleanup sockets?
+      if(socket.room) {
+        socket.leave(socket.room)
+      }
     })
   })
 }

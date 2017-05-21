@@ -20,11 +20,16 @@ const joinChatRoom = (io, socket, action) => {
     where: { threadId }
   })
   .then(messages => {
+    if(socket.room) {
+      socket.leave(socket.room)
+    }
     socket.join(threadId)
+    socket.room = threadId
     socket.emit('action', {
       type: 'JOIN_ROOM_SUCCESS',
       payload: {
-        messages
+        messages,
+        threadId
       }
     })
   })

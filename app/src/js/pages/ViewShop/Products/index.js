@@ -16,9 +16,9 @@ class Products extends Component {
     }
   }
   componentWillUpdate(nextProps) {
-    const { user } = this.props
+    const { user, fetchProducts } = this.props
     if(user.isAuthenticated && nextProps.shop.id && nextProps.products.fetchable) {
-      this.props.fetchProducts(nextProps.shop.id, user)
+      fetchProducts(nextProps.shop.id, user)
     }
   }
   render() {

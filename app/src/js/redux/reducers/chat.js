@@ -39,7 +39,8 @@ export default function(state = initialState, action) {
       })
     case 'JOIN_ROOM_SUCCESS':
       return Object.assign({}, state, {
-        messages: action.payload.messages || []
+        messages: action.payload.messages || [],
+        threadId: action.payload.threadId
       })
     case 'SEND_MESSAGE_FAILURE':
     default:

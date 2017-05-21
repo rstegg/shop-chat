@@ -1,17 +1,19 @@
 const { models } = require('../../../db')
 const { User, Thread } = models
 
-const { pick } = require('ramda')
+const threadAttributes = ['id', 'name', 'owner']
+const profileAttributes = ['id', 'name', 'username', 'image', 'bio']
 
 const validate = req => {
   return User.findOne({
     include: [
       {
         model: Thread,
-        attributes: ['id', 'name', 'owner']
+        attributes: threadAttributes
       }
     ],
-    where: { username: req.params.id }
+    where: { username: req.params.id },
+    attributes: profileAttributes
   })
   .then(user =>
       !user ?
@@ -22,9 +24,6 @@ const validate = req => {
 
 module.exports = (req, res) => {
   validate(req)
-    .then(validatedUser => {
-      const profile = pick(['id', 'name', 'username', 'image', 'bio'], validatedUser)
-      res.status(200).json({profile})
-    })
+    .then(profile => res.status(200).json({profile}))
     .catch(error => res.status(400).json({error}))
 }

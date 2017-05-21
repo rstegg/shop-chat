@@ -18,7 +18,7 @@ class RoomChat extends Component {
   componentWillMount() {
     const { user, chat, room, joinChatRoom } = this.props
     const threadId = getThreadId(room)
-    if(!chat.rooms.includes(threadId)) {
+    if(threadId !== chat.threadId) {
       joinChatRoom(threadId, user)
     }
   }

@@ -15,28 +15,28 @@ const authorize = token =>
     )
   })
 
-module.exports = (socket, action) => {
+module.exports = (io, socket, action) => {
   // TODO: use ramda to check the type of action
   authorize(action.payload.user.token)
     .then(token => {
       socket.userId = token.id //TODO: best answer?
       switch(action.type) {
         case 'WS/SEND_ROOM_CHAT_MESSAGE':
-          return sendRoomChatMessage(socket, action)
+          return sendRoomChatMessage(io, socket, action)
         case 'WS/FETCH_ROOM_CHAT_MESSAGES':
-          return fetchRoomChatMessages(socket, action)
+          return fetchRoomChatMessages(io, socket, action)
         case 'WS/SEND_SHOP_OFFER':
-          return sendShopOffer(socket, action)
-        case 'WS/SEND_PRODUCT_OFFER':
-          return sendProductOffer(socket, action)
+          return sendShopOffer(io, socket, action)
+        // case 'WS/SEND_PRODUCT_OFFER':
+        //   return sendProductOffer(io, socket, action)
         case 'WS/ACCEPT_OFFER':
-          return acceptOffer(socket, action)
+          return acceptOffer(io, socket, action)
         case 'WS/REJECT_OFFER':
-          return rejectOffer(socket, action)
+          return rejectOffer(io, socket, action)
         case 'WS/JOIN_ROOM':
-          return joinChatRoom(socket, action)
+          return joinChatRoom(io, socket, action)
         case 'WS/LEAVE_ROOM':
-          return leaveChatRoom(socket, action)
+          return leaveChatRoom(io, socket, action)
       }
   })
   .catch(error => console.error(error))

@@ -19,7 +19,7 @@ const validate = productId =>
     : product
   )
 
-const sendShopOffer = (socket, action) => {
+const sendShopOffer = (io, socket, action) => {
   const { user, productId, price, threadId } = action.payload
   const { username, image, token } = user
   const avatar = image
@@ -68,7 +68,7 @@ const sendShopOffer = (socket, action) => {
         where: { id: validatedMessage.id }
       })
       .then(message =>
-        socket.emit('action', {
+        io.to(threadId).emit('action', {
           type: 'RECEIVE_ROOM_CHAT_MESSAGE',
           payload: {
             message

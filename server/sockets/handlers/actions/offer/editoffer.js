@@ -4,7 +4,7 @@ const { Message, User, Offer } = models
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
 const userAttributes = ['id', 'username', 'image']
 
-const acceptOffer = (socket, action) => {
+const acceptOffer = (io, socket, action) => {
   const { user, offer, threadId } = action.payload
   const { username, image, token } = user
   const { timestamp } = offer
@@ -13,10 +13,9 @@ const acceptOffer = (socket, action) => {
         !foundOffer ? Promise.reject('No offer')
         : foundOffer
       )
-      .then(validatedOffer => {
-        const stateAccepted = { state: 'accepted' }
-        return Offer.update(stateAccepted, { where: { id: validatedOffer.id } })
-      })
+      .then(validatedOffer =>
+        Offer.update({ state: 'accepted' }, { where: { id: validatedOffer.id } })
+      )
       .then(updatedOffer =>
         Message.findAll({
           include: [
@@ -43,7 +42,7 @@ const acceptOffer = (socket, action) => {
       .catch(error => console.log(error))
 }
 
-const rejectOffer = (socket, action) => {
+const rejectOffer = (io, socket, action) => {
   const { user, offer, threadId } = action.payload
   const { username, image, token } = user
   const { timestamp } = offer
@@ -52,10 +51,9 @@ const rejectOffer = (socket, action) => {
         !foundOffer ? Promise.reject('No offer')
         : foundOffer
       )
-      .then(validatedOffer => {
-        const stateRejected = { state: 'rejected' }
-        return Offer.update(stateRejected, { where: { id: validatedOffer.id } })
-      })
+      .then(validatedOffer =>
+        Offer.update({ state: 'rejected' }, { where: { id: validatedOffer.id } })
+      )
       .then(updatedOffer =>
         Message.findAll({
           include: [
@@ -72,7 +70,7 @@ const rejectOffer = (socket, action) => {
         })
       )
       .then(messages =>
-        socket.emit('action', {
+        io.to(threadId).emit('action', {
           type: 'RECEIVE_ROOM_CHAT_MESSAGES',
           payload: {
             messages

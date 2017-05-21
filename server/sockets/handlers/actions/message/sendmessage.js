@@ -3,7 +3,7 @@ const { User, Message } = models
 
 const userAttributes = ['id', 'username', 'image']
 
-const sendRoomChatMessage = (socket, action) => {
+const sendRoomChatMessage = (io, socket, action) => {
   // TODO: use ramda to get params from payload
   const { user, text, threadId } = action.payload
   const { username, image } = user
@@ -25,7 +25,7 @@ const sendRoomChatMessage = (socket, action) => {
       })
     )
     .then(message =>
-      socket.emit('action', {
+      io.to(threadId).emit('action', {
         type: 'RECEIVE_ROOM_CHAT_MESSAGE',
         payload: {
           message

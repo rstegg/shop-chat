@@ -6,7 +6,7 @@ const { User, Offer, Message } = models
 const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
 const userAttributes = ['id', 'username', 'image']
 
-const fetchRoomChatMessages = (socket, action) => {
+const fetchRoomChatMessages = (io, socket, action) => {
   const { threadId } = action.payload
   Message.findAll({
     include: [

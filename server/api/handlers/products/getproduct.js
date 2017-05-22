@@ -1,7 +1,7 @@
 const { models } = require('../../../db')
 const { Product, Shop, User } = models
 
-const productParams = ['id', 'name', 'slug', 'description', 'category', 'sub_category', 'price_type', 'price', 'image', 'shopId']
+const productParams = ['id', 'name', 'slug', 'description', 'category', 'sub_category', 'is_public', 'price_type', 'price', 'image', 'shopId']
 
 module.exports = (req, res) => {
   Shop.findOne({

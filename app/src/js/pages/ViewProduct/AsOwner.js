@@ -1,30 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { Button, Card, Grid, Image, Header, Checkbox, Rail } from 'semantic-ui-react'
-import { Field, reduxForm } from 'redux-form'
-import { path } from 'ramda'
-
-import Dropzone from 'components/Dropzone'
-
-import EditorField from 'elements/EditorField'
-
-import { editProduct, deleteProduct, uploadEditProductImage, editProductField } from 'actions/products'
+import { Button, Card, Grid, Image, Header, Checkbox, Rail, Segment } from 'semantic-ui-react'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 
 import ProductChatPage from 'components/Chat'
 import SocialMenu from 'components/SocialMenu'
+import Dropzone from 'components/Dropzone'
 
-const productUsername = path(['user', 'username'])
+import EditorField from 'elements/EditorField'
+import SelectField from 'elements/SelectField'
 
-const productUserAvatar = path(['user', 'image'])
-
-const renderType = (price_type, price) =>
-  price_type === 'fixed' ? `Price: $${price}` : 'Purchases welcome'
+import { editProduct, deleteProduct, uploadEditProductImage, editProductField } from 'actions/products'
 
 const Avatar = ({image, uploadEditProductImage}) =>
   <Dropzone className='ui image editable' onDrop={uploadEditProductImage}>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
+
+const options = [
+  { key: 'fixed', value: 'fixed', text: 'Fixed' },
+  { key: 'open', value: 'open', text: 'Open' }
+]
+
+const SelectTypeField = props =>
+  <SelectField {...props} label={<Header as='h2'>List as</Header>} placeholder='Price type' options={options} />
 
 const CheckboxField = ({ input: { value, onChange }, onSubmit }) =>
   <Checkbox
@@ -55,7 +54,19 @@ const DescriptionField = ({isEditing, product, user, editProduct, editProductFie
   </EditorField>
 
 const PublicField = ({product, user, editProduct}) =>
-  <Field component={CheckboxField} name='is_public' onSubmit={v => editProduct({...product, is_public: v}, user)} />
+  <Field component={CheckboxField} name='is_public' onSubmit={is_public => editProduct({...product, is_public}, user)} />
+
+const PriceField = ({isEditing, product, user, editProduct, editProductField}) =>
+  <EditorField
+    isEditing={isEditing}
+    placeholder='Price' name='price'
+    onClick={() => editProductField('price')} onClickOutside={() => editProductField(null)}
+    onSubmit={price => editProduct({...product, price}, user)}>
+    <Header as='h4'>${product.price || '0.00'}</Header>
+  </EditorField>
+
+const PriceTypeField = ({product, user, editProduct}) =>
+  <Field component={SelectTypeField} name='price_type' onSubmit={price_type => editProduct({...product, price_type}, user)} />
 
 class AdminView extends Component {
   componentWillUnmount() {
@@ -68,7 +79,8 @@ class AdminView extends Component {
       editProductField,
       uploadEditProductImage,
       product,
-      user
+      user,
+      priceTypeValue,
     } = this.props
     return (
       <Grid>
@@ -77,22 +89,32 @@ class AdminView extends Component {
             <Card>
               <Avatar image={product.image || '/images/productholder.png'} uploadEditProductImage={img => uploadEditProductImage(img[0], product, user)} />
               <Card.Content>
-                <Card.Header>
-                  <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Card.Header>
-                  <NavLink to={`/user/${product.user.username}`}>
-                    started by <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
-                  </NavLink>
-                <Card.Meta>{renderType(product.price_type, product.price)}</Card.Meta>
-                <Card.Description>
-                  <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Card.Description>
+                <Segment>
+                  <Card.Header>
+                    <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  </Card.Header>
+                </Segment>
+                <Segment>
+                  <PriceTypeField product={product} user={user} editProduct={editProduct} />
+                  { priceTypeValue === 'fixed' &&
+                    <Segment>
+                      <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                    </Segment>
+                  }
+                </Segment>
+                <Segment>
+                  <Card.Description>
+                    <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  </Card.Description>
+                </Segment>
               </Card.Content>
               <Card.Content extra>
-                <Button.Group vertical fluid>
-                  <PublicField product={product} user={user} editProduct={editProduct} />
-                  <Button basic color='red' onClick={() => deleteProduct(product.id, user)} style={{justifyContent: 'center'}}>Delete</Button>
-                </Button.Group>
+                  <Segment>
+                    <PublicField product={product} user={user} editProduct={editProduct} />
+                  </Segment>
+                  <Segment>
+                    <Button fluid basic color='red' onClick={() => deleteProduct(product.id, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
+                  </Segment>
               </Card.Content>
             </Card>
             <Rail attached position='right'>
@@ -116,11 +138,14 @@ const ConnectedAdminView = reduxForm({
   // validate
 })(AdminView)
 
-const mapStateToProps = ({products, user}) =>
+const selector = formValueSelector('editProduct')
+
+const mapStateToProps = state =>
 ({
-  user: user,
-  product: products.current,
-  initialValues: products.current
+  user: state.user,
+  product: state.products.current,
+  priceTypeValue: selector(state, 'price_type'),
+  initialValues: state.products.current
 })
 
 const mapDispatchToProps = dispatch =>

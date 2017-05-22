@@ -1,7 +1,8 @@
 const initialState = {
-  current: {},
+  current: {
+    is_public: false
+  },
   new: {
-    name: '',
     is_public: false
   },
   list: [],

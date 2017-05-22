@@ -19,7 +19,7 @@ const productShopName = path(['shop', 'name'])
 const productShopImage = path(['shop', 'image'])
 
 const renderType = (price_type, price) =>
-  price_type === 'fixed' ? `Price: $${price}` : 'Purchases welcome'
+  price_type === 'fixed' ? `Price: $${price}` : 'Offer'
 
 const UserView = ({
   orders,

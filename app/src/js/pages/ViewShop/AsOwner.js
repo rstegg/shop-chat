@@ -49,7 +49,7 @@ const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
   </EditorField>
 
 const PublicField = ({shop, user, editShop}) =>
-  <Field component={CheckboxField} name='is_public' onSubmit={v => editShop({...shop, is_public: v}, user)} />
+  <Field component={CheckboxField} name='is_public' onSubmit={is_public => editShop({...shop, is_public}, user)} />
 
 class AdminView extends Component {
   componentWillUnmount() {

@@ -113,13 +113,14 @@ export const onUploadProductImageSuccess = res =>
   }
 })
 
-export const uploadEditProductImage = (image, shop, user) =>
+export const uploadEditProductImage = (image, product, user) =>
 ({
   type: 'UPLOAD_EDIT_PRODUCT_IMAGE',
   payload: {
     image,
+    product,
+    shopId: product.shopId,
     token: user.token,
-    shopId: shop.id
   }
 })
 
@@ -131,12 +132,20 @@ export const onUploadEditProductImageSuccess = res =>
   }
 })
 
-export const editProduct = (product, shopId, user) =>
+export const editProductField = field =>
+({
+  type: 'EDIT_PRODUCT_FIELD',
+  payload: {
+    field
+  }
+})
+
+export const editProduct = (product, user) =>
 ({
   type: 'EDIT_PRODUCT',
   payload: {
     product,
-    shopId,
+    shopId: product.shopId,
     token: user.token,
   }
 })

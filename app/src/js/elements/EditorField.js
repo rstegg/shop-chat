@@ -26,6 +26,7 @@ class EditorField extends Component {
             }}
           }
           onClick={v => onSubmit(v)}
+          className='ignore-onclickoutside'
         />
       )
     }

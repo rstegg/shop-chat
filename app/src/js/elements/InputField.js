@@ -3,9 +3,9 @@ import { Form, Label } from 'semantic-ui-react'
 
 class InputField extends Component {
   render() {
-  const { input, meta: { asyncValidating, touched, error }, onKeyUp, type, autoFocus, label, placeholder } = this.props
+  const { input, meta: { asyncValidating, touched, error }, className, onKeyUp, type, autoFocus, label, placeholder } = this.props
   return (
-    <Form.Field>
+    <Form.Field className={className}>
       <label>{label}</label>
       <div className={asyncValidating ? 'ui right icon input loading' : 'ui input'}>
         <input type={type || 'text'} {...input} onKeyUp={onKeyUp} autoFocus={autoFocus || false} placeholder={placeholder || label} />

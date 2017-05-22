@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) =>
       associate () {
         this.belongsTo(sequelize.models['shops'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        this.belongsTo(sequelize.models['threads'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['offers'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
       }
     }

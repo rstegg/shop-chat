@@ -1,5 +1,5 @@
 const { models } = require('../../../db')
-const { Product, Shop } = models
+const { Product, Shop, Thread } = models
 
 const shortId = require('shortid')
 
@@ -7,7 +7,7 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const validField = p => obj => !isNil(path([p], obj))
 
-const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'category', 'sub_category', 'price_type', 'price', 'image']
+const productParams = ['name', 'is_public', 'description', 'category', 'sub_category', 'price_type', 'price', 'image']
 
 const validBody = pipe(
   path(['body', 'product']),
@@ -22,7 +22,7 @@ const validParams = pipe(
       validField('shopId')
   ]))
 
-const getValidSlug = (slug, shopId) =>
+const getValidSlug = (slug, shopId, thread) =>
   new Promise(resolve =>
     Product.findOne({
       where: { slug, shopId }
@@ -30,17 +30,24 @@ const getValidSlug = (slug, shopId) =>
     .then(product =>
       product ?
         resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`), shopId)
-        : resolve(slug)
+        : resolve({slug, thread})
     )
   )
 
-const getValidParams = (id, userId, slug) =>
+const createThread = (shopId, userId, slug) =>
+  Thread.create({ title: slug, owner: userId }, { plain: true })
+    .then(thread =>
+      !thread ? Promise.reject('Thread not created')
+      : getValidSlug(slug, shopId, thread)
+    )
+
+const getValidParams = (shopId, userId, slug) =>
   Shop.findOne({
-    where: { id, userId }
+    where: { id: shopId, userId }
   })
   .then(shop =>
     !shop ? Promise.reject('Invalid permission')
-    : getValidSlug(slug, id)
+    : createThread(shopId, userId, slug)
   )
 
 const validate = req => {
@@ -59,10 +66,11 @@ const validate = req => {
 
 module.exports = (req, res) => {
   validate(req)
-    .then(slug => {
+    .then(({slug, thread}) => {
       const newProduct = merge({
         slug,
         shopId: req.params.shopId,
+        threadId: thread.id,
         userId: req.user.id
       }, pick(productParams, req.body.product))
       return Product.create(newProduct, { plain: true })

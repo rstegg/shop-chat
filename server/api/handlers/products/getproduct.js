@@ -1,5 +1,5 @@
 const { models } = require('../../../db')
-const { Product, Shop, User } = models
+const { Product, Shop, User, Thread } = models
 
 const productParams = ['id', 'name', 'slug', 'description', 'category', 'sub_category', 'is_public', 'price_type', 'price', 'image', 'shopId']
 
@@ -22,6 +22,10 @@ module.exports = (req, res) => {
         {
           model: User,
           attributes: ['id', 'username', 'image']
+        },
+        {
+          model: Thread,
+          attributes: ['id', 'name', 'owner']
         }
       ],
       where: { slug: req.params.id, shopId: shop.id },

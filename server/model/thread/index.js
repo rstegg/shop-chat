@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) =>
         this.hasMany(sequelize.models['users'], { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['messages'], { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
         this.hasMany(sequelize.models['shops'], { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
+        this.hasMany(sequelize.models['products'], { foreignKey: { allowNull: true }, onDelete: 'CASCADE' })
       }
     }
   })

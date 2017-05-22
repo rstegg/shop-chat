@@ -54,7 +54,7 @@ module.exports = (req, res) => {
         userId: req.user.id,
         threadId: thread.id,
         slug
-      }, pick(['name', 'is_public'], req.body.shop))
+      }, pick(['name', 'is_public', 'image'], req.body.shop))
       return Shop.create(newShop, { plain: true })
     })
     .then(shop => res.status(200).json({shop}))

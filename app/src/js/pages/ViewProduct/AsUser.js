@@ -56,24 +56,20 @@ const UserView = ({
                         }} />
                     </Popup.Content>
                 </Popup>
-                <Button fluid basic color='green' content='Add to cart' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+                <Button fluid basic color='green' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
               </Button.Group>
               <Divider />
               <div className='ui two buttons'>
-                <Button basic>
-                  <NavLink to={`/user/${productUsername(product)}`}>
-                    <Button basic color='orange' compact>
-                        more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
-                    </Button>
-                  </NavLink>
-                </Button>
-                <Button basic>
-                  <NavLink to={`/shop/${productShopSlug(product)}`}>
-                    <Button basic color='red' compact>
-                        more from <Image avatar src={productShopImage(product) || '/images/productholder.png'} /> {productShopName(product)}
-                    </Button>
-                  </NavLink>
-                </Button>
+                <NavLink to={`/user/${productUsername(product)}`}>
+                  <Button basic color='orange' compact>
+                      more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
+                  </Button>
+                </NavLink>
+                <NavLink to={`/shop/${productShopSlug(product)}`}>
+                  <Button basic color='red' compact>
+                      more from <Image avatar src={productShopImage(product) || '/images/productholder.png'} /> {productShopName(product)}
+                  </Button>
+                </NavLink>
               </div>
             </Card.Content>
           </Card>

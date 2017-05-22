@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Header } from 'semantic-ui-react'
 
-import ShopMenu from 'components/ProductMenu'
+import ShopMenu from 'components/SocialMenu'
 import ProfileLabel from 'elements/ProfileLabel'
 
 import ShopChatPage from 'components/Chat'

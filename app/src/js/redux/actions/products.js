@@ -113,6 +113,24 @@ export const onUploadProductImageSuccess = res =>
   }
 })
 
+export const uploadEditProductImage = (image, shop, user) =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_IMAGE',
+  payload: {
+    image,
+    token: user.token,
+    shopId: shop.id
+  }
+})
+
+export const onUploadEditProductImageSuccess = res =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_IMAGE_SUCCESS',
+  payload: {
+    image: res.body.image
+  }
+})
+
 export const editProduct = (product, shopId, user) =>
 ({
   type: 'EDIT_PRODUCT',

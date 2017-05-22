@@ -6,7 +6,7 @@ import { Button, Popup } from 'semantic-ui-react'
 
 import ShopChatMenuForm from './form'
 
-import { sendOffer, openOffer, closeOffer } from 'actions/chat'
+import { sendOffer, openOffer, closeOffer } from 'actions/offers'
 
 const getThreadId = path(['thread', 'id'])
 
@@ -15,11 +15,11 @@ class ShopChatMenu extends Component {
     this.props.closeOffer()
   }
   render() {
-    const { user, products, sendOffer, shop, chat, openOffer, closeOffer } = this.props
+    const { user, products, sendOffer, offers, shop, openOffer, closeOffer } = this.props
     return (
       <Popup wide position='top right' on='click'
         trigger={<Button icon='dollar' className='offer-button' type='button' disabled={!products.list.length} />}
-        open={chat.offer.isOpen}
+        open={offers.isOpen}
         onOpen={openOffer} onClose={closeOffer}>
           <Popup.Header>Make an Offer</Popup.Header>
           <Popup.Content>
@@ -36,9 +36,9 @@ class ShopChatMenu extends Component {
 }
 
 
-const mapStateToProps = ({user, products, shops, chat}) =>
+const mapStateToProps = ({user, products, shops, offers}) =>
 ({
-  chat,
+  offers,
   user,
   products,
   shop: shops.current

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Image, Header, Checkbox } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
-import ShopMenu from 'components/ProductMenu'
+import ShopMenu from 'components/SocialMenu'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'

@@ -40,7 +40,7 @@ export default function(state = initialState, action) {
     case 'EDIT_SHOP':
       return Object.assign({}, state, {
         current: {
-          ...action.payload.shop,
+          ...state.current,
           focused: null
         }
       })

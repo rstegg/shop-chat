@@ -3,7 +3,8 @@ const initialState = {
   isLoading: false,
   isEdited: false,
   isFetching: null,
-  focused: null
+  focused: null,
+  newUsername: false,
 }
 
 export default function(state = initialState, action) {
@@ -15,11 +16,6 @@ export default function(state = initialState, action) {
     case 'EDIT_PROFILE_FIELD':
       return Object.assign({}, state, {
         focused: action.payload.field
-      })
-    case 'EDIT_PROFILE':
-      return Object.assign({}, state, {
-        isLoading: true,
-        isEdited: false
       })
     case 'FETCH_PROFILE':
       return Object.assign({}, state, {
@@ -33,6 +29,12 @@ export default function(state = initialState, action) {
         isFetching: null,
         isEdited: false
       })
+    case 'EDIT_PROFILE':
+      return Object.assign({}, state, {
+        isLoading: true,
+        isEdited: false,
+        focused: null
+      })
     case 'EDIT_PROFILE_SUCCESS':
       const newUsername = !(action.payload.user.username === state.username)
       return Object.assign({}, state, {
@@ -40,8 +42,7 @@ export default function(state = initialState, action) {
         ...action.payload.user,
         isLoading: false,
         isEdited: true,
-        newUsername,
-        focused: null
+        newUsername
       })
     case 'REFRESH_PROFILE_EDITING':
       return Object.assign({}, state, {

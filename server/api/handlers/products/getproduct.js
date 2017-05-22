@@ -1,5 +1,5 @@
 const { models } = require('../../../db')
-const { Product, Shop } = models
+const { Product, Shop, User } = models
 
 const productParams = ['id', 'name', 'slug', 'description', 'category', 'sub_category', 'price_type', 'price', 'image', 'shopId']
 
@@ -14,10 +14,16 @@ module.exports = (req, res) => {
   )
   .then(shop =>
     Product.findOne({
-      include: [{
-        model: Shop,
-        attributes: ['image', 'name', 'slug']
-      }],
+      include: [
+        {
+          model: Shop,
+          attributes: ['image', 'name', 'slug']
+        },
+        {
+          model: User,
+          attributes: ['id', 'username', 'image']
+        }
+      ],
       where: { slug: req.params.id, shopId: shop.id },
       attributes: productParams
     })

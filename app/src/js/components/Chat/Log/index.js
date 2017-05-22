@@ -1,10 +1,10 @@
 import React from 'react'
 import moment from 'moment'
 
-import AcceptedOffer from './Log/Offer/Accepted'
-import RejectedOffer from './Log/Offer/Rejected'
-import PendingOffer from './Log/Offer/Pending'
-import TextMessage from './Log/Message'
+import AcceptedOffer from './Offer/Accepted'
+import RejectedOffer from './Offer/Rejected'
+import PendingOffer from './Offer/Pending'
+import TextMessage from './Message'
 
 const ChatMessages = messages => {
   //FIXME: this function uses a map to calculate an accumulation of time differences between messages

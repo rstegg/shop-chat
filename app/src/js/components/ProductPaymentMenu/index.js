@@ -15,11 +15,11 @@ const {
   TwitterShareButton
 } = ShareButtons
 
-import ProductMenuForm from './form'
+import SocialMenuForm from './form'
 
 import { shareProduct } from 'actions/products'
 
-const ProductMenu = ({url, user, shareProduct, productId}) =>
+const SocialMenu = ({url, user, shareProduct, productId}) =>
   <Segment.Group compact horizontal>
     <Segment>
       <CopyToClipboard text={url}>
@@ -38,7 +38,7 @@ const ProductMenu = ({url, user, shareProduct, productId}) =>
     <Popup wide trigger={<Button circular basic icon='mail' size='medium' />} on='click'>
         <Popup.Header>Share via Email</Popup.Header>
         <Popup.Content>
-          <ProductMenuForm onSubmit={values => shareProduct({...values, productId}, user, url)} />
+          <SocialMenuForm onSubmit={values => shareProduct({...values, productId}, user, url)} />
         </Popup.Content>
     </Popup>
   </Segment>
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductMenu)
+)(SocialMenu)

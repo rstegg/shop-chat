@@ -46,6 +46,13 @@ const api = {
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
+  uploadEditProductImage: ({image, product, token}) => {
+    const request = su.post(`${API_HOST}/image/${product.shopId}/product/${product.id}`)
+      .attach('image', image)
+      .set('Accept', 'application/json')
+      .set('Authorization', token)
+    return Observable.fromPromise(request)
+  },
   editProduct: ({product, shopId, token}) => {
    const request = su.put(`${API_HOST}/shop/${shopId}/product/${product.id}`)
       .send({product})
@@ -105,6 +112,16 @@ export const uploadProductImage = action$ =>
   action$.ofType('UPLOAD_PRODUCT_IMAGE')
     .mergeMap(action =>
       api.uploadProductImage(action.payload)
+        .map(onUploadProductImageSuccess)
+        .catch(error => Observable.of({
+          type: 'UPLOAD_PRODUCT_IMAGE_FAILURE'
+        }))
+    )
+
+export const uploadEditProductImage = action$ =>
+  action$.ofType('UPLOAD_EDIT_PRODUCT_IMAGE')
+    .mergeMap(action =>
+      api.uploadEditProductImage(action.payload)
         .map(onUploadProductImageSuccess)
         .catch(error => Observable.of({
           type: 'UPLOAD_PRODUCT_IMAGE_FAILURE'

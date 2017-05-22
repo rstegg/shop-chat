@@ -11,6 +11,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "dependencies": {
+    "braintree-web": "^3.16.0",
     "date-fns": "^1.28.5",
     "express": "^4.15.2",
     "lodash": "^4.17.4",

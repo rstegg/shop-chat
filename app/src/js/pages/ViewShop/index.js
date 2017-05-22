@@ -9,13 +9,13 @@ import { fetchSingleShop, deleteShop, joinShop } from 'actions/shops'
 
 class ViewShop extends Component {
   componentWillMount() {
-    const { match: { params }, user } = this.props
-    this.props.fetchSingleShop(params.id, user)
+    const { match: { params }, fetchSingleShop, user } = this.props
+    fetchSingleShop(params.id, user)
   }
   componentWillUpdate(nextProps) {
-    const { shop, match: { params }, user, isFetching } = this.props
+    const { shop, match: { params }, user, fetchSingleShop, isFetching } = this.props
     if(shop.slug !== params.id && isFetching !== params.id) {
-      this.props.fetchSingleShop(params.id, user)
+      fetchSingleShop(params.id, user)
     }
   }
   render() {

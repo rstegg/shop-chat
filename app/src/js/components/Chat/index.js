@@ -8,7 +8,7 @@ import { reset } from 'redux-form'
 import { Card, Comment, Message } from 'semantic-ui-react'
 
 import ThreadChatForm from './form'
-import ThreadChatMessages from './log'
+import ThreadChatMessages from './Log'
 
 import { sendThreadChatMessage, fetchThreadChatMessages, joinChatThread, leaveChatThread } from 'actions/chat'
 

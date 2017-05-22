@@ -25,6 +25,20 @@ export default function(state = initialState, action) {
           isCreated: true
         }
       })
+    case 'EDIT_PRODUCT_FIELD':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          focused: action.payload.field
+        }
+      })
+    case 'EDIT_PRODUCT':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          focused: null
+        }
+      })
     case 'EDIT_PRODUCT_SUCCESS':
       return Object.assign({}, state, {
         current: {

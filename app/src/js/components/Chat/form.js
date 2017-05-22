@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Form, Button } from 'semantic-ui-react'
 import InputField from 'elements/InputField'
 
-import OfferMenu from './OfferMenu'
+import OfferMenu from 'components/OfferMenu'
 
 const ShopChatForm = ({handleSubmit, resetForm, threadType}) =>
   <Form onSubmit={handleSubmit}>

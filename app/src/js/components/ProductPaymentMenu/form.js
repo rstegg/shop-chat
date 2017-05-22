@@ -6,7 +6,7 @@ import { Form } from 'semantic-ui-react'
 import InputField from 'elements/InputField'
 import AreaField from 'elements/AreaField'
 
-const ProductMenuForm = ({handleSubmit}) =>
+const SocialMenuForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Name' />
     <Field component={InputField} type='email' name='email' label='To' placeholder='Email' />
@@ -16,4 +16,4 @@ const ProductMenuForm = ({handleSubmit}) =>
 
 export default reduxForm({
   form: 'productInvite'
-})(ProductMenuForm)
+})(SocialMenuForm)

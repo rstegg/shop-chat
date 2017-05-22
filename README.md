@@ -44,9 +44,12 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 
 ### General
 
+- ViewProduct:
+  - 'Buy' (placeholder menu)
+  - 'Add to cart'
+  - styling  
 - Add loading screens
-- Style View Product
-  - Add chat to View Product
+- Fix bug with profile chat not always joining [bug]
 - Fix styling in general
 - Add:
   - 'feed'

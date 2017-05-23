@@ -1,11 +1,20 @@
 const { models } = require('../../../db')
-const { User, Thread } = models
+const { User, Shop, Thread } = models
+const { merge, pick } = require('ramda')
 
 const threadAttributes = ['id', 'name', 'owner']
 const profileAttributes = ['id', 'name', 'username', 'image', 'bio']
+const shopAttributes = ['id', 'name', 'description', 'shop_type', 'is_public', 'slug', 'image']
 
-const validate = req => {
-  return User.findOne({
+const getShops = user =>
+  Shop.findAll({
+    where: { userId: user.id },
+    attributes: shopAttributes
+  })
+  .then(shops => merge({ shops }, pick(profileAttributes, user)))
+
+const validate = req =>
+  User.findOne({
     include: [
       {
         model: Thread,
@@ -20,10 +29,9 @@ const validate = req => {
           Promise.reject('invalid username')
           : user
   )
-}
 
-module.exports = (req, res) => {
+module.exports = (req, res) =>
   validate(req)
+    .then(user => getShops(user))
     .then(profile => res.status(200).json({profile}))
     .catch(error => res.status(400).json({error}))
-}

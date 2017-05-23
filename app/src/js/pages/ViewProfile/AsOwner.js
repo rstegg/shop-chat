@@ -11,6 +11,7 @@ import ProfileLabel from 'elements/ProfileLabel'
 
 import { editProfile, uploadAvatar, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
+import Shops from './Shops'
 
 const Avatar = ({image, uploadAvatar}) =>
   <Dropzone className='ui image editable' onDrop={uploadAvatar}>
@@ -51,7 +52,7 @@ class AdminView extends Component {
     return (
       <GridLayout
         Image={<Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />}
-        Canopy={'welcome to your profile'}
+        Canopy={<Shops />}
         ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}

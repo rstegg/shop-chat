@@ -8,6 +8,7 @@ import { ConnectedRouter as Router } from 'react-router-redux'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Settings from './pages/Settings'
 
 import CreateProduct from './pages/CreateProduct'
 import ViewProduct from './pages/ViewProduct'
@@ -47,6 +48,7 @@ export default class AppProvider extends Component {
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/signup' component={Signup} />
+                <Route exact path='/settings' component={Settings} />
                 <Route exact path='/shops' component={Shops} />
                 <Route exact path='/shop/:id/products/new' component={CreateProduct} />
                 <Route exact path='/shops/new' component={CreateShop} />

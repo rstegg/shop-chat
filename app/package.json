@@ -20,6 +20,7 @@
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",
     "react-copy-to-clipboard": "^5.0.0",
+    "react-credit-card": "^0.20.0",
     "react-dom": "^15.5.4",
     "react-maskedinput": "^3.3.4",
     "react-number-input": "^15.5.1",

@@ -45,7 +45,7 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 ### General
 
 - ViewProduct:
-  - 'Buy' (placeholder menu)
+  - 'Buy now'
   - 'Add to cart'
   - styling  
 - Add loading screens

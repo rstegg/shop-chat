@@ -5,17 +5,15 @@ export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}
   <Grid celled='internally' className='main-container'>
     <Grid.Column width={3} stretched>
       <Segment basic>
-        <Segment>{Image}</Segment>
-        <Segment>{Header}</Segment>
-        <Segment>{SubHeader}</Segment>
-        <Segment>{Gutter}</Segment>
-        <Segment>{GutterRight}</Segment>
+        {!!Image && <Segment>{Image}</Segment>}
+        {!!Header && <Segment>{Header}</Segment>}
+        {!!SubHeader && <Segment>{SubHeader}</Segment>}
+        {!!Gutter && <Segment>{Gutter}</Segment>}
+        {!!GutterRight && <Segment>{GutterRight}</Segment>}
       </Segment>
     </Grid.Column>
     <Grid.Column width={8} stretched>
-      <Segment basic>{Canopy}</Segment>
+      {!!Canopy && <Segment basic>{Canopy}</Segment>}
     </Grid.Column>
-    <Grid.Column width={5} stretched>
-      {ChatBox}
-    </Grid.Column>
+    {!!ChatBox && <Grid.Column width={5} stretched>{ChatBox}</Grid.Column>}
   </Grid>

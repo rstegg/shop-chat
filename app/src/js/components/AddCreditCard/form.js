@@ -24,8 +24,7 @@ const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCar
         value={card.number}
         onChange={e => onAddCreditCardFormChange('number', e.target.value)}
         onFocus={() => setFocusedCardField('number')}
-        onBlur={() => setFocusedCardField(null)}
-      />
+        onBlur={() => setFocusedCardField(null)} />
       <FormInput
         label='Name'
         name='name'

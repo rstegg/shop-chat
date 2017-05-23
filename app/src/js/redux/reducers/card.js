@@ -1,5 +1,5 @@
 const initialState = {
-  isOpen: true,
+  isOpen: false,
   isFetching: null,
   focused: null
 }

@@ -19,7 +19,7 @@ const UserView = ({
     Canopy={<Products />}
     ChatBox={<ShopChatPage thread={shop} threadType='shop' />}
     Header={<Header as='h1'>{shop.name}</Header>}
-    SubHeader={<Header as='h4'>{shop.description}</Header>}
+    SubHeader={!!shop.description && <Header as='h4'>{shop.description}</Header>}
     Gutter={shop.user && <ProfileLabel username={shop.user.username} image={shop.user.image} />}
     GutterRight={<ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />} />
 

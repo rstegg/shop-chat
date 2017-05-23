@@ -6,6 +6,9 @@ import ProfileChatPage from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
 import ProfileLabel from 'elements/ProfileLabel'
 
+//TODO: ProfileLabel inside ViewProfile? Replace with custom url
+//TODO: Fill out rest of the page (shops?)
+
 const UserView = ({
   profile,
   user
@@ -15,7 +18,7 @@ const UserView = ({
     Canopy={<Header as='h4'>{'this isnt your profile'}</Header>}
     ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
     Header={<Header as='h1'>{profile.username}</Header>}
-    SubHeader={<Header as='h4'>{profile.bio}</Header>}
+    SubHeader={!!profile.bio && <Header as='h4'>{profile.bio}</Header>}
     Gutter={<ProfileLabel username={profile.username} image={profile.image} />}
     GutterRight={'something'} />
 

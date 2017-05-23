@@ -22,7 +22,7 @@ export default
       {user.isAuthenticated && <MenuButton onClick={toProducts} icon='sticky note' text='your products' />}
       {user.isAuthenticated && <MenuButton onClick={toShops} icon='book' text='your shops' />}
       {user.isAuthenticated && <MenuButton onClick={toPencil} icon='edit' text='start a shop' />}
-      {user.isAuthenticated && <MenuButton onClick={() => user.username && toSettings(user.username)} icon='setting' text='profile' />}
+      {user.isAuthenticated && <MenuButton onClick={() => user.username && toSettings(user.username)} icon='setting' text='settings' />}
       {user.isAuthenticated && <MenuButton onClick={toPower} icon='power' text='logout' />}
     </div>
   </div>

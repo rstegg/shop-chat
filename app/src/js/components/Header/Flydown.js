@@ -30,7 +30,7 @@ const Flydown = ({
       {user.isAuthenticated && <DropItem onClick={toProducts} text='products' icon='sticky note' />}
       {user.isAuthenticated && <DropItem onClick={toShops} text='shops' icon='book' />}
       {user.isAuthenticated && <DropItem onClick={toPencil} text='start a product' icon='edit' />}
-      {user.isAuthenticated && <DropItem onClick={() => user.username && toSettings(user.username)} text='profile' icon='setting' />}
+      {user.isAuthenticated && <DropItem onClick={() => user.username && toSettings(user.username)} text='settings' icon='setting' />}
       {user.isAuthenticated && <Dropdown.Divider />}
       {user.isAuthenticated && <DropItem onClick={toPower}  icon='power' text='logout' />}
     </Dropdown.Menu>

@@ -5,7 +5,10 @@ import { Button } from 'semantic-ui-react'
 const SettingsNav = ({user}) =>
   <div className='settings-nav'>
     <Button.Group vertical>
-      <NavLink to='/settings/profile'>
+      <NavLink to={`/settings`}>
+        <Button basic content='Account' />
+      </NavLink>
+      <NavLink to={`/user/${user.username}`}>
         <Button basic content='Profile' />
       </NavLink>
       <NavLink to='/settings/withdrawals'>

@@ -4,8 +4,9 @@ import { Redirect, NavLink } from 'react-router-dom'
 import { Card, Label } from 'semantic-ui-react'
 
 import SettingsNav from './nav'
+import SettingsForm from './form'
 
-//TODO: Account Settings
+import { onAccountSettingsSave } from 'actions/account'
 
 const Settings = ({user}) =>
   !user.isAuthenticated ?
@@ -17,18 +18,8 @@ const Settings = ({user}) =>
       <Card.Content>
         <Card.Header>Account Settings</Card.Header>
         <Card.Description>
-
+          <SettingsForm onSubmit={account => onAccountSettingsSave(account, user)} />
         </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <NavLink to={`/user/${user.username}`}>
-            <Label basic>Profile Settings</Label>
-          </NavLink>
-          <NavLink to={`/settings`}>
-            <Label basic>Account Settings</Label>
-          </NavLink>
-        </div>
       </Card.Content>
     </Card>
   </div>
@@ -40,7 +31,7 @@ const mapStateToProps = ({user, profile}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-
+  onAccountSettingsSave: (account, user) => dispatch(onAccountSettingsSave(account, user)) 
 })
 
 export default connect(

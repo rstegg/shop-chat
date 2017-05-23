@@ -11,7 +11,7 @@
 @import 'elements/ProductListItem.css';
 /*Pages*/
 @import 'pages/Home.css';
-@import 'pages/AccountSettings.css';
+@import 'pages/Settings.css';
 @import 'pages/Products.css';
 @import 'pages/Shops.css';
 @import 'pages/ViewProduct.css';

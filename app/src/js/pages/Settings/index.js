@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, NavLink } from 'react-router-dom'
-import { Card, Label } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
+import { Card } from 'semantic-ui-react'
 
 import SettingsNav from './nav'
 import SettingsForm from './form'
@@ -31,7 +31,7 @@ const mapStateToProps = ({user, profile}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  onAccountSettingsSave: (account, user) => dispatch(onAccountSettingsSave(account, user)) 
+  onAccountSettingsSave: (account, user) => dispatch(onAccountSettingsSave(account, user))
 })
 
 export default connect(

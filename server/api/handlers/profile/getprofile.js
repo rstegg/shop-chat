@@ -3,7 +3,7 @@ const { User, Shop, Thread } = models
 const { merge, pick } = require('ramda')
 
 const threadAttributes = ['id', 'name', 'owner']
-const profileAttributes = ['id', 'name', 'username', 'image', 'bio']
+const profileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
 const shopAttributes = ['id', 'name', 'description', 'shop_type', 'is_public', 'slug', 'image']
 
 const getShops = user =>

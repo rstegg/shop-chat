@@ -7,7 +7,6 @@ import ProfileChatPage from 'components/Chat'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
-import ProfileLabel from 'elements/ProfileLabel'
 
 import { editProfile, uploadAvatar, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
@@ -37,6 +36,15 @@ const BioField = ({isEditing, user, editProfile, editProfileField}) =>
     <Header as='h4'>{user.bio || 'Add a bio'}</Header>
   </EditorField>
 
+const WebsiteField = ({isEditing, user, editProfile, editProfileField}) =>
+  <EditorField
+    isEditing={isEditing}
+    placeholder='Website' name='website'
+    onClick={() => editProfileField('website')} onClickOutside={() => editProfileField(null)}
+    onSubmit={website => editProfile({...user, website}, user)}>
+    <Header as='h4'>{user.website || 'Website'}</Header>
+  </EditorField>
+
 class AdminView extends Component {
   componentWillUnmount() {
     this.props.editProfileField(null)
@@ -56,7 +64,7 @@ class AdminView extends Component {
         ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
-        Gutter={<ProfileLabel username={profile.username} image={profile.image} />}
+        Gutter={<WebsiteField isEditing={profile.focused === 'website'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         GutterRight={'something'} />
     )
   }

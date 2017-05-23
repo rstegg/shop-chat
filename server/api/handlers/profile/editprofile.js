@@ -3,6 +3,8 @@ const { User } = models
 
 const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 
+const profileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
+
 const validField = p => obj => !isNil(path([p], obj))
 
 const validProfile = pipe(
@@ -45,11 +47,11 @@ module.exports = (req, res) => {
     .then(validatedUsername => {
       const updatedUser = merge({
         username: validatedUsername || req.body.profile.username,
-      }, pick(['name', 'dob', 'bio'], req.body.profile))
+      }, pick(['name', 'dob', 'bio', 'website'], req.body.profile))
       return User.update(updatedUser, { where: { id: req.user.id }, returning: true, plain: true })
     })
     .then(user => {
-      const profile = pick(['id', 'name', 'username', 'image', 'bio'], user[1])
+      const profile = pick(profileAttributes, user[1])
       res.status(200).json({profile})
     })
     .catch(error => res.status(400).json({error}))

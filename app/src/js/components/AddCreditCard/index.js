@@ -35,8 +35,7 @@ const AddCreditCard = ({user, card, closeAddCard }) =>
 const mapStateToProps = ({user, card, form}) =>
 ({
   user,
-  card,
-  cardForm: form.addCreditCardForm.values
+  card
 })
 
 const mapDispatchToProps = dispatch =>

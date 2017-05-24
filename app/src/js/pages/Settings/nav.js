@@ -12,10 +12,10 @@ const SettingsNav = ({user}) =>
         <Button basic content='Profile' />
       </NavLink>
       <NavLink to='/settings/withdrawals'>
-        <Button basic content='Withdrawal Info' />
+        <Button basic content='Withdrawal' />
       </NavLink>
       <NavLink to='/settings/payments'>
-        <Button basic content='Payment Info' />
+        <Button basic content='Payment' />
       </NavLink>
       <NavLink to='/settings/notifications'>
         <Button basic content='Notifications' />

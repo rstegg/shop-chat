@@ -60,11 +60,11 @@ export const onFetchProductsSuccess = res =>
 })
 
 
-export const fetchSingleProduct = (id, shopId, user) =>
+export const fetchSingleProduct = (productId, shopId, user) =>
 ({
   type: 'FETCH_SINGLE_PRODUCT',
   payload: {
-    productId: id,
+    productId,
     shopId,
     token: user.token
   }

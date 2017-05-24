@@ -11,10 +11,7 @@ import RouterButton from 'elements/RouterButton'
 
 class Login extends Component {
   componentWillMount() {
-    const { user, resetLogin } = this.props
-    if(user.isAuthenticated) {
-      return <Redirect to='/' />
-    }
+    const { resetLogin } = this.props
     resetLogin()
   }
   render() {

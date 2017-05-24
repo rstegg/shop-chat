@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -14,21 +14,28 @@ const Avatar = ({image, uploadProductImage}) =>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
-const CreateProduct = ({ user, shop, product, image, createProduct, uploadProductImage }) =>
-  !user.isAuthenticated ?
-    <Redirect to='/login' />
-  : product.isCreated ?
-    <Redirect to={`/shop/${shop.slug}`} />
-  :
-    <Card>
-      <Avatar image={product.image} uploadProductImage={img => uploadProductImage(img[0], user)} />
-      <Card.Content>
-        <Card.Header>New Product</Card.Header>
-        <Card.Description>
-          <CreateProductForm onSubmit={values => createProduct(({...values, image: product.image}), shop.id, user)} />
-        </Card.Description>
-      </Card.Content>
-    </Card>
+class CreateProduct extends Component {
+  render() {
+    const { user, shop, product, createProduct, uploadProductImage } = this.props
+    if(!user.isAuthenticated) {
+      return <Redirect to='/login' />
+    }
+    if(product.isCreated) {
+      return <Redirect to={`/shop/${shop.slug}`} />
+    }
+    return (
+      <Card>
+        <Avatar image={product.image} uploadProductImage={img => uploadProductImage(img[0], user)} />
+        <Card.Content>
+          <Card.Header>New Product</Card.Header>
+          <Card.Description>
+            <CreateProductForm onSubmit={values => createProduct(({...values, image: product.image}), shop.id, user)} />
+          </Card.Description>
+        </Card.Content>
+      </Card>
+    )
+  }
+}
 
 const mapStateToProps = ({user, shops, products}) =>
 ({

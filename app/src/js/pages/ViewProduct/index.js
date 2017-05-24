@@ -15,6 +15,12 @@ class ViewProduct extends Component {
     const { match: { params }, fetchSingleProduct, user } = this.props
     fetchSingleProduct(params.id, params.shopId, user)
   }
+  componentWillUpdate(nextProps) {
+    const { match: { params }, product, user, fetchSingleShop, isFetching } = this.props
+    if(product.slug !== params.id && isFetching !== params.id) {
+      fetchSingleShop(params.id, user)
+    }
+  }
   render() {
     const { product, user } = this.props
     if(!product) {
@@ -32,6 +38,7 @@ class ViewProduct extends Component {
 const mapStateToProps = ({products, user, shop}) =>
 ({
   product: products.current,
+  isFetching: products.isFetching,
   shop,
   user,
 })

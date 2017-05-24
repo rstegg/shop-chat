@@ -14,12 +14,12 @@ class ViewProfile extends Component {
     this.props.refreshProfileEditing()
   }
   componentWillUpdate(nextProps) {
-    const { profile, match: { params }, history, user, fetchable, fetchProfile, refreshProfileEditing } = this.props
+    const { profile, match: { params }, history, user, isFetching, fetchProfile, refreshProfileEditing } = this.props
     if(nextProps.profile.newUsername) {
       history.replace(`/user/${nextProps.profile.username}`)
       refreshProfileEditing()
     }
-    if(profile.username !== params.id && fetchable) {
+    if(profile.username !== params.id && isFetching !== params.id) {
       fetchProfile(params.id, user)
     }
   }
@@ -39,7 +39,7 @@ const mapStateToProps = ({user, profile}) =>
 ({
   user,
   profile,
-  fetchable: profile.fetchable
+  isFetching: profile.isFetching
 })
 
 const mapDispatchToProps = dispatch =>

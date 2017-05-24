@@ -6,7 +6,8 @@ const initialState = {
     is_public: false
   },
   list: [],
-  fetchable: true
+  fetchable: true,
+  isFetching: null
 }
 
 export default function(state = initialState, action) {
@@ -55,9 +56,14 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         image: action.payload.image,
       })
+    case 'FETCH_SINGLE_PRODUCT':
+      return Object.assign({}, state, {
+        isFetching: action.payload.productId
+      })
     case 'FETCH_SINGLE_PRODUCT_SUCCESS':
       return Object.assign({}, state, {
-        current: action.payload.product
+        current: action.payload.product,
+        isFetching: null
       })
     case 'SET_CURRENT_PRODUCT':
       return Object.assign({}, state, {

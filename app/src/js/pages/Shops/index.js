@@ -16,8 +16,8 @@ class Shops extends Component {
     }
   }
   render() {
-    const { shops } = this.props
-    if(!this.props.user.isAuthenticated) {
+    const { shops, user } = this.props
+    if(!user.isAuthenticated) {
       return <Redirect to='/login' />
     }
     return (

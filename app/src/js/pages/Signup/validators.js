@@ -30,27 +30,33 @@ export const validate = values => {
 
 export const asyncValidate = (values, dispatch, props, field) => {
   const previousErrors = props.asyncErrors;
-  if(field === 'username') {
-  return su.post(`${API_HOST}/signup/validate_username`)
-    .send({ username: values.username })
-    .set('Accept', 'application/json')
-    .then(res => {
-      if(res.body.usernameTaken) {
-        // eslint-disable-next-line
-        throw Object.assign({}, previousErrors, { username: 'That username is taken'});
-      }
-    })
-  } else if(field === 'email') {
-    return su.post(`${API_HOST}/signup/validate_email`)
-    .send({ email: values.email })
-    .set('Accept', 'application/json')
-    .then(res => {
-      if(res.body.emailTaken) {
-        // eslint-disable-next-line
-        throw Object.assign({}, previousErrors, { email: 'That email is already registerd'});
-      }
-    })
-  } else {
-    return new Promise((resolve, reject) => resolve())
-  }
+  return new Promise((resolve, reject) => {
+    if(field === 'username') {
+      reject(su.post(`${API_HOST}/signup/validate_username`)
+        .send({ username: values.username })
+        .set('Accept', 'application/json')
+        .then(res => {
+          if(res.body.usernameTaken) {
+            // eslint-disable-next-line
+            throw Object.assign({}, previousErrors, { username: 'That username is taken'})
+          }
+        }).catch(err => err)
+      )
+    } else if(field === 'email') {
+      reject(su.post(`${API_HOST}/signup/validate_email`)
+        .send({ email: values.email })
+        .set('Accept', 'application/json')
+        .then(res => {
+          if(res.body.emailTaken) {
+            // eslint-disable-next-line
+            throw Object.assign({}, previousErrors, { email: 'That email is already registerd'});
+          }
+        }).catch(err => err)
+      )
+    } else if(previousErrors) {
+      reject(previousErrors)
+    } else {
+      resolve()
+    }
+  }).catch(err => err)
 }

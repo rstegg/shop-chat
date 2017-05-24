@@ -18,7 +18,7 @@ const CheckboxField = ({ input: { value, onChange } }) =>
 
 const CreateShopForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>
-    <Field component={InputField} name='name' type='text' label='Organization or project name' placeholder='Name' />
+    <Field component={InputField} name='name' type='text' label='Shop name' placeholder='Name' />
     <Field component={CheckboxField} name='is_public' />
     <Form.Button type='submit' primary>Create</Form.Button>
   </Form>

@@ -8,7 +8,7 @@ const ShopsList =
   shops
 }) =>
   <Feed>
-    {shops.length ? shops.map((shop, i) =>
+    {!!shops.length ? shops.map((shop, i) =>
       <ShopItem key={`shop-${i}`} shop={shop} />
     ) :
     <Feed.Event>

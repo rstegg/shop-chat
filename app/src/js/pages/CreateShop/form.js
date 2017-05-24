@@ -9,12 +9,11 @@ import InputField from 'elements/InputField'
 
 import { Form } from 'semantic-ui-react'
 
-const CheckboxField = ({ input: { value, onChange }, meta: { initial } }) =>
+const CheckboxField = ({ input: { value, onChange } }) =>
   <Form.Checkbox
     label='Public'
     toggle
     checked={!!value}
-    value={initial}
     onChange={(_,data) => onChange(data.checked)} />
 
 const CreateShopForm = ({handleSubmit}) =>

@@ -1,37 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { Card } from 'semantic-ui-react'
 
-import SettingsNav from './nav'
+import SettingsLayout from 'components/layouts/Settings'
 import SettingsForm from './form'
 
-import { onAccountSettingsSave } from 'actions/account'
+import { onSaveAccountSettings } from 'actions/account'
 
 const Settings = ({user}) =>
-  !user.isAuthenticated ?
-    <Redirect to='/' />
-  :
-  <div className='settings'>
-    <SettingsNav user={user} />
+  <SettingsLayout>
     <Card>
       <Card.Content>
         <Card.Header>Account Settings</Card.Header>
         <Card.Description>
-          <SettingsForm onSubmit={account => onAccountSettingsSave(account, user)} />
+          <SettingsForm onSubmit={account => onSaveAccountSettings(account, user)} />
         </Card.Description>
       </Card.Content>
     </Card>
-  </div>
+  </SettingsLayout>
 
-const mapStateToProps = ({user, profile}) =>
+const mapStateToProps = ({user}) =>
 ({
   user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  onAccountSettingsSave: (account, user) => dispatch(onAccountSettingsSave(account, user))
+  onSaveAccountSettings: (account, user) => dispatch(onSaveAccountSettings(account, user))
 })
 
 export default connect(

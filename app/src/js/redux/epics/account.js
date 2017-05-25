@@ -6,7 +6,7 @@ const API_HOST = '/api/v1'
 
 const api = {
   saveAccountSettings: ({account, user}) => {
-    const request = su.post(`${API_HOST}/account`)
+    const request = su.put(`${API_HOST}/account`)
         .send({account})
         .set('Accept', 'application/json')
         .set('Authorization', user.token)

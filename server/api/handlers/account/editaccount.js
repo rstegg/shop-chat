@@ -3,12 +3,12 @@ const { User } = models
 
 const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 
-const profileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
+const accountAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
 
 const validField = p => obj => !isNil(path([p], obj))
 
 const validProfile = pipe(
-    path(['body', 'profile']),
+    path(['body', 'account']),
     allPass([
         validField('name'),
         validField('username')
@@ -18,13 +18,13 @@ const validate = req => {
   if (!validProfile(req)) return Promise.reject('missing fields')
 
   return User.findOne({
-      where: { username: req.body.profile.username },
+      where: { username: req.body.account.username },
       plain: true
   })
   .then(user =>
       user && user.id !== req.user.id ?
           Promise.reject('invalid user')
-          : req.body.profile
+          : req.body.account
   )
 }
 
@@ -46,12 +46,12 @@ module.exports = (req, res) =>
     .then(validatedUser => validateUsername(req, validatedUser.username, validatedUser.id))
     .then(validatedUsername => {
       const updatedUser = merge({
-        username: validatedUsername || req.body.profile.username,
-      }, pick(['name', 'dob', 'bio', 'website'], req.body.profile))
+        username: validatedUsername || req.body.account.username,
+      }, pick(['name', 'dob', 'bio', 'website'], req.body.account))
       return User.update(updatedUser, { where: { id: req.user.id }, returning: true, plain: true })
     })
     .then(user => {
-      const profile = pick(profileAttributes, user[1])
-      res.status(200).json({profile})
+      const account = pick(accountAttributes, user[1])
+      res.status(200).json({account})
     })
     .catch(error => res.status(400).json({error}))

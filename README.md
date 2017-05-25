@@ -47,7 +47,6 @@
 
 - CreateProduct
 - CreateShop
-- EditProduct
 - Home
 - Login
 - Products

@@ -14,7 +14,7 @@ class Shops extends Component {
           <Card.Header>Shops</Card.Header>
           <Card.Description>
             <ShopsList
-              shops={profile.shops}
+              shops={profile.shops || []}
              />
           </Card.Description>
         </Card.Content>

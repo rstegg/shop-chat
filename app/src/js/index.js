@@ -4,9 +4,9 @@ import 'rxjs'
 import React from 'react'
 import { render } from 'react-dom'
 
-import Main from './main'
+import RootRouter from './router'
 
 render(
-  <Main />,
+  <RootRouter />,
   document.querySelector('#root')
 )

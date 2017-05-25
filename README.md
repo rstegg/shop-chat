@@ -16,15 +16,16 @@
 - Fix bug with profile chat not always joining [bug]
 - Add:
   - 'feed'
-  - 'account'
+  - 'settings'
+    - 'notifications'
+    - 'privacy'
+    - 'tools'
 - Finish:
   - 'products'
     - add 'buy'
   - 'account'/'user settings'
+  - 'wallet'
     - create endpoints
-    - create pages for withdraw/payment, or collapse into one
-    - add privacy page
-    - add tools?
 
 ### Styling
 

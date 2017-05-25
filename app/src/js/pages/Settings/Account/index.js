@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Card } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 
-import SettingsLayout from 'components/layouts/Settings'
 import SettingsForm from './form'
 
 import { onSaveAccountSettings } from 'actions/account'
@@ -15,16 +14,14 @@ class Settings extends Component {
        return <Redirect to='/' />
      }
      return (
-      <SettingsLayout>
-        <Card>
-          <Card.Content>
-            <Card.Header>Account Settings</Card.Header>
-            <Card.Description>
-              <SettingsForm onSubmit={account => onSaveAccountSettings(account, user)} />
-            </Card.Description>
-          </Card.Content>
-        </Card>
-      </SettingsLayout>
+      <Card>
+        <Card.Content>
+          <Card.Header>Account Settings</Card.Header>
+          <Card.Description>
+            <SettingsForm onSubmit={account => onSaveAccountSettings(account, user)} />
+          </Card.Description>
+        </Card.Content>
+      </Card>
     )
   }
 }

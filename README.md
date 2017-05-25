@@ -14,10 +14,9 @@
   - styling  
 - Add loading screens
 - Fix bug with profile chat not always joining [bug]
-- Fix styling in general
 - Add:
   - 'feed'
-  - 'payments'
+  - 'account'
 - Finish:
   - 'products'
     - add 'buy'
@@ -26,7 +25,7 @@
     - create pages for withdraw/payment, or collapse into one
     - add privacy page
     - add tools?
-    
+
 ### Styling
 
 - Clean up inline styling [chat]
@@ -43,7 +42,6 @@
 ## Structure
 
 - CreateProduct: should be inside ViewShop/AsOwner (idea)
-- EditProduct: should be ViewProduct/AsOwner (idea/fix)
 
 ### Pages
 

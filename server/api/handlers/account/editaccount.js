@@ -1,6 +1,8 @@
 const { models } = require('../../../db')
 const { User } = models
 
+const crypto = require('crypto')
+
 const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 
 const accountAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
@@ -11,42 +13,52 @@ const validProfile = pipe(
     path(['body', 'account']),
     allPass([
         validField('name'),
-        validField('username')
+        validField('email'),
+        validField('username'),
+        validField('old_password')
     ]))
+
+const account = path(['body', 'account'])
+const oldPassword = path(['body', 'account', 'old_password'])
+const username = path(['body', 'account', 'username'])
+const userId = path(['user', 'id'])
 
 const validate = req => {
   if (!validProfile(req)) return Promise.reject('missing fields')
 
   return User.findOne({
-      where: { username: req.body.account.username },
+      where: { id: req.user.id },
       plain: true
   })
   .then(user =>
-      user && user.id !== req.user.id ?
-          Promise.reject('invalid user')
-          : req.body.account
+      !user ? Promise.reject('invalid user')
+      : validatePassword(user, req)
   )
 }
 
-const validateUsername = (req, username, id) => {
-  if (!validProfile(req)) return Promise.reject('missing fields')
+const validatePassword = (user, req) =>
+  !user.validPassword(oldPassword(req)) ?
+    Promise.reject('invalid password')
+    : validateUsername(user, req)
 
-  return User.findOne({
-      where: { username, id: { $ne: id } }
+const validateUsername = (user, req) =>
+  User.findOne({
+      where: { username: username(req), id: { $ne: userId(req) } }
   })
   .then(user =>
       user ?
           Promise.reject('username taken')
-          : username
+          : account(req)
   )
-}
 
 module.exports = (req, res) =>
   validate(req)
-    .then(validatedUser => validateUsername(req, validatedUser.username, validatedUser.id))
-    .then(validatedUsername => {
+    .then(validAccount => {
+      const reqPassword = validAccount.new_password || validAccount.old_password
+      const updatedPassword = crypto.createHash('md5').update(reqPassword + req.user.salt).digest("hex")
       const updatedUser = merge({
-        username: validatedUsername || req.body.account.username,
+        username: validAccount.username || req.body.account.username,
+        password: updatedPassword
       }, pick(['name', 'dob', 'bio', 'website'], req.body.account))
       return User.update(updatedUser, { where: { id: req.user.id }, returning: true, plain: true })
     })

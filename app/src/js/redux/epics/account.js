@@ -1,4 +1,4 @@
-import { onSaveAccountSettingsSuccess, onSaveAccountSettingsFailure } from 'actions/login'
+import { onSaveAccountSettingsSuccess, onSaveAccountSettingsFailure } from 'actions/account'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
@@ -14,10 +14,13 @@ const api = {
   }
 }
 
-export const onSaveAccountSettings = action$ =>
+export const saveAccountSettings = action$ =>
   action$.ofType('SAVE_ACCOUNT_SETTINGS')
     .mergeMap(action =>
       api.saveAccountSettings(action.payload)
         .map(onSaveAccountSettingsSuccess)
-        .catch(error => Observable.of(onSaveAccountSettingsFailure(error.response.text)))
+        .catch(error => Observable.of({
+          type: 'SAVE_ACCOUNT_SETTINGS_FAILURE',
+          error
+        }))
     )

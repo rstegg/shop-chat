@@ -14,21 +14,14 @@ module.exports = () => {
   const { Strategy: LocalStrategy } = passportLocal
 
   const localStrategy = new LocalStrategy(
-    function(username, password, done) {
+    (username, password, done) =>
       User.findOne({ where: { username: username } })
-        .then(function (user) {
-          if (!user) {
-            return done(null, false, { error: 'Incorrect username' })
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { error: 'Incorrect password' })
-          }
-          return done(null, user)
-        })
-        .catch(function(err) {
-          return done(err)
-        })
-    }
+        .then(user =>
+          !user ? done(null, false, { error: 'Incorrect username' })
+          : !user.validPassword(password) ? done(null, false, { error: 'Incorrect password' })
+          : done(null, user)
+        )
+        .catch(err => done(err))
   )
 
   const jwtOptions = {}
@@ -37,18 +30,13 @@ module.exports = () => {
   jwtOptions.ignoreExpiration = true
 
   const jwtStrategy = new JwtStrategy(jwtOptions,
-    function(jwt_payload, done) {
+    (jwt_payload, done) =>
       User.findById(jwt_payload.id)
-        .then(function(user) {
-          if(!user) {
-            return done(null, false, { error: 'Invalid token' })
-          }
-          return done(null, user)
-        })
-        .catch(function(err) {
-          return done(err)
-        })
-    }
+        .then(user =>
+          !user ? done(null, false, { error: 'Invalid token' })
+          : done(null, user)
+        )
+        .catch(err => done(err))
   )
 
   passport.use(jwtStrategy)

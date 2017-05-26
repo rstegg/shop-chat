@@ -40,6 +40,13 @@ export default function(state = initialState, action) {
         error: null,
         isLoading: false,
       })
+    case 'SAVE_ACCOUNT_SETTINGS_SUCCESS':
+      return Object.assign({}, state, {
+        ...state,
+        ...action.payload.account,
+        error: null,
+        isLoading: false,
+      })
     case 'UPLOAD_AVATAR_SUCCESS':
       return Object.assign({}, state, {
         image: action.payload.image

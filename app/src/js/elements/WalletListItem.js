@@ -24,8 +24,10 @@ const renderCardType = type => {
   }
 }
 
+//TODO: route to wallet ID
+
 const WalletListItem = ({className, onClick, wallet}) =>
-  <Feed.Event>
+  <Feed.Event as={NavLink} to='/settings/wallet'>
     <Feed.Label>
       {wallet.type === 'CreditCard' && renderCardType(wallet.cardType)}
     </Feed.Label>

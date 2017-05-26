@@ -9,7 +9,7 @@ import { onSaveAccountSettings } from 'actions/account'
 
 class Settings extends Component {
    render() {
-     const { user } = this.props
+     const { user, onSaveAccountSettings } = this.props
      if(!user.isAuthenticated) {
        return <Redirect to='/' />
      }

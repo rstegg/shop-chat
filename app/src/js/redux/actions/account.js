@@ -11,7 +11,7 @@ export const onSaveAccountSettingsSuccess = res =>
 ({
   type: 'SAVE_ACCOUNT_SETTINGS_SUCCESS',
   payload: {
-    user: res.body.user,
+    account: res.body.account,
     token: res.body.token
   }
 })

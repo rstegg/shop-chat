@@ -9,11 +9,11 @@ const Settings = ({user, children}) =>
     <Redirect to='/' />
   :
   <div className='settings'>
-    <SettingsNav user={user} />
+    <SettingsNav />
     {children}
   </div>
 
-const mapStateToProps = ({user, profile}) =>
+const mapStateToProps = ({user}) =>
 ({
   user
 })

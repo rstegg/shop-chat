@@ -2,14 +2,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 
-const SettingsNav = ({user}) =>
+const SettingsNav = () =>
   <div className='settings-nav'>
     <Button.Group vertical>
       <NavLink to='/settings/account'>
         <Button basic content='Account' />
-      </NavLink>
-      <NavLink to={`/user/${user.username}`}>
-        <Button basic content='Profile' />
       </NavLink>
       <NavLink to='/settings/wallet'>
         <Button basic content='Payment Options' />

@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Image, Label } from 'semantic-ui-react'
 import CreateShopForm from './form'
 
-import { createShop, uploadShopImage } from 'actions/shops'
+import { createShop, uploadShopImage, uploadShopImageFailure } from 'actions/shops'
 
 import Dropzone from 'components/Dropzone'
 
-const Avatar = ({image, uploadShopImage}) =>
-  <Dropzone className='ui image editable' onDrop={uploadShopImage}>
+const Avatar = ({image, uploadShopImage, uploadShopImageFailure}) =>
+  <Dropzone className='ui image editable' onDrop={uploadShopImage} onDropRejected={uploadShopImageFailure}>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
@@ -25,7 +25,8 @@ class CreateShop extends Component {
     }
     return (
       <Card>
-        <Avatar image={shop.image} uploadShopImage={img => uploadShopImage(img[0], user)} />
+        <Avatar image={shop.image} uploadShopImage={img => uploadShopImage(img[0], user)} uploadShopImageFailure={uploadShopImageFailure} />
+        {shop.image_error && <Label basic color='red'>Invalid image</Label>}
         <Card.Content>
           <Card.Header>New Shop</Card.Header>
           <Card.Description>
@@ -51,6 +52,7 @@ const mapDispatchToProps = dispatch =>
 ({
   createShop: (shop, user) => dispatch(createShop(shop, user)),
   uploadShopImage: (img, user) => dispatch(uploadShopImage(img, user)),
+  uploadShopImageFailure: () => dispatch(uploadShopImageFailure()),
 })
 
 export default connect(

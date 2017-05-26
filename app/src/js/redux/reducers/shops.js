@@ -2,6 +2,7 @@ const initialState = {
   current: {},
   new: {
     name: '',
+    image_error: false,
     is_public: false
   },
   list: [],
@@ -50,10 +51,28 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: null
       })
+    case 'UPLOAD_SHOP_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          image: null,
+          image_error: true
+        }
+      })
     case 'UPLOAD_SHOP_IMAGE_SUCCESS':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          image: action.payload.image,
+          image_error: false
+        }
+      })
     case 'UPLOAD_EDIT_SHOP_IMAGE_SUCCESS':
       return Object.assign({}, state, {
-        image: action.payload.image,
+        current: {
+          ...state.current,
+          image: action.payload.image,
+        }
       })
     case 'SET_CURRENT_SHOP':
       return Object.assign({}, state, {
@@ -65,7 +84,6 @@ export default function(state = initialState, action) {
         new: initialState.new
       })
     case 'FETCH_SHOPS_FAILURE':
-    case 'CREATE_STRIPE_CARD_FAILURE':
     case 'CREATE_SHOP_FAILURE':
     default:
       return state

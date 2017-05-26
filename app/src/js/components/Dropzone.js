@@ -353,8 +353,8 @@ Dropzone.defaultProps = {
   disablePreview: false,
   disableClick: false,
   multiple: false,
-  // maxSize: 4000000, TODO: add error for larger files
-  maxSize: Infinity,
+  maxSize: 1000000,
+  // maxSize: Infinity,
   minSize: 0
 }
 

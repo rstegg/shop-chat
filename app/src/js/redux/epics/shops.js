@@ -109,7 +109,8 @@ export const uploadShopImage = action$ =>
       api.uploadShopImage(action.payload)
         .map(onUploadShopImageSuccess)
         .catch(error => Observable.of({
-          type: 'UPLOAD_SHOP_IMAGE_FAILURE'
+          type: 'UPLOAD_SHOP_IMAGE_FAILURE',
+          error
         }))
       )
 

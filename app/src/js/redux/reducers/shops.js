@@ -51,11 +51,21 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: null
       })
+    case 'UPLOAD_SHOP_IMAGE':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          image: null,
+          image_loading: true,
+          image_error: false
+        }
+      })
     case 'UPLOAD_SHOP_IMAGE_FAILURE':
       return Object.assign({}, state, {
         new: {
           ...state.new,
           image: null,
+          image_loading: false,
           image_error: true
         }
       })
@@ -64,6 +74,16 @@ export default function(state = initialState, action) {
         new: {
           ...state.new,
           image: action.payload.image,
+          image_loading: false,
+          image_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_SHOP_IMAGE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          image: null,
+          image_loading: true,
           image_error: false
         }
       })
@@ -72,6 +92,17 @@ export default function(state = initialState, action) {
         current: {
           ...state.current,
           image: action.payload.image,
+          image_loading: false,
+          image_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_SHOP_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          image: null,
+          image_loading: false,
+          image_error: true
         }
       })
     case 'SET_CURRENT_SHOP':

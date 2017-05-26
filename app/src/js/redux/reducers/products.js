@@ -52,9 +52,59 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: null
       })
+    case 'UPLOAD_PRODUCT_IMAGE':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          image: null,
+          image_loading: true,
+          image_error: false
+        }
+      })
+    case 'UPLOAD_PRODUCT_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          image: null,
+          image_loading: false,
+          image_error: true
+        }
+      })
     case 'UPLOAD_PRODUCT_IMAGE_SUCCESS':
       return Object.assign({}, state, {
-        image: action.payload.image,
+        new: {
+          ...state.new,
+          image: action.payload.image,
+          image_loading: false,
+          image_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_IMAGE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          image: null,
+          image_loading: true,
+          image_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_IMAGE_SUCCESS':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          image: action.payload.image,
+          image_loading: false,
+          image_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          image: null,
+          image_loading: false,
+          image_error: true
+        }
       })
     case 'FETCH_SINGLE_PRODUCT':
       return Object.assign({}, state, {
@@ -75,7 +125,6 @@ export default function(state = initialState, action) {
     case 'FETCH_SINGLE_PRODUCT_FAILURE':
     case 'CREATE_PRODUCT_FAILURE':
     case 'EDIT_PRODUCT_FAILURE':
-    case 'UPLOAD_PRODUCT_IMAGE_FAILURE':
     default:
       return state
   }

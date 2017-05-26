@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Rx'
 const API_HOST = '/api/v1'
 
 const api = {
-  fetchProfile: ({id, token}) => {
-    const request = su.get(`${API_HOST}/profile/${id}`)
+  fetchProfile: ({username, token}) => {
+    const request = su.get(`${API_HOST}/profile/${username}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)

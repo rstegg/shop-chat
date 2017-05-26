@@ -66,7 +66,7 @@ class AdminView extends Component {
     } = this.props
     return (
       <GridLayout
-        Image={<Avatar image={image || shop.image} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />}
+        Image={<Avatar image={shop.image || '/images/productholder.png'} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />}
         Canopy={<Products />}
         ChatBox={<ShopChatPage thread={shop} threadType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}

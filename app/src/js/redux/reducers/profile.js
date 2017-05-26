@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
       })
     case 'FETCH_PROFILE':
       return Object.assign({}, state, {
-        isFetching: action.payload.profileId
+        isFetching: action.payload.username
       })
     case 'FETCH_PROFILE_SUCCESS':
       return Object.assign({}, state, {

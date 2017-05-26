@@ -27,11 +27,10 @@ const validate = req =>
   .then(user =>
       !user ?
           Promise.reject('invalid username')
-          : user
+          : getShops(user)
   )
 
 module.exports = (req, res) =>
   validate(req)
-    .then(user => getShops(user))
     .then(profile => res.status(200).json({profile}))
     .catch(error => res.status(400).json({error}))

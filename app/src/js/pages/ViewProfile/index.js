@@ -44,7 +44,7 @@ const mapStateToProps = ({user, profile}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchProfile: (id, user) => dispatch(fetchProfile(id, user)),
+  fetchProfile: (username, user) => dispatch(fetchProfile(username, user)),
   refreshProfileEditing: () => dispatch(refreshProfileEditing())
 })
 

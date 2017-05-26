@@ -15,12 +15,12 @@ export const onUploadAvatarSuccess = res =>
   }
 })
 
-export const fetchProfile = (profileId, {token}) =>
+export const fetchProfile = (username, user) =>
 ({
   type: 'FETCH_PROFILE',
   payload: {
-    profileId,
-    token
+    username,
+    token: user.token
   }
 })
 

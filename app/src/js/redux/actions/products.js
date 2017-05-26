@@ -157,3 +157,13 @@ export const onEditProductSuccess = res =>
     product: res.body.product
   }
 })
+
+export const onUploadProductImageFailure = () =>
+({
+  type: 'UPLOAD_PRODUCT_IMAGE_FAILURE'
+})
+
+export const onUploadEditProductImageFailure = () =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_IMAGE_FAILURE'
+})

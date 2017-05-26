@@ -146,3 +146,13 @@ export const onUploadEditShopImageSuccess = res =>
     image: res.body.image
   }
 })
+
+export const onUploadShopImageFailure = () =>
+({
+  type: 'UPLOAD_SHOP_IMAGE_FAILURE'
+})
+
+export const onUploadEditShopImageFailure = () =>
+({
+  type: 'UPLOAD_EDIT_SHOP_IMAGE_FAILURE'
+})

@@ -15,7 +15,6 @@ const Flydown = ({
   user,
   toLogin,
   toSignup,
-  toProducts,
   toShops,
   toGlobe,
   toPencil,
@@ -27,10 +26,9 @@ const Flydown = ({
       {!user.isAuthenticated && <DropItem onClick={toLogin} icon='sign in' text='login' />}
       {!user.isAuthenticated && <DropItem onClick={toSignup}  icon='add user' text='sign up' />}
       <DropItem onClick={toGlobe} text='home' icon='home' />
-      {user.isAuthenticated && <DropItem onClick={toProducts} text='products' icon='sticky note' />}
       {user.isAuthenticated && <DropItem onClick={toShops} text='shops' icon='book' />}
       {user.isAuthenticated && <DropItem onClick={toPencil} text='start a product' icon='edit' />}
-      {user.isAuthenticated && <DropItem onClick={() => user.username && toSettings(user.username)} text='settings' icon='setting' />}
+      {user.isAuthenticated && <DropItem onClick={toSettings} text='settings' icon='setting' />}
       {user.isAuthenticated && <Dropdown.Divider />}
       {user.isAuthenticated && <DropItem onClick={toPower}  icon='power' text='logout' />}
     </Dropdown.Menu>
@@ -45,12 +43,11 @@ const mapDispatchToProps = dispatch =>
 ({
   toLogin:    () => dispatch(push('/login')),
   toSignup:   () => dispatch(push('/signup')),
-  toProducts:    () => dispatch(push('/products')),
   toShops:    () => dispatch(push('/shops')),
   toArticles: () => dispatch(push('/articles')),
   toFeed:     () => dispatch(push('/')),
   toPencil:   () => dispatch(push('/shops/new')),
-  toSettings: username => dispatch(push(`/user/${username}`)),
+  toSettings: () => dispatch(push('/settings/account')),
   toPower:    () => dispatch({type: 'LOGOUT'})
 })
 

@@ -24,24 +24,20 @@ const BottomNav =
       />
   )
 
+const mapStateToProps = ({user}) =>
+({
+  user
+})
 
 const mapDispatchToProps = dispatch =>
 ({
   toLogin:      () => dispatch(push('/login')),
   toSignup:     () => dispatch(push('/signup')),
   toShops:      () => dispatch(push('/shops')),
-  toArticles:   () => dispatch(push('/articles')),
-  toProducts:   () => dispatch(push('/products')),
   toGlobe:      () => dispatch(push('/')),
-  toFeed:       () => dispatch(push('/feed')),
   toPencil:     () => dispatch(push('/shops/new')),
   toSettings:   () => dispatch(push('/settings/account')),
   toPower:      () => dispatch({type: 'LOGOUT'})
-})
-
-const mapStateToProps = ({user}) =>
-({
-  user
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomNav)

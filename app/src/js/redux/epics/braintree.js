@@ -5,6 +5,8 @@ import BraintreeClient from 'braintree-web/client'
 
 const API_HOST = '/api/v1'
 
+//TODO: get client auth token from server
+
 const api = {
   createBraintreeInstance: () => {
     const request =

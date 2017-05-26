@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header, Checkbox } from 'semantic-ui-react'
+import { Image, Header, Checkbox, Label } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
 import ShopMenu from 'components/SocialMenu'
@@ -8,16 +8,17 @@ import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
 
-import { editShop, uploadEditShopImage, editShopField } from 'actions/shops'
+import { editShop, uploadEditShopImage, onUploadEditShopImageFailure, editShopField } from 'actions/shops'
 
 import ShopChatPage from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
 
 import Products from './Products'
 
-const Avatar = ({image, uploadEditShopImage}) =>
-  <Dropzone className='ui image editable' onDrop={uploadEditShopImage}>
-    <Image src={image || '/images/productholder.png'} />
+const Avatar = ({shop, uploadEditShopImage, onUploadEditShopImageFailure}) =>
+  <Dropzone className='ui image editable' onDrop={uploadEditShopImage} onDropRejected={onUploadEditShopImageFailure}>
+    <Image src={shop.image || '/images/productholder.png'} />
+    {shop.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
 const CheckboxField = ({ input: { value, onChange }, onSubmit }) =>
@@ -60,13 +61,16 @@ class AdminView extends Component {
       editShop,
       editShopField,
       uploadEditShopImage,
-      image,
+      onUploadEditShopImageFailure,
       shop,
       user
     } = this.props
     return (
       <GridLayout
-        Image={<Avatar image={shop.image || '/images/productholder.png'} uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)} />}
+        Image={<Avatar
+          shop={shop}
+          uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)}
+          onUploadEditShopImageFailure={onUploadEditShopImageFailure} />}
         Canopy={<Products />}
         ChatBox={<ShopChatPage thread={shop} threadType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
@@ -97,6 +101,7 @@ const mapDispatchToProps = dispatch =>
 ({
   editShop: (shop, user) => dispatch(editShop(shop, user)),
   uploadEditShopImage: (img, shop, user) => dispatch(uploadEditShopImage(img, shop, user)),
+  onUploadEditShopImageFailure: () => dispatch(onUploadEditShopImageFailure()),
   editShopField: field => dispatch(editShopField(field))
 })
 

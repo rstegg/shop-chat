@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header } from 'semantic-ui-react'
+import { Image, Header, Label } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 
 import ProfileChatPage from 'components/Chat'
@@ -8,13 +8,14 @@ import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
 
-import { editProfile, uploadProfileImage, editProfileField } from 'actions/profile'
+import { editProfile, uploadProfileImage, onUploadProfileImageFailure, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
 import Shops from './Shops'
 
-const Avatar = ({image, uploadProfileImage}) =>
-  <Dropzone className='ui image editable' onDrop={uploadProfileImage}>
-    <Image src={image || '/images/productholder.png'} />
+const Avatar = ({profile, uploadProfileImage, onUploadProfileImageFailure}) =>
+  <Dropzone className='ui image editable' onDrop={uploadProfileImage} onDropRejected={onUploadProfileImageFailure}>
+    <Image src={profile.image || '/images/productholder.png'} />
+    {profile.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
 const NameField = ({isEditing, user, editProfile, editProfileField}) =>
@@ -54,12 +55,13 @@ class AdminView extends Component {
       editProfile,
       editProfileField,
       uploadProfileImage,
+      onUploadProfileImageFailure,
       profile,
       user
     } = this.props
     return (
       <GridLayout
-        Image={<Avatar image={user.image} uploadProfileImage={img => uploadProfileImage(img[0], user)} />}
+        Image={<Avatar profile={user} uploadProfileImage={img => uploadProfileImage(img[0], user)} onUploadProfileImageFailure={onUploadProfileImageFailure} />}
         Canopy={<Shops />}
         ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
@@ -87,6 +89,7 @@ const mapDispatchToProps = dispatch =>
 ({
   editProfile: (profile, user) => dispatch(editProfile(profile, user)),
   uploadProfileImage: (img, user) => dispatch(uploadProfileImage(img, user)),
+  onUploadProfileImageFailure: () => dispatch(onUploadProfileImageFailure()),
   editProfileField: field => dispatch(editProfileField(field))
 })
 

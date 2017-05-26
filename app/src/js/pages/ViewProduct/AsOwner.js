@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Card, Grid, Image, Header, Checkbox, Rail, Segment } from 'semantic-ui-react'
+import { Button, Card, Label, Grid, Image, Header, Checkbox, Rail, Segment } from 'semantic-ui-react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 
 import ProductChatPage from 'components/Chat'
@@ -10,11 +10,12 @@ import Dropzone from 'components/Dropzone'
 import EditorField from 'elements/EditorField'
 import SelectField from 'elements/SelectField'
 
-import { editProduct, deleteProduct, uploadEditProductImage, editProductField } from 'actions/products'
+import { editProduct, deleteProduct, uploadEditProductImage, onUploadEditProductImageFailure, editProductField } from 'actions/products'
 
-const Avatar = ({image, uploadEditProductImage}) =>
-  <Dropzone className='ui image editable' onDrop={uploadEditProductImage}>
-    <Image src={image || '/images/productholder.png'} />
+const Avatar = ({product, uploadEditProductImage, onUploadEditProductImageFailure}) =>
+  <Dropzone className='ui image editable' onDrop={uploadEditProductImage} onDropRejected={onUploadEditProductImageFailure}>
+    <Image src={product.image || '/images/productholder.png'} />
+    {product.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
 const options = [
@@ -78,6 +79,7 @@ class AdminView extends Component {
       editProduct,
       editProductField,
       uploadEditProductImage,
+      onUploadEditProductImageFailure,
       product,
       user,
       priceTypeValue,
@@ -87,7 +89,10 @@ class AdminView extends Component {
         <Grid.Column>
           <Grid.Row>
             <Card>
-              <Avatar image={product.image || '/images/productholder.png'} uploadEditProductImage={img => uploadEditProductImage(img[0], product, user)} />
+              <Avatar
+                product={product}
+                uploadEditProductImage={img => uploadEditProductImage(img[0], product, user)}
+                onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
               <Card.Content>
                 <Segment>
                   <Card.Header>
@@ -153,6 +158,7 @@ const mapDispatchToProps = dispatch =>
   deleteProduct: (productId, user) => dispatch(deleteProduct(productId, user)),
   editProduct: (product, user) => dispatch(editProduct(product, user)),
   uploadEditProductImage: (img, product, user) => dispatch(uploadEditProductImage(img, product, user)),
+  onUploadEditProductImageFailure: () => dispatch(onUploadEditProductImageFailure()),
   editProductField: field => dispatch(editProductField(field)),
 })
 

@@ -7,7 +7,12 @@ export const uploadProfileImage = (image, user) =>
   }
 })
 
-export const onUploadAvatarSuccess = res =>
+export const onUploadProfileImageFailure = () =>
+({
+  type: 'UPLOAD_PROFILE_IMAGE_FAILURE'
+})
+
+export const onUploadProfileImageSuccess = res =>
 ({
   type: 'UPLOAD_PROFILE_IMAGE_SUCCESS',
   payload: {

@@ -1,4 +1,4 @@
-import { onUploadAvatarSuccess, onEditProfileSuccess, onFetchProfileSuccess } from '../actions/profile'
+import { onUploadProfileImageSuccess, onEditProfileSuccess, onFetchProfileSuccess } from '../actions/profile'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
@@ -41,7 +41,7 @@ export const uploadProfileImage = action$ =>
   action$.ofType('UPLOAD_PROFILE_IMAGE')
     .mergeMap(action =>
       api.uploadProfileImage(action.payload)
-        .map(onUploadAvatarSuccess)
+        .map(onUploadProfileImageSuccess)
         .catch(error => Observable.of({
           type: 'UPLOAD_PROFILE_IMAGE_FAILURE'
         }))

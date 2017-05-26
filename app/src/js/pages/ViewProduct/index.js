@@ -16,9 +16,9 @@ class ViewProduct extends Component {
     fetchSingleProduct(params.id, params.shopId, user)
   }
   componentWillUpdate(nextProps) {
-    const { match: { params }, product, user, fetchSingleShop, isFetching } = this.props
+    const { match: { params }, product, user, fetchSingleProduct, isFetching } = this.props
     if(product.slug !== params.id && isFetching !== params.id) {
-      fetchSingleShop(params.id, user)
+      fetchSingleProduct(params.id, user)
     }
   }
   render() {

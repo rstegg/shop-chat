@@ -9,9 +9,10 @@ import { createProduct, uploadProductImage, onUploadProductImageFailure } from '
 
 import Dropzone from 'components/Dropzone'
 
-const Avatar = ({image, uploadProductImage, onUploadProductImageFailure}) =>
+const Avatar = ({product, uploadProductImage, onUploadProductImageFailure}) =>
   <Dropzone className='ui image editable' onDrop={uploadProductImage} onDropRejected={onUploadProductImageFailure}>
-    <Image src={image || '/images/productholder.png'} />
+    <Image src={product.image || '/images/productholder.png'} />
+    {product.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
 class CreateProduct extends Component {
@@ -25,8 +26,7 @@ class CreateProduct extends Component {
     }
     return (
       <Card>
-        <Avatar image={product.image} uploadProductImage={img => uploadProductImage(img[0], user)} onUploadProductImageFailure={onUploadProductImageFailure} />
-        {product.image_error && <Label basic color='red'>Invalid image</Label>}
+        <Avatar product={product} uploadProductImage={img => uploadProductImage(img[0], user)} onUploadProductImageFailure={onUploadProductImageFailure} />
         <Card.Content>
           <Card.Header>New Product</Card.Header>
           <Card.Description>

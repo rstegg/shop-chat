@@ -1,4 +1,5 @@
 const initialState = {
+  list: [],
   isOpen: false,
   isFetching: null,
   focused: null,
@@ -21,6 +22,10 @@ export default function(state = initialState, action) {
     case 'ON_ADD_CREDIT_CARD_FORM_CHANGE':
       return Object.assign({}, state, {
         [action.payload.field]: action.payload.value
+      })
+    case 'CREATE_BRAINTREE_CARD_SUCCESS':
+      return Object.assign({}, state, {
+        list: [...state.list, action.payload.braintree_card]
       })
     case 'CLOSE_ADD_CARD':
       return initialState

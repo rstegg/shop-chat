@@ -2,6 +2,10 @@ const crypto = require('crypto')
 
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('users', {
+    braintree_cards: {
+      type: DataTypes.ARRAY(DataTypes.JSONB),
+      allowNull: true,
+    },
     interest_types: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,

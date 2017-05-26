@@ -1,3 +1,4 @@
+import { onAddBraintreeCardSuccess } from 'actions/braintree'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
@@ -16,15 +17,14 @@ const api = {
     return Observable.fromPromise(request)
   },
   createBraintreeInstance: response => {
-    console.log(response.body.bt_client_token);
     const request =
       BraintreeClient.create({
         authorization: response.body.bt_client_token
       })
-    return Observable.bindCallback(request, (err, clientInstance) => ({err, clientInstance})) //TODO: ??? HALP BINDPROMISE???
+
+    return Observable.fromPromise(request) //TODO: ??? HALP BINDPROMISE???
   },
   createBraintreeCardRequest: (clientInstance, {card}) => {
-    console.log(clientInstance);
     const request =
       clientInstance.request({
         endpoint: 'payment_methods/credit_cards',
@@ -32,7 +32,7 @@ const api = {
         data: {
           creditCard: {
             number: card.number,
-            expirationDate: card.expiration,
+            expirationDate: card.expirationDate,
             cvv: card.cvv,
             billingAddress: {
               postalCode: card.postalCode,
@@ -57,17 +57,19 @@ export const braintreeCardRequest = action$ =>
   action$.ofType('CREATE_BRAINTREE_CARD')
     .mergeMap(action =>
       api.getClientToken(action.payload)
-        .map(response => api.createBraintreeInstance(response))
-        .map(response => {
-          console.log(response);
-          return api.createBraintreeCardRequest(response.clientInstance, action.payload)
-        }).map((err, response) => {
-          console.log(response);
-          return api.sendCardResponseToServer(response, action.payload.token)
-        })
+        .mergeMap(response => api.createBraintreeInstance(response))
+        .mergeMap(clientInstance => api.createBraintreeCardRequest(clientInstance, action.payload))
+        .mergeMap(response =>
+          api.sendCardResponseToServer(response, action.payload)
+            .map(onAddBraintreeCardSuccess)
+            .catch(error => Observable.of({
+              type: 'CREATE_BRAINTREE_CARD_FAILURE',
+              error
+            }))
+        )
         .catch(error => Observable.of({
           type: 'CREATE_BRAINTREE_CARD_FAILURE',
-          error
+          error: error.response.req.text
         }))
     )
 

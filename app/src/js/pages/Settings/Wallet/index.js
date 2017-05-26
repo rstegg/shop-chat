@@ -10,7 +10,7 @@ import { openAddBank } from 'actions/bank'
 
 class WalletSettings extends Component {
   render() {
-    const { user, openAddCard, openAddBank } = this.props
+    const { user, card, openAddCard, openAddBank } = this.props
     if(!user.isAuthenticated) {
       return <Redirect to='/' />
     }
@@ -20,7 +20,7 @@ class WalletSettings extends Component {
           <Card.Header>Payment Options</Card.Header>
           <Card.Description>
             <WalletList
-              wallet={user.wallet || []} //TODO: PLACEHOLDER
+              wallet={card.list || []} //TODO: PLACEHOLDER
              />
           </Card.Description>
         </Card.Content>
@@ -35,9 +35,10 @@ class WalletSettings extends Component {
   }
 }
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({user, card}) =>
 ({
-  user
+  user,
+  card
 })
 
 const mapDispatchToProps = dispatch =>

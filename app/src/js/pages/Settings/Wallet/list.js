@@ -1,6 +1,6 @@
 import React from 'react'
 
-import WalletListItem from 'elements/ShopItem'
+import WalletListItem from 'elements/WalletListItem'
 import { Feed } from 'semantic-ui-react'
 
 const WalletList =

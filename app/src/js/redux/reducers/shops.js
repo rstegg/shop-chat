@@ -60,15 +60,6 @@ export default function(state = initialState, action) {
           image_error: false
         }
       })
-    case 'UPLOAD_SHOP_IMAGE_FAILURE':
-      return Object.assign({}, state, {
-        new: {
-          ...state.new,
-          image: null,
-          image_loading: false,
-          image_error: true
-        }
-      })
     case 'UPLOAD_SHOP_IMAGE_SUCCESS':
       return Object.assign({}, state, {
         new: {
@@ -76,6 +67,15 @@ export default function(state = initialState, action) {
           image: action.payload.image,
           image_loading: false,
           image_error: false
+        }
+      })
+    case 'UPLOAD_SHOP_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          image: null,
+          image_loading: false,
+          image_error: true
         }
       })
     case 'UPLOAD_EDIT_SHOP_IMAGE':

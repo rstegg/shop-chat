@@ -11,7 +11,7 @@ const api = {
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
-  uploadAvatar: ({image, token}) => {
+  uploadProfileImage: ({image, token}) => {
     const request = su.post(`${API_HOST}/image/profile`)
       .attach('avatar', image)
       .set('Accept', 'application/json')
@@ -37,13 +37,13 @@ export const fetchProfile = action$ =>
         }))
     )
 
-export const uploadAvatar = action$ =>
-  action$.ofType('UPLOAD_AVATAR')
+export const uploadProfileImage = action$ =>
+  action$.ofType('UPLOAD_PROFILE_IMAGE')
     .mergeMap(action =>
-      api.uploadAvatar(action.payload)
+      api.uploadProfileImage(action.payload)
         .map(onUploadAvatarSuccess)
         .catch(error => Observable.of({
-          type: 'UPLOAD_AVATAR_FAILURE'
+          type: 'UPLOAD_PROFILE_IMAGE_FAILURE'
         }))
     )
 

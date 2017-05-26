@@ -8,12 +8,12 @@ import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
 
-import { editProfile, uploadAvatar, editProfileField } from 'actions/profile'
+import { editProfile, uploadProfileImage, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
 import Shops from './Shops'
 
-const Avatar = ({image, uploadAvatar}) =>
-  <Dropzone className='ui image editable' onDrop={uploadAvatar}>
+const Avatar = ({image, uploadProfileImage}) =>
+  <Dropzone className='ui image editable' onDrop={uploadProfileImage}>
     <Image src={image || '/images/productholder.png'} />
   </Dropzone>
 
@@ -53,13 +53,13 @@ class AdminView extends Component {
     const {
       editProfile,
       editProfileField,
-      uploadAvatar,
+      uploadProfileImage,
       profile,
       user
     } = this.props
     return (
       <GridLayout
-        Image={<Avatar image={user.image} uploadAvatar={img => uploadAvatar(img[0], user)} />}
+        Image={<Avatar image={user.image} uploadProfileImage={img => uploadProfileImage(img[0], user)} />}
         Canopy={<Shops />}
         ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
@@ -86,7 +86,7 @@ const mapStateToProps = ({user, profile}) =>
 const mapDispatchToProps = dispatch =>
 ({
   editProfile: (profile, user) => dispatch(editProfile(profile, user)),
-  uploadAvatar: (img, user) => dispatch(uploadAvatar(img, user)),
+  uploadProfileImage: (img, user) => dispatch(uploadProfileImage(img, user)),
   editProfileField: field => dispatch(editProfileField(field))
 })
 

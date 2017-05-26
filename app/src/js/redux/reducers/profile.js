@@ -9,10 +9,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case 'VIEW_PROFILE':
-      return Object.assign({}, state, {
-        userId: action.payload.userId
-      })
     case 'EDIT_PROFILE_FIELD':
       return Object.assign({}, state, {
         focused: action.payload.field

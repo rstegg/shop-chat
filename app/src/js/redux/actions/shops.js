@@ -112,12 +112,12 @@ export const onJoinShopSuccess = res =>
   }
 })
 
-export const uploadShopImage = (image, {token}) =>
+export const uploadShopImage = (image, user) =>
 ({
   type: 'UPLOAD_SHOP_IMAGE',
   payload: {
     image,
-    token
+    token: user.token
   }
 })
 

@@ -54,9 +54,23 @@ export default function(state = initialState, action) {
         ...state,
         error: action.payload.error
       })
-    case 'UPLOAD_AVATAR_SUCCESS':
+    case 'UPLOAD_PROFILE_IMAGE':
       return Object.assign({}, state, {
-        image: action.payload.image
+        image: null,
+        image_loading: true,
+        image_error: false
+      })
+    case 'UPLOAD_PROFILE_IMAGE_SUCCESS':
+      return Object.assign({}, state, {
+        image: action.payload.image,
+        image_loading: false,
+        image_error: false
+      })
+    case 'UPLOAD_PROFILE_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        image: null,
+        image_loading: false,
+        image_error: true
       })
     case 'RESET_LOGIN':
     case 'RESET_SIGNUP':
@@ -74,7 +88,7 @@ export default function(state = initialState, action) {
       })
     case 'LOGOUT':
       return initialState
-    case 'UPLOAD_AVATAR_FAILURE':
+    case 'UPLOAD_PROFILE_IMAGE_FAILURE':
     case 'EDIT_PROFILE_FAILURE':
     default:
       return state

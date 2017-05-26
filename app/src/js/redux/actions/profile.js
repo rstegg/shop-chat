@@ -1,15 +1,15 @@
-export const uploadAvatar = (image, {token}) =>
+export const uploadProfileImage = (image, user) =>
 ({
-  type: 'UPLOAD_AVATAR',
+  type: 'UPLOAD_PROFILE_IMAGE',
   payload: {
     image,
-    token
+    token: user.token
   }
 })
 
 export const onUploadAvatarSuccess = res =>
 ({
-  type: 'UPLOAD_AVATAR_SUCCESS',
+  type: 'UPLOAD_PROFILE_IMAGE_SUCCESS',
   payload: {
     image: res.body.image
   }

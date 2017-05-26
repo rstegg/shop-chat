@@ -4,7 +4,7 @@ import signupSubmit from './signup'
 import { braintreeCardRequest } from './braintree'
 import { fetchProducts, fetchSingleProduct, createProduct, uploadProductImage, editProduct, deleteProduct, shareProduct } from './products'
 import { fetchShops, fetchSingleShop, createShop, uploadShopImage, uploadEditShopImage, editShop, deleteShop } from './shops'
-import { uploadAvatar, editProfile, fetchProfile } from './profile'
+import { uploadProfileImage, editProfile, fetchProfile } from './profile'
 import { saveAccountSettings } from './account'
 
 export default combineEpics(
@@ -23,7 +23,7 @@ export default combineEpics(
   loginSubmit,
   signupSubmit,
   saveAccountSettings,
-  uploadAvatar,
+  uploadProfileImage,
   uploadProductImage,
   uploadShopImage,
   uploadEditShopImage,

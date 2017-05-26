@@ -17,7 +17,7 @@ const s3 = new AWS.S3({
   region: 'us-east-1'
 });
 
-const uploadAvatar = require('../handlers/images/uploadAvatar')
+const uploadProfileImage = require('../handlers/images/uploadProfileImage')
 const uploadProductImage = require('../handlers/images/uploadProductImage')
 const uploadShopImage = require('../handlers/images/uploadShopImage')
 
@@ -58,7 +58,7 @@ module.exports = () => {
   .post(`/image/profile`, //EDIT PROFILE IMAGE
     passport.authenticate('jwt', { session: false }),
     upload.single('avatar'),
-    uploadAvatar
+    uploadProfileImage
   )
   .post(`/image/:shopId/product/:id`, //EDIT PRODUCT IMAGE
     passport.authenticate('jwt', { session: false }),

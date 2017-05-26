@@ -8,37 +8,47 @@ const API_HOST = '/api/v1'
 //TODO: get client auth token from server
 
 const api = {
-  createBraintreeInstance: () => {
+  getClientToken: ({token}) => {
+    const request =
+      su.get(`${API_HOST}/bt_client_token`)
+       .set('Accept', 'application/json')
+       .set('Authorization', token)
+    return Observable.fromPromise(request)
+  },
+  createBraintreeInstance: response => {
+    console.log(response.body.bt_client_token);
     const request =
       BraintreeClient.create({
-        authorization: 'CLIENT_AUTHORIZATION'
+        authorization: response.body.bt_client_token
       })
-      return Observable.fromPromise(request)
-    },
-    braintreeCardRequest: (clientInstance, {card}) => {
-      const request =
-        clientInstance.request({
-          endpoint: 'payment_methods/credit_cards',
-          method: 'post',
-          data: {
-            creditCard: {
-              number: card.number,
-              expirationDate: card.expiration,
-              cvv: card.cvv,
-              billingAddress: {
-                postalCode: card.postalCode,
-              }
+    return Observable.bindCallback(request, (err, clientInstance) => ({err, clientInstance})) //TODO: ??? HALP BINDPROMISE???
+  },
+  createBraintreeCardRequest: (clientInstance, {card}) => {
+    console.log(clientInstance);
+    const request =
+      clientInstance.request({
+        endpoint: 'payment_methods/credit_cards',
+        method: 'post',
+        data: {
+          creditCard: {
+            number: card.number,
+            expirationDate: card.expiration,
+            cvv: card.cvv,
+            billingAddress: {
+              postalCode: card.postalCode,
             }
           }
-        })
-      return Observable.fromPromise(request)
-    },
-    sendCardResponseToServer: (btResponse, user) => {
-      const request =
-       su.post(`${API_HOST}/braintree/cards`)
+        }
+      })
+    return Observable.fromPromise(request)
+  },
+  sendCardResponseToServer: (btResponse, {token}) => {
+    const request =
+      su.post(`${API_HOST}/braintree/cards`)
         .send({btResponse})
         .set('Accept', 'application/json')
-        .set('Authorization', user.token)
+        .set('Authorization', token)
+
     return Observable.fromPromise(request)
   }
 }
@@ -46,13 +56,14 @@ const api = {
 export const braintreeCardRequest = action$ =>
   action$.ofType('CREATE_BRAINTREE_CARD')
     .mergeMap(action =>
-      api.createBraintreeInstance()
-        .map((err, clientInstance) => {
-          console.log(clientInstance);
-          return api.createCardRequest(clientInstance, action.payload)
+      api.getClientToken(action.payload)
+        .map(response => api.createBraintreeInstance(response))
+        .map(response => {
+          console.log(response);
+          return api.createBraintreeCardRequest(response.clientInstance, action.payload)
         }).map((err, response) => {
           console.log(response);
-          api.sendCardResponseToServer(response, action.payload)
+          return api.sendCardResponseToServer(response, action.payload.token)
         })
         .catch(error => Observable.of({
           type: 'CREATE_BRAINTREE_CARD_FAILURE',

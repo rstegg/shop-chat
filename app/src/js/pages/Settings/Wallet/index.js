@@ -20,7 +20,7 @@ class WalletSettings extends Component {
           <Card.Header>Payment Options</Card.Header>
           <Card.Description>
             <WalletList
-              wallet={card.list || []} //TODO: PLACEHOLDER
+              wallet={card.list || []} //TODO: cards should be associated to user?
              />
           </Card.Description>
         </Card.Content>

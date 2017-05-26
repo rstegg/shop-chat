@@ -6,8 +6,6 @@ import BraintreeClient from 'braintree-web/client'
 
 const API_HOST = '/api/v1'
 
-//TODO: get client auth token from server
-
 const api = {
   getClientToken: ({token}) => {
     const request =
@@ -22,7 +20,7 @@ const api = {
         authorization: response.body.bt_client_token
       })
 
-    return Observable.fromPromise(request) //TODO: ??? HALP BINDPROMISE???
+    return Observable.fromPromise(request)
   },
   createBraintreeCardRequest: (clientInstance, {card}) => {
     const request =
@@ -57,8 +55,12 @@ export const braintreeCardRequest = action$ =>
   action$.ofType('CREATE_BRAINTREE_CARD')
     .mergeMap(action =>
       api.getClientToken(action.payload)
-        .mergeMap(response => api.createBraintreeInstance(response))
-        .mergeMap(clientInstance => api.createBraintreeCardRequest(clientInstance, action.payload))
+        .mergeMap(response =>
+          api.createBraintreeInstance(response)
+        )
+        .mergeMap(clientInstance =>
+          api.createBraintreeCardRequest(clientInstance, action.payload)
+        )
         .mergeMap(response =>
           api.sendCardResponseToServer(response, action.payload)
             .map(onAddBraintreeCardSuccess)
@@ -75,14 +77,20 @@ export const braintreeCardRequest = action$ =>
 
 // export const braintreeBankRequest = action$ =>
 //   action$.ofType('CREATE_BRAINTREE_BANK')
-//     .mergeMap(action =>
-//       api.createBraintreeInstance()
-//         .map((err, clientInstance) => //TODO: check for err
-//           api.createBankRequest(clientInstance, action.payload)
-//         ).map((err, response) =>
-//           api.sendBankResponseToServer(response, action.payload)
-//         )
-//         .catch(error => Observable.of(
-//           onCreateCardFailure(error.response.text)
-//         ))
-//     )
+//   .mergeMap(action =>
+//     api.getClientToken(action.payload)
+//       .mergeMap(response => api.createBraintreeInstance(response))
+//       .mergeMap(clientInstance => api.createBraintreeCardRequest(clientInstance, action.payload))
+//       .mergeMap(response =>
+//         api.sendCardResponseToServer(response, action.payload)
+//           .map(onAddBraintreeCardSuccess)
+//           .catch(error => Observable.of({
+//             type: 'CREATE_BRAINTREE_CARD_FAILURE',
+//             error
+//           }))
+//       )
+//       .catch(error => Observable.of({
+//         type: 'CREATE_BRAINTREE_CARD_FAILURE',
+//         error: error.response.req.text
+//       }))
+//   )

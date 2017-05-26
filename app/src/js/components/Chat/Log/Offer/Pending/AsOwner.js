@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { Button, Card, Image } from 'semantic-ui-react'
 
-import { acceptOffer, rejectOffer } from 'actions/chat' //TODO[ACTION] actions/offer
+import { acceptOffer, rejectOffer } from 'actions/offers'
 
 const AdminView = ({ offer, user, acceptOffer, rejectOffer }) =>
   <Card>

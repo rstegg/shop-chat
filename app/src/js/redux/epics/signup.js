@@ -18,7 +18,10 @@ const onSignupSubmit = action$ =>
     .mergeMap(action =>
       api.signup(action.payload)
         .map(onSignupSuccess)
-        .catch(error => Observable.of(onSignupFailure(error.response.text)))
+        .catch(res => {
+          const parsedRes = res.response.text
+          return Observable.of(onSignupFailure(parsedRes.error))
+        })
       )
 
 export default onSignupSubmit

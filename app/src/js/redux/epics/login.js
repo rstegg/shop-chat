@@ -18,7 +18,10 @@ const onLoginSubmit = action$ =>
     .mergeMap(action =>
       api.login(action.payload)
         .map(onLoginSuccess)
-        .catch(error => Observable.of(onLoginFailure(error.response.text)))
+        .catch(res => {
+          const parsedRes = res.response.text
+          return Observable.of(onLoginFailure(parsedRes.error))
+        })
     )
 
 export default onLoginSubmit

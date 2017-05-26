@@ -3,6 +3,7 @@ const initialState = {
   token: '',
   isAuthenticated: false,
   isRegistered: false,
+  isAccountSaved: false,
   image: '',
   isLoading: false,
   error: null
@@ -46,6 +47,12 @@ export default function(state = initialState, action) {
         ...action.payload.account,
         error: null,
         isLoading: false,
+        isAccountSaved: true
+      })
+    case 'SAVE_ACCOUNT_SETTINGS_FAILURE':
+      return Object.assign({}, state, {
+        ...state,
+        error: action.payload.error
       })
     case 'UPLOAD_AVATAR_SUCCESS':
       return Object.assign({}, state, {

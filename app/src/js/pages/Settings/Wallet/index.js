@@ -6,10 +6,11 @@ import { Redirect } from 'react-router-dom'
 import WalletList from './list'
 
 import { openAddCard } from 'actions/card'
+import { openAddBank } from 'actions/bank'
 
 class WalletSettings extends Component {
   render() {
-    const { user, openAddCard } = this.props
+    const { user, openAddCard, openAddBank } = this.props
     if(!user.isAuthenticated) {
       return <Redirect to='/' />
     }
@@ -24,7 +25,10 @@ class WalletSettings extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button basic onClick={openAddCard}>Add a card</Button>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <Button basic onClick={openAddCard}>Add a card</Button>
+            <Button basic onClick={openAddBank}>Add a bank</Button>
+          </div>
         </Card.Content>
       </Card>
     )
@@ -38,6 +42,7 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
+  openAddBank: () => dispatch(openAddBank()),
   openAddCard: () => dispatch(openAddCard())
 })
 

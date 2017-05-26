@@ -1,4 +1,3 @@
-import { onLoginSuccess, onLoginFailure } from 'actions/checkout'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
@@ -7,7 +6,7 @@ import BraintreeClient from 'braintree-web/client'
 const API_HOST = '/api/v1'
 
 const api = {
-  createBraintreeInstance: ({number, expirationDate, cvv, postalCode}) => {
+  createBraintreeInstance: () => {
     const request =
       BraintreeClient.create({
         authorization: 'CLIENT_AUTHORIZATION'
@@ -32,12 +31,12 @@ const api = {
         })
       return Observable.fromPromise(request)
     },
-    sendCardResponseToServer: (btResponse, {token}) => {
+    sendCardResponseToServer: (btResponse, user) => {
       const request =
        su.post(`${API_HOST}/braintree/cards`)
-        .send({btResponse, payload})
+        .send({btResponse})
         .set('Accept', 'application/json')
-        .set('Authorization', )
+        .set('Authorization', user.token)
     return Observable.fromPromise(request)
   }
 }
@@ -46,14 +45,17 @@ export const braintreeCardRequest = action$ =>
   action$.ofType('CREATE_BRAINTREE_CARD')
     .mergeMap(action =>
       api.createBraintreeInstance()
-        .map((err, clientInstance) => //TODO: check for err
-          api.createCardRequest(clientInstance, action.payload)
-        ).map((err, response) =>
+        .map((err, clientInstance) => {
+          console.log(clientInstance);
+          return api.createCardRequest(clientInstance, action.payload)
+        }).map((err, response) => {
+          console.log(response);
           api.sendCardResponseToServer(response, action.payload)
-        )
-        .catch(error => Observable.of(
-          onCreateCardFailure(error.response.text)
-        ))
+        })
+        .catch(error => Observable.of({
+          type: 'CREATE_BRAINTREE_CARD_FAILURE',
+          error
+        }))
     )
 
 // export const braintreeBankRequest = action$ =>

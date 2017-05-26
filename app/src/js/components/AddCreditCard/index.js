@@ -9,15 +9,15 @@ import AddCreditCardForm from './form'
 import { closeAddCard } from 'actions/card'
 import { createBraintreeCard } from 'actions/braintree'
 
-const AddCreditCard = ({user, card, closeAddCard }) =>
+const AddCreditCard = ({user, card, closeAddCard, createBraintreeCard}) =>
   <Modal open={card.isOpen} style={{textAlign: 'center'}}>
     <Modal.Header>Add a Card</Modal.Header>
     <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
       <VisualCreditCard
         name={card.name}
-        number={card.number}
-        expiry={card.expirationDate}
-        cvc={card.cvc}
+        number={card.number.replace(/-/g, '')}
+        expiry={card.expirationDate.replace(/\//g, '')}
+        cvc={card.cvv}
         focused={card.focused}
       />
       <AddCreditCardForm />

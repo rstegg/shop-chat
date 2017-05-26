@@ -5,6 +5,8 @@ import { Form } from 'semantic-ui-react'
 
 import { setFocusedCardField, onAddCreditCardFormChange } from 'actions/card'
 
+import { normalizeCCNumber, normalizeExpiry, normalizeCVV } from './normalize'
+
 const FormInput = ({ type, label, placeholder, value, onChange, autoFocus, onFocus, onBlur }) =>
   <Form.Field>
     <label>{label}</label>
@@ -22,7 +24,7 @@ const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCar
         name='number'
         placeholder='Card number'
         value={card.number}
-        onChange={e => onAddCreditCardFormChange('number', e.target.value)}
+        onChange={e => onAddCreditCardFormChange('number', normalizeCCNumber(e.target.value))}
         onFocus={() => setFocusedCardField('number')}
         onBlur={() => setFocusedCardField(null)} />
       <FormInput
@@ -40,7 +42,7 @@ const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCar
         name='expirationDate'
         placeholder='MM/YY'
         value={card.expirationDate}
-        onChange={e => onAddCreditCardFormChange('expirationDate', e.target.value)}
+        onChange={e => onAddCreditCardFormChange('expirationDate', normalizeExpiry(e.target.value))}
         onFocus={() => setFocusedCardField('expiration')}
         onBlur={() => setFocusedCardField(null)} />
       <FormInput
@@ -48,7 +50,7 @@ const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCar
         name='cvv'
         placeholder='CVV'
         value={card.cvv}
-        onChange={e => onAddCreditCardFormChange('cvc', e.target.value)}
+        onChange={e => onAddCreditCardFormChange('cvv', normalizeCVV(e.target.value))}
         onFocus={() => setFocusedCardField('cvc')}
         onBlur={() => setFocusedCardField(null)} />
     </Form.Group>

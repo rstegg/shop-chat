@@ -1,28 +1,24 @@
 const initialState = {
   isOpen: false,
   isFetching: null,
-  focused: null,
-  name: '',
-  number: '',
-  expirationDate: '',
-  cvv: '',
+  focused: null
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case 'OPEN_ADD_CARD':
+    case 'OPEN_ADD_BANK':
       return Object.assign({}, state, {
         isOpen: true
       })
-    case 'SET_FOCUSED_CARD_FIELD':
+    case 'SET_FOCUSED_BANK_FIELD':
       return Object.assign({}, state, {
         focused: action.payload.field
       })
-    case 'ON_ADD_CREDIT_CARD_FORM_CHANGE':
+    case 'ON_ADD_CREDIT_BANK_FORM_CHANGE':
       return Object.assign({}, state, {
         [action.payload.field]: action.payload.value
       })
-    case 'CLOSE_ADD_CARD':
+    case 'CLOSE_ADD_BANK':
       return initialState
     default:
       return state

@@ -6,6 +6,8 @@ import { Form, Divider } from 'semantic-ui-react'
 
 import InputField from 'elements/InputField'
 
+import { validate, asyncValidate } from './validators'
+
 const SettingsForm = ({handleSubmit, submitting}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name="name" type="text" label='Name *' placeholder='Username' />
@@ -22,6 +24,9 @@ const SettingsForm = ({handleSubmit, submitting}) =>
 
 const ConnectedSettingsForm = reduxForm({
   form: 'accountSettings'
+  validate,
+  asyncValidate,
+  asyncBlurFields: ['username', 'email']
 })(SettingsForm)
 
 const mapStateToProps = ({user}) =>

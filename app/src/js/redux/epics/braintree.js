@@ -69,10 +69,6 @@ export const braintreeCardRequest = action$ =>
               error
             }))
         )
-        .catch(error => Observable.of({
-          type: 'CREATE_BRAINTREE_CARD_FAILURE',
-          error: error.response.req.text
-        }))
     )
 
 // export const braintreeBankRequest = action$ =>

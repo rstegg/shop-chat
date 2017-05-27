@@ -10,11 +10,11 @@ import { validate, asyncValidate } from './validators'
 
 const SettingsForm = ({handleSubmit, submitting}) =>
   <Form onSubmit={handleSubmit}>
-    <Field component={InputField} name="name" type="text" label='Name *' placeholder='Username' />
-    <Field component={InputField} name="email" type="text" label='Email *' placeholder='Email' />
-    <Field component={InputField} name="username" type="text" label='Username *' placeholder='Username' />
-    <Field component={InputField} name="old_password" type="password" label='Old Password *' placeholder='' />
-    <Field component={InputField} name="new_password" type="password" label='New Password' placeholder='' />
+    <Field component={InputField} name='name' type='text' label='Name *' placeholder='Username' />
+    <Field component={InputField} name='email' type='text' label='Email *' placeholder='Email' />
+    <Field component={InputField} name='username' type='text' label='Username *' placeholder='Username' />
+    <Field component={InputField} name='old_password' type='password' label='Old Password *' placeholder='' />
+    <Field component={InputField} name='new_password' type='password' label='New Password' placeholder='' />
     * required
     <br />
     * changing your email will require verification
@@ -23,7 +23,7 @@ const SettingsForm = ({handleSubmit, submitting}) =>
   </Form>
 
 const ConnectedSettingsForm = reduxForm({
-  form: 'accountSettings'
+  form: 'accountSettings',
   validate,
   asyncValidate,
   asyncBlurFields: ['username', 'email']

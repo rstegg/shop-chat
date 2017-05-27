@@ -24,7 +24,7 @@ export const validate = values => {
     errors.old_password = 'Required'
   }
   if(values.new_password < 6) {
-    errors.password = '6 or more characters'
+    errors.new_password = '6 or more characters'
   }
   return errors
 }

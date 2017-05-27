@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Card, Popup, Image, Button, Grid, Divider, Rail } from 'semantic-ui-react'
 import { path } from 'ramda'
 
-import ProductChatPage from 'components/Chat'
+import ProductChat from 'components/Chat'
 import ProductPaymentMenu from 'components/ProductPaymentMenu'
 import SocialMenu from 'components/SocialMenu'
 
@@ -74,7 +74,7 @@ const UserView = ({
             </Card.Content>
           </Card>
           <Rail attached position='right'>
-            <ProductChatPage thread={product} threadType='product' />
+            <ProductChat thread={product} threadType='product' />
           </Rail>
         </Grid.Row>
         <Grid.Row>

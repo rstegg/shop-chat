@@ -10,7 +10,7 @@ import EditorField from 'elements/EditorField'
 
 import { editShop, uploadEditShopImage, onUploadEditShopImageFailure, editShopField } from 'actions/shops'
 
-import ShopChatPage from 'components/Chat'
+import ShopChat from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
 
 import Products from './Products'
@@ -73,7 +73,7 @@ class AdminView extends Component {
           uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)}
           onUploadEditShopImageFailure={onUploadEditShopImageFailure} />}
         Canopy={<Products />}
-        ChatBox={<ShopChatPage thread={shop} threadType='shop' />}
+        ChatBox={<ShopChat thread={shop} threadType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 
-import ProfileChatPage from 'components/Chat'
+import ProfileChat from 'components/Chat'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
@@ -64,7 +64,7 @@ class AdminView extends Component {
       <GridLayout
         Image={<Avatar profile={user} uploadProfileImage={img => uploadProfileImage(img[0], user)} onUploadProfileImageFailure={onUploadProfileImageFailure} />}
         Canopy={<Shops />}
-        ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
+        ChatBox={<ProfileChat thread={profile} threadType='profile' />}
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         Gutter={<WebsiteField isEditing={profile.focused === 'website'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}

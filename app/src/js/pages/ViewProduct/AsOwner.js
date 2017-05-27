@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button, Card, Label, Dimmer, Loader, Grid, Image, Header, Checkbox, Rail, Segment } from 'semantic-ui-react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 
-import ProductChatPage from 'components/Chat'
+import ProductChat from 'components/Chat'
 import SocialMenu from 'components/SocialMenu'
 import Dropzone from 'components/Dropzone'
 
@@ -124,7 +124,7 @@ class AdminView extends Component {
               </Card.Content>
             </Card>
             <Rail attached position='right'>
-              <ProductChatPage thread={product} threadType='product' />
+              <ProductChat thread={product} threadType='product' />
             </Rail>
           </Grid.Row>
           <Grid.Row>

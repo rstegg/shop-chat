@@ -27,7 +27,7 @@ const CurrencyField = ({ input, meta: { asyncValidating, touched, error }, label
       <Label basic>$</Label>
       <input {...input} />
     </Form.Input>
-      {touched && error && <Label basic color='red' pointing='left' floating  style={{top: '45%'}}>{error}</Label>}
+    {touched && error && <Label basic color='red' pointing='left' floating  style={{top: '45%'}}>{error}</Label>}
   </Form.Field>
 
 const SocialMenuForm = ({handleSubmit, products}) =>

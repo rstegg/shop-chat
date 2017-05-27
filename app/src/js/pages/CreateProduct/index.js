@@ -10,7 +10,7 @@ import { createProduct, uploadProductImage, onUploadProductImageFailure } from '
 import Dropzone from 'components/Dropzone'
 
 const Avatar = ({product, uploadProductImage, onUploadProductImageFailure}) =>
-  <Dropzone className='ui image editable' onDrop={uploadProductImage} onDropRejected={onUploadProductImageFailure}>
+  <Dropzone className='ui image editable avatar-image' onDrop={uploadProductImage} onDropRejected={onUploadProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={product.image || '/images/productholder.png'} />
     {product.image_error && <Label basic color='red'>Invalid image</Label>}

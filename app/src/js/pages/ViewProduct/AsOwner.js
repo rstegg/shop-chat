@@ -13,7 +13,7 @@ import SelectField from 'elements/SelectField'
 import { editProduct, deleteProduct, uploadEditProductImage, onUploadEditProductImageFailure, editProductField } from 'actions/products'
 
 const Avatar = ({product, uploadEditProductImage, onUploadEditProductImageFailure}) =>
-  <Dropzone className='ui image editable' onDrop={uploadEditProductImage} onDropRejected={onUploadEditProductImageFailure}>
+  <Dropzone className='ui image editable avatar-image' onDrop={uploadEditProductImage} onDropRejected={onUploadEditProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={product.image || '/images/productholder.png'} />
     {product.image_error && <Label basic color='red'>Invalid image</Label>}

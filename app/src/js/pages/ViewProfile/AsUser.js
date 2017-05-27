@@ -11,7 +11,7 @@ const UserView = ({
   user
 }) =>
   <GridLayout
-    Image={<Image src={profile.image || '/images/productholder.png'} className='profile--image' />}
+    Image={<Image src={profile.image || '/images/productholder.png'} className='profile--image avatar-image' />}
     Canopy={<Shops />}
     ChatBox={<ProfileChatPage thread={profile} threadType='profile' />}
     Header={<Header as='h1'>{profile.username}</Header>}

@@ -19,7 +19,7 @@ const UserView = ({
   joinShop
 }) =>
   <GridLayout
-    Image={<Image src={shop.image || '/images/productholder.png'} className='shop--image' />}
+    Image={<Image src={shop.image || '/images/productholder.png'} className='shop--image avatar-image' />}
     Canopy={<Products />}
     ChatBox={<ShopChatPage thread={shop} threadType='shop' />}
     Header={<Header as='h1'>{shop.name}</Header>}

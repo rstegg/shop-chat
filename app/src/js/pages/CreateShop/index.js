@@ -10,7 +10,7 @@ import { createShop, uploadShopImage, onUploadShopImageFailure } from 'actions/s
 import Dropzone from 'components/Dropzone'
 
 const Avatar = ({shop, uploadShopImage, onUploadShopImageFailure}) =>
-  <Dropzone className='ui image editable' onDrop={uploadShopImage} onDropRejected={onUploadShopImageFailure}>
+  <Dropzone className='ui image editable avatar-image' onDrop={uploadShopImage} onDropRejected={onUploadShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
   </Dropzone>

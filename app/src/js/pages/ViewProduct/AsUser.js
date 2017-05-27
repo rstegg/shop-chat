@@ -34,7 +34,7 @@ const UserView = ({
       <Grid.Column>
         <Grid.Row>
           <Card>
-            <Image src={product.image || '/images/productholder.png'} className='product--image' />
+            <Image src={product.image || '/images/productholder.png'} className='product--image avatar-image' />
             <Card.Content>
               <Card.Header>{product.name}</Card.Header>
               <Card.Meta>{renderType(product.price_type, product.price)}</Card.Meta>

@@ -11,10 +11,6 @@ const multer = require('multer')
 const imager = require('multer-imager')
 const shortId = require('shortid')
 
-const s3 = new AWS.S3({
-
-});
-
 const uploadProfileImage = require('../handlers/images/uploadProfileImage')
 const uploadProductImage = require('../handlers/images/uploadProductImage')
 const uploadShopImage = require('../handlers/images/uploadShopImage')

@@ -18,7 +18,7 @@ import Products from './Products'
 const Avatar = ({shop, uploadEditShopImage, onUploadEditShopImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDrop={uploadEditShopImage} onDropRejected={onUploadEditShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
-    <Image src={shop.image || '/images/productholder.png'} style={{maxWidth: '100%'}} />
+    <Image src={shop.image || '/images/productholder.png'} />
     {shop.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 

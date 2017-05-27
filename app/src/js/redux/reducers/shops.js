@@ -46,7 +46,12 @@ export default function(state = initialState, action) {
         }
       })
     case 'EDIT_SHOP_SUCCESS':
-      return state //FIXME: PLACEHOLDER
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          ...action.payload.shop
+        }
+      })
     case 'DELETE_SHOP_SUCCESS':
       return Object.assign({}, state, {
         current: null

@@ -1,3 +1,10 @@
+.ui.image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .ui.image.editable {
   cursor: pointer;
   border-top: 4px dashed rgb(153, 153, 153) !important;

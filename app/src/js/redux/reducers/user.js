@@ -88,7 +88,6 @@ export default function(state = initialState, action) {
       })
     case 'LOGOUT':
       return initialState
-    case 'UPLOAD_PROFILE_IMAGE_FAILURE':
     case 'EDIT_PROFILE_FAILURE':
     default:
       return state

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header, Label } from 'semantic-ui-react'
+import { Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 
 import ProfileChatPage from 'components/Chat'
@@ -14,6 +14,7 @@ import Shops from './Shops'
 
 const Avatar = ({profile, uploadProfileImage, onUploadProfileImageFailure}) =>
   <Dropzone className='ui image editable' onDrop={uploadProfileImage} onDropRejected={onUploadProfileImageFailure}>
+    {profile.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={profile.image || '/images/productholder.png'} />
     {profile.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>

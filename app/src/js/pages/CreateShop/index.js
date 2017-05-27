@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { Card, Image, Label } from 'semantic-ui-react'
+import { Card, Image, Label, Loader, Dimmer } from 'semantic-ui-react'
 import CreateShopForm from './form'
 
 import { createShop, uploadShopImage, onUploadShopImageFailure } from 'actions/shops'
@@ -11,6 +11,7 @@ import Dropzone from 'components/Dropzone'
 
 const Avatar = ({shop, uploadShopImage, onUploadShopImageFailure}) =>
   <Dropzone className='ui image editable' onDrop={uploadShopImage} onDropRejected={onUploadShopImageFailure}>
+    {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
   </Dropzone>
 

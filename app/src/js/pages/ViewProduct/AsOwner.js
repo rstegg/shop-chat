@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Card, Label, Grid, Image, Header, Checkbox, Rail, Segment } from 'semantic-ui-react'
+import { Button, Card, Label, Dimmer, Loader, Grid, Image, Header, Checkbox, Rail, Segment } from 'semantic-ui-react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 
 import ProductChatPage from 'components/Chat'
@@ -14,6 +14,7 @@ import { editProduct, deleteProduct, uploadEditProductImage, onUploadEditProduct
 
 const Avatar = ({product, uploadEditProductImage, onUploadEditProductImageFailure}) =>
   <Dropzone className='ui image editable' onDrop={uploadEditProductImage} onDropRejected={onUploadEditProductImageFailure}>
+    {product.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={product.image || '/images/productholder.png'} />
     {product.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>

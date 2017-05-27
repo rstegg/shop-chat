@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header, Checkbox, Label } from 'semantic-ui-react'
+import { Image, Header, Checkbox, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
 import ShopMenu from 'components/SocialMenu'
@@ -17,6 +17,7 @@ import Products from './Products'
 
 const Avatar = ({shop, uploadEditShopImage, onUploadEditShopImageFailure}) =>
   <Dropzone className='ui image editable' onDrop={uploadEditShopImage} onDropRejected={onUploadEditShopImageFailure}>
+    {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
     {shop.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>

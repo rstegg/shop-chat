@@ -6,10 +6,22 @@ const initialState = {
   focused: null,
   newUsername: false,
   isAdmin: false,
+  isCropperOpen: false,
+  imagePreview: null
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'OPEN_PROFILE_CROPPER':
+      return Object.assign({}, state, {
+        isCropperOpen: true,
+        imagePreview: action.payload.image
+      })
+    case 'CLOSE_PROFILE_CROPPER':
+      return Object.assign({}, state, {
+        isCropperOpen: false,
+        imagePreview: null
+      })
     case 'SWITCH_TO_PROFILE_ADMIN':
       return Object.assign({}, state, {
         isAdmin: true

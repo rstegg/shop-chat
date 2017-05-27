@@ -7,6 +7,19 @@ export const uploadProfileImage = (image, user) =>
   }
 })
 
+export const openProfileCropper = image =>
+({
+  type: 'OPEN_PROFILE_CROPPER',
+  payload: {
+    image
+  }
+})
+
+export const closeProfileCropper = () =>
+({
+  type: 'CLOSE_PROFILE_CROPPER'
+})
+
 export const switchToProfileAdmin = () =>
 ({
   type: 'SWITCH_TO_PROFILE_ADMIN'

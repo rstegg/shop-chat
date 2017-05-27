@@ -34,8 +34,8 @@ module.exports = () => {
       },
       gm: {
         format: 'png',
-        width: 200,
-        height: 200,
+        width: 250,
+        height: 250,
         options: '%@'
       }
     })

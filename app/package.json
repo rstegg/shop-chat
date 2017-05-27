@@ -19,6 +19,7 @@
     "ramda": "^0.23.0",
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",
+    "react-avatar-editor": "^9.1.1",
     "react-copy-to-clipboard": "^5.0.0",
     "react-credit-card": "^0.20.0",
     "react-dom": "^15.5.4",

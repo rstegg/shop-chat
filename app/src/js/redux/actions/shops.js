@@ -3,6 +3,16 @@ export const refreshShops = () =>
   type: 'REFRESH_SHOPS'
 })
 
+export const switchToShopAdmin = () =>
+({
+  type: 'SWITCH_TO_SHOP_ADMIN'
+})
+
+export const switchToShopUser = () =>
+({
+  type: 'SWITCH_TO_SHOP_USER'
+})
+
 export const fetchShops = user =>
 ({
   type: 'FETCH_SHOPS',

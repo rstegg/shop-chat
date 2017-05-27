@@ -1,5 +1,7 @@
 const initialState = {
-  current: {},
+  current: {
+    isAdmin: false
+  },
   new: {
     name: '',
     image_error: false,
@@ -11,6 +13,20 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'SWITCH_TO_SHOP_ADMIN':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isAdmin: true
+        }
+      })
+    case 'SWITCH_TO_SHOP_USER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isAdmin: false
+        }
+      })
     case 'FETCH_SINGLE_SHOP':
       return Object.assign({}, state, {
         isFetching: action.payload.shopId

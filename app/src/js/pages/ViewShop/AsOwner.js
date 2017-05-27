@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header, Checkbox, Label, Dimmer, Loader } from 'semantic-ui-react'
+import { Button, Image, Header, Checkbox, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
 import ShopMenu from 'components/SocialMenu'
@@ -8,7 +8,7 @@ import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
 
-import { editShop, uploadEditShopImage, onUploadEditShopImageFailure, editShopField } from 'actions/shops'
+import { deleteShop, editShop, editShopField, switchToShopUser, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
 
 import ShopChat from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
@@ -63,6 +63,7 @@ class AdminView extends Component {
       editShopField,
       uploadEditShopImage,
       onUploadEditShopImageFailure,
+      switchToShopUser,
       shop,
       user
     } = this.props
@@ -77,7 +78,12 @@ class AdminView extends Component {
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}
-        GutterRight={<ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />} />
+        GutterRight={
+          user.id === shop.userId ?
+            <Button basic onClick={switchToShopUser}>Switch to User</Button>
+            :
+            <ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
+        } />
     )
   }
 }
@@ -103,7 +109,9 @@ const mapDispatchToProps = dispatch =>
   editShop: (shop, user) => dispatch(editShop(shop, user)),
   uploadEditShopImage: (img, shop, user) => dispatch(uploadEditShopImage(img, shop, user)),
   onUploadEditShopImageFailure: () => dispatch(onUploadEditShopImageFailure()),
-  editShopField: field => dispatch(editShopField(field))
+  editShopField: field => dispatch(editShopField(field)),
+  deleteShop: (shopId, user) => dispatch(deleteShop(shopId, user)),
+  switchToShopUser: () => dispatch(switchToShopUser()),
 })
 
 export default connect(

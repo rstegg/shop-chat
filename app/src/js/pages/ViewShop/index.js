@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
-import { fetchSingleShop, deleteShop, joinShop } from 'actions/shops'
+import { fetchSingleShop, switchToShopAdmin } from 'actions/shops'
 
 class ViewShop extends Component {
   componentWillMount() {
@@ -19,15 +19,18 @@ class ViewShop extends Component {
     }
   }
   render() {
-    const { shop, user, joinShop, deleteShop } = this.props
+    const { shop, user, switchToShopAdmin } = this.props
     if(!shop) {
       return <Redirect to='/' />
     }
-    if(shop.userId === user.id) {
-      const adminViewProps = { shop, user, deleteShop }
+    if(shop.isAdmin) {
+      const adminViewProps = { shop, user }
       return <AdminView {...adminViewProps} />
     }
-    const userViewProps = { shop, user, joinShop }
+    let userViewProps = { shop, user }
+    if(shop.userId === user.id) {
+      userViewProps = { shop, user, switchToShopAdmin }
+    }
     return <UserView {...userViewProps} />
   }
 }
@@ -42,8 +45,7 @@ const mapStateToProps = ({shops, user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchSingleShop: (shopId, user) => dispatch(fetchSingleShop(shopId, user)),
-  deleteShop: (shopId, user) => dispatch(deleteShop(shopId, user)),
-  joinShop: (shopId, user) => dispatch(joinShop(shopId, user))
+  switchToShopAdmin: () => dispatch(switchToShopAdmin())
 })
 
 export default connect(

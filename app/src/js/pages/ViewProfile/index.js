@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
-import { fetchProfile, refreshProfileEditing } from 'actions/profile'
+import { fetchProfile, refreshProfileEditing, switchToProfileAdmin } from 'actions/profile'
 
 class ViewProfile extends Component {
   componentWillMount() {
@@ -24,12 +24,15 @@ class ViewProfile extends Component {
     }
   }
   render() {
-    const { user, profile } = this.props
+    const { user, profile, switchToProfileAdmin } = this.props
     if(!profile) {
       return <Redirect to='/' />
     }
-    if(profile.userId === user.id) {
+    if(profile.isAdmin) {
       return <AdminView user={user} profile={profile} />
+    }
+    if(user.id === profile.userId) {
+      return <UserView user={user} profile={profile} switchToProfileAdmin={switchToProfileAdmin} />
     }
     return <UserView user={user} profile={profile} />
   }
@@ -45,7 +48,8 @@ const mapStateToProps = ({user, profile}) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchProfile: (username, user) => dispatch(fetchProfile(username, user)),
-  refreshProfileEditing: () => dispatch(refreshProfileEditing())
+  refreshProfileEditing: () => dispatch(refreshProfileEditing()),
+  switchToProfileAdmin: () => dispatch(switchToProfileAdmin())
 })
 
 export default connect(

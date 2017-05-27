@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Image, Header } from 'semantic-ui-react'
 import { path } from 'ramda'
 
-import ShopMenu from 'components/SocialMenu'
+import ShareMenu from 'components/SocialMenu'
 import ProfileLabel from 'elements/ProfileLabel'
 
 import ShopChat from 'components/Chat'
@@ -35,7 +35,7 @@ const UserView = ({
       user.id === shop.userId ?
         <Button basic onClick={switchToShopAdmin}>Switch to Admin</Button>
         :
-        <ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
+        <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
     } />
 
 

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
+import { Button, Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 
+import ShareMenu from 'components/SocialMenu'
 import ProfileChat from 'components/Chat'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
 
-import { editProfile, uploadProfileImage, onUploadProfileImageFailure, editProfileField } from 'actions/profile'
+import { editProfile, switchToProfileUser, uploadProfileImage, onUploadProfileImageFailure, editProfileField } from 'actions/profile'
 import GridLayout from 'components/layouts/Grid'
 import Shops from './Shops'
 
@@ -57,6 +58,7 @@ class AdminView extends Component {
       editProfileField,
       uploadProfileImage,
       onUploadProfileImageFailure,
+      switchToProfileUser,
       profile,
       user
     } = this.props
@@ -68,7 +70,12 @@ class AdminView extends Component {
         Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         Gutter={<WebsiteField isEditing={profile.focused === 'website'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
-        GutterRight={'something'} />
+        GutterRight={
+          user.id === profile.userId ?
+            <Button basic onClick={switchToProfileUser}>Switch to User</Button>
+            :
+            <ShareMenu url={`https://kuwau.com/user/${user.username}`} shopId={profile.id} />
+        } />
     )
   }
 }
@@ -91,6 +98,7 @@ const mapDispatchToProps = dispatch =>
   editProfile: (profile, user) => dispatch(editProfile(profile, user)),
   uploadProfileImage: (img, user) => dispatch(uploadProfileImage(img, user)),
   onUploadProfileImageFailure: () => dispatch(onUploadProfileImageFailure()),
+  switchToProfileUser: () => dispatch(switchToProfileUser()),
   editProfileField: field => dispatch(editProfileField(field))
 })
 

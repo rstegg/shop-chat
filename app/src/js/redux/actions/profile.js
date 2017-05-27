@@ -7,6 +7,17 @@ export const uploadProfileImage = (image, user) =>
   }
 })
 
+export const switchToProfileAdmin = () =>
+({
+  type: 'SWITCH_TO_PROFILE_ADMIN'
+})
+
+export const switchToProfileUser = () =>
+({
+  type: 'SWITCH_TO_PROFILE_USER'
+})
+
+
 export const onUploadProfileImageFailure = () =>
 ({
   type: 'UPLOAD_PROFILE_IMAGE_FAILURE'

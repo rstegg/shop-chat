@@ -16,7 +16,7 @@ const getThreadId = path(['thread', 'id'])
 
 class ThreadChat extends Component {
   componentWillMount() {
-    const { user, thread, chat, joinChatThread, isFetching } = this.props
+    const { user, thread, joinChatThread } = this.props
     const threadId = getThreadId(thread)
     if(!!threadId) {
       joinChatThread(threadId, user)

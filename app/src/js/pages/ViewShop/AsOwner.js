@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button, Image, Header, Checkbox, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
-import ShopMenu from 'components/SocialMenu'
+import ShareMenu from 'components/SocialMenu'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
@@ -82,7 +82,7 @@ class AdminView extends Component {
           user.id === shop.userId ?
             <Button basic onClick={switchToShopUser}>Switch to User</Button>
             :
-            <ShopMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
+            <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
         } />
     )
   }

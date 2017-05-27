@@ -22,9 +22,9 @@ class ViewProduct extends Component {
     }
   }
   render() {
-    const { product, user } = this.props
+    const { match: { params }, product, user } = this.props
     if(!product) {
-      return <Redirect to='/' />
+      return <Redirect to={`/shop/${params.shopId}`} />
     }
     if(productUserId(product) === user.id) {
       const adminViewProps = { product, user }

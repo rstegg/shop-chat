@@ -119,7 +119,7 @@ class AdminView extends Component {
                     <PublicField product={product} user={user} editProduct={editProduct} />
                   </Segment>
                   <Segment>
-                    <Button fluid basic color='red' onClick={() => deleteProduct(product.id, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
+                    <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
                   </Segment>
               </Card.Content>
             </Card>
@@ -156,7 +156,7 @@ const mapStateToProps = state =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  deleteProduct: (productId, user) => dispatch(deleteProduct(productId, user)),
+  deleteProduct: (productId, shopId, user) => dispatch(deleteProduct(productId, shopId, user)),
   editProduct: (product, user) => dispatch(editProduct(product, user)),
   uploadEditProductImage: (img, product, user) => dispatch(uploadEditProductImage(img, product, user)),
   onUploadEditProductImageFailure: () => dispatch(onUploadEditProductImageFailure()),

@@ -23,12 +23,11 @@ const SelectField = ({ input: { value, onChange }, meta: { asyncValidating, touc
 
 const CurrencyField = ({ input, meta: { asyncValidating, touched, error }, label, placeholder }) =>
   <Form.Field>
-    <label>{label}</label>
-    <div className='ui left icon input'>
-      <i className='dollar icon'></i>
-      <input type='text' {...input} placeholder={placeholder} />
-      {touched && error && <Label basic color='red' pointing='left' floating style={{top: '5px'}}>{error}</Label>}
-    </div>
+    <Form.Input labelPosition='left' type='text' placeholder='0.00'>
+      <Label basic>$</Label>
+      <input {...input} />
+    </Form.Input>
+      {touched && error && <Label basic color='red' pointing='left' floating  style={{top: '45%'}}>{error}</Label>}
   </Form.Field>
 
 const SocialMenuForm = ({handleSubmit, products}) =>

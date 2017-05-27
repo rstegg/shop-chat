@@ -23,7 +23,7 @@ const CheckboxField = ({ input: { value, onChange } }) =>
     onChange={(_,data) => onChange(data.checked)} />
 
 const CurrencyField = ({ input: { value, onChange } }) =>
-  <Form.Input labelPosition='right' type='text' placeholder='Amount'>
+  <Form.Input labelPosition='left' type='text' placeholder='0.00'>
     <Label basic>$</Label>
     <input value={value} onChange={onChange} />
   </Form.Input>

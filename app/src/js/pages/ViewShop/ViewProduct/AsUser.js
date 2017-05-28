@@ -7,7 +7,7 @@ import { path } from 'ramda'
 import ProductPaymentMenu from 'components/ProductPaymentMenu'
 import SocialMenu from 'components/SocialMenu'
 
-import { openPurchase, closePurchase } from 'actions/orders'
+import { productBuyNow, productAddToCart } from 'actions/orders'
 
 const productUserId = path(['user', 'id'])
 const productUsername = path(['user', 'username'])
@@ -22,11 +22,9 @@ const UserView = ({
   orders,
   product,
   user,
-  makePurchase,
-  addToCart,
-  openPurchase,
-  closePurchase,
-  switchToProductAdmin
+  switchToProductAdmin,
+  productBuyNow,
+  productAddToCart,
 }) =>
   <Grid celled='internally' className='product__container'>
     <Grid.Column width={6} stretched>
@@ -45,21 +43,10 @@ const UserView = ({
         </Segment>
         <Segment>
           <Button.Group vertical fluid>
-            <Popup wide position='top right' on='click'
-              trigger={<Button type='button' basic color='green' disabled={!product} style={{justifyContent: 'center'}}>Buy now</Button>}
-              open={orders.isOpen}
-              onOpen={openPurchase} onClose={closePurchase}>
-                <Popup.Header>Buy now</Popup.Header>
-                <Popup.Content>
-                  <ProductPaymentMenu
-                    product={product}
-                    onSubmit={values => {
-                      makePurchase(product.id, user)
-                      closePurchase()
-                    }} />
-                </Popup.Content>
-            </Popup>
-            <Button fluid basic color='green' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+            <NavLink to='/checkout'>
+              <Button type='button' basic color='green' onClick={() => productBuyNow(product.id)} style={{justifyContent: 'center'}}>Buy now</Button>
+            </NavLink>
+            <Button fluid basic color='green' onClick={() => productAddToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
           </Button.Group>
         </Segment>
         {user.id === productUserId(product) ?
@@ -69,21 +56,10 @@ const UserView = ({
           :
           <Segment>
             <Button.Group vertical fluid>
-              <Popup wide position='top right' on='click'
-                trigger={<Button type='button' basic color='green' disabled={!product} style={{justifyContent: 'center'}}>Buy now</Button>}
-                open={orders.isOpen}
-                onOpen={openPurchase} onClose={closePurchase}>
-                  <Popup.Header>Buy now</Popup.Header>
-                  <Popup.Content>
-                    <ProductPaymentMenu
-                      product={product}
-                      onSubmit={values => {
-                        makePurchase(product.id, user)
-                        closePurchase()
-                      }} />
-                  </Popup.Content>
-              </Popup>
-              <Button fluid basic color='green' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+              <NavLink to='/checkout'>
+                <Button type='button' basic color='green' onClick={() => productBuyNow(product.id)} style={{justifyContent: 'center'}}>Buy now</Button>
+              </NavLink>
+              <Button fluid basic color='green' onClick={() => productAddToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
             </Button.Group>
           </Segment>
         }
@@ -131,8 +107,8 @@ const mapStateToProps = ({orders}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  openPurchase: () => dispatch(openPurchase()),
-  closePurchase: () => dispatch(closePurchase()),
+  productBuyNow: productId => dispatch(productBuyNow(productId)),
+  productAddToCart: productId => dispatch(productAddToCart(productId)),
 })
 
 export default connect(

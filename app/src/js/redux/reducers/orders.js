@@ -1,4 +1,5 @@
 const initialState = {
+  cart: [],
   isOpen: false,
   isFetching: null
 }
@@ -12,6 +13,16 @@ export default function(state = initialState, action) {
     case 'CLOSE_PURCHASE_WINDOW':
       return Object.assign({}, state, {
         isOpen: false
+      })
+    case 'PRODUCT_BUY_NOW':
+    case 'PRODUCT_ADD_TO_CART':
+      return Object.assign({}, state, {
+        cart: [...state.cart, action.payload.productId]
+      })
+    case 'PRODUCT_REMOVE_FROM_CART':
+      const removedIndex = state.cart.indexOf(action.payload.productId)
+      return Object.assign({}, state, {
+        cart: [...state.cart.slice(0, removedIndex), ...state.cart.slice(removedIndex + 1)]
       })
     default:
       return state

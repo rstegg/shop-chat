@@ -3,6 +3,42 @@ export const refreshProducts = () =>
   type: 'REFRESH_PRODUCTS'
 })
 
+export const openCreateProductCropper = image =>
+({
+  type: 'OPEN_CREATE_PRODUCT_CROPPER',
+  payload: {
+    image
+  }
+})
+
+export const closeCreateProductCropper = () =>
+({
+  type: 'CLOSE_CREATE_PRODUCT_CROPPER'
+})
+
+export const openEditProductCropper = image =>
+({
+  type: 'OPEN_EDIT_PRODUCT_CROPPER',
+  payload: {
+    image
+  }
+})
+
+export const closeEditProductCropper = () =>
+({
+  type: 'CLOSE_EDIT_PRODUCT_CROPPER'
+})
+
+export const switchToProductAdmin = () =>
+({
+  type: 'SWITCH_TO_PRODUCT_ADMIN'
+})
+
+export const switchToProductUser = () =>
+({
+  type: 'SWITCH_TO_PRODUCT_USER'
+})
+
 export const shareProduct = ({name, email, message, productId}, user, url) =>
 ({
   type: 'SHARE_PRODUCT',

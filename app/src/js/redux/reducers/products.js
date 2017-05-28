@@ -1,8 +1,12 @@
 const initialState = {
   current: {
-    is_public: false
+    isAdmin: false,
+    isCropperOpen: false,
+    imagePreview: null,
   },
   new: {
+    name: '',
+    image_error: false,
     is_public: false
   },
   list: [],
@@ -12,6 +16,52 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'OPEN_CREATE_PRODUCT_CROPPER':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          isCropperOpen: true,
+          imagePreview: action.payload.image
+        }
+      })
+    case 'CLOSE_CREATE_PRODUCT_CROPPER':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          isCropperOpen: false,
+          imagePreview: null
+        }
+      })
+    case 'OPEN_EDIT_PRODUCT_CROPPER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isCropperOpen: true,
+          imagePreview: action.payload.image
+        }
+      })
+    case 'CLOSE_EDIT_PRODUCT_CROPPER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isCropperOpen: false,
+          imagePreview: null
+        }
+      })
+    case 'SWITCH_TO_PRODUCT_ADMIN':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isAdmin: true
+        }
+      })
+    case 'SWITCH_TO_PRODUCT_USER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isAdmin: false
+        }
+      })
     case 'FETCH_PRODUCTS':
       return Object.assign({}, state, {
         fetchable: false

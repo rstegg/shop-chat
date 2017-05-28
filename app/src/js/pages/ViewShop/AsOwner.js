@@ -14,8 +14,6 @@ import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCrop
 import ShopChat from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
 
-import Products from './Products'
-
 const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDrop={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
@@ -68,7 +66,8 @@ class AdminView extends Component {
       onUploadEditShopImageFailure,
       switchToShopUser,
       shop,
-      user
+      user,
+      children,
     } = this.props
     return (
       <GridLayout
@@ -77,7 +76,7 @@ class AdminView extends Component {
             :
             <Avatar shop={shop} openEditShopCropper={img => openEditShopCropper(img[0])} onUploadEditShopImageFailure={onUploadEditShopImageFailure} />
           }
-        Canopy={<Products />}
+        Canopy={children}
         ChatBox={<ShopChat thread={shop} threadType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
         SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
@@ -95,8 +94,6 @@ class AdminView extends Component {
 
 const ConnectedAdminView = reduxForm({
   form: 'editShop',
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
   // validate
 })(AdminView)
 

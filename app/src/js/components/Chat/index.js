@@ -46,7 +46,7 @@ class ThreadChat extends Component {
   render() {
     const { user, chat, thread, threadType, sendThreadChatMessage, clearThreadChat } = this.props
     return (
-      <Card className='chat__container thread-chat'>
+      <Card className='chat__container'>
         <Card.Content>
           <Card.Header>{!!thread && thread.name} chat</Card.Header>
         </Card.Content>

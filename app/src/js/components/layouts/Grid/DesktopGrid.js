@@ -12,8 +12,6 @@ export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}
         {!!GutterRight && <Segment style={{display: 'flex', justifyContent: 'center'}}>{GutterRight}</Segment>}
       </Segment>
     </Grid.Column>
-    <Grid.Column width={8} stretched>
-      {!!Canopy && <Segment basic>{Canopy}</Segment>}
-    </Grid.Column>
+    {!!Canopy && <Grid.Column width={8} stretched>{Canopy}</Grid.Column>}
     {!!ChatBox && <Grid.Column width={5} stretched>{ChatBox}</Grid.Column>}
   </Grid>

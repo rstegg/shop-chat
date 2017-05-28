@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { path } from 'ramda'
 
 import { Card } from 'semantic-ui-react'
 import ProductsList from './list'
@@ -7,18 +8,21 @@ import RouterButton from 'elements/RouterButton'
 
 import { fetchProducts, refreshProducts } from 'actions/products'
 
+const getId = path(['id'])
+
 class Products extends Component {
   componentWillMount() {
     const { user, shop, products, refreshProducts, fetchProducts } = this.props
     refreshProducts()
-    if(user.isAuthenticated && shop.id && products.fetchable) {
+    if(getId(shop) && products.fetchable) {
       fetchProducts(shop.id, user)
     }
   }
   componentWillUpdate(nextProps) {
-    const { user, fetchProducts } = this.props
-    if(user.isAuthenticated && nextProps.shop.id && nextProps.products.fetchable) {
-      fetchProducts(nextProps.shop.id, user)
+    const { user, shop, products, fetchProducts } = nextProps
+    if(getId(shop) && products.fetchable) {
+      console.log("[Products/componentWillUpdate] componentWillUpdate checking necessary to fetch all products with shop.id and not shop.slug [params.shopId === shop.slug]")
+      fetchProducts(getId(shop), user)
     }
   }
   render() {

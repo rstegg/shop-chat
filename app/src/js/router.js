@@ -9,13 +9,12 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import SettingsRouter from './pages/Settings/Router'
+import ShopRouter from './pages/ViewShop/Router'
 
 import CreateProduct from './pages/CreateProduct'
-import ViewProduct from './pages/ViewProduct'
 
 import Shops from './pages/Shops'
 import CreateShop from './pages/CreateShop'
-import ViewShop from './pages/ViewShop'
 
 import ViewProfile from './pages/ViewProfile'
 
@@ -52,9 +51,8 @@ export default class AppRouter extends Component {
                 <Route exact path='/shops' component={Shops} />
                 <Route exact path='/shop/:id/products/new' component={CreateProduct} />
                 <Route exact path='/shops/new' component={CreateShop} />
-                <Route exact path='/shop/:id' component={ViewShop} />
+                <Route path='/shop/:shopId' component={ShopRouter} />
                 <Route exact path='/user/:id' component={ViewProfile} />
-                <Route exact path='/shop/:shopId/product/:id' component={ViewProduct} />
               </Switch>
             </RootLayout>
         </Router>

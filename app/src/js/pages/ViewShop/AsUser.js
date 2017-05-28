@@ -8,8 +8,6 @@ import ProfileLabel from 'elements/ProfileLabel'
 import ShopChat from 'components/Chat'
 
 import GridLayout from 'components/layouts/Grid'
-import Products from './Products'
-
 
 const Avatar = ({image}) =>
   <div className='ui image shop--image avatar-image'>
@@ -22,11 +20,12 @@ const getUserImage = path(['user', 'image'])
 const UserView = ({
   shop,
   user,
+  children,
   switchToShopAdmin
 }) =>
   <GridLayout
     Image={<Avatar image={shop.image} />}
-    Canopy={<Products />}
+    Canopy={children}
     ChatBox={<ShopChat thread={shop} threadType='shop' />}
     Header={<Header as='h1'>{shop.name}</Header>}
     SubHeader={!!shop.description && <Header as='h4'>{shop.description}</Header>}

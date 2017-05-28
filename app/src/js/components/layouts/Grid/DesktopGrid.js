@@ -9,7 +9,7 @@ export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}
         {!!Header && <Segment>{Header}</Segment>}
         {!!SubHeader && <Segment>{SubHeader}</Segment>}
         {!!Gutter && <Segment>{Gutter}</Segment>}
-        {!!GutterRight && <Segment>{GutterRight}</Segment>}
+        {!!GutterRight && <Segment style={{display: 'flex', justifyContent: 'center'}}>{GutterRight}</Segment>}
       </Segment>
     </Grid.Column>
     <Grid.Column width={8} stretched>

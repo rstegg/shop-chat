@@ -84,7 +84,7 @@ class AdminView extends Component {
         Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}
         GutterRight={
           user.id === shop.userId ?
-            <Button basic onClick={switchToShopUser}>Switch to User</Button>
+            <Button basic onClick={switchToShopUser}>View mode</Button>
             :
             <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
         } />

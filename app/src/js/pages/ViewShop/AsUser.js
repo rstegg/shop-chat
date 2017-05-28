@@ -33,7 +33,7 @@ const UserView = ({
     Gutter={<ProfileLabel username={getUsername(shop)} image={getUserImage(user)} />}
     GutterRight={
       user.id === shop.userId ?
-        <Button basic onClick={switchToShopAdmin}>Switch to Admin</Button>
+        <Button basic onClick={switchToShopAdmin}>Edit mode</Button>
         :
         <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
     } />

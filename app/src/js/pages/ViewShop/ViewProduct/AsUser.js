@@ -89,9 +89,9 @@ const UserView = ({
         }
       </Segment>
     </Grid.Column>
-    <Grid.Column width={10} stretched>
+    <Grid.Column width={10}>
       <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-      <Segment style={{display: 'flex', justifyContent: 'space-between'}}>
+      <Segment compact style={{display: 'flex', justifyContent: 'space-between'}}>
         <NavLink to={`/user/${productUsername(product)}`}>
           <Button basic color='orange' compact>
             more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}

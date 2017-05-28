@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import AvatarEditor from 'react-avatar-editor'
 
 import { Modal, Button } from 'semantic-ui-react'

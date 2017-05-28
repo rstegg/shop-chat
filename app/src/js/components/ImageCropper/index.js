@@ -24,7 +24,7 @@ class ImageCropper extends Component {
             width={300}
             height={300}
             border={50}
-            color={[255, 255, 255, 0.6]} // RGBA
+            color={[255, 255, 255, 0.6]}
             scale={1}
           />
         </Modal.Content>

@@ -4,16 +4,14 @@ import AvatarEditor from 'react-avatar-editor'
 
 import { Modal, Button } from 'semantic-ui-react'
 
-import { uploadProfileImage, closeProfileCropper } from 'actions/profile'
-
 class ImageCropper extends Component {
   onSave() {
-    const { uploadImage, closeCropper, user } = this.props
-    this.editor.getImageScaledToCanvas().toBlob(blob => uploadImage(blob, user))
+    const { uploadImage, closeCropper } = this.props
+    this.editor.getImageScaledToCanvas().toBlob(blob => uploadImage(blob))
     closeCropper()
   }
   render() {
-    const { image, isOpen, closeProfileCropper } = this.props
+    const { image, isOpen, closeCropper } = this.props
     if(!isOpen) {
       return null
     }
@@ -32,7 +30,7 @@ class ImageCropper extends Component {
           />
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={closeProfileCropper} content='Cancel' />
+          <Button color='black' onClick={closeCropper} content='Cancel' />
           <Button positive icon='checkmark' labelPosition='right' content='Save'
             onClick={() => this.onSave()} />
         </Modal.Actions>
@@ -41,9 +39,4 @@ class ImageCropper extends Component {
   }
 }
 
-const mapStateToProps = ({user}) =>
-({
-  user
-})
-
-export default connect(mapStateToProps)(ImageCropper)
+export default ImageCropper

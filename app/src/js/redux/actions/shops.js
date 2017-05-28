@@ -3,6 +3,32 @@ export const refreshShops = () =>
   type: 'REFRESH_SHOPS'
 })
 
+export const openCreateShopCropper = image =>
+({
+  type: 'OPEN_CREATE_SHOP_CROPPER',
+  payload: {
+    image
+  }
+})
+
+export const closeCreateShopCropper = () =>
+({
+  type: 'CLOSE_CREATE_SHOP_CROPPER'
+})
+
+export const openEditShopCropper = image =>
+({
+  type: 'OPEN_EDIT_SHOP_CROPPER',
+  payload: {
+    image
+  }
+})
+
+export const closeEditShopCropper = () =>
+({
+  type: 'CLOSE_EDIT_SHOP_CROPPER'
+})
+
 export const switchToShopAdmin = () =>
 ({
   type: 'SWITCH_TO_SHOP_ADMIN'

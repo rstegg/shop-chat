@@ -4,19 +4,20 @@ import { Button, Image, Header, Checkbox, Label, Dimmer, Loader } from 'semantic
 import { Field, reduxForm } from 'redux-form'
 
 import ShareMenu from 'components/SocialMenu'
+import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
 
-import { deleteShop, editShop, editShopField, switchToShopUser, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
+import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCropper, closeEditShopCropper, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
 
 import ShopChat from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
 
 import Products from './Products'
 
-const Avatar = ({shop, uploadEditShopImage, onUploadEditShopImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDrop={uploadEditShopImage} onDropRejected={onUploadEditShopImageFailure}>
+const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
+  <Dropzone className='ui image editable avatar-image' onDrop={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
     {shop.image_error && <Label basic color='red'>Invalid image</Label>}
@@ -61,6 +62,8 @@ class AdminView extends Component {
     const {
       editShop,
       editShopField,
+      openEditShopCropper,
+      closeEditShopCropper,
       uploadEditShopImage,
       onUploadEditShopImageFailure,
       switchToShopUser,
@@ -69,10 +72,11 @@ class AdminView extends Component {
     } = this.props
     return (
       <GridLayout
-        Image={<Avatar
-          shop={shop}
-          uploadEditShopImage={img => uploadEditShopImage(img[0], shop, user)}
-          onUploadEditShopImageFailure={onUploadEditShopImageFailure} />}
+        Image={shop.isCropperOpen ?
+            <ImageCropper isOpen={shop.isCropperOpen} image={shop.imagePreview} uploadImage={img => uploadEditShopImage(img, shop, user)} closeCropper={closeEditShopCropper} />
+            :
+            <Avatar shop={shop} openEditShopCropper={img => openEditShopCropper(img[0])} onUploadEditShopImageFailure={onUploadEditShopImageFailure} />
+          }
         Canopy={<Products />}
         ChatBox={<ShopChat thread={shop} threadType='shop' />}
         Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
@@ -107,6 +111,8 @@ const mapStateToProps = ({shops, user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   editShop: (shop, user) => dispatch(editShop(shop, user)),
+  openEditShopCropper: img => dispatch(openEditShopCropper(img)),
+  closeEditShopCropper: () => dispatch(closeEditShopCropper()),
   uploadEditShopImage: (img, shop, user) => dispatch(uploadEditShopImage(img, shop, user)),
   onUploadEditShopImageFailure: () => dispatch(onUploadEditShopImageFailure()),
   editShopField: field => dispatch(editShopField(field)),

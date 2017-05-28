@@ -69,7 +69,7 @@ class AdminView extends Component {
     return (
       <GridLayout
         Image={profile.isCropperOpen ?
-          <ImageCropper isOpen={profile.isCropperOpen} image={profile.imagePreview} uploadImage={uploadProfileImage} closeCropper={closeProfileCropper} />
+          <ImageCropper isOpen={profile.isCropperOpen} image={profile.imagePreview} uploadImage={img => uploadProfileImage(img, user)} closeCropper={closeProfileCropper} />
           :
           <Avatar profile={user} openProfileCropper={img => openProfileCropper(img[0])} onUploadProfileImageFailure={onUploadProfileImageFailure} />
         }

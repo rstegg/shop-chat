@@ -5,19 +5,28 @@ import { Redirect } from 'react-router-dom'
 import { Card, Image, Label, Loader, Dimmer } from 'semantic-ui-react'
 import CreateShopForm from './form'
 
-import { createShop, uploadShopImage, onUploadShopImageFailure } from 'actions/shops'
+import { createShop, openCreateShopCropper, closeCreateShopCropper, uploadShopImage, onUploadShopImageFailure } from 'actions/shops'
 
+import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
-const Avatar = ({shop, uploadShopImage, onUploadShopImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDrop={uploadShopImage} onDropRejected={onUploadShopImageFailure}>
+const Avatar = ({shop, openCropper, onUploadShopImageFailure}) =>
+  <Dropzone className='ui image editable avatar-image' onDrop={openCropper} onDropRejected={onUploadShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
   </Dropzone>
 
 class CreateShop extends Component {
   render() {
-    const { user, shop, createShop, uploadShopImage, onUploadShopImageFailure } = this.props
+    const {
+      user,
+      shop,
+      openCreateShopCropper,
+      closeCreateShopCropper,
+      createShop,
+      uploadShopImage,
+      onUploadShopImageFailure
+    } = this.props
     if(!user.isAuthenticated) {
       return <Redirect to='/login' />
     }
@@ -26,7 +35,11 @@ class CreateShop extends Component {
     }
     return (
       <Card>
-        <Avatar shop={shop} uploadShopImage={img => uploadShopImage(img[0], user)} onUploadShopImageFailure={onUploadShopImageFailure} />
+        {shop.isCropperOpen ?
+          <ImageCropper isOpen={shop.isCropperOpen} image={shop.imagePreview} uploadImage={img => uploadShopImage(img, user)} closeCropper={closeCreateShopCropper} />
+          :
+          <Avatar shop={shop} openCropper={img => openCreateShopCropper(img[0])} onUploadShopImageFailure={onUploadShopImageFailure} />
+        }
         {shop.image_error && <Label basic color='red'>Invalid image</Label>}
         <Card.Content>
           <Card.Header>New Shop</Card.Header>
@@ -53,6 +66,8 @@ const mapDispatchToProps = dispatch =>
 ({
   createShop: (shop, user) => dispatch(createShop(shop, user)),
   uploadShopImage: (img, user) => dispatch(uploadShopImage(img, user)),
+  openCreateShopCropper: img => dispatch(openCreateShopCropper(img)),
+  closeCreateShopCropper: () => dispatch(closeCreateShopCropper()),
   onUploadShopImageFailure: () => dispatch(onUploadShopImageFailure()),
 })
 

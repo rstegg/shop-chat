@@ -1,6 +1,8 @@
 const initialState = {
   current: {
-    isAdmin: false
+    isAdmin: false,
+    isCropperOpen: false,
+    imagePreview: null,
   },
   new: {
     name: '',
@@ -13,6 +15,38 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'OPEN_CREATE_SHOP_CROPPER':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          isCropperOpen: true,
+          imagePreview: action.payload.image
+        }
+      })
+    case 'CLOSE_CREATE_SHOP_CROPPER':
+      return Object.assign({}, state, {
+        new: {
+          ...state.new,
+          isCropperOpen: false,
+          imagePreview: null
+        }
+      })
+    case 'OPEN_EDIT_SHOP_CROPPER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isCropperOpen: true,
+          imagePreview: action.payload.image
+        }
+      })
+    case 'CLOSE_EDIT_SHOP_CROPPER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isCropperOpen: false,
+          imagePreview: null
+        }
+      })
     case 'SWITCH_TO_SHOP_ADMIN':
       return Object.assign({}, state, {
         current: {

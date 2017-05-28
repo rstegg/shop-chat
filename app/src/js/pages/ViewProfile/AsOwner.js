@@ -80,7 +80,7 @@ class AdminView extends Component {
         Gutter={<WebsiteField isEditing={profile.focused === 'website'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
         GutterRight={
           user.id === profile.userId ?
-          <Button basic onClick={switchToProfileUser}>View mode</Button>
+          <Button basic onClick={switchToProfileUser}>Done</Button>
           :
           <ShareMenu url={`https://kuwau.com/user/${user.username}`} shopId={profile.id} />
         } />

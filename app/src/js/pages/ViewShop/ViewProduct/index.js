@@ -28,10 +28,10 @@ class ViewProduct extends Component {
       return <Redirect to={`/shop/${params.shopId}`} />
     }
     if(product.isAdmin) {
-      const adminViewProps = { product, user, switchToProductAdmin }
+      const adminViewProps = { product, user }
       return <AdminView {...adminViewProps} />
     }
-    const userViewProps = { product, user }
+    const userViewProps = { product, user, switchToProductAdmin }
     return <UserView {...userViewProps} />
   }
 }

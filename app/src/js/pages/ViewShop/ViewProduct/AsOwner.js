@@ -100,7 +100,7 @@ class AdminView extends Component {
             </Segment>
             <Segment style={{display: 'flex', justifyContent: 'center'}}>
               {user.id === product.user.id ?
-                <Button basic onClick={switchToProductUser}>View mode</Button>
+                <Button basic onClick={switchToProductUser}>Done</Button>
                 :
                 <ShareMenu url={`https://kuwau.com/shop/${product.slug}`} shopId={product.id} />
               }

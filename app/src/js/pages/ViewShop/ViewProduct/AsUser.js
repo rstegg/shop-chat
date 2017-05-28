@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Grid, Segment, Header, Popup, Image, Button } from 'semantic-ui-react'
+import { Grid, Segment, Header, Popup, Image, Button, List } from 'semantic-ui-react'
 import { path } from 'ramda'
 
 import ProductPaymentMenu from 'components/ProductPaymentMenu'
@@ -64,7 +64,7 @@ const UserView = ({
         </Segment>
         {user.id === productUserId(product) ?
           <Segment style={{display: 'flex', justifyContent: 'center'}}>
-            <Button basic onClick={switchToProductAdmin}>Edit mode</Button>
+            <Button basic onClick={switchToProductAdmin}>Edit Product</Button>
           </Segment>
           :
           <Segment>
@@ -90,6 +90,24 @@ const UserView = ({
       </Segment>
     </Grid.Column>
     <Grid.Column width={10}>
+      <List bulleted>
+        <List.Header>About the Product</List.Header>
+        <List.Item>
+          Conditioner contains more than just a masterful blend of harmless conditioning ingredients to help do the job, Silk18 is formulated with a maximized portion of silk amino acids. These aren't fake chemicals: naturally derived from silk are eighteen different silk amino acids which have marvelous benefits to “behind-the-scenes” of conditioning.
+        </List.Item>
+        <List.Item>
+          Helps with frizziness, dry hair, curly hair, static reduction, and gently conditions to result in soft, shiny, and easy-to-manage hair. Additionally, Silk18 conditioner is safe for color treated hair (sulfate free).
+        </List.Item>
+        <List.Item>
+          Contains a holistic synergy of conditioning agents and natural ingredients to condition all hair types. Signature Silk18 formula contains eighteen different silk amino acids to deliver silky softness and assure moisture retention,, jojoba and argan oils to strengthen, protect, and provide shine, botanical keratin to replenish low keratin levels (a common cause of frizzy hair).
+        </List.Item>
+        <List.Item>
+          No artificial fragrances, coloring, sulfates, or any harmful ingredients. 100% natural vanilla provides a delicious and warm aroma that appeals to both men and women alike. Made in the USA and cruelty-free (not tested on animals).
+        </List.Item>
+        <List.Item>
+          Whereas shampoo cleans the hair, conditioning is essential for both feel and appearance. Maple Holistics Silk18 conditioner is the perfect shower aid and compatible with any shampoo.
+        </List.Item>
+      </List>
       <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
       <Segment compact style={{display: 'flex', justifyContent: 'space-between'}}>
         <NavLink to={`/user/${productUsername(product)}`}>

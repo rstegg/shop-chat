@@ -26,7 +26,7 @@ const UserView = ({
     Gutter={!!profile.website && <Header as='a'>{profile.website}</Header>}
     GutterRight={
       user.id === profile.userId ?
-        <Button basic onClick={switchToProfileAdmin}>Edit mode</Button>
+        <Button basic onClick={switchToProfileAdmin}>Edit Profile</Button>
         :
         <ShareMenu url={`https://kuwau.com/user/${user.username}`} shopId={profile.id} />
     } />

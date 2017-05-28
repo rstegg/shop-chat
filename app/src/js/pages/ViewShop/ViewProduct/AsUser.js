@@ -9,6 +9,7 @@ import SocialMenu from 'components/SocialMenu'
 
 import { openPurchase, closePurchase } from 'actions/orders'
 
+const productUserId = path(['user', 'id'])
 const productUsername = path(['user', 'username'])
 
 const productUserAvatar = path(['user', 'image'])
@@ -42,46 +43,66 @@ const UserView = ({
         <Segment>
           <Header as='h4'>${product.price || '0.00'}</Header>
         </Segment>
-          {user.id === product.user.id ?
-            <Segment style={{display: 'flex', justifyContent: 'center'}}>
-              <Button basic onClick={switchToProductAdmin}>Edit mode</Button>
-            </Segment>
-            :
-            null
-          }
+        <Segment>
+          <Button.Group vertical fluid>
+            <Popup wide position='top right' on='click'
+              trigger={<Button type='button' basic color='green' disabled={!product} style={{justifyContent: 'center'}}>Buy now</Button>}
+              open={orders.isOpen}
+              onOpen={openPurchase} onClose={closePurchase}>
+                <Popup.Header>Buy now</Popup.Header>
+                <Popup.Content>
+                  <ProductPaymentMenu
+                    product={product}
+                    onSubmit={values => {
+                      makePurchase(product.id, user)
+                      closePurchase()
+                    }} />
+                </Popup.Content>
+            </Popup>
+            <Button fluid basic color='green' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+          </Button.Group>
+        </Segment>
+        {user.id === productUserId(product) ?
+          <Segment style={{display: 'flex', justifyContent: 'center'}}>
+            <Button basic onClick={switchToProductAdmin}>Edit mode</Button>
+          </Segment>
+          :
+          <Segment>
+            <Button.Group vertical fluid>
+              <Popup wide position='top right' on='click'
+                trigger={<Button type='button' basic color='green' disabled={!product} style={{justifyContent: 'center'}}>Buy now</Button>}
+                open={orders.isOpen}
+                onOpen={openPurchase} onClose={closePurchase}>
+                  <Popup.Header>Buy now</Popup.Header>
+                  <Popup.Content>
+                    <ProductPaymentMenu
+                      product={product}
+                      onSubmit={values => {
+                        makePurchase(product.id, user)
+                        closePurchase()
+                      }} />
+                  </Popup.Content>
+              </Popup>
+              <Button fluid basic color='green' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+            </Button.Group>
+          </Segment>
+        }
       </Segment>
     </Grid.Column>
     <Grid.Column width={10} stretched>
-      <Button.Group vertical fluid>
-        <Popup wide position='top right' on='click'
-          trigger={<Button type='button' basic color='green' disabled={!product} style={{justifyContent: 'center'}}>Buy now</Button>}
-          open={orders.isOpen}
-          onOpen={openPurchase} onClose={closePurchase}>
-            <Popup.Header>Buy now</Popup.Header>
-            <Popup.Content>
-              <ProductPaymentMenu
-                product={product}
-                onSubmit={values => {
-                  makePurchase(product.id, user)
-                  closePurchase()
-                }} />
-            </Popup.Content>
-        </Popup>
-        <Button fluid basic color='green' onClick={() => addToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
-      </Button.Group>
       <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-      <div className='ui two buttons'>
+      <Segment style={{display: 'flex', justifyContent: 'space-between'}}>
         <NavLink to={`/user/${productUsername(product)}`}>
           <Button basic color='orange' compact>
-              more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
+            more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
           </Button>
         </NavLink>
         <NavLink to={`/shop/${productShopSlug(product)}`}>
           <Button basic color='red' compact>
-              more from <Image avatar src={productShopImage(product) || '/images/productholder.png'} /> {productShopName(product)}
+            more from <Image avatar src={productShopImage(product) || '/images/productholder.png'} /> {productShopName(product)}
           </Button>
         </NavLink>
-      </div>
+      </Segment>
     </Grid.Column>
   </Grid>
 

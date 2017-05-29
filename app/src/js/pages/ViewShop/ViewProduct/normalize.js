@@ -1,3 +1,5 @@
+import { length } from 'ramda'
+
 export const normalizePrice = value => {
   if (!value) {
     return value
@@ -11,7 +13,7 @@ export const normalizePrice = value => {
   const decimals = onlyNums.split('.')[1]
 
   const fullNum = integers.concat('.').concat(decimals)
-  if(decimals.length > 2) {
+  if(length(decimals) > 2) {
     const numVals = parseFloat(fullNum, 10)
     const withDecimals = numVals.toFixed(2)
     return withDecimals.toString()

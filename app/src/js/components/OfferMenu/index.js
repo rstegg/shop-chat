@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { path } from 'ramda'
+import { length, path, pipe } from 'ramda'
 
 import { Button, Popup } from 'semantic-ui-react'
 
@@ -9,6 +9,8 @@ import ShopChatMenuForm from './form'
 import { sendOffer, openOffer, closeOffer } from 'actions/offers'
 
 const getThreadId = path(['thread', 'id'])
+const getList = path(['list'])
+const hasLength = pipe(getList, length)
 
 class ShopChatMenu extends Component {
   componentWillMount() {
@@ -18,7 +20,7 @@ class ShopChatMenu extends Component {
     const { user, products, sendOffer, offers, shop, openOffer, closeOffer } = this.props
     return (
       <Popup wide position='top right' on='click'
-        trigger={<Button icon='dollar' className='offer-button' type='button' disabled={!products.list.length} />}
+        trigger={<Button icon='dollar' className='offer-button' type='button' disabled={!hasLength(products)} />}
         open={offers.isOpen}
         onOpen={openOffer} onClose={closeOffer}>
           <Popup.Header>Make an Offer</Popup.Header>

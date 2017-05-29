@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
-import { path } from 'ramda'
+import { length, path, pipe } from 'ramda'
 
 import { reset } from 'redux-form'
 
@@ -13,6 +13,8 @@ import ThreadChatMessages from './Log'
 import { sendThreadChatMessage, fetchThreadChatMessages, joinChatThread, leaveChatThread } from 'actions/chat'
 
 const getThreadId = path(['thread', 'id'])
+const getMessages = path(['messages'])
+const msgLength = pipe(getMessages, length)
 
 class ThreadChat extends Component {
   componentWillMount() {
@@ -52,7 +54,7 @@ class ThreadChat extends Component {
         </Card.Content>
         <Card.Content>
           <Comment.Group>
-          { !!chat.messages.length ?
+          { msgLength(chat) ?
             ThreadChatMessages(chat.messages)
             : <Message info>
                 <Message.Header style={{textAlign: 'center'}}>No chat activity 😞</Message.Header>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { length } from 'ramda'
 
 import ShopItem from 'elements/ShopItem'
 import { Feed } from 'semantic-ui-react'
@@ -8,7 +9,7 @@ const ShopsList =
   shops
 }) =>
   <Feed>
-    {!!shops.length ? shops.map((shop, i) =>
+    {length(shops) ? shops.map((shop, i) =>
       <ShopItem key={`shop-${i}`} shop={shop} />
     ) :
     <Feed.Event>

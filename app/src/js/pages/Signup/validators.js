@@ -1,5 +1,9 @@
 import su from 'superagent'
+import { length, path, pipe } from 'ramda'
 const API_HOST = '/api/v1'
+
+const getUsername = path(['username'])
+const usernameLength = pipe(getUsername, length)
 
 export const validate = values => {
   const errors = {}
@@ -8,9 +12,9 @@ export const validate = values => {
   }
   if (!values.username) {
     errors.username = 'Required'
-  } else if(values.username.length > 20) {
+  } else if(usernameLength(values) > 20) {
     errors.username = 'Maximum 20 characters'
-  } else if(values.username.length < 4) {
+  } else if(usernameLength(values) < 4) {
     errors.username = 'Minimum 4 characters'
   } else if(!/^([a-zA-Z]+)[0-9]*\.*[a-zA-Z0-9]+$|^[a-zA-Z]+[0-9]*$/.test(values.username)) {
     errors.username = 'Invalid username'

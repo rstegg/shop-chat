@@ -1,7 +1,7 @@
 import React from 'react'
-
 import { Field, reduxForm } from 'redux-form'
 import { Form, Label, Divider } from 'semantic-ui-react'
+import { length } from 'ramda'
 
 import { validate } from './validators'
 
@@ -31,7 +31,7 @@ const CurrencyField = ({ input, meta: { asyncValidating, touched, error }, label
 
 const SocialMenuForm = ({handleSubmit, products}) =>
   <Form onSubmit={handleSubmit}>
-    {!!products.length && <Field component={SelectField} name='productId' label='Product' placeholder='Product' options={createOptions(products)} />}
+    {length(products) && <Field component={SelectField} name='productId' label='Product' placeholder='Product' options={createOptions(products)} />}
     <Field component={CurrencyField} name='price' label='Offer' placeholder='0.00' />
     <Divider />
     <Form.Button fluid type='submit' positive>Send offer</Form.Button>

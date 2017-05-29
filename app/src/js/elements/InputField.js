@@ -11,7 +11,7 @@ class InputField extends Component {
         <input type={type || 'text'} {...input} onKeyUp={onKeyUp} autoFocus={autoFocus || false} placeholder={placeholder || label} />
         {asyncValidating && <i className='search icon'></i>}
       </div>
-      {touched && error && <Label basic color='red' pointing={pointing || 'up'}>{error}</Label>}
+      {touched && error && <Label basic color='red' pointing={pointing || true}>{error}</Label>}
     </Form.Field>
     )
   }

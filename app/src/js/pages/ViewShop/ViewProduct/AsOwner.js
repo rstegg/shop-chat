@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Button, Label, Dimmer, Loader, Image, Header, Segment } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
+import { length } from 'ramda'
 
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
@@ -27,7 +28,11 @@ const NameField = ({isEditing, product, user, editProduct, editProductField}) =>
     isEditing={product.focused === 'name'}
     placeholder='Name' name='name'
     onClick={() => editProductField('name')} onClickOutside={() => editProductField(null)}
-    onSubmit={name => editProduct({...product, name}, user)}>
+    onSubmit={name => {
+      if(length(name)) {
+        editProduct({...product, name}, user)
+      }
+    }}>
     <Header as='h1'>{product.name}</Header>
   </EditorField>
 

@@ -29,6 +29,7 @@ class EditorField extends Component {
           onClick={v => onSubmit(v)}
           pointing='left'
           className='ignore-onclickoutside'
+          style={{display: 'flex'}}
         />
       )
     }

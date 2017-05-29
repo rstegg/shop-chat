@@ -3,11 +3,8 @@ export const validate = values => {
   if (!values.name) {
     errors.name = 'Required'
   }
-  if (!values.product_type) {
-    errors.product_type = 'Required'
-  }
-  if (values.product_type === 'fixed' && !values.amount) {
-    errors.amount = 'Required'
+  if (!values.price) {
+    errors.price = 'Required'
   }
   return errors
 }

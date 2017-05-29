@@ -5,9 +5,11 @@ import { Field, reduxForm } from 'redux-form'
 import { Form, Label } from 'semantic-ui-react'
 
 import { validate } from './validators'
+import { normalizePrice } from './normalize'
 
 import InputField from 'elements/InputField'
 import AreaField from 'elements/AreaField'
+import CurrencyField from 'elements/CurrencyField'
 
 const CheckboxField = ({ input: { value, onChange } }) =>
   <Form.Checkbox
@@ -16,17 +18,11 @@ const CheckboxField = ({ input: { value, onChange } }) =>
     checked={!!value}
     onChange={(_,data) => onChange(data.checked)} />
 
-const CurrencyField = ({ input: { value, onChange } }) =>
-  <Form.Input labelPosition='left' type='text' placeholder='0.00'>
-    <Label basic>$</Label>
-    <input value={value} onChange={onChange} />
-  </Form.Input>
-
 const CreateProductForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Product name' />
     <Field component={AreaField} name='description' label='Description' placeholder='Product descripton'  />
-    <Field component={CurrencyField} name='price' />
+    <Field component={CurrencyField} name='price' label='Base price' placeholder='0.00' normalize={normalizePrice} />
     <Field component={CheckboxField} name='is_public' />
     <Form.Button type='submit' primary>Submit</Form.Button>
   </Form>

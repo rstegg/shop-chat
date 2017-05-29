@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
+import { length } from 'ramda'
 
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
@@ -15,6 +16,8 @@ import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCrop
 import ShopChat from 'components/Chat'
 import GridLayout from 'components/layouts/Grid'
 
+import { validate } from './validators'
+
 const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDrop={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
@@ -27,7 +30,11 @@ const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
     isEditing={shop.focused === 'name'}
     placeholder='Name' name='name'
     onClick={() => editShopField('name')} onClickOutside={() => editShopField(null)}
-    onSubmit={name => editShop({...shop, name}, user)}>
+    onSubmit={name => {
+      if(length(name)) {
+        editShop({...shop, name}, user)
+      }
+    }}>
     <Header as='h1'>{shop.name}</Header>
   </EditorField>
 
@@ -85,7 +92,7 @@ class AdminView extends Component {
 
 const ConnectedAdminView = reduxForm({
   form: 'editShop',
-  // validate
+  validate
 })(AdminView)
 
 const mapStateToProps = ({shops, user}) =>

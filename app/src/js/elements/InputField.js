@@ -3,7 +3,7 @@ import { Form, Label } from 'semantic-ui-react'
 
 class InputField extends Component {
   render() {
-  const { input, meta: { asyncValidating, touched, error }, className, onKeyUp, type, autoFocus, label, placeholder } = this.props
+  const { input, meta: { asyncValidating, touched, error }, className, onKeyUp, type, autoFocus, label, placeholder, pointing } = this.props
   return (
     <Form.Field className={className}>
       <label>{label}</label>
@@ -11,7 +11,7 @@ class InputField extends Component {
         <input type={type || 'text'} {...input} onKeyUp={onKeyUp} autoFocus={autoFocus || false} placeholder={placeholder || label} />
         {asyncValidating && <i className='search icon'></i>}
       </div>
-      {touched && error && <Label basic color='red' pointing>{error}</Label>}
+      {touched && error && <Label basic color='red' pointing={pointing || 'up'}>{error}</Label>}
     </Form.Field>
     )
   }

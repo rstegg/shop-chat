@@ -10,7 +10,7 @@ class EditorField extends Component {
     this.props.onClickOutside()
   }
   render() {
-    const { children, fieldComponent, onClick, isEditing, placeholder, label, name, type, onSubmit } = this.props
+    const { children, fieldComponent, normalize, onClick, isEditing, placeholder, label, name, type, onSubmit } = this.props
     if(isEditing) {
       return (
         <Field
@@ -20,12 +20,14 @@ class EditorField extends Component {
           label={label}
           placeholder={placeholder}
           name={name}
+          normalize={normalize}
           onKeyUp={e => {
             if(e.keyCode === 13) {
               onSubmit(e.target.value)
             }}
           }
           onClick={v => onSubmit(v)}
+          pointing='left'
           className='ignore-onclickoutside'
         />
       )

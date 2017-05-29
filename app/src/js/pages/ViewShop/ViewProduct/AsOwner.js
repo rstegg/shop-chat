@@ -12,6 +12,9 @@ import CheckboxField from 'elements/CheckboxField'
 
 import { openEditProductCropper, closeEditProductCropper, switchToProductUser, editProduct, deleteProduct, uploadEditProductImage, onUploadEditProductImageFailure, editProductField } from 'actions/products'
 
+import { validate } from './validators'
+import { normalizePrice } from './normalize'
+
 const Avatar = ({product, openEditProductCropper, onUploadEditProductImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDrop={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
@@ -44,6 +47,7 @@ const PriceField = ({isEditing, product, user, editProduct, editProductField}) =
   <EditorField
     isEditing={isEditing}
     placeholder='Price' name='price'
+    normalize={normalizePrice}
     onClick={() => editProductField('price')} onClickOutside={() => editProductField(null)}
     onSubmit={price => editProduct({...product, price}, user)}>
     <Header as='h4'>${product.price || '0.00'}</Header>
@@ -111,7 +115,7 @@ class AdminView extends Component {
 
 const ConnectedAdminView = reduxForm({
   form: 'editProduct',
-  // validate
+  validate
 })(AdminView)
 
 const mapStateToProps = state =>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Image, Header, Checkbox, Label, Dimmer, Loader } from 'semantic-ui-react'
+import { Button, Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
 import ShareMenu from 'components/SocialMenu'

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Field, reduxForm } from 'redux-form'
-import { Form, Label } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 
 import { validate } from './validators'
 import { normalizePrice } from './normalize'

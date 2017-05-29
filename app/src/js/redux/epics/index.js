@@ -6,6 +6,7 @@ import { fetchProducts, fetchSingleProduct, createProduct, uploadProductImage, e
 import { fetchShops, fetchSingleShop, createShop, uploadShopImage, uploadEditShopImage, editShop, deleteShop } from './shops'
 import { uploadProfileImage, editProfile, fetchProfile } from './profile'
 import { saveAccountSettings } from './account'
+import { saveShippingSettings } from './shipping'
 
 export default combineEpics(
   braintreeCardRequest,
@@ -23,6 +24,7 @@ export default combineEpics(
   loginSubmit,
   signupSubmit,
   saveAccountSettings,
+  saveShippingSettings,
   uploadProfileImage,
   uploadProductImage,
   uploadShopImage,

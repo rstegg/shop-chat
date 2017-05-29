@@ -1,5 +1,7 @@
 const crypto = require('crypto')
 
+//TODO: Clean up model
+
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('users', {
     braintree_cards: {
@@ -9,14 +11,9 @@ module.exports = (sequelize, DataTypes) =>
     interest_types: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
-      defaultValue: ['open', 'topic']
+      defaultValue: ['general']
     },
     interests: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-      defaultValue: ['']
-    },
-    tech_wanted: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
       defaultValue: ['']
@@ -80,26 +77,6 @@ module.exports = (sequelize, DataTypes) =>
     name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    address: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    region: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    zip: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    phone: {
-      type: DataTypes.STRING,
-      allowNull: true
     },
     dob: {
       type: DataTypes.STRING,

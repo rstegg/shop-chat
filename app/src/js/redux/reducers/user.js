@@ -54,6 +54,19 @@ export default function(state = initialState, action) {
         ...state,
         error: action.payload.error
       })
+    case 'SAVE_SHIPPING_SETTINGS_SUCCESS':
+      return Object.assign({}, state, {
+        ...state,
+        address: action.payload.shipping,
+        error: null,
+        isLoading: false,
+        isShippingSaved: true
+      })
+    case 'SAVE_SHIPPING_SETTINGS_FAILURE':
+      return Object.assign({}, state, {
+        ...state,
+        error: action.payload.error
+      })
     case 'UPLOAD_PROFILE_IMAGE':
       return Object.assign({}, state, {
         image: null,

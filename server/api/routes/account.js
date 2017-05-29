@@ -5,11 +5,11 @@ const editAccountHandler = require('../handlers/account/editaccount')
 const getAccountHandler = require('../handlers/account/getaccount')
 
 module.exports = () => {
-  router.get(`/account`,
+  router.use(passport.authenticate('jwt', { session: false }))
+  .get(`/account`,
     getAccountHandler
   )
   .put(`/account`,
-    passport.authenticate('jwt', { session: false }),
     editAccountHandler
   )
 

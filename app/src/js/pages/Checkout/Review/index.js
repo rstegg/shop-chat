@@ -1,26 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Card, Label, List, Button, Header, Segment } from 'semantic-ui-react'
+import { Card, List, Button, Header, Segment } from 'semantic-ui-react'
 import { length } from 'ramda'
 
 import { productRemoveFromCart } from 'actions/orders'
 
-const ReviewCheckout = ({cart}) =>
+const ReviewCheckout = ({cart, user, address}) =>
   <Card>
     <Card.Content>
       <Card.Header>Checkout Review</Card.Header>
       <Card.Description>
-        <Button.Group vertical>
-          {length(cart) ? cart.map((product, i) =>
-            <Segment key={i}>
-              <Label to={`/shop/${product.shop.slug}/product/${product.slug}`} as={NavLink} basic image>
-                <img src={product.image || '/images/productholder.png'} alt={product.name} /> {product.name}
-              </Label>
-              <Label basic color='red' icon='delete' onClick={() => productRemoveFromCart(product)} style={{border: 'none'}}/>
-            </Segment>
-          ) : <Segment>Empty!</Segment> }
-        </Button.Group>
+        <Segment>
+          <Header>Shipping Address</Header>
+          <List>
+            <List.Item>{address.name}</List.Item>
+            <List.Item>{address.line1}</List.Item>
+            <List.Item>{address.line2}</List.Item>
+            <List.Item>{address.city}, {address.region} {address.zip}</List.Item>
+            <List.Item>{address.country}</List.Item>
+          </List>
+          <NavLink to='/settings/shipping'>
+            <Button basic>Change</Button>
+          </NavLink>
+        </Segment>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
@@ -43,6 +46,7 @@ const ReviewCheckout = ({cart}) =>
 const mapStateToProps = ({user, orders}) =>
 ({
   user,
+  address: user.address,
   cart: orders.cart
 })
 

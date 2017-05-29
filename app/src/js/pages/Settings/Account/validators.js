@@ -30,7 +30,7 @@ export const validate = values => {
 }
 
 export const asyncValidate = (values, dispatch, props, field) => {
-  const previousErrors = props.asyncErrors;
+  const previousErrors = props.asyncErrors
   return new Promise((resolve, reject) => {
     if(field === 'username') {
       reject(su.post(`${API_HOST}/signup/validate_username`)
@@ -50,7 +50,7 @@ export const asyncValidate = (values, dispatch, props, field) => {
         .then(res => {
           if(res.body.emailTaken) {
             // eslint-disable-next-line
-            throw Object.assign({}, previousErrors, { email: 'That email is already registerd'});
+            throw Object.assign({}, previousErrors, { email: 'That email is already registerd'})
           }
         }).catch(err => err)
       )

@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Grid, Segment, Header, Popup, Image, Button, List } from 'semantic-ui-react'
+import { Grid, Segment, Header, Image, Button, List } from 'semantic-ui-react'
 import { path } from 'ramda'
 
-import ProductPaymentMenu from 'components/ProductPaymentMenu'
 import SocialMenu from 'components/SocialMenu'
 
 import { productBuyNow, productAddToCart } from 'actions/orders'
@@ -43,10 +42,10 @@ const UserView = ({
         </Segment>
         <Segment>
           <Button.Group vertical fluid>
-            <NavLink to='/checkout'>
-              <Button type='button' basic color='green' onClick={() => productBuyNow(product.id)} style={{justifyContent: 'center'}}>Buy now</Button>
+            <NavLink to='/checkout/review'>
+              <Button type='button' basic color='green' onClick={() => productBuyNow(product)} style={{justifyContent: 'center'}}>Buy now</Button>
             </NavLink>
-            <Button fluid basic color='green' onClick={() => productAddToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+            <Button fluid basic color='green' onClick={() => productAddToCart(product)} style={{justifyContent: 'center'}}>Add to cart</Button>
           </Button.Group>
         </Segment>
         {user.id === productUserId(product) ?
@@ -56,10 +55,10 @@ const UserView = ({
           :
           <Segment>
             <Button.Group vertical fluid>
-              <NavLink to='/checkout'>
-                <Button type='button' basic color='green' onClick={() => productBuyNow(product.id)} style={{justifyContent: 'center'}}>Buy now</Button>
+              <NavLink to='/checkout/review'>
+                <Button type='button' basic color='green' onClick={() => productBuyNow(product)} style={{justifyContent: 'center'}}>Buy now</Button>
               </NavLink>
-              <Button fluid basic color='green' onClick={() => productAddToCart(product.id)} style={{justifyContent: 'center'}}>Add to cart</Button>
+              <Button fluid basic color='green' onClick={() => productAddToCart(product)} style={{justifyContent: 'center'}}>Add to cart</Button>
             </Button.Group>
           </Segment>
         }
@@ -107,8 +106,8 @@ const mapStateToProps = ({orders}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  productBuyNow: productId => dispatch(productBuyNow(productId)),
-  productAddToCart: productId => dispatch(productAddToCart(productId)),
+  productBuyNow: product => dispatch(productBuyNow(product)),
+  productAddToCart: product => dispatch(productAddToCart(product)),
 })
 
 export default connect(

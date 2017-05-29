@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { path } from 'ramda'
 
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
 import { fetchSingleProduct, switchToProductAdmin } from 'actions/products'
-
-const productUserId = path(['user', 'id'])
 
 class ViewProduct extends Component {
   componentWillMount() {

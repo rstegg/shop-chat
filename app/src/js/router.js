@@ -8,6 +8,7 @@ import { ConnectedRouter as Router } from 'react-router-redux'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import CheckoutRouter from './pages/Checkout/Router'
 import SettingsRouter from './pages/Settings/Router'
 import ShopRouter from './pages/ViewShop/Router'
 
@@ -48,6 +49,7 @@ export default class AppRouter extends Component {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/signup' component={Signup} />
                 <Route path='/settings' component={SettingsRouter} />
+                <Route path='/checkout' component={CheckoutRouter} />
                 <Route exact path='/shops' component={Shops} />
                 <Route exact path='/shop/:id/products/new' component={CreateProduct} />
                 <Route exact path='/shops/new' component={CreateShop} />

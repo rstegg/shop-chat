@@ -1,24 +1,24 @@
-export const productBuyNow = productId =>
+export const productBuyNow = product =>
 ({
   type: 'PRODUCT_BUY_NOW',
   payload: {
-    productId
+    product
   }
 })
 
-export const productAddToCart = productId =>
+export const productAddToCart = product =>
 ({
   type: 'PRODUCT_ADD_TO_CART',
   payload: {
-    productId
+    product
   }
 })
 
-export const productRemoveFromCart = productId =>
+export const productRemoveFromCart = product =>
 ({
   type: 'PRODUCT_REMOVE_FROM_CART',
   payload: {
-    productId
+    product
   }
 })
 

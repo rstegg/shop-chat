@@ -21,7 +21,6 @@ export default function(state = initialState, action) {
       })
     case 'PRODUCT_REMOVE_FROM_CART':
       const removedIndex = state.cart.indexOf(action.payload.product)
-      console.log(removedIndex);
       return Object.assign({}, state, {
         cart: [...state.cart.slice(0, removedIndex), ...state.cart.slice(removedIndex + 1)]
       })

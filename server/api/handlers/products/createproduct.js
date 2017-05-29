@@ -7,13 +7,14 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const validField = p => obj => !isNil(path([p], obj))
 
-const productParams = ['name', 'is_public', 'description', 'category', 'sub_category', 'price_type', 'price', 'image']
+const productParams = ['name', 'is_public', 'description', 'category', 'sub_category', 'price', 'image']
 
 const validBody = pipe(
   path(['body', 'product']),
   allPass([
       validField('name'),
-      validField('is_public')
+      validField('is_public'),
+      validField('price'),
   ]))
 
 const validParams = pipe(

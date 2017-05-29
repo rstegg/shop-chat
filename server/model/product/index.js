@@ -24,13 +24,10 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: true
     },
-    price_type: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     price: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      defaultValue: '0'
     },
     image: {
       type: DataTypes.STRING,

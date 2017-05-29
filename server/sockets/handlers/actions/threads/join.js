@@ -1,7 +1,7 @@
 const { models } = rootRequire('db')
 const { User, Offer, Message } = models
 
-const offerAttributes = ['id', 'state', 'product_name', 'price', 'price_type', 'productId', 'userId', 'seller_id']
+const offerAttributes = ['id', 'state', 'product_name', 'price', 'productId', 'userId', 'seller_id']
 const userAttributes = ['id', 'username', 'image']
 
 const joinChatThread = (io, socket, action) => {

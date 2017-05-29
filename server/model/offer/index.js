@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: false
     },
-    price_type: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     seller_id: {
       type: DataTypes.INTEGER,
       allowNull: false

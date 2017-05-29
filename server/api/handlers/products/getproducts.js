@@ -1,7 +1,7 @@
 const { models } = require('../../../db')
 const { Product, Shop } = models
 
-const productParams = ['id', 'name', 'slug', 'description', 'category', 'sub_category', 'price_type', 'price', 'image', 'shopId']
+const productParams = ['id', 'name', 'slug', 'description', 'category', 'sub_category', 'price', 'image', 'shopId']
 
 module.exports = (req, res) => {
   Product.findAll({

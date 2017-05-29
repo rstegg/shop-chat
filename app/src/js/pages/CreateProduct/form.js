@@ -28,12 +28,11 @@ const CurrencyField = ({ input: { value, onChange } }) =>
     <input value={value} onChange={onChange} />
   </Form.Input>
 
-const CreateProductForm = ({handleSubmit, priceTypeValue}) =>
+const CreateProductForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Product name' />
     <Field component={AreaField} name='description' label='Description' placeholder='Product descripton'  />
-    <Field component={SelectField} name='price_type' label='List as' placeholder='Price type' options={options} />
-    {priceTypeValue === 'fixed' && <Field component={CurrencyField} name='price' />}
+    <Field component={CurrencyField} name='price' />
     <Field component={CheckboxField} name='is_public' />
     <Form.Button type='submit' primary>Submit</Form.Button>
   </Form>
@@ -43,11 +42,8 @@ const connectedCreateProductForm = reduxForm({
   validate
 })(CreateProductForm)
 
-const selector = formValueSelector('newProduct')
-
 const mapStateToProps = state =>
 ({
-  priceTypeValue: selector(state, 'price_type'),
   initialValues: state.products.new
 })
 

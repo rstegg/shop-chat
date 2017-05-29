@@ -31,7 +31,6 @@ const sendShopOffer = (io, socket, action) => {
         productId: validatedProduct.id,
         product_name: validatedProduct.name,
         seller_id: validatedProduct.user.id,
-        price_type: 'USD',
         state: 'open'
       }, pick(offerAttributes, action.payload))
       return Offer.create(newOffer, { plain: true, })

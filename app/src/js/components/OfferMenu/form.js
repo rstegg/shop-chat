@@ -7,7 +7,6 @@ import { validate } from './validators'
 
 const createOptions = products =>
   products
-    .filter(product => product.price_type === 'open')
     .map(product => ({ key: product.id, value: product.id, text: product.name, image: product.image || '/images/productholder.png' }) )
 
 const SelectField = ({ input: { value, onChange }, meta: { asyncValidating, touched, error }, label, placeholder, options }) =>

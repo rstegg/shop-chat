@@ -7,6 +7,7 @@ import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
+import CheckboxField from 'elements/CheckboxField'
 import EditorField from 'elements/EditorField'
 
 import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCropper, closeEditShopCropper, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
@@ -20,16 +21,6 @@ const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
     <Image src={shop.image || '/images/productholder.png'} />
     {shop.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
-
-const CheckboxField = ({ input: { value, onChange }, onSubmit }) =>
-  <Checkbox
-    label='Public'
-    toggle
-    checked={!!value}
-    onChange={(_,data) => {
-      onChange(data.checked)
-      onSubmit(data.checked)
-    }} />
 
 const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
   <EditorField
@@ -50,7 +41,7 @@ const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
   </EditorField>
 
 const PublicField = ({shop, user, editShop}) =>
-  <Field component={CheckboxField} name='is_public' onSubmit={is_public => editShop({...shop, is_public}, user)} />
+  <Field component={CheckboxField} name='is_public' label='Public' onSubmit={is_public => editShop({...shop, is_public}, user)} />
 
 class AdminView extends Component {
   componentWillUnmount() {

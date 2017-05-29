@@ -10,20 +10,14 @@ import { normalizePrice } from './normalize'
 import InputField from 'elements/InputField'
 import AreaField from 'elements/AreaField'
 import CurrencyField from 'elements/CurrencyField'
-
-const CheckboxField = ({ input: { value, onChange } }) =>
-  <Form.Checkbox
-    label='Public'
-    toggle
-    checked={!!value}
-    onChange={(_,data) => onChange(data.checked)} />
+import CheckboxField from 'elements/CheckboxField'
 
 const CreateProductForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Product name' />
     <Field component={AreaField} name='description' label='Description' placeholder='Product descripton'  />
     <Field component={CurrencyField} name='price' label='Base price' placeholder='0.00' normalize={normalizePrice} />
-    <Field component={CheckboxField} name='is_public' />
+    <Field component={CheckboxField} name='is_public' label='Public' />
     <Form.Button type='submit' primary>Submit</Form.Button>
   </Form>
 

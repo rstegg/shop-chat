@@ -8,6 +8,7 @@ import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
 import EditorField from 'elements/EditorField'
+import CheckboxField from 'elements/CheckboxField'
 
 import { openEditProductCropper, closeEditProductCropper, switchToProductUser, editProduct, deleteProduct, uploadEditProductImage, onUploadEditProductImageFailure, editProductField } from 'actions/products'
 
@@ -17,16 +18,6 @@ const Avatar = ({product, openEditProductCropper, onUploadEditProductImageFailur
     <Image src={product.image || '/images/productholder.png'} />
     {product.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
-
-const CheckboxField = ({ input: { value, onChange }, onSubmit }) =>
-  <Checkbox
-    label='Public'
-    toggle
-    checked={!!value}
-    onChange={(_,data) => {
-      onChange(data.checked)
-      onSubmit(data.checked)
-    }} />
 
 const NameField = ({isEditing, product, user, editProduct, editProductField}) =>
   <EditorField
@@ -47,7 +38,7 @@ const DescriptionField = ({isEditing, product, user, editProduct, editProductFie
   </EditorField>
 
 const PublicField = ({product, user, editProduct}) =>
-  <Field component={CheckboxField} name='is_public' onSubmit={is_public => editProduct({...product, is_public}, user)} />
+  <Field component={CheckboxField} name='is_public' label='Public' onSubmit={is_public => editProduct({...product, is_public}, user)} />
 
 const PriceField = ({isEditing, product, user, editProduct, editProductField}) =>
   <EditorField

@@ -95,6 +95,7 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: {
           ...state.current,
+          ...action.payload.product,
           isEdited: true
         }
       })

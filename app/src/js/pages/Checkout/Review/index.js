@@ -25,14 +25,16 @@ const ReviewCheckout = ({cart}) =>
     </Card.Content>
     <Card.Content extra>
       {length(cart) ?
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <Button basic onClick={() => {}}>Place your order</Button>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+          <Header>Review items and shipping</Header>
         <List>
           {cart.map((product, i) =>
             <List.Item key={i}>{product.name}: ${product.price}</List.Item>
           )}
         </List>
-        <Header>Total: ${cart.reduce((acc, product) => parseInt(product.price, 10) + acc, 0)}</Header>
+        TODO: SHIPPING LOL
+        <Header>Total: ${cart.reduce((acc, product) => parseFloat(product.price, 10) + acc, 0)}</Header>
+        <Button basic onClick={() => {}}>Place your order</Button>
       </div>
       : 'Go Shop!'}
     </Card.Content>

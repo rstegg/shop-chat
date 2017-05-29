@@ -19,7 +19,7 @@ const SettingsForm = ({handleSubmit, submitting}) =>
     <br />
     * changing your email will require verification
     <Divider />
-    <Form.Button loading={submitting} type="submit" primary>Save</Form.Button>
+    <Form.Button loading={submitting} type='submit' primary>Save</Form.Button>
   </Form>
 
 const ConnectedSettingsForm = reduxForm({

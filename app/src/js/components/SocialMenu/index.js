@@ -28,7 +28,7 @@ const SocialMenu = ({url, user, shareProduct, productId}) =>
     </Segment>
     <Segment>
       <TwitterShareButton
-        title="Kool, Wow"
+        title='Kool, Wow'
         url={url}
         style={{cursor: 'pointer'}}>
           <TwitterIcon size={32} round={true} />

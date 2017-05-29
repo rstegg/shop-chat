@@ -31,7 +31,7 @@ class Signup extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <RouterButton to="/login" prefix="Have an account?" label="Login" />
+          <RouterButton to='/login' prefix='Have an account?' label='Login' />
         </Card.Content>
       </Card>
     )

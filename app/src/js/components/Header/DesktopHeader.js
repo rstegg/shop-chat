@@ -17,11 +17,11 @@ const DesktopHeader = ({user}) =>
         </Button.Group>
         :
         <Button.Group>
-          <NavLink to="/login">
+          <NavLink to='/login'>
             <Button primary>Login</Button>
           </NavLink>
           <Button.Or />
-          <NavLink to="/signup">
+          <NavLink to='/signup'>
             <Button positive>Sign up</Button>
           </NavLink>
         </Button.Group>

@@ -1,19 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { Form, Label } from 'semantic-ui-react'
 
 import { validate } from './validators'
 
 import InputField from 'elements/InputField'
 import AreaField from 'elements/AreaField'
-import SelectField from 'elements/SelectField'
-
-const options = [
-  { key: 'fixed', value: 'fixed', text: 'Fixed' },
-  { key: 'open', value: 'open', text: 'Open' }
-]
 
 const CheckboxField = ({ input: { value, onChange } }) =>
   <Form.Checkbox

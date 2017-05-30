@@ -12,7 +12,6 @@
   - 'Add to cart'
   - styling  
 - Add loading screens
-- Fix bug with profile chat not always joining [bug]
 - Add:
   - 'feed'
   - 'settings'
@@ -21,8 +20,6 @@
     - 'tools'
 - Finish:
   - 'products'
-    - add 'buy'
-  - 'account'/'user settings'
   - 'wallet'
     - create endpoints
 

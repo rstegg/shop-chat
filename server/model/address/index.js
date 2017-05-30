@@ -1,43 +1,36 @@
 const crypto = require('crypto')
 
 module.exports = (sequelize, DataTypes) =>
-  sequelize.define('shippings', {
-    carrier: {
+  sequelize.define('addresses', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    line1: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    tracking: {
+    line2: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    method: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    rate: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    packed: {
+    city: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: false
     },
-    shipped: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: false
-    },
-    delivered: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: false
-    },
-    shippingLabelUrl: {
+    region: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    customsLabelUrl: {
+    country: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    zip: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    phone: {
       type: DataTypes.STRING,
       allowNull: true
     }
@@ -46,7 +39,7 @@ module.exports = (sequelize, DataTypes) =>
     classMethods: {
       associate () {
         this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.belongsTo(sequelize.models['addresses'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        this.hasMany(sequelize.models['shippings'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
       }
     }
   })

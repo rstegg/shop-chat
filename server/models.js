@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) =>
 ({
+  Address: require('./model/address')(sequelize, DataTypes),
   Message: require('./model/message')(sequelize, DataTypes),
   Offer: require('./model/offer')(sequelize, DataTypes),
   Product: require('./model/product')(sequelize, DataTypes),

@@ -11,6 +11,9 @@ const SettingsNav = () =>
       <NavLink to='/settings/wallet'>
         <Button basic content='Payment Options' />
       </NavLink>
+      <NavLink to='/settings/shipping'>
+        <Button basic content='Shipping Address' />
+      </NavLink>
       <NavLink to='/settings/notifications'>
         <Button basic content='Notifications' />
       </NavLink>

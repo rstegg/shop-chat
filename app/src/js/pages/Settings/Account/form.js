@@ -17,7 +17,7 @@ const SettingsForm = ({handleSubmit, submitting}) =>
     <Field component={InputField} name='new_password' type='password' label='New Password' placeholder='' />
     * required
     <br />
-    * changing your email will require verification
+    * changing your email will require re-verification
     <Divider />
     <Form.Button loading={submitting} type='submit' primary>Save</Form.Button>
   </Form>

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 
+import SettingsLayout from 'components/layouts/Settings'
+
 import AccountSettings from './Account'
 import WalletSettings from './Wallet'
 import ShippingSettings from './Shipping'
-
-import SettingsLayout from 'components/layouts/Settings'
 
 export default () =>
   <SettingsLayout>

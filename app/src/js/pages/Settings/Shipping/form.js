@@ -11,7 +11,7 @@ import SelectField from 'elements/SelectField'
 
 import { validate } from './validators'
 
-const ShippingForm = ({handleSubmit, submitting}) =>
+const AddressForm = ({handleSubmit, submitting}) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' type='text' label='Full Name' placeholder='' />
     <Field component={InputField} name='line1' type='text' label='Address' placeholder='Street and number, P.O. box, c/o.' />
@@ -24,14 +24,14 @@ const ShippingForm = ({handleSubmit, submitting}) =>
     <Form.Button loading={submitting} type='submit' primary>Save</Form.Button>
   </Form>
 
-const ConnectedShippingForm = reduxForm({
-  form: 'shippingSettings',
+const ConnectedAddressForm = reduxForm({
+  form: 'addressSettings',
   validate
-})(ShippingForm)
+})(AddressForm)
 
 const mapStateToProps = ({user}) =>
 ({
   initialValues: user.address
 })
 
-export default connect(mapStateToProps)(ConnectedShippingForm)
+export default connect(mapStateToProps)(ConnectedAddressForm)

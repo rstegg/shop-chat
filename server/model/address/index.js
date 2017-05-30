@@ -1,5 +1,3 @@
-const crypto = require('crypto')
-
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('addresses', {
     name: {

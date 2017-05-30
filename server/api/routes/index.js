@@ -4,7 +4,7 @@ const braintree = require('./braintree')
 const shops = require('./shops')
 const products = require('./products')
 const account = require('./account')
-const shipping = require('./shipping')
+const address = require('./address')
 const profile = require('./profile')
 const images = require('./images')
 
@@ -15,7 +15,7 @@ module.exports = [
   shops,
   products,
   account,
-  shipping,
+  address,
   profile,
   images,
 ]

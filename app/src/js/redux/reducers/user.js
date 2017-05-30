@@ -54,15 +54,15 @@ export default function(state = initialState, action) {
         ...state,
         error: action.payload.error
       })
-    case 'SAVE_SHIPPING_SETTINGS_SUCCESS':
+    case 'SAVE_ADDRESS_SETTINGS_SUCCESS':
       return Object.assign({}, state, {
         ...state,
-        address: action.payload.shipping,
+        address: action.payload.address,
         error: null,
         isLoading: false,
-        isShippingSaved: true
+        isAddressSaved: true
       })
-    case 'SAVE_SHIPPING_SETTINGS_FAILURE':
+    case 'SAVE_ADDRESS_SETTINGS_FAILURE':
       return Object.assign({}, state, {
         ...state,
         error: action.payload.error

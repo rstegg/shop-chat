@@ -20,7 +20,7 @@ const ReviewCheckout = ({cart, user, address}) =>
             <List.Item>{address.city}, {address.region} {address.zip}</List.Item>
             <List.Item>{address.country}</List.Item>
           </List>
-          <NavLink to='/settings/shipping'>
+          <NavLink to='/settings/address'>
             <Button basic>Change</Button>
           </NavLink>
         </Segment>

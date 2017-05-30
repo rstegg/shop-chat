@@ -53,7 +53,6 @@ module.exports = (req, res) =>
     })
     .then(updatedShipping => {
       const updatedAddress = updatedShipping[1]
-      console.log(updatedAddress);
       const shipping = pick(shippingAttributes, updatedAddress)
       res.status(200).json({shipping})
     })

@@ -92,6 +92,18 @@ export default function(state = initialState, action) {
         isLoading: false,
         error: null,
       })
+    case 'RESET_ACCOUNT':
+      return Object.assign({}, state, {
+        isAccountSaved: false,
+        isLoading: false,
+        error: null,
+      })
+    case 'RESET_ADDRESS':
+      return Object.assign({}, state, {
+        isAddressSaved: false,
+        isLoading: false,
+        error: null,
+      })
     case 'LOGIN_FAILURE':
     case 'SIGNUP_FAILURE':
       const error = action.payload.error === 'Unauthorized' ? 'Wrong username or password' : action.payload.error

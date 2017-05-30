@@ -6,6 +6,7 @@
 @import 'components/Chat.css';
 @import 'components/Dropzone.css';
 /*Elements*/
+@import 'elements/AlertBox.css';
 @import 'elements/InputField.css';
 @import 'elements/EditorField.css';
 @import 'elements/ProductListItem.css';

@@ -5,7 +5,7 @@ const editProfileHandler = require('../handlers/profile/editprofile')
 const getProfileHandler = require('../handlers/profile/getprofile')
 
 module.exports = () => {
-  router.get(`/profile/:id`,
+  router.get(`/profile/:username`,
     getProfileHandler
   )
   .put(`/profile`,

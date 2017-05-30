@@ -1,3 +1,8 @@
+export const resetAddress = () =>
+({
+  type: 'RESET_ADDRESS'
+})
+
 export const onSaveAddressSettings = (address, user) =>
 ({
   type: 'SAVE_ADDRESS_SETTINGS',

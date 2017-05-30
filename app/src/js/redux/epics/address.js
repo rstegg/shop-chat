@@ -19,8 +19,5 @@ export const saveAddressSettings = action$ =>
     .mergeMap(action =>
       api.saveAddressSettings(action.payload)
         .map(onSaveAddressSettingsSuccess)
-        .catch(res => {
-          const parsedRes = JSON.parse(res.response.text)
-          return Observable.of(onSaveAddressSettingsFailure(parsedRes.error))
-        })
+        .catch(res => Observable.of(onSaveAddressSettingsFailure(res)))
     )

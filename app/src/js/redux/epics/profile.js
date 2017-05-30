@@ -33,7 +33,8 @@ export const fetchProfile = action$ =>
       api.fetchProfile(action.payload)
         .map(onFetchProfileSuccess)
         .catch(error => Observable.of({
-          type: 'FETCH_PROFILE_FAILURE'
+          type: 'FETCH_PROFILE_FAILURE',
+          error
         }))
     )
 

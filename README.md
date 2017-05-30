@@ -9,7 +9,6 @@
 ### General
 
 - ViewProduct:
-  - 'Buy now'
   - 'Add to cart'
   - styling  
 - Add loading screens

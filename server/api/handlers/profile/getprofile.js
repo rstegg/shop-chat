@@ -4,6 +4,7 @@ const { merge, pick } = require('ramda')
 
 const threadAttributes = ['id', 'name', 'owner']
 const profileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
+const resProfileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website', 'thread']
 const shopAttributes = ['id', 'name', 'description', 'shop_type', 'is_public', 'slug', 'image']
 
 const getShops = user =>
@@ -11,7 +12,7 @@ const getShops = user =>
     where: { userId: user.id },
     attributes: shopAttributes
   })
-  .then(shops => merge({ shops }, pick(profileAttributes, user)))
+  .then(shops => merge({ shops }, pick(resProfileAttributes, user)))
 
 const validate = req =>
   User.findOne({
@@ -21,7 +22,7 @@ const validate = req =>
         attributes: threadAttributes
       }
     ],
-    where: { username: req.params.id },
+    where: { username: req.params.username },
     attributes: profileAttributes
   })
   .then(user =>

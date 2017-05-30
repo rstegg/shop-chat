@@ -1,3 +1,8 @@
+export const resetAccount = () =>
+({
+  type: 'RESET_ACCOUNT'
+})
+
 export const onSaveAccountSettings = (account, user) =>
 ({
   type: 'SAVE_ACCOUNT_SETTINGS',

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import SignupSuccess from 'components/SuccessMessage'
+import AlertBox from 'components/AlertBox'
 import AddCreditCard from 'components/AddCreditCard'
 
 export default () =>
   <div>
-    <SignupSuccess />
+    <AlertBox />
     <AddCreditCard />
   </div>

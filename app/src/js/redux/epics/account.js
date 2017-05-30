@@ -19,8 +19,5 @@ export const saveAccountSettings = action$ =>
     .mergeMap(action =>
       api.saveAccountSettings(action.payload)
         .map(onSaveAccountSettingsSuccess)
-        .catch(res => {
-          const parsedRes = JSON.parse(res.response.text)
-          return Observable.of(onSaveAccountSettingsFailure(parsedRes.error))
-        })
+        .catch(res => Observable.of(onSaveAccountSettingsFailure(res)))
     )

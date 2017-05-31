@@ -14,14 +14,15 @@ module.exports = () => {
   const { Strategy: LocalStrategy } = passportLocal
 
   const localStrategy = new LocalStrategy(
+    { session: false },
     (username, password, done) =>
-      User.findOne({ where: { username: username } })
+      User.findOne({ where: { username } })
         .then(user =>
-          !user ? done(null, false, { error: 'Incorrect username' })
-          : !user.validPassword(password) ? done(null, false, { error: 'Incorrect password' })
+          !user ? done(null, false, { message: 'Incorrect username' })
+          : !user.validPassword(password) ? done(null, false, { message: 'Incorrect password' })
           : done(null, user)
         )
-        .catch(err => done(err))
+        .catch(err => done(null, false, { message: 'Incorrect username or password' }))
   )
 
   const jwtOptions = {}

@@ -109,9 +109,8 @@ export default function(state = initialState, action) {
       })
     case 'LOGIN_FAILURE':
     case 'SIGNUP_FAILURE':
-      const error = action.payload.error === 'Unauthorized' ? 'Wrong username or password' : action.payload.error
       return Object.assign({}, state, {
-        error,
+        error: 'Incorrect username or password',
         isLoading: false
       })
     case 'LOGOUT':

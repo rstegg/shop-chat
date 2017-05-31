@@ -1,6 +1,7 @@
 const login = require('./login')
 const signup = require('./signup')
 const braintree = require('./braintree')
+const stripe = require('./stripe')
 const shops = require('./shops')
 const products = require('./products')
 const account = require('./account')
@@ -12,6 +13,7 @@ module.exports = [
   login,
   signup,
   braintree,
+  stripe,
   shops,
   products,
   account,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { Header, Segment, Icon } from 'semantic-ui-react'
+import { Feed, Header, Icon } from 'semantic-ui-react'
 
 const renderCardType = type => {
   switch(type) {
@@ -27,15 +27,13 @@ const renderCardType = type => {
 //TODO: route to wallet ID
 
 const WalletListItem = ({className, onClick, wallet}) =>
-  <NavLink to='/settings/wallet'>
-    <Segment clearing>
-      <Header floated='left'>
-        {wallet.object === 'card' && renderCardType(wallet.brand)} ending in {wallet.last4}
-      </Header>
-      <Header floated='right'>
-        {wallet.exp_month}/{wallet.exp_year}
-      </Header>
-    </Segment>
-  </NavLink>
+  <Feed.Event as={NavLink} to='/settings/wallet'>
+    <Feed.Label>
+      {wallet.type === 'CreditCard' && renderCardType(wallet.cardType)}
+    </Feed.Label>
+    <Feed.Content>
+      <Header>{wallet.description}</Header>
+    </Feed.Content>
+  </Feed.Event>
 
 export default WalletListItem

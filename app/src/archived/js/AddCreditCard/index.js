@@ -7,9 +7,9 @@ import VisualCreditCard from 'react-credit-card'
 import AddCreditCardForm from './form'
 
 import { closeAddCard } from 'actions/card'
-import { createStripeCard } from 'actions/stripe'
+import { createBraintreeCard } from 'actions/braintree'
 
-const AddCreditCard = ({user, card, closeAddCard, createStripeCard}) =>
+const AddCreditCard = ({user, card, closeAddCard, createBraintreeCard}) =>
   <Modal open={card.isOpen} style={{textAlign: 'center'}}>
     <Modal.Header>Add a Card</Modal.Header>
     <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
@@ -26,7 +26,7 @@ const AddCreditCard = ({user, card, closeAddCard, createStripeCard}) =>
       <Button color='black' onClick={closeAddCard} content='Cancel' />
       <Button positive icon='checkmark' labelPosition='right' content='Add card'
         onClick={() => {
-          createStripeCard(card, user)
+          createBraintreeCard(card, user)
           closeAddCard()
         }} />
     </Modal.Actions>
@@ -40,7 +40,7 @@ const mapStateToProps = ({user, card, form}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  createStripeCard: (card, user) => dispatch(createStripeCard(card, user)),
+  createBraintreeCard: (card, user) => dispatch(createBraintreeCard(card, user)),
   closeAddCard: () => dispatch(closeAddCard()),
 })
 

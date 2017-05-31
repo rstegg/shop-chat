@@ -7,8 +7,13 @@ import WalletList from './list'
 
 import { openAddCard } from 'actions/card'
 import { openAddBank } from 'actions/bank'
+import { fetchStripeCards } from 'actions/stripe'
 
 class WalletSettings extends Component {
+  componentWillMount() {
+    const { fetchStripeCards, user } = this.props
+    fetchStripeCards(user)
+  }
   render() {
     const { user, card, openAddCard, openAddBank } = this.props
     if(!user.isAuthenticated) {
@@ -44,7 +49,8 @@ const mapStateToProps = ({user, card}) =>
 const mapDispatchToProps = dispatch =>
 ({
   openAddBank: () => dispatch(openAddBank()),
-  openAddCard: () => dispatch(openAddCard())
+  openAddCard: () => dispatch(openAddCard()),
+  fetchStripeCards: user => dispatch(fetchStripeCards(user))
 })
 
 export default connect(

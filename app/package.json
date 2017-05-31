@@ -106,7 +106,12 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
     ],
     "moduleNameMapper": {
-      "^react-native$": "react-native-web"
+      "^react-native$": "react-native-web",
+      "^@components(.*)$": "<rootDir>/src/js/components$1",
+      "^@elements(.*)$": "<rootDir>/src/js/elements$1",
+      "^@pages(.*)$": "<rootDir>/src/js/pages$1",
+      "^@actions(.*)$": "<rootDir>/src/js/redux/actions$1",
+      "^@utils(.*)$": "<rootDir>/src/js/utils$1"
     }
   },
   "babel": {

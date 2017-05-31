@@ -19,7 +19,6 @@ const onLoginSubmit = action$ =>
       api.login(action.payload)
         .map(onLoginSuccess)
         .catch(res => {
-          console.log(res);
           const parsedRes = res.response.text
           return Observable.of(onLoginFailure(parsedRes.error))
         })

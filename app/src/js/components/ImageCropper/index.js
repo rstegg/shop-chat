@@ -6,8 +6,10 @@ import { Modal, Button } from 'semantic-ui-react'
 class ImageCropper extends Component {
   onSave() {
     const { uploadImage, closeCropper } = this.props
-    this.editor.getImageScaledToCanvas().toBlob(blob => uploadImage(blob))
-    closeCropper()
+    this.editor.getImageScaledToCanvas().toBlob(blob => {
+      uploadImage(blob)
+      closeCropper()
+    })
   }
   render() {
     const { image, isOpen, closeCropper } = this.props

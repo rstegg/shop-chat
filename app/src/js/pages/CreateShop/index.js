@@ -11,7 +11,7 @@ import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
 const Avatar = ({shop, openCropper, onUploadShopImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDrop={openCropper} onDropRejected={onUploadShopImageFailure}>
+  <Dropzone className='ui image editable avatar-image' onDropAccepted={openCropper} onDropRejected={onUploadShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
   </Dropzone>

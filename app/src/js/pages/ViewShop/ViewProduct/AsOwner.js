@@ -17,7 +17,7 @@ import { validate } from './validators'
 import { normalizePrice } from './normalize'
 
 const Avatar = ({product, openEditProductCropper, onUploadEditProductImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDrop={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
+  <Dropzone className='ui image editable avatar-image' onDropAccepted={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={product.image || '/images/productholder.png'} />
     {product.image_error && <Label basic color='red'>Invalid image</Label>}

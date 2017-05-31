@@ -19,7 +19,7 @@ import GridLayout from 'components/layouts/Grid'
 import { validate } from './validators'
 
 const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDrop={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
+  <Dropzone className='ui image editable avatar-image' onDropAccepted={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
     {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
     {shop.image_error && <Label basic color='red'>Invalid image</Label>}

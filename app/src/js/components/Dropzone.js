@@ -353,7 +353,7 @@ Dropzone.defaultProps = {
   disablePreview: false,
   disableClick: false,
   multiple: false,
-  maxSize: 1000000,
+  maxSize: Infinity,
   accept: "image/*",
   minSize: 0
 }

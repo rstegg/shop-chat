@@ -5,6 +5,7 @@ import {
   onDeleteProductSuccess,
   onCreateProductSuccess,
   onUploadProductImageSuccess,
+  onUploadEditProductImageSuccess,
   onShareProductSuccess
 } from '../actions/products'
 import su from 'superagent'
@@ -122,7 +123,7 @@ export const uploadEditProductImage = action$ =>
   action$.ofType('UPLOAD_EDIT_PRODUCT_IMAGE')
     .mergeMap(action =>
       api.uploadEditProductImage(action.payload)
-        .map(onUploadProductImageSuccess)
+        .map(onUploadEditProductImageSuccess)
         .catch(error => Observable.of({
           type: 'UPLOAD_PRODUCT_IMAGE_FAILURE'
         }))

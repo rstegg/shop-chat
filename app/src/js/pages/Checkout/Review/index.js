@@ -13,15 +13,21 @@ const ReviewCheckout = ({cart, user, address}) =>
       <Card.Description>
         <Segment>
           <Header>Shipping Address</Header>
-          <List>
-            <List.Item>{address.name}</List.Item>
-            <List.Item>{address.line1}</List.Item>
-            <List.Item>{address.line2}</List.Item>
-            <List.Item>{address.city}, {address.region} {address.zip}</List.Item>
-            <List.Item>{address.country}</List.Item>
-          </List>
+          {
+            address.name ?
+            <List>
+              <List.Item>{address.name}</List.Item>
+              <List.Item>{address.line1}</List.Item>
+              <List.Item>{address.line2}</List.Item>
+              <List.Item>{address.city}, {address.region} {address.zip}</List.Item>
+              <List.Item>{address.country}</List.Item>
+              </List>
+             : <List>
+               <List.Item>No address saved</List.Item>
+             </List>
+          }
           <NavLink to='/settings/address'>
-            <Button basic>Change</Button>
+            <Button basic>{address.name ? 'Change' : 'Set Address'}</Button>
           </NavLink>
         </Segment>
       </Card.Description>

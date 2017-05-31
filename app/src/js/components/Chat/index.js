@@ -20,7 +20,6 @@ class ThreadChat extends Component {
   componentWillMount() {
     const { user, thread, joinChatThread } = this.props
     const threadId = getThreadId(thread)
-    console.log(thread);
     if(!!threadId) {
       joinChatThread(threadId, user)
     }

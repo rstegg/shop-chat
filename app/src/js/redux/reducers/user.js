@@ -1,6 +1,9 @@
 const initialState = {
   id: null,
   token: '',
+  address: {
+    country: 'United States'
+  },
   isAuthenticated: false,
   isRegistered: false,
   isAccountSaved: false,

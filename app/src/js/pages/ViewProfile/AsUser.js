@@ -9,7 +9,7 @@ import Shops from './Shops'
 
 const Avatar = ({image}) =>
   <div className='ui image shop--image avatar-image'>
-    <Image src={image || '/images/productholder.png'} />
+    <Image src={image || '/images/placeholder.png'} />
   </div>
 
 const UserView = ({

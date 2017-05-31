@@ -63,6 +63,12 @@ export default function(state = initialState, action) {
         isEdited: true,
         newUsername
       })
+    case 'UPLOAD_PROFILE_IMAGE_SUCCESS':
+      return Object.assign({}, state, {
+        image: action.payload.image,
+        image_loading: false,
+        image_error: false
+      })
     case 'REFRESH_PROFILE_EDITING':
       return Object.assign({}, state, {
         isLoading: false,

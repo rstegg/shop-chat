@@ -59,11 +59,11 @@ export const addStripeCard = (card, user) =>
   }
 })
 
-export const onAddStripeCardSuccess = stripe_card =>
+export const onAddStripeCardSuccess = res =>
 ({
   type: 'ADD_STRIPE_CARD_SUCCESS',
   payload: {
-    stripe_card
+    stripe_card: res.body.stripe_card
   }
 })
 
@@ -76,11 +76,11 @@ export const addStripeBank = (bank, user) =>
   }
 })
 
-export const onAddStripeBankSuccess = stripe_bank =>
+export const onAddStripeBankSuccess = res =>
 ({
   type: 'ADD_STRIPE_BANK_SUCCESS',
   payload: {
-    stripe_bank
+    stripe_bank: res.body.stripe_bank
   }
 })
 
@@ -97,6 +97,6 @@ export const onAddStripeBitcoinSuccess = res =>
 ({
   type: 'ADD_STRIPE_BITCOIN_SUCCESS',
   payload: {
-    bitcoin: res.body.bitcoin
+    stripe_bitcoin: res.response
   }
 })

@@ -23,10 +23,10 @@ module.exports = () => {
     .post('/stripe/banks',
       addStripeBankHandler
     )
-    .get(`/stripe/bitcoin`,
+    .get(`/stripe/bitcoins`,
       getStripeBitcoinsHandler
     )
-    .post('/stripe/bitcoin',
+    .post('/stripe/bitcoins',
       addStripeBitcoinHandler
     )
   return router

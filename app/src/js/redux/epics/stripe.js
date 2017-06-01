@@ -54,7 +54,7 @@ const api = {
       )
       const exp_month = expirationDate.split('/')[0]
       const exp_year = expirationDate.split('/')[1]
-      return request({ country: 'US', currency: 'USD', number, cvc, exp_month, exp_year })
+      return request({ currency: 'USD', number, cvc, exp_month, exp_year })
   },
   addStripeBitcoin: ({ bitcoin: { amount, email } }) => {
     const request =
@@ -109,7 +109,7 @@ export const addStripeCard = action$ =>
     .mergeMap(action =>
       api.addStripeCard(action.payload)
         .mergeMap(({status, response}) =>
-          response.error ? { type: 'ADD_STRIPE_CARD_FAILURE', error: response.error }
+          response.error ? Observable.of({ type: 'ADD_STRIPE_CARD_FAILURE', error: response.error })
           : api.sendCardResponseToServer(response, action.payload.user)
               .map(onAddStripeCardSuccess)
               .catch(error => Observable.of({
@@ -120,7 +120,7 @@ export const addStripeCard = action$ =>
     )
 
 export const fetchStripeBanks = action$ =>
-  action$.ofType('FETCH_STRIPE_CARDS')
+  action$.ofType('FETCH_STRIPE_BANKS')
     .mergeMap(action =>
       api.fetchStripeBanks(action.payload)
         .map(onFetchStripeBanksSuccess)
@@ -135,7 +135,7 @@ export const addStripeBank = action$ =>
     .mergeMap(action =>
       api.addStripeBank(action.payload)
         .mergeMap(({status, response}) =>
-          response.error ? { type: 'ADD_STRIPE_BANK_FAILURE', error: response.error }
+          response.error ? Observable.of({ type: 'ADD_STRIPE_BANK_FAILURE', error: response.error })
           : api.sendBankResponseToServer(response, action.payload.user)
               .map(onAddStripeBankSuccess)
               .catch(error => Observable.of({
@@ -160,13 +160,24 @@ export const addStripeBitcoin = action$ =>
   action$.ofType('ADD_STRIPE_BITCOIN')
     .mergeMap(action =>
       api.addStripeBitcoin(action.payload)
-        .mergeMap(({status, response}) =>
-          response.error ? { type: 'ADD_STRIPE_BITCOIN_FAILURE', error: response.error }
-          : api.sendBitcoinResponseToServer(response, action.payload.user)
-              .map(onAddStripeBitcoinSuccess)
-              .catch(error => Observable.of({
-                type: 'ADD_STRIPE_BITCOIN_FAILURE',
-                error
-              }))
-            )
+        .map(onAddStripeBitcoinSuccess)
+        .catch(error => Observable.of({
+          type: 'ADD_STRIPE_BITCOIN_FAILURE',
+          error
+        }))
     )
+
+// export const addStripeBitcoin = action$ =>
+//   action$.ofType('ADD_STRIPE_BITCOIN')
+//     .mergeMap(action =>
+//       api.addStripeBitcoin(action.payload)
+//         .mergeMap(({status, response}) =>
+//           response.error ? Observable.of({ type: 'ADD_STRIPE_BITCOIN_FAILURE', error: response.error })
+//           : api.sendBitcoinResponseToServer(response, action.payload.user)
+//               .map(onAddStripeBitcoinSuccess)
+//               .catch(error => Observable.of({
+//                 type: 'ADD_STRIPE_BITCOIN_FAILURE',
+//                 error
+//               }))
+//             )
+//     )

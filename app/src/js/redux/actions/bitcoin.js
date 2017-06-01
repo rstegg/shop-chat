@@ -8,6 +8,16 @@ export const closeAddBitcoin = () =>
   type: 'CLOSE_ADD_BITCOIN'
 })
 
+export const openWithdrawBitcoin = () =>
+({
+  type: 'OPEN_WITHDRAW_BITCOIN'
+})
+
+export const closeWithdrawBitcoin = () =>
+({
+  type: 'CLOSE_WITHDRAW_BITCOIN'
+})
+
 export const setFocusedBitcoinField = field =>
 ({
   type: 'SET_FOCUSED_BITCOIN_FIELD',

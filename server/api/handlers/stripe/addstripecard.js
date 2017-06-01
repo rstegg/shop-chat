@@ -27,7 +27,7 @@ const validate = req => {
 }
 
 const findOrCreateStripeCustomer = (user, stripeToken) => {
-  if(user.stripe_customer) {
+  if(!user.stripe_customer) {
     stripe.customers.create({
       description: `Customer for ${user.username}`,
       source: stripeToken
@@ -44,12 +44,11 @@ const findOrCreateStripeCustomer = (user, stripeToken) => {
 module.exports = (req, res) =>
   validate(req)
     .then(validatedUser => findOrCreateStripeCustomer(validatedUser, req.body.stripeResponse.id))
-      .then(customer => User.update({ stripe_customer: customer }, { where: { id: req.user.id }, returning: true, plain: true }))
-      .then(user => {
+      .then(customer => {
         const new_stripe_card = req.body.stripeResponse.card
         const old_stripe_cards = req.user.stripe_cards || []
-        const updated_stripe_cards = { stripe_cards: old_stripe_cards.concat(new_stripe_card) }
-        return User.update(updated_stripe_cards, { where: { id: req.user.id }, returning: true, plain: true })
+        const updated_stripe = { stripe_cards: old_stripe_cards.concat(new_stripe_card), stripe_customer: customer }
+        return User.update(updated_stripe, { where: { id: req.user.id }, returning: true, plain: true })
       })
       .then(user => {
         const stripe_card = req.body.stripeResponse.card

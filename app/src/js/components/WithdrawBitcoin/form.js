@@ -16,20 +16,12 @@ const FormInput = ({ type, label, placeholder, value, onChange, autoFocus, onFoc
 const AddBitcoinForm = ({bitcoin, user, onAddBitcoinFormChange, setFocusedBitcoinField}) =>
   <Form>
     <FormInput
-      label='Email'
-      name='email'
-      placeholder='Email'
-      value={bitcoin.email}
-      onChange={e => onAddBitcoinFormChange('email', e.target.value)}
-      onFocus={() => setFocusedBitcoinField('email')}
-      onBlur={() => setFocusedBitcoinField(null)} />
-    <FormInput
-      label='Amount'
-      name='amount'
-      placeholder='Amount'
-      value={bitcoin.amount}
-      onChange={e => onAddBitcoinFormChange('amount', e.target.value)}
-      onFocus={() => setFocusedBitcoinField('amount')}
+      label='Address'
+      name='address'
+      placeholder='Bitcoin address'
+      value={bitcoin.address}
+      onChange={e => onAddBitcoinFormChange('address', e.target.value)}
+      onFocus={() => setFocusedBitcoinField('address')}
       onBlur={() => setFocusedBitcoinField(null)} />
   </Form>
 

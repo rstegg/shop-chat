@@ -21,7 +21,7 @@ import ViewProfile from './pages/ViewProfile'
 
 import store, { history } from './store'
 
-import RootLayout from 'components/layouts/Root'
+import RootLayout from 'layouts/Root'
 
 export default class AppRouter extends Component {
 

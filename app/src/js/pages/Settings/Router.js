@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 
-import SettingsLayout from 'components/layouts/Settings'
+import SettingsLayout from 'layouts/Settings'
 
 import AccountSettings from './Account'
 import AddressSettings from './Address'

@@ -14,7 +14,7 @@ import EditorField from 'elements/EditorField'
 import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCropper, closeEditShopCropper, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
 
 import ShopChat from 'components/Chat'
-import GridLayout from 'components/layouts/Grid'
+import GridLayout from 'layouts/Grid'
 
 import { validate } from './validators'
 

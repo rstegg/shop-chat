@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router'
 import ReviewCheckout from './Review'
 import ProcessedCheckout from './Processed'
 
-import CheckoutLayout from 'components/layouts/Checkout'
+import CheckoutLayout from 'layouts/Checkout'
 
 export default () =>
   <CheckoutLayout>

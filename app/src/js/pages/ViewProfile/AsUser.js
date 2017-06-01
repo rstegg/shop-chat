@@ -4,7 +4,7 @@ import { Button, Image, Header } from 'semantic-ui-react'
 import ShareMenu from 'components/SocialMenu'
 import ProfileChat from 'components/Chat'
 
-import GridLayout from 'components/layouts/Grid'
+import GridLayout from 'layouts/Grid'
 import Shops from './Shops'
 
 const Avatar = ({image}) =>

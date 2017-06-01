@@ -8,6 +8,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const appAliases = require('./alias');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -74,16 +75,7 @@ module.exports = {
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx'],
-    alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web',
-      'components': path.join(paths.appSrc, 'js/components'),
-      'elements': path.join(paths.appSrc, 'js/elements'),
-      'pages': path.join(paths.appSrc, 'js/pages'),
-      'actions': path.join(paths.appSrc, 'js/redux/actions'),
-      'utils': path.join(paths.appSrc, 'js/utils')
-    },
+    alias: appAliases,
   },
   // @remove-on-eject-begin
   // Resolve loaders (webpack plugins for CSS, images, transpilation) from the

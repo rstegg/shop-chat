@@ -12,7 +12,7 @@ import EditorField from 'elements/EditorField'
 import ImageCropper from 'components/ImageCropper'
 
 import { editProfile, switchToProfileUser, openProfileCropper, closeProfileCropper, uploadProfileImage, onUploadProfileImageFailure, editProfileField } from 'actions/profile'
-import GridLayout from 'components/layouts/Grid'
+import GridLayout from 'layouts/Grid'
 import Shops from './Shops'
 
 const Avatar = ({profile, openProfileCropper, onUploadProfileImageFailure}) =>

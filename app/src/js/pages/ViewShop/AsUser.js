@@ -7,7 +7,7 @@ import ProfileLabel from 'elements/ProfileLabel'
 
 import ShopChat from 'components/Chat'
 
-import GridLayout from 'components/layouts/Grid'
+import GridLayout from 'layouts/Grid'
 
 const Avatar = ({image}) =>
   <div className='ui image shop--image avatar-image'>

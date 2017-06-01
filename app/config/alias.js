@@ -3,7 +3,6 @@
 const path = require('path')
 const paths = require('./paths')
 
-// config after eject: we're in ./config/
 module.exports = {
   'react-native': 'react-native-web',
   'actions': path.join(paths.appSrc, 'js/redux/actions'),

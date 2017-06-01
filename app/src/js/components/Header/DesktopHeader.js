@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Button, Menu } from 'semantic-ui-react'
 
 import ProfileLabel from 'elements/ProfileLabel'
+import ShoppingLabel from 'elements/ShoppingLabel'
 
 const DesktopHeader = ({user}) =>
   <Menu fluid fixed='top' borderless className='header__container'>
@@ -13,6 +14,7 @@ const DesktopHeader = ({user}) =>
     <Menu.Item position='right'>
       {user.isAuthenticated ?
         <Button.Group>
+          <ShoppingLabel />
           <ProfileLabel username={user.username} image={user.image} />
         </Button.Group>
         :

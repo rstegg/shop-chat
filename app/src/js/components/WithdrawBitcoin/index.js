@@ -10,13 +10,13 @@ import { addStripeBitcoin } from 'actions/stripe'
 
 const WithdrawBitcoin = ({user, bitcoin, closeWithdrawBitcoin, addStripeBitcoin}) =>
   <Modal open={bitcoin.isWithdrawOpen} style={{textAlign: 'center'}}>
-    <Modal.Header>Withdraw Bitcoin</Modal.Header>
+    <Modal.Header>Bitcoin Address</Modal.Header>
     <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
       <WithdrawBitcoinForm />
     </Modal.Content>
     <Modal.Actions>
       <Button color='black' onClick={closeWithdrawBitcoin} content='Cancel' />
-      <Button positive icon='checkmark' labelPosition='right' content='Withdraw bitcoin'
+      <Button positive icon='checkmark' labelPosition='right' content='Add address'
         onClick={() => {
           addStripeBitcoin(bitcoin, user)
           closeWithdrawBitcoin()

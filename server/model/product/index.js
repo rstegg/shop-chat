@@ -17,8 +17,9 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false
     },
     is_public: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     },
     sub_category: {
       type: DataTypes.STRING,

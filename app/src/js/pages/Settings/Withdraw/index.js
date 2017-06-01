@@ -5,8 +5,8 @@ import { Redirect } from 'react-router-dom'
 
 import WithdrawList from './list'
 
-import { openAddBank } from 'actions/bank'
-import { openAddBitcoin } from 'actions/bitcoin'
+import { openWithdrawBank } from 'actions/bank'
+import { openWithdrawBitcoin } from 'actions/bitcoin'
 import { fetchStripeBanks, fetchStripeBitcoins } from 'actions/stripe'
 
 class WithdrawSettings extends Component {
@@ -16,7 +16,7 @@ class WithdrawSettings extends Component {
     fetchStripeBitcoins(user)
   }
   render() {
-    const { user, bank, openAddBank, openAddBitcoin } = this.props
+    const { user, bank, openWithdrawBank, openWithdrawBitcoin } = this.props
     if(!user.isAuthenticated) {
       return <Redirect to='/' />
     }
@@ -32,8 +32,8 @@ class WithdrawSettings extends Component {
         </Card.Content>
         <Card.Content extra>
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <Button basic onClick={openAddBank}>Add a bank</Button>
-            <Button basic onClick={openAddBitcoin}>Add bitcoin</Button>
+            <Button basic onClick={openWithdrawBank}>Add a bank</Button>
+            <Button basic onClick={openWithdrawBitcoin}>Add bitcoin</Button>
           </div>
         </Card.Content>
       </Card>
@@ -50,8 +50,8 @@ const mapStateToProps = ({user, bank, bitcoin}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  openAddBank: () => dispatch(openAddBank()),
-  openAddBitcoin: () => dispatch(openAddBitcoin()),
+  openWithdrawBank: () => dispatch(openWithdrawBank()),
+  openWithdrawBitcoin: () => dispatch(openWithdrawBitcoin()),
   fetchStripeBanks: user => dispatch(fetchStripeBanks(user)),
   fetchStripeBitcoins: user => dispatch(fetchStripeBitcoins(user)),
 })

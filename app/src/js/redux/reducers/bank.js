@@ -1,5 +1,6 @@
 const initialState = {
   isOpen: false,
+  isWithdrawOpen: false,
   isFetching: null,
   focused: null,
   account_holder_name: '',
@@ -25,10 +26,15 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         [action.payload.field]: action.payload.value
       })
+    case 'OPEN_WITHDRAW_BANK':
+      return Object.assign({}, state, {
+        isWithdrawOpen: true
+      })
     case 'OPEN_ADD_BANK':
       return Object.assign({}, state, {
         isOpen: true
       })
+    case 'CLOSE_WITHDRAW_BANK':
     case 'CLOSE_ADD_BANK':
       return initialState
     default:

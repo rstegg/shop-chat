@@ -123,11 +123,11 @@ const ConnectedAdminView = reduxForm({
   validate
 })(AdminView)
 
-const mapStateToProps = state =>
+const mapStateToProps = ({user, products}) =>
 ({
-  user: state.user,
-  product: state.products.current,
-  initialValues: state.products.current
+  user,
+  product: products.current,
+  initialValues: products.current
 })
 
 const mapDispatchToProps = dispatch =>

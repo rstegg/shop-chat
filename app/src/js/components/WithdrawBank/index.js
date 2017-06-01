@@ -5,21 +5,21 @@ import { Modal, Button } from 'semantic-ui-react'
 
 import AddBankForm from './form'
 
-import { closeAddBank } from 'actions/bank'
+import { closeWithdrawBank } from 'actions/bank'
 import { addStripeBank } from 'actions/stripe'
 
-const AddBank = ({user, bank, closeAddBank, addStripeBank}) =>
-  <Modal open={bank.isOpen} style={{textAlign: 'center'}}>
+const AddBank = ({user, bank, closeWithdrawBank, addStripeBank}) =>
+  <Modal open={bank.isWithdrawOpen} style={{textAlign: 'center'}}>
     <Modal.Header>Add Bank</Modal.Header>
     <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
       <AddBankForm />
     </Modal.Content>
     <Modal.Actions>
-      <Button color='black' onClick={closeAddBank} content='Cancel' />
+      <Button color='black' onClick={closeWithdrawBank} content='Cancel' />
       <Button positive icon='checkmark' labelPosition='right' content='Add bank'
         onClick={() => {
           addStripeBank(bank, user)
-          closeAddBank()
+          closeWithdrawBank()
         }} />
     </Modal.Actions>
   </Modal>
@@ -33,7 +33,7 @@ const mapStateToProps = ({user, bank, form}) =>
 const mapDispatchToProps = dispatch =>
 ({
   addStripeBank: (bank, user) => dispatch(addStripeBank(bank, user)),
-  closeAddBank: () => dispatch(closeAddBank()),
+  closeWithdrawBank: () => dispatch(closeWithdrawBank()),
 })
 
 export default connect(

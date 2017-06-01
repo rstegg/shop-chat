@@ -1,4 +1,4 @@
-import { onSignupSuccess, onSignupFailure } from '../actions/signup'
+import { onSignupSuccess, onSignupFailure } from 'actions/signup'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 

@@ -8,7 +8,15 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
     },
+    stripe_bitcoins: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+    },
     stripe_cards: {
+      type: DataTypes.ARRAY(DataTypes.JSONB),
+      allowNull: true,
+    },
+    stripe_banks: {
       type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
     },

@@ -11,9 +11,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case 'FETCH_STRIPE_CARD_SUCCESS':
+    case 'FETCH_STRIPE_CARDS_SUCCESS':
       return Object.assign({}, state, {
         list: action.payload.stripe_cards
+      })
+    case 'ADD_STRIPE_CARD_SUCCESS':
+      return Object.assign({}, state, {
+        list: [...state.list, action.payload.stripe_card]
       })
     case 'SET_FOCUSED_CARD_FIELD':
       return Object.assign({}, state, {
@@ -22,14 +26,6 @@ export default function(state = initialState, action) {
     case 'ON_ADD_CREDIT_CARD_FORM_CHANGE':
       return Object.assign({}, state, {
         [action.payload.field]: action.payload.value
-      })
-    case 'CREATE_BRAINTREE_CARD_SUCCESS':
-      return Object.assign({}, state, {
-        list: [...state.list, action.payload.braintree_card]
-      })
-    case 'CREATE_STRIPE_CARD_SUCCESS':
-      return Object.assign({}, state, {
-        list: [...state.list, action.payload.stripe_card]
       })
     case 'OPEN_ADD_CARD':
       return Object.assign({}, state, {

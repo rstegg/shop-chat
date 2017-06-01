@@ -1,35 +1,35 @@
 const initialState = {
+  list: [],
   isOpen: false,
   isFetching: null,
   focused: null,
-  account_holder_name: '',
-  routing_number: '',
-  account_number: '',
+  amount: '',
+  email: ''
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case 'FETCH_STRIPE_BANKS_SUCCESS':
+    case 'FETCH_STRIPE_BITCOINS_SUCCESS':
       return Object.assign({}, state, {
-        list: action.payload.stripe_cards
+        list: action.payload.bitcoin_addresses
       })
-    case 'ADD_STRIPE_BANK_SUCCESS':
+    case 'ADD_STRIPE_BITCOIN_SUCCESS':
       return Object.assign({}, state, {
-        list: [...state.list, action.payload.stripe_card]
+        list: [...state.list, action.payload.bitcoin_address]
       })
-    case 'SET_FOCUSED_BANK_FIELD':
+    case 'SET_FOCUSED_BITCOIN_FIELD':
       return Object.assign({}, state, {
         focused: action.payload.field
       })
-    case 'ON_ADD_CREDIT_BANK_FORM_CHANGE':
+    case 'ON_ADD_BITCOIN_ADDRESS_FORM_CHANGE':
       return Object.assign({}, state, {
         [action.payload.field]: action.payload.value
       })
-    case 'OPEN_ADD_BANK':
+    case 'OPEN_ADD_BITCOIN':
       return Object.assign({}, state, {
         isOpen: true
       })
-    case 'CLOSE_ADD_BANK':
+    case 'CLOSE_ADD_BITCOIN':
       return initialState
     default:
       return state

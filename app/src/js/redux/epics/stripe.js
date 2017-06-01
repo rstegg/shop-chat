@@ -1,4 +1,11 @@
-import { onFetchStripeCardsSuccess, onCreateStripeCardSuccess, onCreateStripeBankSuccess } from '../actions/stripe'
+import {
+  onFetchStripeCardsSuccess,
+  onFetchStripeBanksSuccess,
+  onFetchStripeBitcoinsSuccess,
+  onAddStripeCardSuccess,
+  onAddStripeBankSuccess,
+  onAddStripeBitcoinSuccess,
+} from 'actions/stripe'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
@@ -7,15 +14,39 @@ const Stripe = window.Stripe
 const API_HOST = '/api/v1'
 
 const api = {
-  createStripeBank: ({ bank: { routing_number, account_number, account_holder_name, account_holder_type }, user }) => {
+  fetchStripeCards: ({user}) => {
+    const request =
+      su.get(`${API_HOST}/stripe/cards`)
+        .set('Accept', 'application/json')
+        .set('Authorization', user.token)
+
+    return Observable.fromPromise(request)
+  },
+  fetchStripeBanks: ({user}) => {
+    const request =
+      su.get(`${API_HOST}/stripe/banks`)
+        .set('Accept', 'application/json')
+        .set('Authorization', user.token)
+
+    return Observable.fromPromise(request)
+  },
+  fetchStripeBitcoins: ({user}) => {
+    const request =
+      su.get(`${API_HOST}/stripe/bitcoins`)
+        .set('Accept', 'application/json')
+        .set('Authorization', user.token)
+
+    return Observable.fromPromise(request)
+  },
+  addStripeBank: ({ bank: { routing_number, account_number, account_holder_name }, user }) => {
     const request =
       Observable.bindCallback(
         Stripe.bankAccount.createToken,
         (status, response) => ({ status, response })
       )
-      return request({ country: 'US', currency: 'USD', routing_number, account_number, account_holder_name, account_holder_type })
+      return request({ country: 'US', currency: 'USD', routing_number, account_number, account_holder_name, account_holder_type: 'individual' })
   },
-  createStripeCard: ({ card: { number, cvc, expirationDate } }) => {
+  addStripeCard: ({ card: { number, cvc, expirationDate } }) => {
     const request =
       Observable.bindCallback(
         Stripe.card.createToken,
@@ -23,7 +54,15 @@ const api = {
       )
       const exp_month = expirationDate.split('/')[0]
       const exp_year = expirationDate.split('/')[1]
-      return request({ number, cvc, exp_month, exp_year })
+      return request({ country: 'US', currency: 'USD', number, cvc, exp_month, exp_year })
+  },
+  addStripeBitcoin: ({ bitcoin: { amount, email } }) => {
+    const request =
+      Observable.bindCallback(
+        Stripe.source.create,
+        (status, response) => ({ status, response })
+      )
+      return request({ type: 'bitcoin', currency: 'USD', amount, owner: { email } })
   },
   sendCardResponseToServer: (stripeResponse, user) => {
     const request =
@@ -34,9 +73,19 @@ const api = {
 
     return Observable.fromPromise(request)
   },
-  fetchStripeCards: ({user}) => {
+  sendBankResponseToServer: (stripeResponse, user) => {
     const request =
-      su.get(`${API_HOST}/stripe/cards`)
+      su.post(`${API_HOST}/stripe/banks`)
+        .send({stripeResponse})
+        .set('Accept', 'application/json')
+        .set('Authorization', user.token)
+
+    return Observable.fromPromise(request)
+  },
+  sendBitcoinResponseToServer: (stripeResponse, user) => {
+    const request =
+      su.post(`${API_HOST}/stripe/bitcoins`)
+        .send({stripeResponse})
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
 
@@ -55,14 +104,14 @@ export const fetchStripeCards = action$ =>
         }))
     )
 
-export const createStripeCard = action$ =>
-  action$.ofType('CREATE_STRIPE_CARD')
+export const addStripeCard = action$ =>
+  action$.ofType('ADD_STRIPE_CARD')
     .mergeMap(action =>
-      api.createStripeCard(action.payload)
+      api.addStripeCard(action.payload)
         .mergeMap(({status, response}) =>
-          response.error ? { type: 'CREATE_STRIPE_CARD_FAILURE', error: response.error }
+          response.error ? { type: 'ADD_STRIPE_CARD_FAILURE', error: response.error }
           : api.sendCardResponseToServer(response, action.payload.user)
-              .map(onCreateStripeCardSuccess)
+              .map(onAddStripeCardSuccess)
               .catch(error => Observable.of({
                 type: 'ADD_STRIPE_CARD_FAILURE',
                 error
@@ -70,14 +119,54 @@ export const createStripeCard = action$ =>
             )
     )
 
-export const createStripeBank = action$ =>
-  action$.ofType('CREATE_STRIPE_BANK')
+export const fetchStripeBanks = action$ =>
+  action$.ofType('FETCH_STRIPE_CARDS')
     .mergeMap(action =>
-      api.createStripeBank(action.payload)
-        .map((status, response) =>
-          onCreateStripeBankSuccess(status, response, action.payload.user)
-        )
+      api.fetchStripeBanks(action.payload)
+        .map(onFetchStripeBanksSuccess)
         .catch(error => Observable.of({
-          type: 'CREATE_STRIPE_BANK_FAILURE'
+          type: 'FETCH_STRIPE_BANKS_FAILURE',
+          error
         }))
+    )
+
+export const addStripeBank = action$ =>
+  action$.ofType('ADD_STRIPE_BANK')
+    .mergeMap(action =>
+      api.addStripeBank(action.payload)
+        .mergeMap(({status, response}) =>
+          response.error ? { type: 'ADD_STRIPE_BANK_FAILURE', error: response.error }
+          : api.sendBankResponseToServer(response, action.payload.user)
+              .map(onAddStripeBankSuccess)
+              .catch(error => Observable.of({
+                type: 'ADD_STRIPE_BANK_FAILURE',
+                error
+              }))
+            )
+    )
+
+export const fetchStripeBitcoins = action$ =>
+  action$.ofType('FETCH_STRIPE_BITCOINS')
+    .mergeMap(action =>
+      api.fetchStripeBitcoins(action.payload)
+        .map(onFetchStripeBitcoinsSuccess)
+        .catch(error => Observable.of({
+          type: 'FETCH_STRIPE_BITCOINS_FAILURE',
+          error
+        }))
+    )
+
+export const addStripeBitcoin = action$ =>
+  action$.ofType('ADD_STRIPE_BITCOIN')
+    .mergeMap(action =>
+      api.addStripeBitcoin(action.payload)
+        .mergeMap(({status, response}) =>
+          response.error ? { type: 'ADD_STRIPE_BITCOIN_FAILURE', error: response.error }
+          : api.sendBitcoinResponseToServer(response, action.payload.user)
+              .map(onAddStripeBitcoinSuccess)
+              .catch(error => Observable.of({
+                type: 'ADD_STRIPE_BITCOIN_FAILURE',
+                error
+              }))
+            )
     )

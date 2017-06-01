@@ -1,4 +1,4 @@
-import { onUploadProfileImageSuccess, onEditProfileSuccess, onFetchProfileSuccess } from '../actions/profile'
+import { onUploadProfileImageSuccess, onEditProfileSuccess, onFetchProfileSuccess } from 'actions/profile'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 

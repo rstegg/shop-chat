@@ -16,9 +16,9 @@ export const setFocusedBankField = field =>
   }
 })
 
-export const onAddCreditBankFormChange = (field, value) =>
+export const onAddBankFormChange = (field, value) =>
 ({
-  type: 'ON_ADD_CREDIT_BANK_FORM_CHANGE',
+  type: 'ON_ADD_BANK_FORM_CHANGE',
   payload: {
     field,
     value

@@ -1,4 +1,4 @@
-import { onFetchShopsSuccess, onFetchSingleShopSuccess, onCreateShopSuccess, onEditShopSuccess, onDeleteShopSuccess, onUploadShopImageSuccess, onUploadEditShopImageSuccess } from '../actions/shops'
+import { onFetchShopsSuccess, onFetchSingleShopSuccess, onCreateShopSuccess, onEditShopSuccess, onDeleteShopSuccess, onUploadShopImageSuccess, onUploadEditShopImageSuccess } from 'actions/shops'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 

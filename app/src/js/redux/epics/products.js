@@ -7,7 +7,7 @@ import {
   onUploadProductImageSuccess,
   onUploadEditProductImageSuccess,
   onShareProductSuccess
-} from '../actions/products'
+} from 'actions/products'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 

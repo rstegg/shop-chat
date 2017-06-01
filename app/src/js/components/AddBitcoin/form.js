@@ -5,8 +5,6 @@ import { Form } from 'semantic-ui-react'
 
 import { setFocusedBitcoinField, onAddBitcoinFormChange } from 'actions/bitcoin'
 
-import { normalizeNumber } from './normalize'
-
 const FormInput = ({ type, label, placeholder, value, onChange, autoFocus, onFocus, onBlur }) =>
   <Form.Field>
     <label>{label}</label>

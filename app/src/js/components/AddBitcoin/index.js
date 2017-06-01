@@ -3,40 +3,40 @@ import { connect } from 'react-redux'
 
 import { Modal, Button } from 'semantic-ui-react'
 
-import AddBankForm from './form'
+import AddBitcoinForm from './form'
 
-import { closeAddBank } from 'actions/bank'
-import { addStripeBank } from 'actions/stripe'
+import { closeAddBitcoin } from 'actions/bitcoin'
+import { addStripeBitcoin } from 'actions/stripe'
 
-const AddBank = ({user, bank, closeAddBank, addStripeBank}) =>
-  <Modal open={bank.isOpen} style={{textAlign: 'center'}}>
-    <Modal.Header>Add Bank</Modal.Header>
+const AddBitcoin = ({user, bitcoin, closeAddBitcoin, addStripeBitcoin}) =>
+  <Modal open={bitcoin.isOpen} style={{textAlign: 'center'}}>
+    <Modal.Header>Add Bitcoin</Modal.Header>
     <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-      <AddBankForm />
+      <AddBitcoinForm />
     </Modal.Content>
     <Modal.Actions>
-      <Button color='black' onClick={closeAddBank} content='Cancel' />
-      <Button positive icon='checkmark' labelPosition='right' content='Add bank'
+      <Button color='black' onClick={closeAddBitcoin} content='Cancel' />
+      <Button positive icon='checkmark' labelPosition='right' content='Add bitcoin'
         onClick={() => {
-          addStripeBank(bank, user)
-          closeAddBank()
+          addStripeBitcoin(bitcoin, user)
+          closeAddBitcoin()
         }} />
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user, bank, form}) =>
+const mapStateToProps = ({user, bitcoin, form}) =>
 ({
   user,
-  bank
+  bitcoin
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  addStripeBank: (bank, user) => dispatch(addStripeBank(bank, user)),
-  closeAddBank: () => dispatch(closeAddBank()),
+  addStripeBitcoin: (bitcoin, user) => dispatch(addStripeBitcoin(bitcoin, user)),
+  closeAddBitcoin: () => dispatch(closeAddBitcoin()),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddBank)
+)(AddBitcoin)

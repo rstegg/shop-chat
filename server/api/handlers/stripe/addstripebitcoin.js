@@ -22,13 +22,13 @@ const validate = req => {
 module.exports = (req, res) =>
   validate(req)
       .then(validatedUser => {
-        const new_bitcoin_address = req.body.bitcoin_address
-        const old_bitcoin_addresses = req.user.bitcoin_addresses || []
-        const updated_bitcoin_addresses = { bitcoin_addresses: old_bitcoin_addresses.concat(new_bitcoin_address) }
-        return User.update(updated_bitcoin_addresses, { where: { id: req.user.id }, returning: true, plain: true })
+        const new_stripe_bitcoin = req.body.stripe_bitcoin
+        const old_stripe_bitcoins = req.user.stripe_bitcoins || []
+        const updated_stripe_bitcoins = { stripe_bitcoins: old_stripe_bitcoins.concat(new_stripe_bitcoin) }
+        return User.update(updated_stripe_bitcoins, { where: { id: req.user.id }, returning: true, plain: true })
       })
       .then(user => {
-        const bitcoin_address = req.body.bitcoin_address
-        res.status(200).json({bitcoin_address})
+        const stripe_bitcoin = req.body.stripe_bitcoin
+        res.status(200).json({stripe_bitcoin})
       })
     .catch(error => res.status(400).json({error}))

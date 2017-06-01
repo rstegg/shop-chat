@@ -2,7 +2,7 @@ const { models } = require('../../../db')
 const { User } = models
 const { merge, pick } = require('ramda')
 
-const userAttributes = ['id', 'stripe_bitcoins']
+const userAttributes = ['id', 'stripe_banks']
 
 const validate = req =>
   User.findOne({
@@ -17,5 +17,5 @@ const validate = req =>
 
 module.exports = (req, res) =>
   validate(req)
-    .then(({stripe_bitcoins}) => res.status(200).json({stripe_bitcoins}))
+    .then(({stripe_banks}) => res.status(200).json({stripe_banks}))
     .catch(error => res.status(400).json({error}))

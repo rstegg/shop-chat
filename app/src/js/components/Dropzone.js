@@ -1,6 +1,6 @@
 import React from 'react'
-import accepts from '../utils/accept'
-import getDataTransferItems from '../utils/getTransferItems'
+import accepts from 'utils/accept'
+import getDataTransferItems from 'utils/getTransferItems'
 
 class Dropzone extends React.Component {
   static onDocumentDragOver(e) {

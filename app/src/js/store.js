@@ -7,7 +7,7 @@ import { createEpicMiddleware } from 'redux-observable'
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 // SocketIO
-import createSocketIoMiddleware from './utils/redux-socket-io'
+import createSocketIoMiddleware from 'utils/redux-socket-io'
 import io from 'socket.io-client'
 const socket = io()
 // All actions beginning with 'WS/' will be emitted

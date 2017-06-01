@@ -18,10 +18,6 @@
     - 'notifications'
     - 'privacy'
     - 'tools'
-- Finish:
-  - 'products'
-  - 'wallet'
-    - create endpoints
 
 ### Styling
 

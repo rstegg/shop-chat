@@ -4,15 +4,23 @@ import { connect } from 'react-redux'
 import DesktopHeader from './DesktopHeader'
 import MobileHeader from './MobileHeader'
 
-const Header = ({user, isMobile}) =>
+const Header = ({user, logout, isMobile}) =>
   isMobile ?
     <MobileHeader user={user} />
   :
-    <DesktopHeader user={user} />
+    <DesktopHeader user={user} logout={logout} />
 
 const mapStateToProps = ({user}) =>
 ({
   user
 })
 
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = dispatch =>
+({
+  logout: () => dispatch({type: 'LOGOUT'})
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header)

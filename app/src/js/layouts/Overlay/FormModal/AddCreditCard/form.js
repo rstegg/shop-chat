@@ -20,20 +20,20 @@ const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCar
     <Form.Group>
       <FormInput
         autoFocus={true}
-        label='Number'
-        name='number'
-        placeholder='Card number'
-        value={card.number}
-        onChange={e => onAddCreditCardFormChange('number', normalizeCCNumber(e.target.value))}
-        onFocus={() => setFocusedCardField('number')}
-        onBlur={() => setFocusedCardField(null)} />
-      <FormInput
         label='Name'
         name='name'
         placeholder='Name on card'
         value={card.name}
         onChange={e => onAddCreditCardFormChange('name', e.target.value)}
         onFocus={() => setFocusedCardField('name')}
+        onBlur={() => setFocusedCardField(null)} />
+      <FormInput
+        label='Number'
+        name='number'
+        placeholder='Card number'
+        value={card.number}
+        onChange={e => onAddCreditCardFormChange('number', normalizeCCNumber(e.target.value))}
+        onFocus={() => setFocusedCardField('number')}
         onBlur={() => setFocusedCardField(null)} />
     </Form.Group>
     <Form.Group>

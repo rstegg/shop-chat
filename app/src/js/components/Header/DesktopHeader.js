@@ -10,7 +10,7 @@ const ProfileButton = ({username, image}) =>
     <img src={image || '/images/placeholder.png'} alt={username} /> {username}
   </Label>
 
-const DesktopHeader = ({user, logout}) =>
+const DesktopHeader = ({user, logout, location}) =>
   <Menu fluid fixed='top' borderless className='header__container'>
     <Menu.Item header>
       <NavLink to='/'>Kuwau</NavLink>
@@ -21,8 +21,8 @@ const DesktopHeader = ({user, logout}) =>
             <ShoppingLabel />
             <Dropdown trigger={<ProfileButton username={user.username} image={user.image} />} icon={null} pointing='top right'>
               <Dropdown.Menu>
-                <Dropdown.Item as={NavLink} to={`/user/${user.username}`} text='Profile' />
-                <Dropdown.Item as={NavLink} to={`/settings/account`} text='Settings' />
+                <Dropdown.Item as={NavLink} to={`/user/${user.username}`} text='Profile' active={location.pathname === `/user/${user.username}`} />
+                <Dropdown.Item as={NavLink} to={`/settings/account`} text='Settings' active={location.pathname.startsWith('/settings/')} />
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={logout} text='Sign Out' />
               </Dropdown.Menu>

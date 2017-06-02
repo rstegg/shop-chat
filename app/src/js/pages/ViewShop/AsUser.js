@@ -29,7 +29,7 @@ const UserView = ({
     ChatBox={<ShopChat thread={shop} threadType='shop' />}
     Header={<Header as='h1'>{shop.name}</Header>}
     SubHeader={!!shop.description && <Header as='h4'>{shop.description}</Header>}
-    Gutter={<ProfileLabel username={getUsername(shop)} image={getUserImage(user)} />}
+    Gutter={<ProfileLabel username={getUsername(shop)} image={getUserImage(shop)} />}
     GutterRight={
       user.id === shop.userId ?
         <Button basic onClick={switchToShopAdmin}>Edit Shop</Button>

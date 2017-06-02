@@ -35,8 +35,8 @@ const getValidSlug = (slug, shopId, thread) =>
     )
   )
 
-const createThread = (shopId, userId, slug) =>
-  Thread.create({ title: slug, owner: userId }, { plain: true })
+const createThread = (shopId, username, slug) =>
+  Thread.create({ title: slug, owner: username }, { plain: true })
     .then(thread =>
       !thread ? Promise.reject('Thread not created')
       : getValidSlug(slug, shopId, thread)
@@ -62,7 +62,7 @@ const validate = req => {
       .toLowerCase()
       .trim()
 
-  return getValidParams(req.params.shopId, req.user.id, slug)
+  return getValidParams(req.params.shopId, req.user.username, slug)
 }
 
 module.exports = (req, res) => {

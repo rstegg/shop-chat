@@ -89,7 +89,7 @@ module.exports = (req, res) => {
         const resUser = pick(['id', 'email', 'name', 'username'], createdUser) //TODO: remove sending of userID, change userId checks to username (frontend)
         const token = jwt.sign({ id: createdUser.id }, process.env.JWT_SECRET)
         res.status(200).json({user: resUser, token})
-        return Thread.update({ owner: createdUser.id }, { where: { id: createdUser.threadId } })
+        return Thread.update({ owner: createdUser.username }, { where: { id: createdUser.threadId } })
       })
       .catch(error => res.status(400).json({error}))
 }

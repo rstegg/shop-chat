@@ -8,25 +8,33 @@
 
 ### General
 
+- Checkout:
+  - Add shipping
+  - Redo styling
+- Settings:
+  - 'Payment options'
+    - 'Add a card' - need validation on card
+  - 'notifications'
+    - Add page for
+  - 'privacy'
+    - Add page for
+  - 'tools'
+    - Add page for
 - ViewProduct:
-  - 'Add to cart'
-  - styling  
-- Add loading screens
+  - 'Add to cart' needs some animation/something happens
+  - redo the layout
 - Add:
-  - 'feed'
-  - 'settings'
-    - 'notifications'
-    - 'privacy'
-    - 'tools'
+  - loading screens
+  - 'feed', 'follow', 'suggestions'
 
 ### Styling
 
-- Clean up inline styling [chat]
+- Clean up inline styling [chat, components]
 
 ### Sockets
 
-- Threads authentication (permissions)
-- private Threads
+- Threads permissions (moderators)
+- private Threads (whispers)
 
 ### TODO: Low Priority
 

@@ -15,9 +15,17 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         list: action.payload.stripe_cards
       })
-    case 'ADD_STRIPE_CARD_SUCCESS':
+    case 'ADD_STRIPE_CARD':
       return Object.assign({}, state, {
+        isLoading: true
+      })
+    case 'ADD_STRIPE_CARD_SUCCESS':
+      return Object.assign({}, initialState, {
         list: [...state.list, action.payload.stripe_card]
+      })
+    case 'ADD_STRIPE_CARD_FAILURE':
+      return Object.assign({}, state, {
+        error: action.payload.error
       })
     case 'SET_FOCUSED_CARD_FIELD':
       return Object.assign({}, state, {

@@ -8,6 +8,10 @@
 
 ### General
 
+- IDEA:
+  - BOTTOM MENU IS CUSTOMIZABLE FOR EACH SHOP
+    - THIS CREATES A CMS STYLE ATMOSPHERE?
+
 - Checkout:
   - Add shipping
   - Redo styling

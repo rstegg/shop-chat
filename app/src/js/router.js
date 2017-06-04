@@ -5,19 +5,12 @@ import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router'
 import { ConnectedRouter as Router } from 'react-router-redux'
 
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+import MainRouter from './pages/Main/Router'
 import CheckoutRouter from './pages/Checkout/Router'
 import SettingsRouter from './pages/Settings/Router'
-import ShopRouter from './pages/ViewShop/Router'
-
-import CreateProduct from './pages/CreateProduct'
-
-import Shops from './pages/Shops'
-import CreateShop from './pages/CreateShop'
-
-import ViewProfile from './pages/ViewProfile'
+import ShopRouter from './pages/Shop/Router'
+import ProductRouter from './pages/Product/Router'
+import ProfileRouter from './pages/Profile/Router'
 
 import store, { history } from './store'
 
@@ -45,16 +38,12 @@ export default class AppRouter extends Component {
         <Router history={history}>
             <RootLayout>
               <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={Signup} />
-                <Route path='/settings' component={SettingsRouter} />
                 <Route path='/checkout' component={CheckoutRouter} />
-                <Route exact path='/shops' component={Shops} />
-                <Route exact path='/shop/:id/products/new' component={CreateProduct} />
-                <Route exact path='/shops/new' component={CreateShop} />
-                <Route path='/shop/:shopId' component={ShopRouter} />
-                <Route exact path='/user/:id' component={ViewProfile} />
+                <Route path='/settings' component={SettingsRouter} />
+                <Route path='/shop/:shopId/product' component={ProductRouter} />
+                <Route path='/shop' component={ShopRouter} />
+                <Route path='/user' component={ProfileRouter} />
+                <Route path='/' component={MainRouter} />
               </Switch>
             </RootLayout>
         </Router>

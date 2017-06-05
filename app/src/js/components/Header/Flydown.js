@@ -11,27 +11,23 @@ const DropItem = ({onClick, icon, text}) =>
     {text}
   </Header>
 
-const Flydown = ({
-  user,
-  toLogin,
-  toSignup,
-  toShops,
-  toGlobe,
-  toPencil,
-  toSettings,
-  toPower
-}) =>
+const Flydown = props =>
   <Dropdown icon='content' basic button className='icon secondary'>
-    <Dropdown.Menu className='dropdown--mobile'>
-      {!user.isAuthenticated && <DropItem onClick={toLogin} icon='sign in' text='login' />}
-      {!user.isAuthenticated && <DropItem onClick={toSignup}  icon='add user' text='sign up' />}
-      <DropItem onClick={toGlobe} text='home' icon='home' />
-      {user.isAuthenticated && <DropItem onClick={toShops} text='shops' icon='book' />}
-      {user.isAuthenticated && <DropItem onClick={toPencil} text='start a product' icon='edit' />}
-      {user.isAuthenticated && <DropItem onClick={toSettings} text='settings' icon='setting' />}
-      {user.isAuthenticated && <Dropdown.Divider />}
-      {user.isAuthenticated && <DropItem onClick={toPower}  icon='power' text='logout' />}
-    </Dropdown.Menu>
+    <DropItem onClick={props.toGlobe} text='home' icon='home' />
+    {props.user.isAuthenticated ?
+      <Dropdown.Menu className='dropdown--mobile'>
+        <DropItem onClick={props.toShops} text='shops' icon='book' />
+        <DropItem onClick={props.toPencil} text='start a product' icon='edit' />
+        <DropItem onClick={props.toSettings} text='settings' icon='setting' />
+        <Dropdown.Divider />
+        <DropItem onClick={props.toPower}  icon='power' text='logout' />
+      </Dropdown.Menu>
+      :
+      <Dropdown.Menu className='dropdown--mobile'>
+        <DropItem onClick={props.toLogin} icon='sign in' text='login' />
+        <DropItem onClick={props.toSignup}  icon='add user' text='sign up' />
+      </Dropdown.Menu>
+    }
   </Dropdown>
 
 const mapStateToProps = ({user}) =>

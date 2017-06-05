@@ -6,7 +6,7 @@ import MobileGrid from './MobileGrid'
 import isMobile from 'utils/isMobile'
 
 export default props =>
-  isMobile() ?
+  isMobile ?
     <MobileGrid {...props} />
   :
     <DesktopGrid {...props} />

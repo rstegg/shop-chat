@@ -6,13 +6,9 @@ import { push } from 'react-router-redux'
 import TabletMenu from './TabletMenu'
 import DesktopMenu from './DesktopMenu'
 
+import isMobile, { isTablet } from 'utils/isMobile'
 //Only renders if this is a tablet or desktop
-const BottomNav =
-({
-  isMobile,
-  isTablet,
-  ...props
-}) =>
+const BottomNav = props =>
   !isMobile && (
     isTablet ?
       <TabletMenu

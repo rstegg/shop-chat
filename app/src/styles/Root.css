@@ -72,8 +72,8 @@
   .main {
     position: absolute;
     width: 100%;
+    height: 95%;
     top: 63px;
-    bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;

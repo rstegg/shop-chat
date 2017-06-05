@@ -7,7 +7,7 @@ import isMobile from 'utils/isMobile'
 
 export default ({children}) =>
   <div className='root'>
-    <Header isMobile={isMobile()} />
+    <Header isMobile={isMobile} />
       <div className='main'>
         {children}
       </div>

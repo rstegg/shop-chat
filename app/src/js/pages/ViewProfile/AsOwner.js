@@ -7,7 +7,7 @@ import ShareMenu from 'components/SocialMenu'
 import ProfileChat from 'components/Chat'
 import Dropzone from 'components/Dropzone'
 
-import EditorField from 'elements/EditorField'
+import EditorField from 'elements/Input/EditorField'
 
 import ImageCropper from 'components/ImageCropper'
 

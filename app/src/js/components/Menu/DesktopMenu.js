@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MenuButton from 'elements/MenuButton'
+import MenuButton from 'elements/Button/MenuButton'
 
 export default
 ({

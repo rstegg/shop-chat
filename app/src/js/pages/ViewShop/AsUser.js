@@ -3,7 +3,7 @@ import { Button, Image, Header } from 'semantic-ui-react'
 import { path } from 'ramda'
 
 import ShareMenu from 'components/SocialMenu'
-import ProfileLabel from 'elements/ProfileLabel'
+import ProfileLabel from 'elements/Label/ProfileLabel'
 
 import ShopChat from 'components/Chat'
 

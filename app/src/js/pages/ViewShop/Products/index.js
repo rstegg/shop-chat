@@ -4,7 +4,7 @@ import { path } from 'ramda'
 
 import { Card } from 'semantic-ui-react'
 import ProductsList from './list'
-import RouterButton from 'elements/RouterButton'
+import RouterButton from 'elements/Button/RouterButton'
 
 import { fetchProducts, refreshProducts } from 'actions/products'
 

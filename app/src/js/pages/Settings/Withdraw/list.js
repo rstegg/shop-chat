@@ -1,7 +1,7 @@
 import React from 'react'
 import { length } from 'ramda'
 
-import WalletListItem from 'elements/WalletListItem'
+import WalletListItem from 'elements/ListItem/WalletListItem'
 import { Segment, Header, Icon } from 'semantic-ui-react'
 
 const WalletList =

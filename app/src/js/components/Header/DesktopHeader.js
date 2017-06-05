@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import { Button, Menu, Dropdown, Label } from 'semantic-ui-react'
 
-import ShoppingLabel from 'elements/ShoppingLabel'
+import ShoppingLabel from 'elements/Label/ShoppingLabel'
 
 const ProfileButton = ({username, image}) =>
   <Label basic image>

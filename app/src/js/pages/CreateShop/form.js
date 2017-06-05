@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Form } from 'semantic-ui-react'
 
-import InputField from 'elements/InputField'
-import CheckboxField from 'elements/CheckboxField'
+import InputField from 'elements/Input/InputField'
+import CheckboxField from 'elements/Input/CheckboxField'
 
 import { validate } from './validators'
 

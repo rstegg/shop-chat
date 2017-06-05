@@ -1,7 +1,7 @@
 import React from 'react'
 import { length } from 'ramda'
 
-import ShopItem from 'elements/ShopItem'
+import ShopItem from 'elements/ListItem/ShopListItem'
 import { Feed } from 'semantic-ui-react'
 
 const ShopsList =

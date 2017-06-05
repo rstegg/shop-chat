@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Field, reduxForm } from 'redux-form'
 import { Form } from 'semantic-ui-react'
-import InputField from 'elements/InputField'
+import InputField from 'elements/Input/InputField'
 
 import { validate, asyncValidate } from './validators'
 

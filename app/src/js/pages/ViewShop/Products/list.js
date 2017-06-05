@@ -2,7 +2,7 @@ import React from 'react'
 import { Feed } from 'semantic-ui-react'
 import { length } from 'ramda'
 
-import ProductListItem from 'elements/ProductListItem'
+import ProductListItem from 'elements/ListItem/ProductListItem'
 
 const ProductsList =
 ({

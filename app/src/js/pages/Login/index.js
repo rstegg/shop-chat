@@ -7,7 +7,7 @@ import { Card, Message } from 'semantic-ui-react'
 import { onLoginSubmit, resetLogin } from 'actions/login'
 
 import LoginForm from './form'
-import RouterButton from 'elements/RouterButton'
+import RouterButton from 'elements/Button/RouterButton'
 
 class Login extends Component {
   componentWillMount() {

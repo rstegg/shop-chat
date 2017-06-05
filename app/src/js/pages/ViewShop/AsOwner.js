@@ -8,8 +8,8 @@ import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
-import CheckboxField from 'elements/CheckboxField'
-import EditorField from 'elements/EditorField'
+import CheckboxField from 'elements/Input/CheckboxField'
+import EditorField from 'elements/Input/EditorField'
 
 import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCropper, closeEditShopCropper, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
 

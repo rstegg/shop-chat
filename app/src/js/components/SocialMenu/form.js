@@ -3,8 +3,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Form } from 'semantic-ui-react'
 
-import InputField from 'elements/InputField'
-import AreaField from 'elements/AreaField'
+import InputField from 'elements/Input/InputField'
+import AreaField from 'elements/Input/AreaField'
 
 const SocialMenuForm = ({handleSubmit}) =>
   <Form onSubmit={handleSubmit}>

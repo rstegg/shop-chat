@@ -6,7 +6,7 @@ import { Form, Dropdown, Label, Divider } from 'semantic-ui-react'
 
 import countries from './countries'
 
-import InputField from 'elements/InputField'
+import InputField from 'elements/Input/InputField'
 
 import { validate } from './validators'
 

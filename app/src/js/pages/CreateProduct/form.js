@@ -7,11 +7,11 @@ import { Form } from 'semantic-ui-react'
 import { validate } from './validators'
 import { normalizePrice } from './normalize'
 
-import InputField from 'elements/InputField'
-import AreaField from 'elements/AreaField'
-import CurrencyField from 'elements/CurrencyField'
-import CheckboxField from 'elements/CheckboxField'
-import SelectField from 'elements/SelectField'
+import InputField from 'elements/Input/InputField'
+import AreaField from 'elements/Input/AreaField'
+import CurrencyField from 'elements/Input/CurrencyField'
+import CheckboxField from 'elements/Input/CheckboxField'
+import SelectField from 'elements/Input/SelectField'
 
 const categories = [
   { key: 'accessories', value: 'accessories', text: 'Accessories' },

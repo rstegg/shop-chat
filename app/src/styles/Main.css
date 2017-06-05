@@ -5,11 +5,11 @@
 @import 'components/Header.css';
 @import 'components/Chat.css';
 @import 'components/Dropzone.css';
+@import 'components/AlertBox.css';
 /*Elements*/
-@import 'elements/AlertBox.css';
-@import 'elements/InputField.css';
-@import 'elements/EditorField.css';
-@import 'elements/ProductListItem.css';
+@import 'elements/Input/InputField.css';
+@import 'elements/Input/EditorField.css';
+@import 'elements/ListItem/ProductListItem.css';
 /*Pages*/
 @import 'pages/Home.css';
 @import 'pages/Checkout.css';

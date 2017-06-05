@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Card } from 'semantic-ui-react'
 import ShopsList from './list'
-import RouterButton from 'elements/RouterButton'
+import RouterButton from 'elements/Button/RouterButton'
 
 class Shops extends Component {
   render() {

@@ -4,15 +4,14 @@ import { NavLink } from 'react-router-dom'
 import { Label, Icon } from 'semantic-ui-react'
 
 const ShoppingLabel = ({cart}) =>
-  !!cart.length ? (
+  !!cart.length ?
   <Label as={NavLink} to={`/checkout/review`} basic color='green'>
-    <Icon name='shop' /> {cart.length}
+    <Icon name='shop' /> {cart.length} cart
   </Label>
-  ) : (
+  :
   <Label as={NavLink} to={`/checkout/review`} basic>
-    <Icon name='shop' />
+    <Icon name='shop' /> cart
   </Label>
-  )
 
 const mapStateToProps = ({orders}) =>
 ({

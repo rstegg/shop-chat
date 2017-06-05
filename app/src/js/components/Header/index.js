@@ -2,14 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
+import { push } from 'react-router-redux'
+
+
 import DesktopHeader from './DesktopHeader'
 import MobileHeader from './MobileHeader'
 
-const Header = ({user, logout, isMobile, location}) =>
-  isMobile ?
-    <MobileHeader user={user} />
+const Header = props =>
+  props.isMobile ?
+    <MobileHeader {...props} />
   :
-    <DesktopHeader user={user} logout={logout} location={location} />
+    <DesktopHeader {...props} />
 
 const mapStateToProps = ({user}) =>
 ({
@@ -18,7 +21,12 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  logout: () => dispatch({type: 'LOGOUT'})
+  toLogin:      () => dispatch(push('/login')),
+  toSignup:     () => dispatch(push('/signup')),
+  toHome:       () => dispatch(push('/')),
+  toShops:      () => dispatch(push('/shops')),
+  toSettings:   () => dispatch(push('/settings/account')),
+  logout:       () => dispatch({type: 'LOGOUT'})
 })
 
 export default withRouter(connect(

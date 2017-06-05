@@ -1,10 +1,9 @@
 import React from 'react'
 
-import Menu from 'components/Menu'
 import Header from 'components/Header'
 import OverlaySwitch from './Overlay'
 
-import isMobile, { isTablet } from 'utils/isMobile'
+import isMobile from 'utils/isMobile'
 
 export default ({children}) =>
   <div className='root'>
@@ -12,6 +11,5 @@ export default ({children}) =>
       <div className='main'>
         {children}
       </div>
-    <Menu isMobile={isMobile()} isTablet={isTablet()} />
     <OverlaySwitch />
   </div>

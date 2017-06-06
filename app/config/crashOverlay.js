@@ -19,7 +19,6 @@ function getHead() {
 
 var injectedCss = [];
 
-// From: http://stackoverflow.com/a/524721/127629
 function injectCss(css) {
   var head = getHead();
   var style = document.createElement('style');
@@ -213,10 +212,6 @@ var footerStyle = {
 
 function applyStyles(element, styles) {
   element.setAttribute('style', '');
-  // Firefox can't handle const due to non-compliant implementation
-  // Revisit Jan 2016
-  // https://developer.mozilla.org/en-US/Firefox/Releases/51#JavaScript
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=1101653
   for (var key in styles) {
     if (!styles.hasOwnProperty(key)) continue;
     var val = styles[key];
@@ -665,23 +660,19 @@ function render(error, name, message, resolvedFrames) {
 
   injectCss(css);
 
-  // Create overlay
   var overlay = document.createElement('div');
   applyStyles(overlay, overlayStyle);
   overlay.appendChild(hintsDiv());
 
-  // Create container
   var container = document.createElement('div');
   container.className = 'cra-container';
   overlay.appendChild(container);
 
-  // Create additional
   additionalReference = document.createElement('div');
   applyStyles(additionalReference, additionalStyle);
   container.appendChild(additionalReference);
   renderAdditional();
 
-  // Create header
   var header = document.createElement('div');
   applyStyles(header, headerStyle);
   if (message.match(/^\w*:/)) {
@@ -690,14 +681,8 @@ function render(error, name, message, resolvedFrames) {
     header.appendChild(document.createTextNode(name + ': ' + message));
   }
   container.appendChild(header);
-
-  // Create trace
   container.appendChild(traceDiv(resolvedFrames));
-
-  // Show message
   container.appendChild(footer());
-
-  // Mount
   document.body.appendChild((overlayReference = overlay));
 }
 
@@ -797,8 +782,6 @@ function crash(error) {
       }
     })
     .catch(function(e) {
-      // This is another fail case (unlikely to happen)
-      // e.g. render(...) throws an error with provided arguments
       console.log('Red box renderer error:', e);
       unmount();
       render(
@@ -914,8 +897,6 @@ var proxyConsole = function proxyConsole(type) {
     return orig.apply(this, arguments);
   };
 };
-
-// proxyConsole('error');
 
 if (module.hot) {
   module.hot.dispose(function() {

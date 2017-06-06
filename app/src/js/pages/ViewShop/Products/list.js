@@ -1,5 +1,5 @@
 import React from 'react'
-import { Feed } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 import { length } from 'ramda'
 
 import ProductListItem from 'elements/ListItem/ProductListItem'
@@ -8,15 +8,15 @@ const ProductsList =
 ({
   products
 }) =>
-    <Feed>
+    <Card.Group>
       {length(products) ? products.map((product, i) =>
         <ProductListItem key={`product-${i}`} product={product} />
       ) :
-        <Feed.Event>
-          <Feed.Label image='/images/productholder.png' />
-          <Feed.Content content='No Products!' />
-        </Feed.Event>
+        <Card>
+          <Image src='/images/productholder.png' />
+          <Card.Content>No Products!</Card.Content>
+        </Card>
       }
-    </Feed>
+    </Card.Group>
 
 export default ProductsList

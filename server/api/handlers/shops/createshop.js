@@ -5,6 +5,8 @@ const shortId = require('shortid')
 
 const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
+const shopAttributes = ['name', 'is_public', 'image']
+
 const validField = p => obj => !isNil(path([p], obj))
 
 const validBody = pipe(
@@ -54,7 +56,7 @@ module.exports = (req, res) => {
         userId: req.user.id,
         threadId: thread.id,
         slug
-      }, pick(['name', 'is_public', 'image'], req.body.shop))
+      }, pick(shopAttributes, req.body.shop))
       return Shop.create(newShop, { plain: true })
     })
     .then(shop => res.status(200).json({shop}))

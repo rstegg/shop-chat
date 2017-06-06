@@ -9,6 +9,8 @@ import { createProduct, uploadProductImage, onUploadProductImageFailure } from '
 
 import Dropzone from 'components/Dropzone'
 
+const tagsArray = tags => tags.split(' ')
+
 const Avatar = ({product, uploadProductImage, onUploadProductImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={uploadProductImage} onDropRejected={onUploadProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
@@ -31,7 +33,7 @@ class CreateProduct extends Component {
         <Card.Content>
           <Card.Header>New Product</Card.Header>
           <Card.Description>
-            <CreateProductForm onSubmit={values => createProduct(({...values, image: product.image}), shop.id, user)} />
+            <CreateProductForm onSubmit={values => createProduct(({...values, tags: tagsArray(values.tags), image: product.image}), shop.id, user)} />
           </Card.Description>
         </Card.Content>
       </Card>

@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: true
     },
-    shop_type: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

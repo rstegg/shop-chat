@@ -10,16 +10,15 @@ import Dropzone from 'components/Dropzone'
 import EditorField from 'elements/Input/EditorField'
 
 import ImageCropper from 'components/ImageCropper'
-import ProfileMenu from 'components/Menu'
 
 import { editProfile, switchToProfileUser, openProfileCropper, closeProfileCropper, uploadProfileImage, onUploadProfileImageFailure, editProfileField } from 'actions/profile'
 import GridLayout from 'layouts/Grid'
 import Shops from './Shops'
 
-const Avatar = ({profile, openProfileCropper, onUploadProfileImageFailure}) =>
+const Avatar = ({user, profile, openProfileCropper, onUploadProfileImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openProfileCropper} onDropRejected={onUploadProfileImageFailure}>
     {profile.image_loading && <Dimmer active><Loader /></Dimmer>}
-    <Image src={profile.image || '/images/placeholder.png'} />
+    <Image src={user.image || profile.image || '/images/placeholder.png'} />
     {profile.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
@@ -68,26 +67,23 @@ class AdminView extends Component {
       user
     } = this.props
     return (
-      <div style={{position: 'absolute', width: '100%', top: '0px', bottom: '100px'}}>
-        <GridLayout
-          Image={profile.isCropperOpen ?
-            <ImageCropper isOpen={profile.isCropperOpen} image={profile.imagePreview} uploadImage={img => uploadProfileImage(img, user)} closeCropper={closeProfileCropper} />
-            :
-            <Avatar profile={user} openProfileCropper={img => openProfileCropper(img[0])} onUploadProfileImageFailure={onUploadProfileImageFailure} />
-          }
-          Canopy={<Shops />}
-          ChatBox={<ProfileChat thread={profile} threadType='profile' />}
-          Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
-          SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
-          Gutter={<WebsiteField isEditing={profile.focused === 'website'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
-          GutterRight={
-            user.id === profile.userId ?
-            <Button basic onClick={switchToProfileUser}>Done</Button>
-            :
-            <ShareMenu url={`https://kuwau.com/user/${user.username}`} shopId={profile.id} />
-          } />
-        <ProfileMenu />
-      </div>
+      <GridLayout
+        Image={profile.isCropperOpen ?
+          <ImageCropper isOpen={profile.isCropperOpen} image={profile.imagePreview} uploadImage={img => uploadProfileImage(img, user)} closeCropper={closeProfileCropper} />
+          :
+          <Avatar profile={profile} user={user} openProfileCropper={img => openProfileCropper(img[0])} onUploadProfileImageFailure={onUploadProfileImageFailure} />
+        }
+        Canopy={<Shops />}
+        ChatBox={<ProfileChat thread={profile} threadType='profile' />}
+        Header={<NameField isEditing={profile.focused === 'username'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
+        SubHeader={<BioField isEditing={profile.focused === 'bio'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
+        Gutter={<WebsiteField isEditing={profile.focused === 'website'} user={user} editProfile={editProfile} editProfileField={editProfileField} />}
+        GutterRight={
+          user.id === profile.userId ?
+          <Button basic onClick={switchToProfileUser}>Done</Button>
+          :
+          <ShareMenu url={`https://kuwau.com/user/${user.username}`} shopId={profile.id} />
+        } />
     )
   }
 }

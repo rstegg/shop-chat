@@ -7,7 +7,7 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const validField = p => obj => !isNil(path([p], obj))
 
-const productParams = ['name', 'is_public', 'description', 'category', 'sub_category', 'price', 'image']
+const productParams = ['name', 'is_public', 'description', 'category', 'tags', 'price', 'image']
 
 const validBody = pipe(
   path(['body', 'product']),
@@ -62,7 +62,7 @@ const validate = req => {
       .toLowerCase()
       .trim()
 
-  return getValidParams(req.params.shopId, req.user.username, slug)
+  return getValidParams(req.params.shopId, req.user.id, slug)
 }
 
 module.exports = (req, res) => {

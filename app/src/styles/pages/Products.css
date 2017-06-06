@@ -13,7 +13,7 @@
 
 @media (min-width:768px)  {
   .products {
-    width: 100% !important;
-    height: 100% !important;
+    width: 75% !important;
+    height: 75% !important;
   }
 }

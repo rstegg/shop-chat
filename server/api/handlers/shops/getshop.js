@@ -3,7 +3,7 @@ const { Shop, User, Thread } = models
 
 const { pick } = require('ramda')
 
-const shopParams = ['id', 'name', 'description', 'shop_type', 'is_public', 'slug', 'image', 'userId']
+const shopAttributes = ['id', 'name', 'description', 'is_public', 'slug', 'image', 'userId']
 
 module.exports = (req, res) => {
   Shop.findOne({
@@ -18,7 +18,7 @@ module.exports = (req, res) => {
       }
     ],
     where: { slug: req.params.id },
-    attributes: shopParams
+    attributes: shopAttributes
   })
   .then(shop => res.status(200).json({shop}))
   .catch(error => res.status(400).json({error}))

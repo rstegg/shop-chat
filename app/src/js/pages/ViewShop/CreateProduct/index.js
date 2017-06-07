@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 
-import { Grid, Segment, Image, Label, Dimmer, Loader } from 'semantic-ui-react'
+import { Button, Grid, Segment, Image, Label, Dimmer, Loader } from 'semantic-ui-react'
 import CreateProductForm from './form'
 
 import { createProduct, openCreateProductCropper, closeCreateProductCropper, uploadProductImage, onUploadProductImageFailure } from 'actions/products'
@@ -43,6 +43,7 @@ class CreateProduct extends Component {
         </Grid.Column>
         <Grid.Column width={10} stretched>
           <CreateProductForm onSubmit={values => createProduct(({...values, tags: tagsArray(values.tags), image: product.image}), shop.id, user)} />
+          <Button basic color='red' as={NavLink} to={`/shop/${shop.slug}`}>Cancel</Button>
         </Grid.Column>
       </Grid>
     )

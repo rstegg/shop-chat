@@ -4,6 +4,8 @@ import { Grid, Button, Label, Dimmer, Loader, Image, Header, Segment } from 'sem
 import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
+import ProductAdminMenu from 'components/ProductAdminMenu'
+
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
@@ -59,9 +61,6 @@ const PriceField = ({isEditing, product, user, editProduct, editProductField}) =
   </EditorField>
 
 class AdminView extends Component {
-  componentWillUnmount() {
-    this.props.editProductField(null)
-  }
   render() {
     const {
       deleteProduct,
@@ -76,44 +75,47 @@ class AdminView extends Component {
       user,
     } = this.props
     return (
-      <Grid celled='internally' className='product__container'>
-        <Grid.Column width={6} stretched>
-          <Segment basic>
+      <div>
+        <Grid celled='internally' className='edit-product-container'>
+          <Grid.Column width={6} stretched>
+            <Segment basic>
+              <Segment>
+                {product.isCropperOpen ?
+                  <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
+                  :
+                  <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+                }
+              </Segment>
+              <Segment>
+                <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </Segment>
+              <Segment>
+                <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </Segment>
+              <Segment>
+                <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </Segment>
+              <Segment>
+                <PublicField product={product} user={user} editProduct={editProduct} />
+              </Segment>
+              <Segment style={{display: 'flex', justifyContent: 'center'}}>
+                {user.id === product.user.id ?
+                  <Button basic onClick={switchToProductUser}>Done</Button>
+                  :
+                  <ShareMenu url={`https://kuwau.com/shop/${product.slug}`} shopId={product.id} />
+                }
+              </Segment>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={10} stretched>
+            <ShareMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
             <Segment>
-              {product.isCropperOpen ?
-                <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
-                :
-                <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-              }
+              <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
             </Segment>
-            <Segment>
-              <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </Segment>
-            <Segment>
-              <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </Segment>
-            <Segment>
-              <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </Segment>
-            <Segment>
-              <PublicField product={product} user={user} editProduct={editProduct} />
-            </Segment>
-            <Segment style={{display: 'flex', justifyContent: 'center'}}>
-              {user.id === product.user.id ?
-                <Button basic onClick={switchToProductUser}>Done</Button>
-                :
-                <ShareMenu url={`https://kuwau.com/shop/${product.slug}`} shopId={product.id} />
-              }
-            </Segment>
-          </Segment>
-        </Grid.Column>
-        <Grid.Column width={10} stretched>
-          <ShareMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-          <Segment>
-            <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
-          </Segment>
-        </Grid.Column>
-      </Grid>
+          </Grid.Column>
+        </Grid>
+        <ProductAdminMenu />
+      </div>
     )
   }
 }

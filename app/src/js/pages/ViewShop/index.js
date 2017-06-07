@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { path } from 'ramda'
 
+import ShopAdminMenu from 'components/ShopAdminMenu'
+
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
@@ -23,7 +25,7 @@ class ViewShop extends Component {
     }
   }
   render() {
-    const { shop, user, children, switchToShopAdmin } = this.props
+    const { product, shop, user, children, switchToShopAdmin } = this.props
     if(!shop) {
       return <Redirect to='/' />
     }
@@ -32,6 +34,7 @@ class ViewShop extends Component {
       return (
         <AdminView {...adminViewProps} >
           {children}
+          <ShopAdminMenu />
         </AdminView>
       )
     }
@@ -47,9 +50,10 @@ class ViewShop extends Component {
   }
 }
 
-const mapStateToProps = ({shops, user}) =>
+const mapStateToProps = ({shops, products, user}) =>
 ({
   shop: shops.current,
+  product: products.current,
   isFetching: shops.isFetching,
   user
 })

@@ -39,7 +39,7 @@ const UserView = ({
             <Header as='h4'>{product.description || 'No description'}</Header>
           </Segment>
           <Segment>
-            <Header as='h4'>${product.price || '0.00'}</Header>
+            <Header as='h4'>${product.price}</Header>
           </Segment>
           <Segment>
             <Button.Group vertical fluid>

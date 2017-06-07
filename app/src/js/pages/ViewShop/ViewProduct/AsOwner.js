@@ -57,7 +57,7 @@ const PriceField = ({isEditing, product, user, editProduct, editProductField}) =
     normalize={normalizePrice}
     onClick={() => editProductField('price')} onClickOutside={() => editProductField(null)}
     onSubmit={price => editProduct({...product, price}, user)}>
-    <Header as='h4'>${product.price || '0.00'}</Header>
+    <Header as='h4'>${product.price}</Header>
   </EditorField>
 
 class AdminView extends Component {

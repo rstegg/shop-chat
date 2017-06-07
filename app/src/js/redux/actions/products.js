@@ -16,6 +16,26 @@ export const closeCreateProductCropper = () =>
   type: 'CLOSE_CREATE_PRODUCT_CROPPER'
 })
 
+export const uploadEditProductLeftCanvas = (type, product, user) =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LEFT_CANVAS',
+  payload: {
+    type,
+    product,
+    user
+  }
+})
+
+export const openChangeProductLeftCanvas = () =>
+({
+  type: 'OPEN_CHANGE_PRODUCT_LEFT_CANVAS'
+})
+
+export const closeChangeProductLeftCanvas = () =>
+({
+  type: 'CLOSE_CHANGE_PRODUCT_LEFT_CANVAS'
+})
+
 export const openChangeProductLayout = () =>
 ({
   type: 'OPEN_CHANGE_PRODUCT_LAYOUT'

@@ -14,9 +14,8 @@
 
 @media (min-width:768px)  {
   .shops {
-    min-height: 20%;
-    max-height: 80%;
-    height: auto;
+    width: 75% !important;
+    height: 75% !important;
     overflow: auto;
   }
 }

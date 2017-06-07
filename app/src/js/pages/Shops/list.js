@@ -2,21 +2,20 @@ import React from 'react'
 import { length } from 'ramda'
 
 import ShopItem from 'elements/ListItem/ShopListItem'
-import { Feed } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 const ShopsList =
 ({
   shops
 }) =>
-  <Feed>
+  <Card.Group>
     {length(shops) ? shops.map((shop, i) =>
       <ShopItem key={`shop-${i}`} shop={shop} />
     ) :
-    <Feed.Event>
-      <Feed.Label image='/images/productholder.png' />
-      <Feed.Content content='No Shops!' />
-    </Feed.Event>
+      <Card>
+        <Image src='/images/productholder.png' />
+        <Card.Content>No Shops!</Card.Content>
+      </Card>
     }
-  </Feed>
-
+  </Card.Group>
 export default ShopsList

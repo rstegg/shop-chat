@@ -41,19 +41,19 @@ export default class AppRouter extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-            <RootLayout>
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={Signup} />
-                <Route path='/settings' component={SettingsRouter} />
-                <Route path='/checkout' component={CheckoutRouter} />
-                <Route exact path='/shops' component={Shops} />
-                <Route exact path='/shops/new' component={CreateShop} />
-                <Route path='/shop/:shopId' component={ShopRouter} />
-                <Route exact path='/user/:id' component={ViewProfile} />
-              </Switch>
-            </RootLayout>
+          <RootLayout>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/signup' component={Signup} />
+              <Route path='/settings' component={SettingsRouter} />
+              <Route path='/checkout' component={CheckoutRouter} />
+              <Route exact path='/shops' component={Shops} />
+              <Route exact path='/shops/new' component={CreateShop} />
+              <Route path='/shop/:shopId' component={ShopRouter} />
+              <Route exact path='/user/:id' component={ViewProfile} />
+            </Switch>
+          </RootLayout>
         </Router>
       </Provider>
     )

@@ -8,7 +8,7 @@ const ProductsList =
 ({
   products
 }) =>
-    <Card.Group>
+    <Card.Group itemsPerRow={4}>
       {length(products) ? products.map((product, i) =>
         <ProductListItem key={`product-${i}`} product={product} />
       ) :

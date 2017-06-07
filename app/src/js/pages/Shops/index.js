@@ -21,7 +21,7 @@ class Shops extends Component {
       return <Redirect to='/login' />
     }
     return (
-      <Card className='products'>
+      <Card className='shops'>
         <Card.Content className='card__list'>
           <Card.Header>Shops</Card.Header>
           <Card.Description>

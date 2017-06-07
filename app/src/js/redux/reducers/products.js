@@ -32,6 +32,44 @@ export default function(state = initialState, action) {
           imagePreview: null
         }
       })
+    case 'OPEN_CHANGE_PRODUCT_LAYOUT':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          editMode: 'layout'
+        }
+      })
+    case 'OPEN_ADD_PRODUCT_OPTIONS':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          editMode: 'options'
+        }
+      })
+    case 'OPEN_ADD_PRODUCT_TEXT':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          editMode: 'text'
+        }
+      })
+    case 'OPEN_ADD_PRODUCT_MEDIA':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          editMode: 'text'
+        }
+      })
+    case 'CLOSE_CHANGE_PRODUCT_LAYOUT':
+    case 'CLOSE_ADD_PRODUCT_TEXT':
+    case 'CLOSE_ADD_PRODUCT_OPTIONS':
+    case 'CLOSE_ADD_PRODUCT_MEDIA':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          editMode: null
+        }
+      })
     case 'OPEN_EDIT_PRODUCT_CROPPER':
       return Object.assign({}, state, {
         current: {

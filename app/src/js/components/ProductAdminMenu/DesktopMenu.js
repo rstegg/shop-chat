@@ -4,9 +4,8 @@ import ProductAdminMenuButton from 'elements/Button/ProductAdminMenuButton'
 
 export default props =>
   <div className='ui menu product-admin-menu'>
-    <ProductAdminMenuButton onClick={props.toGlobe} icon='home' text='home' />
-    <ProductAdminMenuButton onClick={props.toShops} icon='book' text='your shops' />
-    <ProductAdminMenuButton onClick={props.toPencil} icon='edit' text='start a shop' />
-    <ProductAdminMenuButton onClick={props.toSettings} icon='setting' text='settings' />
-    <ProductAdminMenuButton onClick={props.toPower} icon='power' text='logout' />
+    <ProductAdminMenuButton onClick={props.openChangeProductLayout} icon='object group' text='change layout' />
+    <ProductAdminMenuButton onClick={props.openAddProductOptions} icon='unordered list' text='add options' />
+    <ProductAdminMenuButton onClick={props.openAddProductText} icon='font' text='add description' />
+    <ProductAdminMenuButton onClick={props.openAddProductMedia} icon='video play outline' text='add media' />
   </div>

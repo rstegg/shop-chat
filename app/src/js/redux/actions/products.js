@@ -16,6 +16,46 @@ export const closeCreateProductCropper = () =>
   type: 'CLOSE_CREATE_PRODUCT_CROPPER'
 })
 
+export const openChangeProductLayout = () =>
+({
+  type: 'OPEN_CHANGE_PRODUCT_LAYOUT'
+})
+
+export const closeChangeProductLayout = () =>
+({
+  type: 'CLOSE_CHANGE_PRODUCT_LAYOUT'
+})
+
+export const openAddProductOptions = () =>
+({
+  type: 'OPEN_ADD_PRODUCT_OPTIONS'
+})
+
+export const closeAddProductOptions = () =>
+({
+  type: 'CLOSE_ADD_PRODUCT_OPTIONS'
+})
+
+export const openAddProductText = () =>
+({
+  type: 'OPEN_ADD_PRODUCT_TEXT'
+})
+
+export const closeAddProductText = () =>
+({
+  type: 'CLOSE_ADD_PRODUCT_TEXT'
+})
+
+export const openAddProductMedia = () =>
+({
+  type: 'OPEN_ADD_PRODUCT_MEDIA'
+})
+
+export const closeAddProductMedia = () =>
+({
+  type: 'CLOSE_ADD_PRODUCT_MEDIA'
+})
+
 export const openEditProductCropper = image =>
 ({
   type: 'OPEN_EDIT_PRODUCT_CROPPER',

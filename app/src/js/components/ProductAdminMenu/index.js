@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { push } from 'react-router-redux'
-
 import TabletMenu from './TabletMenu'
 import DesktopMenu from './DesktopMenu'
+
+import { openChangeProductLayout, openAddProductOptions, openAddProductText, openAddProductMedia } from 'actions/products'
 
 import isMobile, { isTablet } from 'utils/isMobile'
 //Only renders if this is a tablet or desktop
@@ -27,13 +27,10 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  toLogin:      () => dispatch(push('/login')),
-  toSignup:     () => dispatch(push('/signup')),
-  toShops:      () => dispatch(push('/shops')),
-  toGlobe:      () => dispatch(push('/')),
-  toPencil:     () => dispatch(push('/shops/new')),
-  toSettings:   () => dispatch(push('/settings/account')),
-  toPower:      () => dispatch({type: 'LOGOUT'})
+  openChangeProductLayout:  () => dispatch(openChangeProductLayout()),
+  openAddProductOptions:    () => dispatch(openAddProductOptions()),
+  openAddProductText:       () => dispatch(openAddProductText()),
+  openAddProductMedia:      () => dispatch(openAddProductMedia()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomNav)

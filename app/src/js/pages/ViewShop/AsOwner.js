@@ -4,6 +4,8 @@ import { Button, Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
+import ShopAdminMenu from 'components/ShopAdminMenu'
+
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
@@ -68,24 +70,27 @@ class AdminView extends Component {
       children,
     } = this.props
     return (
-      <div className='edit-shop-container'>
-        <GridLayout
-          Image={shop.isCropperOpen ?
+      <div>
+        <div className='edit-shop-container'>
+          <GridLayout
+            Image={shop.isCropperOpen ?
               <ImageCropper isOpen={shop.isCropperOpen} image={shop.imagePreview} uploadImage={img => uploadEditShopImage(img, shop, user)} closeCropper={closeEditShopCropper} />
               :
               <Avatar shop={shop} openEditShopCropper={img => openEditShopCropper(img[0])} onUploadEditShopImageFailure={onUploadEditShopImageFailure} />
             }
-          Canopy={children}
-          ChatBox={<ShopChat thread={shop} threadType='shop' />}
-          Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
-          SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
-          Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}
-          GutterRight={
-            user.id === shop.userId ?
+            Canopy={children}
+            ChatBox={<ShopChat thread={shop} threadType='shop' />}
+            Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
+            SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
+            Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}
+            GutterRight={
+              user.id === shop.userId ?
               <Button basic onClick={switchToShopUser}>Done</Button>
               :
               <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
-          } />
+            } />
+        </div>
+        <ShopAdminMenu />
       </div>
     )
   }

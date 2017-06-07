@@ -10,6 +10,7 @@
   width: 100%;
   height: calc(100% - 100px);
   bottom: 100px;
+  left: 0;
 }
 
 .pay--menu {

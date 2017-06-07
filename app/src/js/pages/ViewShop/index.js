@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { path } from 'ramda'
 
-import ShopAdminMenu from 'components/ShopAdminMenu'
-
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
@@ -14,8 +12,10 @@ const getShopSlug = path(['slug'])
 
 class ViewShop extends Component {
   componentWillMount() {
-    const { match: { params }, user, fetchSingleShop } = this.props
-    fetchSingleShop(params.shopId, user)
+    const { match: { params }, user, shop, fetchSingleShop, isFetching } = this.props
+    if(!!shop && getShopSlug(shop) !== params.shopId && isFetching !== params.shopId) {
+      fetchSingleShop(params.shopId, user)
+    }
   }
   componentWillUpdate(nextProps) {
     const { match: { params }, user, shop, fetchSingleShop, isFetching } = nextProps
@@ -26,26 +26,14 @@ class ViewShop extends Component {
   }
   render() {
     const { product, shop, user, children, switchToShopAdmin } = this.props
+    const Hoc = shop.isAdmin ? AdminView : UserView
     if(!shop) {
       return <Redirect to='/' />
     }
-    if(shop.isAdmin) {
-      const adminViewProps = { shop, user }
-      return (
-        <AdminView {...adminViewProps} >
-          {children}
-          <ShopAdminMenu />
-        </AdminView>
-      )
-    }
-    let userViewProps = { shop, user }
-    if(shop.userId === user.id) {
-      userViewProps = { shop, user, switchToShopAdmin }
-    }
     return (
-      <UserView {...userViewProps} >
+      <Hoc {...this.props} >
         {children}
-      </UserView>
+      </Hoc>
     )
   }
 }

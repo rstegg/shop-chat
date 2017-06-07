@@ -9,8 +9,10 @@ import { fetchSingleProduct, switchToProductAdmin } from 'actions/products'
 
 class ViewProduct extends Component {
   componentWillMount() {
-    const { match: { params }, user, fetchSingleProduct } = this.props
-    fetchSingleProduct(params.productId, params.shopId, user)
+    const { match: { params }, user, product, fetchSingleProduct, isFetchingProduct } = this.props
+    if(!!product && product.slug !== params.productId && isFetchingProduct !== params.productId) {
+      fetchSingleProduct(params.productId, params.shopId, user)
+    }
   }
   componentWillUpdate() {
     const { match: { params }, user, product, fetchSingleProduct, isFetchingProduct } = this.props

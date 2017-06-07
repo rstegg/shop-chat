@@ -12,8 +12,6 @@ import CheckoutRouter from './pages/Checkout/Router'
 import SettingsRouter from './pages/Settings/Router'
 import ShopRouter from './pages/ViewShop/Router'
 
-import CreateProduct from './pages/CreateProduct'
-
 import Shops from './pages/Shops'
 import CreateShop from './pages/CreateShop'
 
@@ -51,7 +49,6 @@ export default class AppRouter extends Component {
                 <Route path='/settings' component={SettingsRouter} />
                 <Route path='/checkout' component={CheckoutRouter} />
                 <Route exact path='/shops' component={Shops} />
-                <Route exact path='/shop/:id/products/new' component={CreateProduct} />
                 <Route exact path='/shops/new' component={CreateShop} />
                 <Route path='/shop/:shopId' component={ShopRouter} />
                 <Route exact path='/user/:id' component={ViewProfile} />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MenuButton from 'elements/Button/MenuButton'
+import ProductAdminMenuButton from 'elements/Button/ProductAdminMenuButton'
 
 export default
 ({
@@ -14,15 +14,15 @@ export default
   toPower
 }) =>
   <div>
-    <div className='menu__container--left'>
-      <MenuButton onClick={toGlobe} icon='home' text='home' />
-      {user.isAuthenticated && <MenuButton onClick={toShops} icon='book' text='your shops' />}
+    <div className='product-admin-menu--left'>
+      <ProductAdminMenuButton onClick={toGlobe} icon='home' text='home' />
+      {user.isAuthenticated && <ProductAdminMenuButton onClick={toShops} icon='book' text='your shops' />}
     </div>
-    <div className='menu__container--right'>
-      {!user.isAuthenticated && <MenuButton onClick={toLogin} icon='sign in' text='login' />}
-      {!user.isAuthenticated && <MenuButton onClick={toSignup} icon='add user' text='sign up' />}
-      {user.isAuthenticated && <MenuButton onClick={toPencil} icon='edit' text='start a product' />}
-      {user.isAuthenticated && <MenuButton onClick={toSettings} icon='setting' text='settings' />}
-      {user.isAuthenticated && <MenuButton onClick={toPower} icon='power' text='logout' />}
+    <div className='product-admin-menu--right'>
+      {!user.isAuthenticated && <ProductAdminMenuButton onClick={toLogin} icon='sign in' text='login' />}
+      {!user.isAuthenticated && <ProductAdminMenuButton onClick={toSignup} icon='add user' text='sign up' />}
+      {user.isAuthenticated && <ProductAdminMenuButton onClick={toPencil} icon='edit' text='start a product' />}
+      {user.isAuthenticated && <ProductAdminMenuButton onClick={toSettings} icon='setting' text='settings' />}
+      {user.isAuthenticated && <ProductAdminMenuButton onClick={toPower} icon='power' text='logout' />}
     </div>
   </div>

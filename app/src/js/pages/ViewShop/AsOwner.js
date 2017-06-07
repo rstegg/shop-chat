@@ -15,7 +15,6 @@ import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCrop
 
 import ShopChat from 'components/Chat'
 import GridLayout from 'layouts/Grid'
-import ShopMenu from 'components/Menu'
 
 import { validate } from './validators'
 
@@ -87,7 +86,6 @@ class AdminView extends Component {
               :
               <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
           } />
-        <ShopMenu />
       </div>
     )
   }

@@ -1,4 +1,4 @@
-.admin-menu {
+.shop-admin-menu {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
   top: auto;
 }
 
-.admin-menu--left {
+.shop-admin-menu--left {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -24,7 +24,7 @@
   top: auto;
 }
 
-.admin-menu--right {
+.shop-admin-menu--right {
   display: flex;
   flex-direction: column;
   justify-content: space-around;

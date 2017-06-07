@@ -29,7 +29,7 @@ class CreateProduct extends Component {
       return <Redirect to={`/shop/${shop.slug}`} />
     }
     return (
-      <Grid celled='internally' className='product__container'>
+      <Grid celled='internally' className='product-container'>
         <Grid.Column width={6} stretched>
           <Segment basic>
             <Segment>

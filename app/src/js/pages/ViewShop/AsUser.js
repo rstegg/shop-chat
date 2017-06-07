@@ -23,19 +23,20 @@ const UserView = ({
   children,
   switchToShopAdmin
 }) =>
-  <GridLayout
-    Image={<Avatar image={shop.image} />}
-    Canopy={children}
-    ChatBox={<ShopChat thread={shop} threadType='shop' />}
-    Header={<Header as='h1'>{shop.name}</Header>}
-    SubHeader={!!shop.description && <Header as='h4'>{shop.description}</Header>}
-    Gutter={<ProfileLabel username={getUsername(shop)} image={getUserImage(shop)} />}
-    GutterRight={
-      user.id === shop.userId ?
-        <Button basic onClick={switchToShopAdmin}>Edit Shop</Button>
-        :
-        <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
-    } />
-
+  <div className='shop-container'>
+    <GridLayout
+      Image={<Avatar image={shop.image} />}
+      Canopy={children}
+      ChatBox={<ShopChat thread={shop} threadType='shop' />}
+      Header={<Header as='h1'>{shop.name}</Header>}
+      SubHeader={!!shop.description && <Header as='h4'>{shop.description}</Header>}
+      Gutter={<ProfileLabel username={getUsername(shop)} image={getUserImage(shop)} />}
+      GutterRight={
+        user.id === shop.userId ?
+          <Button basic onClick={switchToShopAdmin}>Edit Shop</Button>
+          :
+          <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
+      } />
+    </div>
 
 export default UserView

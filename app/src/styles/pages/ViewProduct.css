@@ -12,9 +12,10 @@
   align-self: center;
 }
 
-.product__container {
+.product-container {
   width: 100% !important;
   height: 100% !important;
+  overflow: auto;
 }
 
 .edit-product-container {
@@ -31,8 +32,9 @@
     align-self: center;
   }
 
-  .product__container {
+  .product-container {
     width: 100% !important;
     height: 100% !important;
+    overflow: auto;
   }
 }

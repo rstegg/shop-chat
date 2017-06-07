@@ -1,12 +1,12 @@
 import React from 'react'
 
-import AdminMenuButton from 'elements/Button/AdminMenuButton'
+import ProductAdminMenuButton from 'elements/Button/ProductAdminMenuButton'
 
 export default props =>
   <div className='ui menu product-admin-menu'>
-    <AdminMenuButton onClick={props.toGlobe} icon='home' text='home' />
-    <AdminMenuButton onClick={props.toShops} icon='book' text='your shops' />
-    <AdminMenuButton onClick={props.toPencil} icon='edit' text='start a shop' />
-    <AdminMenuButton onClick={props.toSettings} icon='setting' text='settings' />
-    <AdminMenuButton onClick={props.toPower} icon='power' text='logout' />
+    <ProductAdminMenuButton onClick={props.toGlobe} icon='home' text='home' />
+    <ProductAdminMenuButton onClick={props.toShops} icon='book' text='your shops' />
+    <ProductAdminMenuButton onClick={props.toPencil} icon='edit' text='start a shop' />
+    <ProductAdminMenuButton onClick={props.toSettings} icon='setting' text='settings' />
+    <ProductAdminMenuButton onClick={props.toPower} icon='power' text='logout' />
   </div>

@@ -18,4 +18,7 @@
 @import 'pages/Products.css';
 @import 'pages/Shops.css';
 @import 'pages/ViewProduct.css';
+@import 'pages/Layout/Image.css';
+@import 'pages/Layout/Gallery.css';
+@import 'pages/Layout/Grid.css';
 @import 'pages/ViewShop.css';

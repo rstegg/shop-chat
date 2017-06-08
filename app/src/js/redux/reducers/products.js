@@ -4,7 +4,7 @@ const initialState = {
     isCropperOpen: false,
     imagePreview: null,
     editMode: null,
-    layoutMode: null
+    layout: null
   },
   new: {
     name: '',
@@ -41,13 +41,6 @@ export default function(state = initialState, action) {
           editMode: 'layout'
         }
       })
-    case 'OPEN_CHANGE_PRODUCT_LEFT_CANVAS':
-      return Object.assign({}, state, {
-        current: {
-          ...state.current,
-          layoutMode: 'left-canvas'
-        }
-      })
     case 'OPEN_ADD_PRODUCT_OPTIONS':
       return Object.assign({}, state, {
         current: {
@@ -69,7 +62,6 @@ export default function(state = initialState, action) {
           editMode: 'text'
         }
       })
-    case 'CLOSE_CHANGE_PRODUCT_LEFT_CANVAS':
     case 'CLOSE_CHANGE_PRODUCT_LAYOUT':
     case 'CLOSE_ADD_PRODUCT_TEXT':
     case 'CLOSE_ADD_PRODUCT_OPTIONS':

@@ -31,7 +31,7 @@ import { validate } from './validators'
 import { normalizePrice } from './normalize'
 
 const Avatar = ({product, openEditProductCropper, onUploadEditProductImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDropAccepted={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
+  <Dropzone className='ui image editable avatar-image product-image-underlay' onDropAccepted={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
     <Image src={product.image || '/images/productholder.png'} />
     {product.image_error && <Label basic color='red'>Invalid image</Label>}
@@ -59,8 +59,8 @@ const DescriptionField = ({isEditing, product, user, editProduct, editProductFie
     <Header as='h4'>{product.description || 'Add a description'}</Header>
   </EditorField>
 
-const PublicField = ({product, user, editProduct}) =>
-  <Field component={CheckboxField} name='is_public' label='Public' onSubmit={is_public => editProduct({...product, is_public}, user)} />
+const PublicField = ({product, user, editProduct, style}) =>
+  <Field component={CheckboxField} name='is_public' label='Public' style={style} onSubmit={is_public => editProduct({...product, is_public}, user)} />
 
 const PriceField = ({isEditing, product, user, editProduct, editProductField}) =>
   <EditorField
@@ -72,7 +72,7 @@ const PriceField = ({isEditing, product, user, editProduct, editProductField}) =
     <Header as='h4'>${product.price}</Header>
   </EditorField>
 
-class AdminView extends Component {
+class AdminGridView extends Component {
   render() {
     const {
       user,
@@ -91,60 +91,38 @@ class AdminView extends Component {
     return (
       <div>
         <div className='edit-product-container'>
-          <Grid celled='internally'>
-            <Grid.Column width={6} stretched>
-              <Segment basic>
-                { product.editMode === 'layout' &&
-                  <ProductLayoutPicker
-                    isOpen={product.editMode === 'layout'}
-                    updateLayout={layout => uploadEditProductLayout(layout, product, user)}
-                    closeLayoutPicker={closeChangeProductLayout} /> }
-                <Segment>
-                  {product.isCropperOpen ?
-                    <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
-                    :
-                    <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-                  }
-                </Segment>
-                <Segment>
-                  <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment>
-                  <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment>
-                  <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment>
-                  <PublicField product={product} user={user} editProduct={editProduct} />
-                </Segment>
-                <Segment style={{display: 'flex', justifyContent: 'center'}}>
-                  {user.id === product.user.id ?
-                    <Button basic onClick={switchToProductUser}>Done</Button>
-                    :
-                    <ShareMenu url={`https://kuwau.com/shop/${product.slug}`} shopId={product.id} />
-                  }
-                </Segment>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column width={10} stretched>
-              <ShareMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-              <Segment>
-                <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
-              </Segment>
-            </Grid.Column>
-          </Grid>
+          { product.editMode === 'layout' &&
+            <ProductLayoutPicker
+              isOpen={product.editMode === 'layout'}
+              updateLayout={layout => uploadEditProductLayout(layout, product, user)}
+              closeLayoutPicker={closeChangeProductLayout} /> }
+            {product.isCropperOpen ?
+              <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
+              :
+              <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+            }
+          <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+            <Segment compact style={{pointerEvents: 'auto'}}>
+              <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+            </Segment>
+            <Segment compact style={{pointerEvents: 'auto'}}>
+              <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+            </Segment>
+            <Segment compact style={{pointerEvents: 'auto'}}>
+              <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+            </Segment>
+          </div>
         </div>
-        <ProductAdminMenu />
+        <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
       </div>
     )
   }
 }
 
-const ConnectedAdminView = reduxForm({
+const ConnectedAdminGridView = reduxForm({
   form: 'editProduct',
   validate
-})(AdminView)
+})(AdminGridView)
 
 const mapStateToProps = ({user, products}) =>
 ({
@@ -170,4 +148,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ConnectedAdminView)
+)(ConnectedAdminGridView)

@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import AdminView from './AsOwner'
-import UserView from './AsUser'
+import AdminGridView from './Layout/Grid/AsOwner'
+import UserGridView from './Layout/Grid/AsUser'
+import AdminImageView from './Layout/Image/AsOwner'
+import UserImageView from './Layout/Image/AsUser'
+import AdminGalleryView from './Layout/Gallery/AsOwner'
+import UserGalleryView from './Layout/Gallery/AsUser'
 
 import { fetchSingleProduct, switchToProductAdmin } from 'actions/products'
 
@@ -28,10 +32,26 @@ class ViewProduct extends Component {
     }
     if(product.isAdmin) {
       const adminViewProps = { product, user }
-      return <AdminView {...adminViewProps} />
+      switch(product.layout) {
+        case 'image':
+          return <AdminImageView {...adminViewProps} />
+        case 'gallery':
+          return <AdminGalleryView {...adminViewProps} />
+        case 'grid':
+        default:
+          return <AdminGridView {...adminViewProps} />
+      }
     }
     const userViewProps = { product, user, switchToProductAdmin }
-    return <UserView {...userViewProps} />
+    switch(product.layout) {
+      case 'image':
+        return <UserImageView {...userViewProps} />
+      case 'gallery':
+        return <UserGalleryView {...userViewProps} />
+      case 'grid':
+      default:
+        return <UserGridView {...userViewProps} />
+    }
   }
 }
 

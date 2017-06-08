@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import TabletMenu from './TabletMenu'
 import DesktopMenu from './DesktopMenu'
 
-import { openChangeProductLayout, openAddProductOptions, openAddProductText, openAddProductMedia } from 'actions/products'
+import { openChangeProductLayout, openAddProductOptions, openAddProductText, openAddProductMedia, switchToProductUser } from 'actions/products'
 
 import isMobile, { isTablet } from 'utils/isMobile'
 //Only renders if this is a tablet or desktop
@@ -31,6 +31,7 @@ const mapDispatchToProps = dispatch =>
   openAddProductOptions:    () => dispatch(openAddProductOptions()),
   openAddProductText:       () => dispatch(openAddProductText()),
   openAddProductMedia:      () => dispatch(openAddProductMedia()),
+  switchToProductUser:      () => dispatch(switchToProductUser()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomNav)

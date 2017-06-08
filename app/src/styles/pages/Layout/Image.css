@@ -1,0 +1,10 @@
+.product-image-layout {
+
+}
+
+.product-image-underlay {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+
+}

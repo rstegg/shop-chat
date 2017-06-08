@@ -72,7 +72,7 @@ const PriceField = ({isEditing, product, user, editProduct, editProductField}) =
     <Header as='h4'>${product.price}</Header>
   </EditorField>
 
-class AdminView extends Component {
+class AdminGridView extends Component {
   render() {
     const {
       user,
@@ -141,10 +141,10 @@ class AdminView extends Component {
   }
 }
 
-const ConnectedAdminView = reduxForm({
+const ConnectedAdminGridView = reduxForm({
   form: 'editProduct',
   validate
-})(AdminView)
+})(AdminGridView)
 
 const mapStateToProps = ({user, products}) =>
 ({
@@ -170,4 +170,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ConnectedAdminView)
+)(ConnectedAdminGridView)

@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
 import ProductAdminMenu from 'components/ProductAdminMenu'
+import ProductLayoutPicker from 'components/ProductLayoutPicker'
 
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
@@ -13,7 +14,18 @@ import Dropzone from 'components/Dropzone'
 import EditorField from 'elements/Input/EditorField'
 import CheckboxField from 'elements/Input/CheckboxField'
 
-import { openEditProductCropper, closeEditProductCropper, switchToProductUser, editProduct, deleteProduct, uploadEditProductImage, onUploadEditProductImageFailure, editProductField } from 'actions/products'
+import {
+  openEditProductCropper,
+  closeEditProductCropper,
+  closeChangeProductLayout,
+  uploadEditProductLayout,
+  switchToProductUser,
+  editProduct,
+  deleteProduct,
+  uploadEditProductImage,
+  onUploadEditProductImageFailure,
+  editProductField
+} from 'actions/products'
 
 import { validate } from './validators'
 import { normalizePrice } from './normalize'
@@ -71,6 +83,8 @@ class AdminView extends Component {
       closeEditProductCropper,
       uploadEditProductImage,
       onUploadEditProductImageFailure,
+      closeChangeProductLayout,
+      uploadEditProductLayout,
       product,
       user,
     } = this.props
@@ -80,6 +94,11 @@ class AdminView extends Component {
           <Grid celled='internally'>
             <Grid.Column width={6} stretched>
               <Segment basic>
+                { product.editMode === 'layout' &&
+                  <ProductLayoutPicker
+                    isOpen={product.editMode === 'layout'}
+                    updateLayout={layout => uploadEditProductLayout(layout, product, user)}
+                    closeLayoutPicker={closeChangeProductLayout} /> }
                 <Segment>
                   {product.isCropperOpen ?
                     <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
@@ -143,7 +162,9 @@ const mapDispatchToProps = dispatch =>
   editProductField: field => dispatch(editProductField(field)),
   openEditProductCropper: img => dispatch(openEditProductCropper(img)),
   closeEditProductCropper: () => dispatch(closeEditProductCropper()),
-  switchToProductUser: () => dispatch(switchToProductUser())
+  switchToProductUser: () => dispatch(switchToProductUser()),
+  closeChangeProductLayout: () => dispatch(closeChangeProductLayout()),
+  uploadEditProductLayout: (type, product, user) => dispatch(uploadEditProductLayout(type, product, user)),
 })
 
 export default connect(

@@ -6,6 +6,7 @@ import {
   onCreateProductSuccess,
   onUploadProductImageSuccess,
   onUploadEditProductImageSuccess,
+  onUploadEditProductLayoutSuccess,
   onShareProductSuccess
 } from 'actions/products'
 import su from 'superagent'
@@ -52,6 +53,13 @@ const api = {
       .attach('image', image)
       .set('Accept', 'application/json')
       .set('Authorization', token)
+    return Observable.fromPromise(request)
+  },
+  uploadEditProductLayout: ({layout, product, user}) => {
+    const request = su.put(`${API_HOST}/shop/${product.shopId}/product/${product.id}/layout`)
+      .send({layout})
+      .set('Accept', 'application/json')
+      .set('Authorization', user.token)
     return Observable.fromPromise(request)
   },
   editProduct: ({product, shopId, token}) => {
@@ -127,6 +135,17 @@ export const uploadEditProductImage = action$ =>
         .map(onUploadEditProductImageSuccess)
         .catch(error => Observable.of({
           type: 'UPLOAD_PRODUCT_IMAGE_FAILURE',
+          error
+        }))
+    )
+
+export const uploadEditProductLayout = action$ =>
+  action$.ofType('UPLOAD_EDIT_PRODUCT_LAYOUT')
+    .mergeMap(action =>
+      api.uploadEditProductLayout(action.payload)
+        .map(onUploadEditProductLayoutSuccess)
+        .catch(error => Observable.of({
+          type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE',
           error
         }))
     )

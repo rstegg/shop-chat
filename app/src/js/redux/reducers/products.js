@@ -206,6 +206,32 @@ export default function(state = initialState, action) {
           image_error: true
         }
       })
+    case 'UPLOAD_EDIT_PRODUCT_LAYOUT':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          layout_loading: true,
+          layout_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          ...action.payload.product,
+          layout_loading: false,
+          layout_error: false,
+          editMode: null
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          layout_loading: false,
+          layout_error: true
+        }
+      })
     case 'FETCH_SINGLE_PRODUCT':
       return Object.assign({}, state, {
         isFetching: action.payload.productId

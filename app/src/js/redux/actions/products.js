@@ -16,24 +16,27 @@ export const closeCreateProductCropper = () =>
   type: 'CLOSE_CREATE_PRODUCT_CROPPER'
 })
 
-export const uploadEditProductLeftCanvas = (type, product, user) =>
+export const uploadEditProductLayout = (layout, product, user) =>
 ({
-  type: 'UPLOAD_EDIT_PRODUCT_LEFT_CANVAS',
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT',
   payload: {
-    type,
+    layout,
     product,
     user
   }
 })
 
-export const openChangeProductLeftCanvas = () =>
+export const onUploadEditProductLayoutFailure = () =>
 ({
-  type: 'OPEN_CHANGE_PRODUCT_LEFT_CANVAS'
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE'
 })
 
-export const closeChangeProductLeftCanvas = () =>
+export const onUploadEditProductLayoutSuccess = res =>
 ({
-  type: 'CLOSE_CHANGE_PRODUCT_LEFT_CANVAS'
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
 })
 
 export const openChangeProductLayout = () =>

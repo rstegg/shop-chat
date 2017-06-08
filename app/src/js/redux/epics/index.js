@@ -2,7 +2,7 @@ import { combineEpics } from 'redux-observable'
 import loginSubmit from './login'
 import signupSubmit from './signup'
 import { fetchStripeCards, addStripeCard, fetchStripeBanks, addStripeBank, fetchStripeBitcoins, addStripeBitcoin } from './stripe'
-import { fetchProducts, fetchSingleProduct, createProduct, uploadProductImage, uploadEditProductImage, editProduct, deleteProduct, shareProduct } from './products'
+import { fetchProducts, fetchSingleProduct, createProduct, uploadProductImage, uploadEditProductImage, uploadEditProductLayout, editProduct, deleteProduct, shareProduct } from './products'
 import { fetchShops, fetchSingleShop, createShop, uploadShopImage, uploadEditShopImage, editShop, deleteShop } from './shops'
 import { uploadProfileImage, editProfile, fetchProfile } from './profile'
 import { saveAccountSettings } from './account'
@@ -33,6 +33,7 @@ export default combineEpics(
   uploadProfileImage,
   uploadProductImage,
   uploadEditProductImage,
+  uploadEditProductLayout,
   uploadShopImage,
   uploadEditShopImage,
   editProfile,

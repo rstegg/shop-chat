@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: false
     },
+    layout: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'grid'
+    },
     is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

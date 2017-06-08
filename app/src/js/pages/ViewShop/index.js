@@ -25,7 +25,7 @@ class ViewShop extends Component {
     }
   }
   render() {
-    const { product, shop, user, children, switchToShopAdmin } = this.props
+    const { shop, user, children } = this.props
     const Hoc = shop.isAdmin ? AdminView : UserView
     if(!shop) {
       return <Redirect to='/' />
@@ -38,10 +38,9 @@ class ViewShop extends Component {
   }
 }
 
-const mapStateToProps = ({shops, products, user}) =>
+const mapStateToProps = ({shops, user}) =>
 ({
   shop: shops.current,
-  product: products.current,
   isFetching: shops.isFetching,
   user
 })

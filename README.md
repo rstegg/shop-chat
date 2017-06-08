@@ -1,9 +1,5 @@
 # kuwau
 
-## TODOS
-
-- Add epic to UPLOAD_EDIT_PRODUCT_LEFT_CANVAS
-
 ## TODO: End goals
 
 - TODO

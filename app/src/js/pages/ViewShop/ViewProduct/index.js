@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import EditLayoutView from './AsEditLayout'
 import AdminView from './AsOwner'
 import UserView from './AsUser'
 
@@ -29,9 +28,6 @@ class ViewProduct extends Component {
     }
     if(product.isAdmin) {
       const adminViewProps = { product, user }
-      if(product.editMode === 'layout') {
-        return <EditLayoutView {...adminViewProps} />
-      }
       return <AdminView {...adminViewProps} />
     }
     const userViewProps = { product, user, switchToProductAdmin }

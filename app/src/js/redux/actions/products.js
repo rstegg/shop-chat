@@ -78,6 +78,29 @@ export const onUploadEditProductLayoutSuccess = res =>
   }
 })
 
+export const uploadAddProductOption = (option, product, user) =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT',
+  payload: {
+    option,
+    product,
+    user
+  }
+})
+
+export const onUploadAddProductOptionFailure = () =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE'
+})
+
+export const onUploadAddProductOptionSuccess = res =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
+})
+
 export const uploadGalleryProductImage = (image, index, product, user) =>
 ({
   type: 'UPLOAD_GALLERY_PRODUCT_IMAGE',
@@ -117,12 +140,12 @@ export const closeChangeProductLayout = () =>
   type: 'CLOSE_CHANGE_PRODUCT_LAYOUT'
 })
 
-export const openAddProductOptions = () =>
+export const openAddProductOption = () =>
 ({
   type: 'OPEN_ADD_PRODUCT_OPTIONS'
 })
 
-export const closeAddProductOptions = () =>
+export const closeAddProductOption = () =>
 ({
   type: 'CLOSE_ADD_PRODUCT_OPTIONS'
 })

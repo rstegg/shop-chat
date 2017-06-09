@@ -13,6 +13,7 @@ const shortId = require('shortid')
 
 const uploadProfileImage = require('../handlers/images/uploadProfileImage')
 const uploadProductImage = require('../handlers/images/uploadProductImage')
+const uploadGalleryProductImage = require('../handlers/images/uploadGalleryProductImage')
 const uploadShopImage = require('../handlers/images/uploadShopImage')
 
 module.exports = () => {
@@ -45,12 +46,10 @@ module.exports = () => {
 
   router.use(passport.authenticate('jwt', { session: false }))
   .post(`/image/shop`,
-    passport.authenticate('jwt', { session: false }),
     upload.single('image'),
     success
   )
   .post(`/image/product`,
-    passport.authenticate('jwt', { session: false }),
     upload.single('image'),
     success
   )
@@ -59,14 +58,16 @@ module.exports = () => {
     uploadShopImage
   )
   .post(`/image/profile`, //EDIT PROFILE IMAGE
-    passport.authenticate('jwt', { session: false }),
     upload.single('avatar'),
     uploadProfileImage
   )
   .post(`/image/:shopId/product/:id`, //EDIT PRODUCT IMAGE
-    passport.authenticate('jwt', { session: false }),
     upload.single('image'),
     uploadProductImage
+  )
+  .post(`/image/:shopId/product/:id/gallery/:index`, //EDIT PRODUCT GALLERY
+    upload.single('image'),
+    uploadGalleryProductImage
   )
 
   return router

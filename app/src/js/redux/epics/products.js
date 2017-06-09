@@ -6,7 +6,9 @@ import {
   onCreateProductSuccess,
   onUploadProductImageSuccess,
   onUploadEditProductImageSuccess,
+  onUploadGalleryProductImageSuccess,
   onUploadEditProductLayoutSuccess,
+  onDeleteProductGalleryImageSuccess,
   onShareProductSuccess
 } from 'actions/products'
 import su from 'superagent'
@@ -53,6 +55,19 @@ const api = {
       .attach('image', image)
       .set('Accept', 'application/json')
       .set('Authorization', token)
+    return Observable.fromPromise(request)
+  },
+  uploadGalleryProductImage: ({image, index, product, user}) => {
+    const request = su.post(`${API_HOST}/image/${product.shopId}/product/${product.id}/gallery/${index}`)
+      .attach('image', image)
+      .set('Accept', 'application/json')
+      .set('Authorization', user.token)
+    return Observable.fromPromise(request)
+  },
+  deleteProductGalleryImage: ({index, product, user}) => {
+    const request = su.delete(`${API_HOST}/shop/${product.shopId}/product/${product.id}/gallery/${index}`)
+      .set('Accept', 'application/json')
+      .set('Authorization', user.token)
     return Observable.fromPromise(request)
   },
   uploadEditProductLayout: ({layout, product, user}) => {
@@ -139,6 +154,20 @@ export const uploadEditProductImage = action$ =>
         }))
     )
 
+export const uploadGalleryProductImage = action$ =>
+  action$.ofType('UPLOAD_GALLERY_PRODUCT_IMAGE')
+    .mergeMap(action =>
+      api.uploadGalleryProductImage(action.payload)
+        .map(onUploadGalleryProductImageSuccess)
+        .catch(error => Observable.of({
+          type: 'UPLOAD_GALLERY_PRODUCT_IMAGE_FAILURE',
+          payload: {
+            error,
+            index: action.payload.index
+          }
+        }))
+    )
+
 export const uploadEditProductLayout = action$ =>
   action$.ofType('UPLOAD_EDIT_PRODUCT_LAYOUT')
     .mergeMap(action =>
@@ -167,5 +196,15 @@ export const deleteProduct = action$ =>
         .map(onDeleteProductSuccess)
         .catch(error => Observable.of({
           type: 'DELETE_PRODUCT_FAILURE'
+        }))
+      )
+
+export const deleteProductGalleryImage = action$ =>
+  action$.ofType('DELETE_PRODUCT_GALLERY_IMAGE')
+    .mergeMap(action =>
+      api.deleteProductGalleryImage(action.payload)
+        .map(onDeleteProductGalleryImageSuccess)
+        .catch(error => Observable.of({
+          type: 'DELETE_PRODUCT_GALLERY_IMAGE_FAILURE'
         }))
       )

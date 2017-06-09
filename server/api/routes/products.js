@@ -7,6 +7,7 @@ const editProductLayoutHandler = require('../handlers/products/editproductlayout
 const shareProductHandler = require('../handlers/products/shareproduct')
 const getProductsHandler = require('../handlers/products/getproducts')
 const getProductHandler = require('../handlers/products/getproduct')
+const deleteProductGalleryHandler = require('../handlers/products/deleteproductgallery')
 const deleteProductHandler = require('../handlers/products/deleteproduct')
 
 module.exports = () => {
@@ -29,6 +30,9 @@ module.exports = () => {
   )
   .post(`/share/product`,
     shareProductHandler
+  )
+  .delete(`/shop/:shopId/product/:id/gallery/:index`,
+    deleteProductGalleryHandler
   )
   .delete(`/shop/:shopId/product/:id`,
     deleteProductHandler

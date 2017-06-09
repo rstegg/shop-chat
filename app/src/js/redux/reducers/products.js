@@ -4,7 +4,8 @@ const initialState = {
     isCropperOpen: false,
     imagePreview: null,
     editMode: null,
-    layout: null
+    layout: null,
+    gallery: []
   },
   new: {
     name: '',
@@ -32,6 +33,20 @@ export default function(state = initialState, action) {
           ...state.new,
           isCropperOpen: false,
           imagePreview: null
+        }
+      })
+    case 'ADD_GALLERY_IMAGE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          gallery: [...state.current.gallery, { image: '/images/productholder.png' } ]
+        }
+      })
+    case 'DELETE_PRODUCT_GALLERY_IMAGE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          gallery: [...state.current.gallery.slice(0, action.payload.index), ...state.current.gallery.slice(action.payload.index + 1)]
         }
       })
     case 'OPEN_CHANGE_PRODUCT_LAYOUT':
@@ -86,6 +101,24 @@ export default function(state = initialState, action) {
         current: {
           ...state.current,
           isCropperOpen: false,
+          imagePreview: null
+        }
+      })
+    case 'OPEN_ADD_GALLERY_PRODUCT_CROPPER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isGalleryCropperOpen: true,
+          galleryActiveIndex: action.payload.index,
+          imagePreview: action.payload.image
+        }
+      })
+    case 'CLOSE_ADD_GALLERY_PRODUCT_CROPPER':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          isGalleryCropperOpen: false,
+          galleryActiveIndex: null,
           imagePreview: null
         }
       })
@@ -196,6 +229,51 @@ export default function(state = initialState, action) {
           image: null,
           image_loading: false,
           image_error: true
+        }
+      })
+    case 'UPLOAD_GALLERY_PRODUCT_IMAGE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          gallery: [
+            ...state.current.gallery.slice(0, action.payload.index),
+            {
+              image: null,
+              image_loading: true,
+              image_error: false
+            },
+            ...state.current.gallery.slice(action.payload.index + 1)
+          ]
+        }
+      })
+    case 'UPLOAD_GALLERY_PRODUCT_IMAGE_SUCCESS':
+      return Object.assign({}, state, {
+        current: {
+            ...state.current,
+            gallery: [
+              ...state.current.gallery.slice(0, action.payload.index),
+              {
+                image: action.payload.image,
+                image_loading: false,
+                image_error: false
+              },
+              ...state.current.gallery.slice(action.payload.index + 1)
+            ]
+          }
+        })
+    case 'UPLOAD_GALLERY_PRODUCT_IMAGE_FAILURE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          gallery: [
+            ...state.current.gallery.slice(0, action.payload.index),
+            {
+              image: null,
+              image_loading: false,
+              image_error: true
+            },
+            ...state.current.gallery.slice(action.payload.index + 1)
+          ]
         }
       })
     case 'UPLOAD_EDIT_PRODUCT_LAYOUT':

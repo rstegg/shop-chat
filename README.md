@@ -2,7 +2,7 @@
 
 ## TODO: End goals
 
-- TODO
+- TODO: ADD_GALLERY_IMAGE epic
 
 ## TODO
 

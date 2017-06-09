@@ -1,21 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Grid, Segment, Header, Image, Button, List } from 'semantic-ui-react'
+import { Segment, Header, Image, Button } from 'semantic-ui-react'
 import { path } from 'ramda'
-
-import SocialMenu from 'components/SocialMenu'
 
 import { productBuyNow, productAddToCart } from 'actions/orders'
 
 const productUserId = path(['user', 'id'])
-const productUsername = path(['user', 'username'])
-
-const productUserAvatar = path(['user', 'image'])
-
-const productShopSlug = path(['shop', 'slug'])
-const productShopName = path(['shop', 'name'])
-const productShopImage = path(['shop', 'image'])
 
 const UserView = ({
   orders,

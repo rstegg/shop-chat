@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
 import ProductAdminMenu from 'components/ProductAdminMenu'
-import ProductLayoutPicker from 'components/ProductLayoutPicker'
+import ProductLayoutMenu from 'components/ProductLayoutMenu'
 
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
@@ -17,9 +17,6 @@ import CheckboxField from 'elements/Input/CheckboxField'
 import {
   openEditProductCropper,
   closeEditProductCropper,
-  closeChangeProductLayout,
-  uploadEditProductLayout,
-  switchToProductUser,
   editProduct,
   deleteProduct,
   uploadEditProductImage,
@@ -59,8 +56,8 @@ const DescriptionField = ({isEditing, product, user, editProduct, editProductFie
     <Header as='h4'>{product.description || 'Add a description'}</Header>
   </EditorField>
 
-const PublicField = ({product, user, editProduct}) =>
-  <Field component={CheckboxField} name='is_public' label='Public' onSubmit={is_public => editProduct({...product, is_public}, user)} />
+const PublicField = ({product, user, editProduct, style}) =>
+  <Field component={CheckboxField} name='is_public' label='Public' style={style} onSubmit={is_public => editProduct({...product, is_public}, user)} />
 
 const PriceField = ({isEditing, product, user, editProduct, editProductField}) =>
   <EditorField
@@ -80,62 +77,55 @@ class AdminGridView extends Component {
       editProduct,
       deleteProduct,
       editProductField,
-      switchToProductUser,
       openEditProductCropper,
       closeEditProductCropper,
       uploadEditProductImage,
       onUploadEditProductImageFailure,
-      closeChangeProductLayout,
-      uploadEditProductLayout,
     } = this.props
     return (
       <div>
-        <div className='edit-product-container'>
-          <Grid celled='internally'>
-            <Grid.Column width={6} stretched>
-              <Segment basic>
-                { product.editMode === 'layout' &&
-                  <ProductLayoutPicker
-                    isOpen={product.editMode === 'layout'}
-                    updateLayout={layout => uploadEditProductLayout(layout, product, user)}
-                    closeLayoutPicker={closeChangeProductLayout} /> }
-                <Segment>
-                  {product.isCropperOpen ?
-                    <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
-                    :
-                    <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-                  }
-                </Segment>
-                <Segment>
-                  <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment>
-                  <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment>
-                  <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment>
-                  <PublicField product={product} user={user} editProduct={editProduct} />
-                </Segment>
-                <Segment style={{display: 'flex', justifyContent: 'center'}}>
-                  {user.id === product.user.id ?
-                    <Button basic onClick={switchToProductUser}>Done</Button>
-                    :
-                    <ShareMenu url={`https://kuwau.com/shop/${product.slug}`} shopId={product.id} />
-                  }
-                </Segment>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column width={10} stretched>
-              <ShareMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-              <Segment>
-                <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
-              </Segment>
-            </Grid.Column>
-          </Grid>
-        </div>
-        <ProductAdminMenu />
+        <ProductLayoutMenu>
+          <div className='edit-product-container'>
+            <Grid celled='internally'>
+              <Grid.Row columns={2}>
+                <Grid.Column width={8} stretched>
+                  <Segment basic>
+                    <Segment>
+                      {product.isCropperOpen ?
+                        <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
+                        :
+                        <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+                      }
+                    </Segment>
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={8} stretched>
+                  <Segment compact>
+                    <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  </Segment>
+                  <Segment compact>
+                    <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  </Segment>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={2}>
+                <Grid.Column width={8} stretched>
+                  <Segment>
+                    <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={8} stretched>
+                  <ShareMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
+                  <Segment>
+                    <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
+                  </Segment>
+                </Grid.Column>
+
+              </Grid.Row>
+            </Grid>
+          </div>
+          <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
+        </ProductLayoutMenu>
       </div>
     )
   }
@@ -162,9 +152,6 @@ const mapDispatchToProps = dispatch =>
   editProductField: field => dispatch(editProductField(field)),
   openEditProductCropper: img => dispatch(openEditProductCropper(img)),
   closeEditProductCropper: () => dispatch(closeEditProductCropper()),
-  switchToProductUser: () => dispatch(switchToProductUser()),
-  closeChangeProductLayout: () => dispatch(closeChangeProductLayout()),
-  uploadEditProductLayout: (layout, product, user) => dispatch(uploadEditProductLayout(layout, product, user)),
 })
 
 export default connect(

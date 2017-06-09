@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Button, Label, Dimmer, Loader, Image, Header, Segment } from 'semantic-ui-react'
+import { Label, Dimmer, Loader, Image, Header, Segment } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
 import ProductAdminMenu from 'components/ProductAdminMenu'
-import ProductLayoutPicker from 'components/ProductLayoutPicker'
+import ProductLayoutMenu from 'components/ProductLayoutMenu'
 
-import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
@@ -17,11 +16,7 @@ import CheckboxField from 'elements/Input/CheckboxField'
 import {
   openEditProductCropper,
   closeEditProductCropper,
-  closeChangeProductLayout,
-  uploadEditProductLayout,
-  switchToProductUser,
   editProduct,
-  deleteProduct,
   uploadEditProductImage,
   onUploadEditProductImageFailure,
   editProductField
@@ -78,42 +73,35 @@ class AdminGridView extends Component {
       user,
       product,
       editProduct,
-      deleteProduct,
       editProductField,
-      switchToProductUser,
       openEditProductCropper,
       closeEditProductCropper,
       uploadEditProductImage,
       onUploadEditProductImageFailure,
-      closeChangeProductLayout,
-      uploadEditProductLayout,
     } = this.props
     return (
       <div>
-        <div className='edit-product-container'>
-          { product.editMode === 'layout' &&
-            <ProductLayoutPicker
-              isOpen={product.editMode === 'layout'}
-              updateLayout={layout => uploadEditProductLayout(layout, product, user)}
-              closeLayoutPicker={closeChangeProductLayout} /> }
-            {product.isCropperOpen ?
-              <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
-              :
-              <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-            }
-          <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-            <Segment compact style={{pointerEvents: 'auto'}}>
-              <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </Segment>
-            <Segment compact style={{pointerEvents: 'auto'}}>
-              <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </Segment>
-            <Segment compact style={{pointerEvents: 'auto'}}>
-              <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </Segment>
+        <ProductLayoutMenu>
+          <div className='edit-product-container'>
+              {product.isCropperOpen ?
+                <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
+                :
+                <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+              }
+            <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+              <Segment compact style={{pointerEvents: 'auto'}}>
+                <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </Segment>
+              <Segment compact style={{pointerEvents: 'auto'}}>
+                <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </Segment>
+              <Segment compact style={{pointerEvents: 'auto'}}>
+                <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </Segment>
+            </div>
           </div>
-        </div>
-        <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
+          <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
+        </ProductLayoutMenu>
       </div>
     )
   }
@@ -133,16 +121,12 @@ const mapStateToProps = ({user, products}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  deleteProduct: (productId, shopId, user) => dispatch(deleteProduct(productId, shopId, user)),
   editProduct: (product, user) => dispatch(editProduct(product, user)),
   uploadEditProductImage: (img, product, user) => dispatch(uploadEditProductImage(img, product, user)),
   onUploadEditProductImageFailure: () => dispatch(onUploadEditProductImageFailure()),
   editProductField: field => dispatch(editProductField(field)),
   openEditProductCropper: img => dispatch(openEditProductCropper(img)),
   closeEditProductCropper: () => dispatch(closeEditProductCropper()),
-  switchToProductUser: () => dispatch(switchToProductUser()),
-  closeChangeProductLayout: () => dispatch(closeChangeProductLayout()),
-  uploadEditProductLayout: (layout, product, user) => dispatch(uploadEditProductLayout(layout, product, user)),
 })
 
 export default connect(

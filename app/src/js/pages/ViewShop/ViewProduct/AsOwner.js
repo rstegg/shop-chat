@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
 import ProductAdminMenu from 'components/ProductAdminMenu'
-import ProductLayoutPicker from 'components/ProductLayoutPicker'
+import ProductLayoutMenu from 'components/ProductLayoutMenu'
 
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
@@ -95,7 +95,7 @@ class AdminView extends Component {
             <Grid.Column width={6} stretched>
               <Segment basic>
                 { product.editMode === 'layout' &&
-                  <ProductLayoutPicker
+                  <ProductLayoutMenu layout={product.layout}
                     isOpen={product.editMode === 'layout'}
                     updateLayout={layout => uploadEditProductLayout(layout, product, user)}
                     closeLayoutPicker={closeChangeProductLayout} /> }

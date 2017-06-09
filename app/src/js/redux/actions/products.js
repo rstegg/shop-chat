@@ -16,6 +16,45 @@ export const closeCreateProductCropper = () =>
   type: 'CLOSE_CREATE_PRODUCT_CROPPER'
 })
 
+export const openAddGalleryProductCropper = (image, index) =>
+({
+  type: 'OPEN_ADD_GALLERY_PRODUCT_CROPPER',
+  payload: {
+    image,
+    index
+  }
+})
+
+export const closeAddGalleryProductCropper = () =>
+({
+  type: 'CLOSE_ADD_GALLERY_PRODUCT_CROPPER'
+})
+
+export const addGalleryImage = () =>
+({
+  type: 'ADD_GALLERY_IMAGE'
+})
+
+export const deleteProductGalleryImage = (index, product, user) =>
+({
+  type: 'DELETE_PRODUCT_GALLERY_IMAGE',
+  payload: {
+    index,
+    product,
+    user
+  }
+})
+
+export const onDeleteProductGalleryImageSuccess = (index, product, user) =>
+({
+  type: 'DELETE_PRODUCT_GALLERY_IMAGE_SUCCESS',
+  payload: {
+    index,
+    product,
+    user
+  }
+})
+
 export const uploadEditProductLayout = (layout, product, user) =>
 ({
   type: 'UPLOAD_EDIT_PRODUCT_LAYOUT',
@@ -36,6 +75,35 @@ export const onUploadEditProductLayoutSuccess = res =>
   type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS',
   payload: {
     product: res.body.product
+  }
+})
+
+export const uploadGalleryProductImage = (image, index, product, user) =>
+({
+  type: 'UPLOAD_GALLERY_PRODUCT_IMAGE',
+  payload: {
+    image,
+    index,
+    product,
+    user
+  }
+})
+
+export const onUploadGalleryProductImageFailure = (error, index) =>
+({
+  type: 'UPLOAD_GALLERY_PRODUCT_IMAGE_FAILURE',
+  payload: {
+    error,
+    index
+  }
+})
+
+export const onUploadGalleryProductImageSuccess = res =>
+({
+  type: 'UPLOAD_GALLERY_PRODUCT_IMAGE_SUCCESS',
+  payload: {
+    image: res.body.image,
+    index: res.body.index,
   }
 })
 

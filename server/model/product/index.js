@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false,
       defaultValue: 'grid'
     },
+    gallery: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: []
+    },
     is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

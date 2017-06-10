@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
 import ProductAdminMenu from 'components/ProductAdminMenu'
-import ProductLayoutMenu from 'components/ProductLayoutMenu'
+import ProductSidebar from 'components/ProductSidebar'
 
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
@@ -81,7 +81,7 @@ class AdminGridView extends Component {
     } = this.props
     return (
       <div>
-        <ProductLayoutMenu>
+        <ProductSidebar editMode={product.editMode}>
           <div className='edit-product-container'>
               {product.isCropperOpen ?
                 <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
@@ -101,7 +101,7 @@ class AdminGridView extends Component {
             </div>
           </div>
           <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
-        </ProductLayoutMenu>
+        </ProductSidebar>
       </div>
     )
   }

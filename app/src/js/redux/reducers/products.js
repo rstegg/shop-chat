@@ -84,8 +84,7 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: {
           ...state.current,
-          editMode: null,
-          layoutMode: null
+          editMode: null
         }
       })
     case 'OPEN_EDIT_PRODUCT_CROPPER':

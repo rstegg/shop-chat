@@ -14,16 +14,12 @@ add actions:
 
 - uploadAddProductElement
 
-add ProductTheme:
+ProductTheme:
 
-- Primary color
-- Secondary color
-- Background color
-- Font color
-- Segment color
+- use varaibles
+- add server-side saving
 
 add ProductOptions:
-
 - Checkbox
 - Toggle
 - Radio
@@ -50,10 +46,6 @@ add ProductMedias:
 ## TODO
 
 ### General
-
-- IDEA:
-  - BOTTOM MENU IS CUSTOMIZABLE FOR EACH SHOP
-    - THIS CREATES A CMS STYLE ATMOSPHERE?
 
 - Checkout:
   - Add shipping

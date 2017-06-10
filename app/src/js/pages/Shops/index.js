@@ -22,7 +22,7 @@ class Shops extends Component {
     }
     return (
       <Card className='shops'>
-        <Card.Content className='card__list'>
+        <Card.Content className='shops-list'>
           <Card.Header>Shops</Card.Header>
           <Card.Description>
             <ShopsList

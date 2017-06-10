@@ -1,7 +1,6 @@
 @import 'Base.css';
 /*Components*/
 @import 'Root.css';
-@import 'components/ShopAdminMenu.css';
 @import 'components/ProductAdminMenu.css';
 @import 'components/Header.css';
 @import 'components/Chat.css';
@@ -18,6 +17,7 @@
 @import 'pages/Products.css';
 @import 'pages/Shops.css';
 @import 'pages/ViewProduct.css';
+@import 'pages/ViewProfile.css';
 @import 'pages/Layout/Image.css';
 @import 'pages/Layout/Gallery.css';
 @import 'pages/Layout/Grid.css';

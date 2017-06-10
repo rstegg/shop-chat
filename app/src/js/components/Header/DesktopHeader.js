@@ -21,6 +21,7 @@ const DesktopHeader = ({user, logout, location, toHome, toShops, toSettings}) =>
           <Menu.Menu>
             <HeaderNavLabel to='/' icon='home' text='home' />
             <HeaderNavLabel to='/shops' icon='book' text='your shops' />
+            <HeaderNavLabel to='/shops/new' icon='edit' text='start a shop' />
             <Dropdown trigger={<ProfileButton username={user.username} image={user.image} />} icon={null} pointing='top right'>
               <Dropdown.Menu>
                 <Dropdown.Item as={NavLink} to={`/user/${user.username}`} text='Profile' active={location.pathname === `/user/${user.username}`} />

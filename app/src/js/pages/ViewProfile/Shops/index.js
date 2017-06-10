@@ -9,8 +9,8 @@ class Shops extends Component {
   render() {
     const { profile, user } = this.props
     return (
-      <Card className='products'>
-        <Card.Content className='card__list'>
+      <Card className='profile-shops-container'>
+        <Card.Content className='shops-list'>
           <Card.Header>Shops</Card.Header>
           <Card.Description>
             <ShopsList

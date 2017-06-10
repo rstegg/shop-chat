@@ -6,13 +6,21 @@ add 'ProductTheme' menu
 
 add actions:
 
+- uploadEditProductTheme
+
+- uploadAddProductOption
+
 - uploadAddProductMedia
-- openAddProductMedia
-- closeAddProductMedia
 
 - uploadAddProductElement
-- openAddProductElement
-- closeAddProductElement
+
+add ProductTheme:
+
+- Primary color
+- Secondary color
+- Background color
+- Font color
+- Segment color
 
 add ProductOptions:
 
@@ -34,7 +42,10 @@ add ProductElements:
 
 add ProductMedias:
 - Video
-- TODO: finish ProductMedias
+- Line chart(?)
+- Bar chart(?)
+- Pie chart(?)
+- Activity feed(?)
 
 ## TODO
 

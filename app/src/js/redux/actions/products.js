@@ -150,14 +150,14 @@ export const closeAddProductOption = () =>
   type: 'CLOSE_ADD_PRODUCT_OPTIONS'
 })
 
-export const openAddProductText = () =>
+export const openAddProductElement = () =>
 ({
-  type: 'OPEN_ADD_PRODUCT_TEXT'
+  type: 'OPEN_ADD_PRODUCT_ELEMENT'
 })
 
-export const closeAddProductText = () =>
+export const closeAddProductElement = () =>
 ({
-  type: 'CLOSE_ADD_PRODUCT_TEXT'
+  type: 'CLOSE_ADD_PRODUCT_ELEMENT'
 })
 
 export const openAddProductMedia = () =>
@@ -168,6 +168,16 @@ export const openAddProductMedia = () =>
 export const closeAddProductMedia = () =>
 ({
   type: 'CLOSE_ADD_PRODUCT_MEDIA'
+})
+
+export const openEditProductTheme = () =>
+({
+  type: 'OPEN_EDIT_PRODUCT_THEME'
+})
+
+export const closeEditProductTheme = () =>
+({
+  type: 'CLOSE_EDIT_PRODUCT_THEME'
 })
 
 export const openEditProductCropper = image =>

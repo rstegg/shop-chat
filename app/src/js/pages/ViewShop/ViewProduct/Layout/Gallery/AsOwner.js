@@ -108,7 +108,7 @@ class AdminGridView extends Component {
     } = this.props
     return (
       <div>
-        <ProductSidebar editMode={product.editMode}>
+        <ProductSidebar product={product}>
           <div className='edit-product-container'>
             <Grid celled='internally'>
               <Grid.Column width={10} stretched>

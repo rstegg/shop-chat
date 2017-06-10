@@ -55,52 +55,6 @@ export const onDeleteProductGalleryImageSuccess = (index, product, user) =>
   }
 })
 
-export const uploadEditProductLayout = (layout, product, user) =>
-({
-  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT',
-  payload: {
-    layout,
-    product,
-    user
-  }
-})
-
-export const onUploadEditProductLayoutFailure = () =>
-({
-  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE'
-})
-
-export const onUploadEditProductLayoutSuccess = res =>
-({
-  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS',
-  payload: {
-    product: res.body.product
-  }
-})
-
-export const uploadAddProductOption = (option, product, user) =>
-({
-  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT',
-  payload: {
-    option,
-    product,
-    user
-  }
-})
-
-export const onUploadAddProductOptionFailure = () =>
-({
-  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE'
-})
-
-export const onUploadAddProductOptionSuccess = res =>
-({
-  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS',
-  payload: {
-    product: res.body.product
-  }
-})
-
 export const uploadGalleryProductImage = (image, index, product, user) =>
 ({
   type: 'UPLOAD_GALLERY_PRODUCT_IMAGE',
@@ -140,6 +94,29 @@ export const closeChangeProductLayout = () =>
   type: 'CLOSE_CHANGE_PRODUCT_LAYOUT'
 })
 
+export const uploadEditProductLayout = (layout, product, user) =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT',
+  payload: {
+    layout,
+    product,
+    user
+  }
+})
+
+export const onUploadEditProductLayoutFailure = () =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE'
+})
+
+export const onUploadEditProductLayoutSuccess = res =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
+})
+
 export const openAddProductOption = () =>
 ({
   type: 'OPEN_ADD_PRODUCT_OPTIONS'
@@ -148,6 +125,29 @@ export const openAddProductOption = () =>
 export const closeAddProductOption = () =>
 ({
   type: 'CLOSE_ADD_PRODUCT_OPTIONS'
+})
+
+export const uploadAddProductOption = (option, product, user) =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_OPTION',
+  payload: {
+    option,
+    product,
+    user
+  }
+})
+
+export const onUploadAddProductOptionFailure = () =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_OPTION_FAILURE'
+})
+
+export const onUploadAddProductOptionSuccess = res =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_OPTION_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
 })
 
 export const openAddProductElement = () =>
@@ -160,6 +160,29 @@ export const closeAddProductElement = () =>
   type: 'CLOSE_ADD_PRODUCT_ELEMENT'
 })
 
+export const uploadAddProductElement = (element, product, user) =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_ELEMENT',
+  payload: {
+    element,
+    product,
+    user
+  }
+})
+
+export const onUploadAddProductElementFailure = () =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_ELEMENT_FAILURE'
+})
+
+export const onUploadAddProductElementSuccess = res =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_ELEMENT_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
+})
+
 export const openAddProductMedia = () =>
 ({
   type: 'OPEN_ADD_PRODUCT_MEDIA'
@@ -170,6 +193,29 @@ export const closeAddProductMedia = () =>
   type: 'CLOSE_ADD_PRODUCT_MEDIA'
 })
 
+export const uploadAddProductMedia = (media, product, user) =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_MEDIA',
+  payload: {
+    media,
+    product,
+    user
+  }
+})
+
+export const onUploadAddProductMediaFailure = () =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_MEDIA_FAILURE'
+})
+
+export const onUploadAddProductMediaSuccess = res =>
+({
+  type: 'UPLOAD_ADD_PRODUCT_MEDIA_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
+})
+
 export const openEditProductTheme = () =>
 ({
   type: 'OPEN_EDIT_PRODUCT_THEME'
@@ -178,6 +224,52 @@ export const openEditProductTheme = () =>
 export const closeEditProductTheme = () =>
 ({
   type: 'CLOSE_EDIT_PRODUCT_THEME'
+})
+
+export const openEditProductThemeColor = theme =>
+({
+  type: 'OPEN_EDIT_PRODUCT_THEME_COLOR',
+  payload: {
+    theme
+  }
+})
+
+export const closeEditProductThemeColor = () =>
+({
+  type: 'CLOSE_EDIT_PRODUCT_THEME_COLOR'
+})
+
+export const editProductThemeColor = (theme, color) =>
+({
+  type: 'EDIT_PRODUCT_THEME_COLOR',
+  payload: {
+    theme,
+    color
+  }
+})
+
+export const uploadEditProductTheme = (theme, color, product, user) =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_THEME',
+  payload: {
+    theme,
+    color,
+    product,
+    user
+  }
+})
+
+export const onUploadEditProductThemeFailure = () =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_THEME_FAILURE'
+})
+
+export const onUploadEditProductThemeSuccess = res =>
+({
+  type: 'UPLOAD_EDIT_PRODUCT_THEME_SUCCESS',
+  payload: {
+    product: res.body.product
+  }
 })
 
 export const openEditProductCropper = image =>

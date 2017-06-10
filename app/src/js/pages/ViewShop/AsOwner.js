@@ -4,8 +4,6 @@ import { Button, Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import { length } from 'ramda'
 
-import ShopAdminMenu from 'components/ShopAdminMenu'
-
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
@@ -13,7 +11,16 @@ import Dropzone from 'components/Dropzone'
 import CheckboxField from 'elements/Input/CheckboxField'
 import EditorField from 'elements/Input/EditorField'
 
-import { deleteShop, editShop, editShopField, switchToShopUser, openEditShopCropper, closeEditShopCropper, uploadEditShopImage, onUploadEditShopImageFailure } from 'actions/shops'
+import {
+  deleteShop,
+  editShop,
+  editShopField,
+  switchToShopUser,
+  openEditShopCropper,
+  closeEditShopCropper,
+  uploadEditShopImage,
+  onUploadEditShopImageFailure
+} from 'actions/shops'
 
 import ShopChat from 'components/Chat'
 import GridLayout from 'layouts/Grid'
@@ -90,7 +97,6 @@ class AdminView extends Component {
               <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
             } />
         </div>
-        <ShopAdminMenu />
       </div>
     )
   }

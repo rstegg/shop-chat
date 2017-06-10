@@ -28,11 +28,11 @@ const SidebarContent = ({editMode}) => {
   }
 }
 
-const ProductSidebar = ({editMode, children}) =>
+const ProductSidebar = ({product, children}) =>
   <div>
     <Sidebar.Pushable as={Segment} style={{position: 'absolute', top: '0', left: '0', bottom: '0', right: '0'}}>
-      <Sidebar animation='overlay' width='thin' visible={!!editMode}>
-        <SidebarContent editMode={editMode} />
+      <Sidebar animation='overlay' width='thin' visible={!!product.editMode}>
+        <SidebarContent editMode={product.editMode} />
       </Sidebar>
       <Sidebar.Pusher>
         {children}

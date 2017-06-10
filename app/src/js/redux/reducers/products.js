@@ -2,10 +2,25 @@ const initialState = {
   current: {
     isAdmin: false,
     isCropperOpen: false,
+    activeTheme: false,
     imagePreview: null,
     editMode: null,
     layout: null,
-    gallery: []
+    gallery: [],
+    themes: {
+      primary: '',
+      secondary: '',
+      background: '',
+      segment: '',
+      font: '',
+    },
+    previewThemes: {
+      primary: '',
+      secondary: '',
+      background: '',
+      segment: '',
+      font: '',
+    }
   },
   new: {
     name: '',
@@ -88,11 +103,18 @@ export default function(state = initialState, action) {
     case 'CLOSE_ADD_PRODUCT_ELEMENT':
     case 'CLOSE_ADD_PRODUCT_OPTIONS':
     case 'CLOSE_ADD_PRODUCT_MEDIA':
-    case 'CLOSE_EDIT_PRODUCT_THEME':
       return Object.assign({}, state, {
         current: {
           ...state.current,
           editMode: null
+        }
+      })
+    case 'CLOSE_EDIT_PRODUCT_THEME':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          editMode: null,
+          previewThemes: initialState.current.previewThemes,
         }
       })
     case 'OPEN_EDIT_PRODUCT_CROPPER':
@@ -109,6 +131,27 @@ export default function(state = initialState, action) {
           ...state.current,
           isCropperOpen: false,
           imagePreview: null
+        }
+      })
+    case 'OPEN_EDIT_PRODUCT_THEME_COLOR':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          activeTheme: action.payload.theme
+        }
+      })
+    case 'CLOSE_EDIT_PRODUCT_THEME_COLOR':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          activeTheme: false
+        }
+      })
+    case 'EDIT_PRODUCT_THEME_COLOR':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          activeThemeColor: action.payload.color
         }
       })
     case 'OPEN_ADD_GALLERY_PRODUCT_CROPPER':

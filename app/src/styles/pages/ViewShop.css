@@ -8,8 +8,8 @@
   display: flex;
   position: absolute;
   width: 100%;
-  height: calc(100% - 100px);
-  bottom: 100px;
+  height: 100%;
+  top: 0;
   left: 0;
 }
 

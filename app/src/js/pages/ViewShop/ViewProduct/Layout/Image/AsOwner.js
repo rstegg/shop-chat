@@ -81,7 +81,7 @@ class AdminGridView extends Component {
     } = this.props
     return (
       <div>
-        <ProductSidebar editMode={product.editMode}>
+        <ProductSidebar product={product}>
           <div className='edit-product-container'>
               {product.isCropperOpen ?
                 <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />

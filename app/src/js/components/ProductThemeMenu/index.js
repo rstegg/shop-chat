@@ -3,28 +3,28 @@ import { connect } from 'react-redux'
 
 import { Header, Menu, Button, Icon } from 'semantic-ui-react'
 
-import { closeEditProductTheme, uploadEditProductTheme, } from 'actions/products'
+import { closeEditProductTheme, openEditProductThemeColor, } from 'actions/products'
 
-const ProductThemeMenu = ({ product, user, uploadEditProductTheme, closeEditProductTheme }) =>
+const ProductThemeMenu = ({ product, user, openEditProductThemeColor, closeEditProductTheme }) =>
   <Menu icon='labeled' vertical inverted style={{width: '100%', height: '100%'}}>
     <Header block inverted>Theme</Header>
-    <Menu.Item onClick={() => uploadEditProductTheme('primary', product, user)}>
+    <Menu.Item onClick={() => openEditProductThemeColor('primary')}>
       <Icon name='square' size='massive' />
       Primary color
     </Menu.Item>
-    <Menu.Item onClick={() => uploadEditProductTheme('secondary', product, user)}>
+    <Menu.Item onClick={() => openEditProductThemeColor('secondary')}>
       <Icon name='square' size='massive' />
       Secondary color
     </Menu.Item>
-    <Menu.Item onClick={() => uploadEditProductTheme('background', product, user)}>
+    <Menu.Item onClick={() => openEditProductThemeColor('background')}>
       <Icon name='square' size='massive' />
       Background color
     </Menu.Item>
-    <Menu.Item onClick={() => uploadEditProductTheme('segment', product, user)}>
+    <Menu.Item onClick={() => openEditProductThemeColor('segment')}>
       <Icon name='square' size='massive' />
       Segment color
     </Menu.Item>
-    <Menu.Item onClick={() => uploadEditProductTheme('font', product, user)}>
+    <Menu.Item onClick={() => openEditProductThemeColor('font')}>
       <Icon name='font' size='massive' />
       Font color
     </Menu.Item>
@@ -43,7 +43,7 @@ const mapStateToProps = ({products, user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  uploadEditProductTheme: (options, product, user) => dispatch(uploadEditProductTheme(options, product, user)),
+  openEditProductThemeColor: theme => dispatch(openEditProductThemeColor(theme)),
   closeEditProductTheme: () => dispatch(closeEditProductTheme()),
 })
 

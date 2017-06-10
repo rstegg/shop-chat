@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch =>
 ({
   openChangeProductLayout:  () => dispatch(openChangeProductLayout()),
   openAddProductOption:     () => dispatch(openAddProductOption()),
-  openAddProductElement:       () => dispatch(openAddProductElement()),
+  openAddProductElement:    () => dispatch(openAddProductElement()),
   openAddProductMedia:      () => dispatch(openAddProductMedia()),
   openEditProductTheme:     () => dispatch(openEditProductTheme()),
   switchToProductUser:      () => dispatch(switchToProductUser()),

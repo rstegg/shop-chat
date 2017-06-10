@@ -1,8 +1,40 @@
 # kuwau
 
-## TODO: End goals
+## TODO
 
-- TODO: ADD_GALLERY_IMAGE epic
+add 'ProductTheme' menu
+
+add actions:
+
+- uploadAddProductMedia
+- openAddProductMedia
+- closeAddProductMedia
+
+- uploadAddProductElement
+- openAddProductElement
+- closeAddProductElement
+
+add ProductOptions:
+
+- Checkbox
+- Toggle
+- Radio
+- Dropdown
+- Type(?)
+- Color
+- Bundle(?)
+- Coupon(?)
+
+add ProductElements:
+- Header
+- Paragraph
+- List
+- Table
+- Columns
+
+add ProductMedias:
+- Video
+- TODO: finish ProductMedias
 
 ## TODO
 

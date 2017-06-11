@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: true,
       defaultValue: []
     },
+    themes: {
+      type: DataTypes.JSONB,
+      allowNull: false
+    },
     is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

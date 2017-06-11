@@ -3,7 +3,7 @@ const { Product, Shop } = models
 
 const shortId = require('shortid')
 
-const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
+const { allPass, assoc, merge, path, pick, pipe, isNil } = require('ramda')
 
 const validField = p => obj => !isNil(path([p], obj))
 
@@ -12,7 +12,8 @@ const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'galler
 const validBody = pipe(
   path(['body']),
   allPass([
-      validField('layout')
+      validField('theme'),
+      validField('color')
   ]))
 
 const validParams = pipe(
@@ -22,13 +23,13 @@ const validParams = pipe(
       validField('shopId')
   ]))
 
-const getValidParams = (productId, shopId, userId) =>
-  Shop.findOne({
-    where: { id: shopId, userId }
+const getValidParams = (productId, userId) =>
+  Product.findOne({
+    where: { id: productId, userId }
   })
-  .then(shop =>
-    !shop ? Promise.reject('Invalid permission')
-    : shop
+  .then(product =>
+    !product ? Promise.reject('Invalid permission')
+    : product
   )
 
 const validate = req => {
@@ -37,14 +38,15 @@ const validate = req => {
 
   const { shopId, id } = req.params
 
-  return getValidParams(id, shopId, req.user.id)
+  return getValidParams(id, req.user.id)
 }
 
 module.exports = (req, res) => {
   validate(req)
-    .then(shop => {
+    .then(product => {
+      const updateTheme = assoc(req.body.theme, req.body.color)
       const updatedProduct = {
-        layout: req.body.layout
+        themes: updateTheme(product.themes)
       }
       return Product.update(updatedProduct, { where: { id: req.params.id, shopId: req.params.shopId, userId: req.user.id }, returning: true, plain: true })
     })

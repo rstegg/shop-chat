@@ -8,6 +8,7 @@ import {
   onUploadEditProductImageSuccess,
   onUploadGalleryProductImageSuccess,
   onUploadEditProductLayoutSuccess,
+  onUploadEditProductThemeSuccess,
   onDeleteProductGalleryImageSuccess,
   onShareProductSuccess
 } from 'actions/products'
@@ -73,6 +74,13 @@ const api = {
   uploadEditProductLayout: ({layout, product, user}) => {
     const request = su.put(`${API_HOST}/shop/${product.shopId}/product/${product.id}/layout`)
       .send({layout})
+      .set('Accept', 'application/json')
+      .set('Authorization', user.token)
+    return Observable.fromPromise(request)
+  },
+  uploadEditProductTheme: ({theme, color, product, user}) => {
+    const request = su.put(`${API_HOST}/shop/${product.shopId}/product/${product.id}/theme`)
+      .send({theme, color})
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
     return Observable.fromPromise(request)
@@ -175,6 +183,17 @@ export const uploadEditProductLayout = action$ =>
         .map(onUploadEditProductLayoutSuccess)
         .catch(error => Observable.of({
           type: 'UPLOAD_EDIT_PRODUCT_LAYOUT_FAILURE',
+          error
+        }))
+    )
+
+export const uploadEditProductTheme = action$ =>
+  action$.ofType('UPLOAD_EDIT_PRODUCT_THEME')
+    .mergeMap(action =>
+      api.uploadEditProductTheme(action.payload)
+        .map(onUploadEditProductThemeSuccess)
+        .catch(error => Observable.of({
+          type: 'UPLOAD_EDIT_PRODUCT_THEME_FAILURE',
           error
         }))
     )

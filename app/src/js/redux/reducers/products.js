@@ -3,23 +3,27 @@ const initialState = {
     isAdmin: false,
     isCropperOpen: false,
     activeTheme: false,
+    activeThemeColor: null,
     imagePreview: null,
     editMode: null,
     layout: null,
     gallery: [],
     themes: {
-      primary: '',
-      secondary: '',
-      background: '',
-      segment: '',
-      font: '',
-    },
-    previewThemes: {
-      primary: '',
-      secondary: '',
-      background: '',
-      segment: '',
-      font: '',
+      primary: {
+        hex: '#ffffff'
+      },
+      secondary: {
+        hex: '#ffffff'
+      },
+      background: {
+        hex: '#ffffff'
+      },
+      segment: {
+        hex: '#ffffff'
+      },
+      font: {
+        hex: '#000000'
+      },
     }
   },
   new: {
@@ -113,8 +117,7 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: {
           ...state.current,
-          editMode: null,
-          previewThemes: initialState.current.previewThemes,
+          editMode: null
         }
       })
     case 'OPEN_EDIT_PRODUCT_CROPPER':
@@ -144,7 +147,8 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: {
           ...state.current,
-          activeTheme: false
+          activeTheme: false,
+          activeThemeColor: null
         }
       })
     case 'EDIT_PRODUCT_THEME_COLOR':
@@ -152,6 +156,33 @@ export default function(state = initialState, action) {
         current: {
           ...state.current,
           activeThemeColor: action.payload.color
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_THEME':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          activeTheme: false,
+          activeThemeColor: null,
+          theme_loading: true,
+          theme_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_THEME_SUCCESS':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          ...action.payload.product,
+          theme_loading: false,
+          theme_error: false
+        }
+      })
+    case 'UPLOAD_EDIT_PRODUCT_THEME_FAILURE':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          theme_loading: false,
+          theme_error: true
         }
       })
     case 'OPEN_ADD_GALLERY_PRODUCT_CROPPER':

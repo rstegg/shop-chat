@@ -7,7 +7,63 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const validField = p => obj => !isNil(path([p], obj))
 
-const productParams = ['name', 'is_public', 'description', 'layout', 'category', 'tags', 'price', 'image']
+const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
+
+const defaultTheme = {
+  hsl: {
+    h: 247.5,
+    s: 0,
+    l: 1,
+    a: 1,
+  },
+  hex: '#ffffff',
+  rgb: {
+    r: 255,
+    g: 255,
+    b: 255,
+    a: 1
+  },
+  hsv: {
+    h: 247.5,
+    s: 0,
+    v: 1,
+    a: 1
+  },
+  oldHue: 247.5,
+  source: 'rgb'
+}
+
+const defaultFontTheme = {
+  hsl: {
+    h: 247.5,
+    s: 0,
+    l: 0,
+    a: 1,
+  },
+  hex: '#000000',
+  rgb: {
+    r: 0,
+    g: 0,
+    b: 0,
+    a: 1
+  },
+  hsv: {
+    h: 247.5,
+    s: 0,
+    v: 0,
+    a: 1
+  },
+  oldHue: 247.5,
+  source: 'rgb'
+}
+
+const defaultThemes = {
+  primary: defaultTheme,
+  secondary: defaultTheme,
+  background: defaultTheme,
+  segment: defaultTheme,
+  font: defaultFontTheme,
+}
 
 const validBody = pipe(
   path(['body', 'product']),
@@ -70,6 +126,7 @@ module.exports = (req, res) => {
     .then(({slug, thread}) => {
       const newProduct = merge({
         slug,
+        themes: defaultThemes,
         shopId: req.params.shopId,
         threadId: thread.id,
         userId: req.user.id

@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false
     },
     elements: {
-      type: DataTypes.Array(DataTypes.JSONB),
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true
     },
     options: {
-      type: DataTypes.Array(DataTypes.JSONB),
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true
     },
     is_public: {

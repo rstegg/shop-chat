@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Grid, Label, Dimmer, Loader, Image, Icon, Segment } from 'semantic-ui-react'
+import { Card, Grid, Image, Segment } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 import { pipe, path } from 'ramda'
 
@@ -8,9 +8,9 @@ import ProductAdminMenu from 'components/ProductAdminMenu'
 import ProductSidebar from 'components/ProductSidebar'
 
 import ImageCropper from 'components/ImageCropper'
-import Dropzone from 'components/Dropzone'
 
 import AvatarField from 'elements/Product/Fields/AvatarField'
+import GalleryAvatarField from 'elements/Product/Fields/GalleryAvatarField'
 import NameField from 'elements/Product/Fields/NameField'
 import DescriptionField from 'elements/Product/Fields/DescriptionField'
 import PriceField from 'elements/Product/Fields/PriceField'
@@ -52,16 +52,6 @@ const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 const AddGalleryImageButton = ({addGalleryImage}) =>
   <Card onClick={addGalleryImage} style={{display: 'flex'}}>
     <Image src='/images/add_image_btn.png' />
-  </Card>
-
-const GalleryAvatar = ({product, index, openAddGalleryProductCropper, onUploadGalleryProductImageFailure, onDeleteGalleryImage}) =>
-  <Card>
-    <Dropzone className='ui image editable gallery-image' onDropAccepted={openAddGalleryProductCropper} onDropRejected={onUploadGalleryProductImageFailure}>
-      {product.gallery[index].image_loading && <Dimmer active><Loader /></Dimmer>}
-      <Image src={product.gallery[index].image || '/images/productholder.png'} />
-      {product.gallery[index].image_error && <Label basic color='red'>Invalid image</Label>}
-    </Dropzone>
-    <Icon name='delete' style={{position: 'absolute'}} onClick={() => onDeleteGalleryImage(index)} />
   </Card>
 
 class AdminGridView extends Component {
@@ -116,7 +106,7 @@ class AdminGridView extends Component {
                   </Segment>
                   <Card.Group itemsPerRow={4}>
                     { !!product.gallery && product.gallery.map((image, i) =>
-                      <GalleryAvatar key={`gallery-${i}`} index={i} product={product}
+                      <GalleryAvatarField key={`gallery-${i}`} index={i} product={product}
                         onDeleteGalleryImage={index => deleteProductGalleryImage(index, product, user)}
                         openAddGalleryProductCropper={img => openAddGalleryProductCropper(img[0], i)}
                         onUploadGalleryProductImageFailure={onUploadGalleryProductImageFailure} />)}

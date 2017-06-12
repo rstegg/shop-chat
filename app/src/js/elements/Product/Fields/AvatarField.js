@@ -11,4 +11,4 @@ const AvatarField = ({product, className, openEditProductCropper, onUploadEditPr
     {product.image_error && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
-  export default AvatarField
+export default AvatarField

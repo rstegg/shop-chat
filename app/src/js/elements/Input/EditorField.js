@@ -10,7 +10,7 @@ class EditorField extends Component {
     this.props.onClickOutside()
   }
   render() {
-    const { children, fieldComponent, normalize, onClick, isEditing, placeholder, label, name, type, onSubmit } = this.props
+    const { children, fieldComponent, normalize, onClick, isEditing, placeholder, label, name, type, style, onSubmit } = this.props
     if(isEditing) {
       return (
         <Field
@@ -29,7 +29,7 @@ class EditorField extends Component {
           onClick={v => onSubmit(v)}
           pointing='left'
           className='ignore-onclickoutside'
-          style={{display: 'flex'}}
+          style={style}
         />
       )
     }

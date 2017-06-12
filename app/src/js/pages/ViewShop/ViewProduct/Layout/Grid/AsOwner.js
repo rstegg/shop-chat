@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Button, Label, Dimmer, Loader, Image, Header, Segment } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
-import { length } from 'ramda'
+import { pipe, path, length } from 'ramda'
 
 import ProductAdminMenu from 'components/ProductAdminMenu'
 import ProductSidebar from 'components/ProductSidebar'
@@ -27,6 +27,20 @@ import {
 import { validate } from './validators'
 import { normalizePrice } from './normalize'
 
+const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
+const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
+const getBackgroundRGB = path(['themes', 'background', 'rgb'])
+const getSegmentRGB = path(['themes', 'segment', 'rgb'])
+const getFontRGB = path(['themes', 'font', 'rgb'])
+
+const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
+
+const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
+const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
+const getBackground = pipe(getBackgroundRGB, toRGBStyle)
+const getSegment = pipe(getSegmentRGB, toRGBStyle)
+const getFont = pipe(getFontRGB, toRGBStyle)
+
 const Avatar = ({product, openEditProductCropper, onUploadEditProductImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
     {product.image_loading && <Dimmer active><Loader /></Dimmer>}
@@ -38,22 +52,24 @@ const NameField = ({isEditing, product, user, editProduct, editProductField}) =>
   <EditorField
     isEditing={product.focused === 'name'}
     placeholder='Name' name='name'
+    style={{color: getFont(product)}}
     onClick={() => editProductField('name')} onClickOutside={() => editProductField(null)}
     onSubmit={name => {
       if(length(name)) {
         editProduct({...product, name}, user)
       }
     }}>
-    <Header as='h1'>{product.name}</Header>
+    <Header as='h1' style={{color: getFont(product)}}>{product.name}</Header>
   </EditorField>
 
 const DescriptionField = ({isEditing, product, user, editProduct, editProductField}) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Description' name='description'
+    style={{color: getFont(product)}}
     onClick={() => editProductField('description')} onClickOutside={() => editProductField(null)}
     onSubmit={description => editProduct({...product, description}, user)}>
-    <Header as='h4'>{product.description || 'Add a description'}</Header>
+    <Header as='h4' style={{color: getFont(product)}}>{product.description || 'Add a description'}</Header>
   </EditorField>
 
 const PublicField = ({product, user, editProduct, style}) =>
@@ -63,10 +79,11 @@ const PriceField = ({isEditing, product, user, editProduct, editProductField}) =
   <EditorField
     isEditing={isEditing}
     placeholder='Price' name='price'
+    style={{color: getFont(product)}}
     normalize={normalizePrice}
     onClick={() => editProductField('price')} onClickOutside={() => editProductField(null)}
     onSubmit={price => editProduct({...product, price}, user)}>
-    <Header as='h4'>${product.price}</Header>
+    <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
   </EditorField>
 
 class AdminGridView extends Component {
@@ -85,7 +102,7 @@ class AdminGridView extends Component {
     return (
       <div>
         <ProductSidebar product={product}>
-          <div className='edit-product-container'>
+          <div className='edit-product-container' style={{backgroundColor: getBackground(product)}}>
             <Grid celled='internally'>
               <Grid.Row columns={2}>
                 <Grid.Column width={8} stretched>
@@ -100,10 +117,10 @@ class AdminGridView extends Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8} stretched>
-                  <Segment compact>
+                  <Segment compact style={{backgroundColor: getSegment(product)}}>
                     <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
                   </Segment>
-                  <Segment compact>
+                  <Segment compact style={{backgroundColor: getSegment(product)}}>
                     <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
                   </Segment>
                 </Grid.Column>

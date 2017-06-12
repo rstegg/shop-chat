@@ -25,6 +25,21 @@ const productGallery = prop('gallery')
 
 const productHasGallery = pipe(productGallery, length, Boolean)
 
+const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
+const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
+const getBackgroundRGB = path(['themes', 'background', 'rgb'])
+const getSegmentRGB = path(['themes', 'segment', 'rgb'])
+const getFontRGB = path(['themes', 'font', 'rgb'])
+
+const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
+
+const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
+const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
+const getBackground = pipe(getBackgroundRGB, toRGBStyle)
+const getSegment = pipe(getSegmentRGB, toRGBStyle)
+const getFont = pipe(getFontRGB, toRGBStyle)
+
+
 const UserView = ({
   orders,
   product,
@@ -34,10 +49,10 @@ const UserView = ({
   productAddToCart,
 }) =>
   <div className='product-container'>
-    <Grid celled='internally'>
-      <Grid.Column width={10} stretched>
+    <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
+      <Grid.Column width={6} stretched>
         <Segment basic>
-          <Segment className='avatar-image'>
+          <Segment className='avatar-image' style={{backgroundColor: getSegment(product)}}>
             <Image src={product.image || '/images/productholder.png'} />
           </Segment>
           <Card.Group itemsPerRow={4}>
@@ -49,15 +64,15 @@ const UserView = ({
           </Card.Group>
         </Segment>
       </Grid.Column>
-      <Grid.Column width={6} stretched>
-        <Segment compact>
-          <Header as='h1'>{getName(product)}</Header>
+      <Grid.Column width={10} stretched>
+        <Segment compact style={{backgroundColor: getSegment(product)}}>
+          <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
         </Segment>
-        <Segment compact>
-          <Header as='h4'>{getDesc(product) || 'No description'}</Header>
+        <Segment compact style={{backgroundColor: getSegment(product)}}>
+          <Header as='h4' style={{color: getFont(product)}}>{getDesc(product) || 'No description'}</Header>
         </Segment>
-        <Segment compact>
-          <Header as='h4'>${getPrice(product)}</Header>
+        <Segment compact style={{backgroundColor: getSegment(product)}}>
+          <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
         </Segment>
         <Segment compact style={{width: '100%'}}>
           <Button.Group fluid>

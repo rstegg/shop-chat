@@ -1,16 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { pipe, path, prop } from 'ramda'
+import { pipe, path } from 'ramda'
 
 import { Header, Menu, Button, Icon } from 'semantic-ui-react'
 
 import { closeEditProductTheme, openEditProductThemeColor, } from 'actions/products'
 
-const getPrimary = path(['themes', 'primary', 'hex'])
-const getSecondary = path(['themes', 'secondary', 'hex'])
-const getBackground = path(['themes', 'background', 'hex'])
-const getSegment = path(['themes', 'segment', 'hex'])
-const getFont = path(['themes', 'font', 'hex'])
+const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
+const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
+const getBackgroundRGB = path(['themes', 'background', 'rgb'])
+const getSegmentRGB = path(['themes', 'segment', 'rgb'])
+const getFontRGB = path(['themes', 'font', 'rgb'])
+
+const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
+
+const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
+const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
+const getBackground = pipe(getBackgroundRGB, toRGBStyle)
+const getSegment = pipe(getSegmentRGB, toRGBStyle)
+const getFont = pipe(getFontRGB, toRGBStyle)
 
 const ProductThemeMenu = ({ product, user, openEditProductThemeColor, closeEditProductTheme }) =>
   <Menu icon='labeled' vertical inverted style={{width: '100%', height: '100%'}}>

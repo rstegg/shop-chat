@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { path } from 'ramda'
 
 import { Modal, Segment, Header, Button } from 'semantic-ui-react'
 
@@ -7,17 +8,23 @@ import { SketchPicker } from 'react-color'
 
 import { editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor } from 'actions/products'
 
+const getActiveRGB = path(['activeThemeColor', 'rgb'])
+const getRGB = path(['rgb'])
+
 const ColorPicker = ({ product, user, editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor}) =>
-  <Modal open={!!product.activeTheme} onClose={closeEditProductThemeColor} basic size='small'>
+  <Modal open={!!product.activeTheme} onClose={closeEditProductThemeColor}>
     <Modal.Content>
-      <Segment compact style={{display: 'flex', flexDirection: 'column',  alignItems: 'center'}}>
+      <Segment basic style={{display: 'flex', flexDirection: 'column',  alignItems: 'center'}}>
         <Header>{product.activeTheme} color</Header>
         <SketchPicker
-          color={product.activeThemeColor || product.themes[product.activeTheme]}
+          color={getActiveRGB(product) || getRGB(product.themes[product.activeTheme])}
+          onChange={color => editProductThemeColor(product.activeTheme, color)}
           onChangeComplete={color => editProductThemeColor(product.activeTheme, color)}
         />
         <Segment basic compact>
-          <Button basic color='red' onClick={closeEditProductThemeColor} size='huge'>Cancel</Button>
+          <Button color='red' onClick={closeEditProductThemeColor} inverted size='huge'>
+            Cancel
+          </Button>
           <Button color='green' onClick={() => uploadEditProductTheme(product.activeTheme, product.activeThemeColor, product, user)} inverted size='huge'>
             Save
           </Button>

@@ -8,7 +8,7 @@ class InputField extends Component {
     <Form.Field className={className} style={style}>
       <label>{label}</label>
       <div className={asyncValidating ? 'ui right icon input loading' : 'ui input'}>
-        <input type={type || 'text'} {...input} onKeyUp={onKeyUp} autoFocus={autoFocus || false} placeholder={placeholder || label} />
+        <input type={type || 'text'} {...input} style={style} onKeyUp={onKeyUp} autoFocus={autoFocus || false} placeholder={placeholder || label} />
         {asyncValidating && <i className='search icon'></i>}
       </div>
       {touched && error && <Label basic color='red' pointing={pointing || true}>{error}</Label>}

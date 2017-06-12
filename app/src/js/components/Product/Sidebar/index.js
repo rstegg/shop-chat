@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Sidebar, Segment, Menu } from 'semantic-ui-react'
 
-import ProductLayoutMenu from 'components/ProductLayoutMenu'
-import ProductOptionMenu from 'components/ProductOptionMenu'
-import ProductElementMenu from 'components/ProductElementMenu'
-import ProductMediaMenu from 'components/ProductMediaMenu'
-import ProductThemeMenu from 'components/ProductThemeMenu'
+import ProductLayoutMenu from './LayoutMenu'
+import ProductOptionMenu from './OptionMenu'
+import ProductElementMenu from './ElementMenu'
+import ProductMediaMenu from './MediaMenu'
+import ProductThemeMenu from './ThemeMenu'
 
 const ProductEmptyMenu = () =>
   <Menu vertical inverted style={{width: '100%', height: '100%'}}></Menu>

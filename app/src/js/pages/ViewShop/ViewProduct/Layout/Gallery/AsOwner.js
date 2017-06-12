@@ -4,8 +4,8 @@ import { Card, Grid, Segment } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 import { pipe, path } from 'ramda'
 
-import ProductAdminMenu from 'components/ProductAdminMenu'
-import ProductSidebar from 'components/ProductSidebar'
+import ProductAdminMenu from 'components/Product/AdminMenu'
+import ProductSidebar from 'components/Product/Sidebar'
 
 import ImageCropper from 'components/ImageCropper'
 

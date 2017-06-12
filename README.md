@@ -2,22 +2,13 @@
 
 ## TODO
 
-add 'ProductTheme' menu
-
 add actions:
-
-- uploadEditProductTheme
 
 - uploadAddProductOption
 
 - uploadAddProductMedia
 
 - uploadAddProductElement
-
-ProductTheme:
-
-- use varaibles
-- add server-side saving
 
 add ProductOptions:
 - Checkbox

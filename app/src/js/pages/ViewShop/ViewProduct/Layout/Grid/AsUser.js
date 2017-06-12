@@ -5,6 +5,7 @@ import { Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
 import { pipe, path } from 'ramda'
 
 import SocialMenu from 'components/SocialMenu'
+import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
 
 import { productBuyNow, productAddToCart } from 'actions/orders'
 
@@ -83,23 +84,20 @@ const UserView = ({
               </Button.Group>
             </Segment>
           }
-          <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-          <Segment compact  style={{display: 'flex', justifyContent: 'space-between'}}>
-            <NavLink to={`/user/${productUsername(product)}`}>
-              <Button basic color='orange' compact>
-                more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
-              </Button>
-            </NavLink>
-            <NavLink to={`/shop/${productShopSlug(product)}`}>
-              <Button basic color='teal' compact>
-                more from <Image avatar src={productShopImage(product) || '/images/productholder.png'} /> {productShopName(product)}
-              </Button>
-            </NavLink>
-          </Segment>
         </Grid.Column>
-
       </Grid.Row>
     </Grid>
+    <Segment compact>
+      <Grid.Column width={4} stretched>
+        <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
+        <PurchaseButtons />
+        {user.id === productUserId(product) &&
+          <Segment compact style={{width: '100%'}}>
+            <Button fluid basic color='yellow' onClick={switchToProductAdmin}>Edit Product</Button>
+          </Segment>
+        }
+      </Grid.Column>
+    </Segment>
   </div>
 
 const mapStateToProps = ({orders}) =>

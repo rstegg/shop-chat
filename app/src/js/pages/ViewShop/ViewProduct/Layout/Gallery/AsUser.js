@@ -51,7 +51,7 @@ const UserView = ({
 }) =>
   <div className='product-container'>
     <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
-      <Grid.Column width={6} stretched>
+      <Grid.Column width={8} stretched>
         <Segment basic>
           <Segment className='avatar-image' style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
             <Image src={product.image || '/images/productholder.png'} />
@@ -65,7 +65,7 @@ const UserView = ({
           </Card.Group>
         </Segment>
       </Grid.Column>
-      <Grid.Column width={6} stretched>
+      <Grid.Column width={8} stretched>
         <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
           <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
         </Segment>
@@ -76,6 +76,8 @@ const UserView = ({
           <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
         </Segment>
       </Grid.Column>
+    </Grid>
+    <Segment compact>
       <Grid.Column width={4} stretched>
         <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
         <PurchaseButtons />
@@ -85,7 +87,7 @@ const UserView = ({
           </Segment>
         }
       </Grid.Column>
-    </Grid>
+    </Segment>
   </div>
 
 const mapStateToProps = ({orders}) =>

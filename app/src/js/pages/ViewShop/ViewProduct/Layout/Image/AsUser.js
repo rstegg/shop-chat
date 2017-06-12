@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Segment, Header, Image, Button } from 'semantic-ui-react'
+import { Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
 import { pipe, path } from 'ramda'
 
 import { productBuyNow, productAddToCart } from 'actions/orders'
+
+import SocialMenu from 'components/SocialMenu'
+import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
 
 const productUserId = path(['user', 'id'])
 
@@ -46,18 +49,18 @@ const UserView = ({
       <Segment style={{pointerEvents: 'auto', background: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
         <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
       </Segment>
-      <Segment style={{pointerEvents: 'auto'}}>
-          {user.id === productUserId(product) ?
-            <Button type='button' basic onClick={() => switchToProductAdmin()} style={{justifyContent: 'center'}}>Edit Product</Button>
-            :
-          <Button.Group vertical fluid>
-            <NavLink to='/checkout/review'>
-              <Button type='button' basic color='green' onClick={() => productBuyNow(product)} style={{justifyContent: 'center'}}>Buy now</Button>
-            </NavLink>
-            <Button fluid basic color='green' onClick={() => productAddToCart(product)} style={{justifyContent: 'center'}}>Add to cart</Button>
-          </Button.Group>
-          }
-      </Segment>
+    </Segment>
+    <Segment basic>
+      {user.id === productUserId(product) ?
+          <Segment compact>
+            <Button fluid basic color='yellow' onClick={switchToProductAdmin}>Edit Product</Button>
+          </Segment>
+        :
+        <Segment compact>
+          <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
+          <PurchaseButtons />
+        </Segment>
+      }
     </Segment>
   </div>
 

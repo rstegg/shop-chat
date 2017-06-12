@@ -20,7 +20,7 @@ import SocialMenuForm from './form'
 import { shareProduct } from 'actions/products'
 
 const SocialMenu = ({url, user, shareProduct, productId}) =>
-  <Segment.Group compact horizontal>
+  <Segment.Group compact horizontal style={{flexGrow: '0'}}>
     <Segment>
       <CopyToClipboard text={url}>
         <Button circular basic icon='linkify' size='medium' />
@@ -35,13 +35,13 @@ const SocialMenu = ({url, user, shareProduct, productId}) =>
       </TwitterShareButton>
     </Segment>
     <Segment>
-    <Popup wide trigger={<Button circular basic icon='mail' size='medium' />} on='click'>
-        <Popup.Header>Share via Email</Popup.Header>
-        <Popup.Content>
-          <SocialMenuForm onSubmit={values => shareProduct({...values, productId}, user, url)} />
-        </Popup.Content>
-    </Popup>
-  </Segment>
+      <Popup wide trigger={<Button circular basic icon='mail' size='medium' />} on='click'>
+          <Popup.Header>Share via Email</Popup.Header>
+          <Popup.Content>
+            <SocialMenuForm onSubmit={values => shareProduct({...values, productId}, url, user)} />
+          </Popup.Content>
+      </Popup>
+    </Segment>
   </Segment.Group>
 
 const mapStateToProps = ({user}) =>
@@ -51,7 +51,7 @@ const mapStateToProps = ({user}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  shareProduct: (email, user, url) => dispatch(shareProduct(email, user, url))
+  shareProduct: (email, url, user) => dispatch(shareProduct(email, url, user))
 })
 
 export default connect(

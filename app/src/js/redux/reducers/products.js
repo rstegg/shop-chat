@@ -1,5 +1,6 @@
 const initialState = {
   current: {
+    purchasingQuantity: 1,
     isAdmin: false,
     isCropperOpen: false,
     activeTheme: false,
@@ -38,6 +39,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case 'PRODUCT_SET_QUANTITY':
+      return Object.assign({}, state, {
+        current: {
+          ...state.current,
+          purchasingQuantity: action.payload.quantity
+        }
+      })
     case 'OPEN_CREATE_PRODUCT_CROPPER':
       return Object.assign({}, state, {
         new: {

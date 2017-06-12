@@ -1,3 +1,12 @@
+export const productSetQuantity = (product, quantity) =>
+({
+  type: 'PRODUCT_SET_QUANTITY',
+  payload: {
+    product,
+    quantity
+  }
+})
+
 export const productBuyNow = product =>
 ({
   type: 'PRODUCT_BUY_NOW',

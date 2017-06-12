@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Card, Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
+import { Card, Divider, Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
 import { pipe, prop, path, length } from 'ramda'
 
 import SocialMenu from 'components/SocialMenu'
-
-import { productBuyNow, productAddToCart } from 'actions/orders'
+import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
 
 const productUserId = path(['user', 'id'])
 const productUsername = path(['user', 'username'])
@@ -48,9 +47,7 @@ const UserView = ({
   orders,
   product,
   user,
-  switchToProductAdmin,
-  productBuyNow,
-  productAddToCart,
+  switchToProductAdmin
 }) =>
   <div className='product-container'>
     <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
@@ -68,7 +65,7 @@ const UserView = ({
           </Card.Group>
         </Segment>
       </Grid.Column>
-      <Grid.Column width={10} stretched>
+      <Grid.Column width={6} stretched>
         <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
           <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
         </Segment>
@@ -78,21 +75,10 @@ const UserView = ({
         <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
           <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
         </Segment>
-        <Segment compact style={{width: '100%'}}>
-          <Button.Group fluid>
-            <Button basic color='green' as={NavLink} to='/checkout/review' type='button'  onClick={() => productBuyNow(product)} style={{justifyContent: 'center'}}>Buy now</Button>
-            <Button basic color='orange' onClick={() => productAddToCart(product)} style={{justifyContent: 'center'}}>Add to cart</Button>
-          </Button.Group>
-        </Segment>
+      </Grid.Column>
+      <Grid.Column width={4} stretched>
         <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-        <Segment compact style={{display: 'flex', justifyContent: 'space-between'}}>
-          <Button as={NavLink} to={`/user/${productUsername(product)}`} basic color='orange' compact>
-            more from <Image avatar src={productUserAvatar(product) || '/images/placeholder.png'} /> {productUsername(product)}
-          </Button>
-          <Button as={NavLink} to={`/shop/${productShopSlug(product)}`} basic color='red' compact>
-            more from <Image avatar src={productShopImage(product) || '/images/productholder.png'} /> {productShopName(product)}
-          </Button>
-        </Segment>
+        <PurchaseButtons />
         {user.id === productUserId(product) &&
           <Segment compact style={{width: '100%'}}>
             <Button fluid basic color='yellow' onClick={switchToProductAdmin}>Edit Product</Button>
@@ -107,13 +93,6 @@ const mapStateToProps = ({orders}) =>
   orders
 })
 
-const mapDispatchToProps = dispatch =>
-({
-  productBuyNow: product => dispatch(productBuyNow(product)),
-  productAddToCart: product => dispatch(productAddToCart(product)),
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(UserView)

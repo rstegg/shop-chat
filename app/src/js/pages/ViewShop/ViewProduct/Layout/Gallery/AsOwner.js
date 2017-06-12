@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Grid, Image, Segment } from 'semantic-ui-react'
+import { Card, Grid, Segment } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
 import { pipe, path } from 'ramda'
 

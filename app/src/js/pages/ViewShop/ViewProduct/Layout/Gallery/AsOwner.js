@@ -9,12 +9,14 @@ import ProductSidebar from 'components/ProductSidebar'
 
 import ImageCropper from 'components/ImageCropper'
 
-import AvatarField from 'elements/Product/Fields/AvatarField'
-import GalleryAvatarField from 'elements/Product/Fields/GalleryAvatarField'
-import NameField from 'elements/Product/Fields/NameField'
-import DescriptionField from 'elements/Product/Fields/DescriptionField'
-import PriceField from 'elements/Product/Fields/PriceField'
-import PublicField from 'elements/Product/Fields/PublicField'
+import AddGalleryImageButton from 'elements/Product/Button/AddGalleryImageButton'
+
+import AvatarField from 'elements/Product/Field/AvatarField'
+import GalleryAvatarField from 'elements/Product/Field/GalleryAvatarField'
+import NameField from 'elements/Product/Field/NameField'
+import DescriptionField from 'elements/Product/Field/DescriptionField'
+import PriceField from 'elements/Product/Field/PriceField'
+import PublicField from 'elements/Product/Field/PublicField'
 
 import {
   openEditProductCropper,
@@ -48,11 +50,6 @@ const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getSegment = pipe(getSegmentRGB, toRGBStyle)
 
 const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
-
-const AddGalleryImageButton = ({addGalleryImage}) =>
-  <Card onClick={addGalleryImage} style={{display: 'flex'}}>
-    <Image src='/images/add_image_btn.png' />
-  </Card>
 
 class AdminGridView extends Component {
   render() {

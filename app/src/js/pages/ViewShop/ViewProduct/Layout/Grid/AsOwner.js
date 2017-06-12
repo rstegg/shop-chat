@@ -9,11 +9,11 @@ import ProductSidebar from 'components/ProductSidebar'
 
 import ImageCropper from 'components/ImageCropper'
 
-import AvatarField from 'elements/Product/Fields/AvatarField'
-import NameField from 'elements/Product/Fields/NameField'
-import DescriptionField from 'elements/Product/Fields/DescriptionField'
-import PriceField from 'elements/Product/Fields/PriceField'
-import PublicField from 'elements/Product/Fields/PublicField'
+import AvatarField from 'elements/Product/Field/AvatarField'
+import NameField from 'elements/Product/Field/NameField'
+import DescriptionField from 'elements/Product/Field/DescriptionField'
+import PriceField from 'elements/Product/Field/PriceField'
+import PublicField from 'elements/Product/Field/PublicField'
 
 import {
   openEditProductCropper,

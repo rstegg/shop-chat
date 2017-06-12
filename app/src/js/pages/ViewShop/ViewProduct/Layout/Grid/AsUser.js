@@ -25,11 +25,15 @@ const getFontRGB = path(['themes', 'font', 'rgb'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 
+const hasAlpha = rgba => !!rgba && rgba.a === 0 ? 'none' : '0 1px 2px 0 rgba(34,36,38,.15)'
+
 const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
 const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getSegment = pipe(getSegmentRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
+
+const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 
 const UserView = ({
   orders,
@@ -50,17 +54,17 @@ const UserView = ({
           </Segment>
         </Grid.Column>
         <Grid.Column width={8} stretched>
-          <Segment compact style={{backgroundColor: getSegment(product)}}>
+          <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
             <Header as='h1' style={{color: getFont(product)}}>{product.name}</Header>
           </Segment>
-          <Segment compact style={{backgroundColor: getSegment(product)}}>
+          <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
             <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
           </Segment>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row columns={2}>
         <Grid.Column width={8} stretched>
-          <Segment style={{backgroundColor: getSegment(product)}}>
+          <Segment style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
             <Header as='h4' style={{color: getFont(product)}}>{product.description || 'No description'}</Header>
           </Segment>
         </Grid.Column>

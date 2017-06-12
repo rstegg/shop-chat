@@ -30,6 +30,14 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.JSONB,
       allowNull: false
     },
+    elements: {
+      type: DataTypes.Array(DataTypes.JSONB),
+      allowNull: true
+    },
+    options: {
+      type: DataTypes.Array(DataTypes.JSONB),
+      allowNull: true
+    },
     is_public: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

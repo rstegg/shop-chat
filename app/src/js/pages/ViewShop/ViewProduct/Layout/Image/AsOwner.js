@@ -33,11 +33,15 @@ const getFontRGB = path(['themes', 'font', 'rgb'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 
+const hasAlpha = rgba => !!rgba && rgba.a === 0 ? 'none' : '0 1px 2px 0 rgba(34,36,38,.15)'
+
 const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
 const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getSegment = pipe(getSegmentRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
+
+const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 
 const Avatar = ({product, openEditProductCropper, onUploadEditProductImageFailure}) =>
   <Dropzone className='ui image editable avatar-image product-image-underlay' onDropAccepted={openEditProductCropper} onDropRejected={onUploadEditProductImageFailure}>
@@ -107,13 +111,13 @@ class AdminGridView extends Component {
                 <Avatar product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
               }
             <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product)}}>
+              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
                 <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
               </Segment>
-              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product)}}>
+              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
                 <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
               </Segment>
-              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product)}}>
+              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
                 <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
               </Segment>
             </div>

@@ -33,11 +33,15 @@ const getFontRGB = path(['themes', 'font', 'rgb'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 
+const hasAlpha = rgba => !!rgba && rgba.a === 0 ? 'none' : '0 1px 2px 0 rgba(34,36,38,.15)'
+
 const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
 const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getSegment = pipe(getSegmentRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
+
+const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 
 
 const UserView = ({
@@ -52,7 +56,7 @@ const UserView = ({
     <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
       <Grid.Column width={6} stretched>
         <Segment basic>
-          <Segment className='avatar-image' style={{backgroundColor: getSegment(product)}}>
+          <Segment className='avatar-image' style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
             <Image src={product.image || '/images/productholder.png'} />
           </Segment>
           <Card.Group itemsPerRow={4}>
@@ -65,13 +69,13 @@ const UserView = ({
         </Segment>
       </Grid.Column>
       <Grid.Column width={10} stretched>
-        <Segment compact style={{backgroundColor: getSegment(product)}}>
+        <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
           <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
         </Segment>
-        <Segment compact style={{backgroundColor: getSegment(product)}}>
+        <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
           <Header as='h4' style={{color: getFont(product)}}>{getDesc(product) || 'No description'}</Header>
         </Segment>
-        <Segment compact style={{backgroundColor: getSegment(product)}}>
+        <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
           <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
         </Segment>
         <Segment compact style={{width: '100%'}}>

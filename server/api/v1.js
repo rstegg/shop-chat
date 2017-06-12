@@ -10,6 +10,6 @@ module.exports = () => {
   //TODO: move configureAuth to local routes
   configureAuth()
   //feed each route the express app and options
-  routes.map(route => router.use(route()))
+  router.use('/', routes)
   return router
 }

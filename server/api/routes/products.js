@@ -11,36 +11,33 @@ const getProductHandler = require('../handlers/products/getproduct')
 const deleteProductGalleryHandler = require('../handlers/products/deleteproductgallery')
 const deleteProductHandler = require('../handlers/products/deleteproduct')
 
-module.exports = () => {
-
-  router.get(`/shop/:shopId/product/:id`,
-    getProductHandler
-  )
-  .use(passport.authenticate('jwt', { session: false }))
-  .get(`/shop/:shopId/products`,
-    getProductsHandler
-  )
-  .post(`/shop/:shopId/products`,
-    createProductHandler
-  )
-  .put(`/shop/:shopId/product/:id`,
-    editProductHandler
-  )
-  .put(`/shop/:shopId/product/:id/layout`,
-    editProductLayoutHandler
-  )
-  .put(`/shop/:shopId/product/:id/theme`,
-    editProductThemeHandler
-  )
-  .post(`/share/product`,
-    shareProductHandler
-  )
-  .delete(`/shop/:shopId/product/:id/gallery/:index`,
-    deleteProductGalleryHandler
-  )
-  .delete(`/shop/:shopId/product/:id`,
-    deleteProductHandler
-  )
-
-  return router
-}
+module.exports =
+  router
+    .get(`/:shopId/:id`,
+      getProductHandler
+    )
+    .use(passport.authenticate('jwt', { session: false }))
+    .get(`/:shopId`,
+      getProductsHandler
+    )
+    .post(`/:shopId`,
+      createProductHandler
+    )
+    .put(`/:shopId/:id`,
+      editProductHandler
+    )
+    .put(`/:shopId/:id/layout`,
+      editProductLayoutHandler
+    )
+    .put(`/:shopId/:id/theme`,
+      editProductThemeHandler
+    )
+    .post(`/share`,
+      shareProductHandler
+    )
+    .delete(`/:shopId/:id/gallery/:index`,
+      deleteProductGalleryHandler
+    )
+    .delete(`/:shopId/:id`,
+      deleteProductHandler
+    )

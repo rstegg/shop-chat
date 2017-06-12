@@ -8,26 +8,24 @@ const getStripeBanksHandler = require('../handlers/stripe/getstripebanks')
 const addStripeBitcoinHandler = require('../handlers/stripe/addstripebitcoin')
 const getStripeBitcoinsHandler = require('../handlers/stripe/getstripebitcoins')
 
-module.exports = () => {
+module.exports =
   router
     .use(passport.authenticate('jwt', { session: false }))
-    .get(`/stripe/cards`,
+    .get(`/cards`,
       getStripeCardsHandler
     )
-    .post('/stripe/cards',
+    .post('/cards',
       addStripeCardHandler
     )
-    .get(`/stripe/banks`,
+    .get(`/banks`,
       getStripeBanksHandler
     )
-    .post('/stripe/banks',
+    .post('/banks',
       addStripeBankHandler
     )
-    .get(`/stripe/bitcoins`,
+    .get(`/bitcoins`,
       getStripeBitcoinsHandler
     )
-    .post('/stripe/bitcoins',
+    .post('/bitcoins',
       addStripeBitcoinHandler
     )
-  return router
-}

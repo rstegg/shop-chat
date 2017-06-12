@@ -6,7 +6,7 @@ const API_HOST = '/api/v1'
 
 const api = {
   login: ({username, password}) => {
-    const request = su.post(`${API_HOST}/login`)
+    const request = su.post(`${API_HOST}/auth/login`)
         .send({username, password})
         .set('Accept', 'application/json')
     return Observable.fromPromise(request)

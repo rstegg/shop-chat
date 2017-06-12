@@ -19,26 +19,26 @@ const API_HOST = '/api/v1'
 
 const api = {
   fetchProducts: ({shopId, token}) => {
-    const request = su.get(`${API_HOST}/shop/${shopId}/products`)
+    const request = su.get(`${API_HOST}/products/${shopId}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   fetchSingleProduct: ({productId, shopId, token}) => {
-    const request = su.get(`${API_HOST}/shop/${shopId}/product/${productId}`)
+    const request = su.get(`${API_HOST}/products/${shopId}/${productId}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   createProduct: ({product, shopId, token}) => {
-   const request = su.post(`${API_HOST}/shop/${shopId}/products`)
+   const request = su.post(`${API_HOST}/products/${shopId}`)
       .send({product})
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   shareProduct: ({name, email, message, token, url, productId}) => {
-   const request = su.post(`${API_HOST}/share/product`)
+   const request = su.post(`${API_HOST}/products/share`)
       .send({name, email, message, token, url, productId})
       .set('Accept', 'application/json')
       .set('Authorization', token)
@@ -66,34 +66,34 @@ const api = {
     return Observable.fromPromise(request)
   },
   deleteProductGalleryImage: ({index, product, user}) => {
-    const request = su.delete(`${API_HOST}/shop/${product.shopId}/product/${product.id}/gallery/${index}`)
+    const request = su.delete(`${API_HOST}/products/${product.shopId}/${product.id}/gallery/${index}`)
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
     return Observable.fromPromise(request)
   },
   uploadEditProductLayout: ({layout, product, user}) => {
-    const request = su.put(`${API_HOST}/shop/${product.shopId}/product/${product.id}/layout`)
+    const request = su.put(`${API_HOST}/products/${product.shopId}/${product.id}/layout`)
       .send({layout})
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
     return Observable.fromPromise(request)
   },
   uploadEditProductTheme: ({theme, color, product, user}) => {
-    const request = su.put(`${API_HOST}/shop/${product.shopId}/product/${product.id}/theme`)
+    const request = su.put(`${API_HOST}/products/${product.shopId}/${product.id}/theme`)
       .send({theme, color})
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
     return Observable.fromPromise(request)
   },
   editProduct: ({product, shopId, token}) => {
-   const request = su.put(`${API_HOST}/shop/${shopId}/product/${product.id}`)
+   const request = su.put(`${API_HOST}/products/${shopId}/${product.id}`)
       .send({product})
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
   },
   deleteProduct: ({id, shopId, token}) => {
-   const request = su.delete(`${API_HOST}/shop/${shopId}/product/${id}`)
+   const request = su.delete(`${API_HOST}/products/${shopId}/${id}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)

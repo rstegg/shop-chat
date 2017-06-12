@@ -21,7 +21,7 @@ class Products extends Component {
   componentWillUpdate(nextProps) {
     const { user, shop, products, fetchProducts } = nextProps
     if(getId(shop) && products.fetchable) {
-      console.log("[Products/componentWillUpdate] componentWillUpdate checking necessary to fetch all products with shop.id and not shop.slug [params.shopId === shop.slug]")
+      console.log("[ProductList/componentWillUpdate] componentWillUpdate checking necessary to fetch all products with shop.id and not shop.slug [params.shopId === shop.slug]")
       fetchProducts(getId(shop), user)
     }
   }

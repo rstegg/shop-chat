@@ -12,7 +12,7 @@ const api = {
     return Observable.fromPromise(request)
   },
   fetchSingleShop: ({shopId, token}) => {
-    const request = su.get(`${API_HOST}/shop/${shopId}`)
+    const request = su.get(`${API_HOST}/shops/${shopId}`)
       .set('Accept', 'application/json')
       .set('Authorization', token)
     return Observable.fromPromise(request)
@@ -25,14 +25,14 @@ const api = {
     return Observable.fromPromise(request)
   },
   editShop: ({shop, user}) => {
-   const request = su.put(`${API_HOST}/shop/${shop.id}`)
+   const request = su.put(`${API_HOST}/shops/${shop.id}`)
       .send({shop})
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
     return Observable.fromPromise(request)
   },
   deleteShop: ({shopId, user}) => {
-   const request = su.delete(`${API_HOST}/shop/${shopId}`)
+   const request = su.delete(`${API_HOST}/shops/${shopId}`)
       .set('Accept', 'application/json')
       .set('Authorization', user.token)
     return Observable.fromPromise(request)

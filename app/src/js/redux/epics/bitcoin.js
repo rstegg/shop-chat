@@ -11,7 +11,7 @@ const API_HOST = '/api/v1'
 const api = {
   addBitcoinAddress: (bitcoin_address, user) => {
     const request =
-      su.post(`${API_HOST}/bitcoin/address`)
+      su.post(`${API_HOST}/stripe/bitcoin/address`)
         .send({bitcoin_address})
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
@@ -20,7 +20,7 @@ const api = {
   },
   fetchBitcoinAddresses: ({user}) => {
     const request =
-      su.get(`${API_HOST}/bitcoin/addresses`)
+      su.get(`${API_HOST}/stripe/bitcoin/addresses`)
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
 

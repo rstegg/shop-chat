@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { replace } from 'react-router-redux'
+import { path, length } from 'ramda'
+
+
 import { Button, Image, Header, Label, Dimmer, Loader } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
-import { length } from 'ramda'
 
 import ShareMenu from 'components/SocialMenu'
 import ImageCropper from 'components/ImageCropper'
@@ -10,6 +14,8 @@ import Dropzone from 'components/Dropzone'
 
 import CheckboxField from 'elements/Input/CheckboxField'
 import EditorField from 'elements/Input/EditorField'
+
+const getName = path(['name'])
 
 import {
   deleteShop,
@@ -60,8 +66,12 @@ const PublicField = ({shop, user, editShop}) =>
   <Field component={CheckboxField} name='is_public' label='Public' onSubmit={is_public => editShop({...shop, is_public}, user)} />
 
 class AdminView extends Component {
-  componentWillUnmount() {
-    this.props.editShopField(null)
+  componentWillUpdate(nextProps) {
+    const nextShop = nextProps.shop
+    const { shop, redirectToNewStore } = this.props
+    if(getName(nextShop) !== getName(shop)) {
+      redirectToNewStore(nextShop.slug)
+    }
   }
   render() {
     const {
@@ -126,6 +136,7 @@ const mapDispatchToProps = dispatch =>
   editShopField: field => dispatch(editShopField(field)),
   deleteShop: (shopId, user) => dispatch(deleteShop(shopId, user)),
   switchToShopUser: () => dispatch(switchToShopUser()),
+  redirectToNewStore: slug => dispatch(replace(`/shop/${slug}`))
 })
 
 export default connect(

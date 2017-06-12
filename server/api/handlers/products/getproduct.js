@@ -32,6 +32,10 @@ module.exports = (req, res) => {
       attributes: productParams
     })
   )
+  .then(product =>
+    !product ? Promise.reject('Invalid product id')
+    : product
+  )
   .then(product => res.status(200).json({product}))
   .catch(error => res.status(400).json({error}))
 }

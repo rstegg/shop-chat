@@ -14,12 +14,12 @@ const confirmationMail = (user, permalink_url) => mailcomposer({
 })
 
 const sendConfirmation = (mail, user) => {
-  mail.build(function(mailBuildError, message) {
+  mail.build((mailBuildError, message) => {
     const verifyEmail = {
       to: user.email,
       message: message.toString('ascii')
     }
-    mailgun.messages().sendMime(verifyEmail, function(sendError, body) {
+    mailgun.messages().sendMime(verifyEmail, (sendError, body) => {
       if(sendError) {
         console.log(sendError);
         return;

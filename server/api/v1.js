@@ -9,7 +9,7 @@ const configureAuth = require('./service/auth')
 module.exports = () => {
   //TODO: move configureAuth to local routes
   configureAuth()
-  //feed each route the express app and options
+  
   router.use('/', routes)
   return router
 }

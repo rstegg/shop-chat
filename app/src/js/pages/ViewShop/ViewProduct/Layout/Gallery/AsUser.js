@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { Card, Divider, Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
+import { Card, Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
 import { pipe, prop, path, length } from 'ramda'
 
 import SocialMenu from 'components/SocialMenu'
@@ -9,13 +8,6 @@ import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
 import ProductGallerySegment from 'components/Product/Segment/GallerySegment'
 
 const productUserId = path(['user', 'id'])
-const productUsername = path(['user', 'username'])
-
-const productUserAvatar = path(['user', 'image'])
-
-const productShopSlug = path(['shop', 'slug'])
-const productShopName = path(['shop', 'name'])
-const productShopImage = path(['shop', 'image'])
 
 const getImage = prop('image')
 const getName = prop('name')
@@ -28,21 +20,14 @@ const productHasGallery = pipe(productGallery, length, Boolean)
 const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
 const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
 const getBackgroundRGB = path(['themes', 'background', 'rgb'])
-const getSegmentRGB = path(['themes', 'segment', 'rgb'])
 const getFontRGB = path(['themes', 'font', 'rgb'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 
-const hasAlpha = rgba => !!rgba && rgba.a === 0 ? 'none' : '0 1px 2px 0 rgba(34,36,38,.15)'
-
 const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
 const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
-const getSegment = pipe(getSegmentRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
-
-const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
-
 
 const UserView = ({
   orders,

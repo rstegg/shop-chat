@@ -31,18 +31,12 @@ import { validate } from './validators'
 const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
 const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
 const getBackgroundRGB = path(['themes', 'background', 'rgb'])
-const getSegmentRGB = path(['themes', 'segment', 'rgb'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
-
-const hasAlpha = rgba => !!rgba && rgba.a === 0 ? 'none' : '0 1px 2px 0 rgba(34,36,38,.15)'
 
 const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
 const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
-const getSegment = pipe(getSegmentRGB, toRGBStyle)
-
-const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 
 class AdminGridView extends Component {
   render() {

@@ -25,10 +25,10 @@ class ViewShop extends Component {
     }
   }
   render() {
-    const { shop, user, isFetching, children } = this.props
-    // if(!shop && !isFetching) {
-    //   return <Redirect to='/' />
-    // }
+    const { shop, isFetching, children } = this.props
+    if(!shop && !isFetching) {
+      return <Redirect to='/' />
+    }
     const Hoc = shop.isAdmin ? AdminView : UserView
     return (
       <Hoc {...this.props} >

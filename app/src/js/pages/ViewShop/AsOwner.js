@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { replace } from 'react-router-redux'
 import { path, length } from 'ramda'
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { times } from 'ramda'
 
-import { Button, Dropdown, Divider, Menu, Segment } from 'semantic-ui-react'
+import { Button, Dropdown, Divider, Segment } from 'semantic-ui-react'
 
 import { productSetQuantity, productAddToCart, productBuyNow } from 'actions/orders'
 

@@ -6,6 +6,7 @@ import { pipe, path } from 'ramda'
 
 import SocialMenu from 'components/SocialMenu'
 import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
+import ProductGridSegment from 'components/Product/Segment/GridSegment'
 
 import { productBuyNow, productAddToCart } from 'actions/orders'
 
@@ -49,45 +50,32 @@ const UserView = ({
       <Grid.Row columns={2}>
         <Grid.Column width={8} stretched>
           <Segment basic>
-            <Segment className='avatar-image'>
+            <ProductGridSegment>
               <Image src={product.image || '/images/productholder.png'} />
-            </Segment>
+            </ProductGridSegment>
           </Segment>
         </Grid.Column>
         <Grid.Column width={8} stretched>
-          <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+          <ProductGridSegment>
             <Header as='h1' style={{color: getFont(product)}}>{product.name}</Header>
-          </Segment>
-          <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+          </ProductGridSegment>
+          <ProductGridSegment>
             <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
-          </Segment>
+          </ProductGridSegment>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row columns={2}>
         <Grid.Column width={8} stretched>
-          <Segment style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+          <ProductGridSegment>
             <Header as='h4' style={{color: getFont(product)}}>{product.description || 'No description'}</Header>
-          </Segment>
+          </ProductGridSegment>
         </Grid.Column>
         <Grid.Column width={8} stretched>
-          {user.id === productUserId(product) ?
-            <Segment style={{display: 'flex', justifyContent: 'center'}}>
-              <Button basic onClick={switchToProductAdmin}>Edit Product</Button>
-            </Segment>
-            :
-            <Segment>
-              <Button.Group vertical fluid>
-                <NavLink to='/checkout/review'>
-                  <Button type='button' basic color='green' onClick={() => productBuyNow(product)} style={{justifyContent: 'center'}}>Buy now</Button>
-                </NavLink>
-                <Button fluid basic color='green' onClick={() => productAddToCart(product)} style={{justifyContent: 'center'}}>Add to cart</Button>
-              </Button.Group>
-            </Segment>
-          }
+          {/*TODO*/}
         </Grid.Column>
       </Grid.Row>
     </Grid>
-    <Segment compact>
+    <Segment compact style={{position: 'absolute', right: '0', top: '0'}}>
       <Grid.Column width={4} stretched>
         <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
         <PurchaseButtons />

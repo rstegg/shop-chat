@@ -6,6 +6,7 @@ import { pipe, path } from 'ramda'
 
 import ProductAdminMenu from 'components/Product/AdminMenu'
 import ProductSidebar from 'components/Product/Sidebar'
+import ProductGallerySegment from 'components/Product/Segment/GallerySegment'
 
 import ImageCropper from 'components/ImageCropper'
 
@@ -76,7 +77,7 @@ class AdminGridView extends Component {
             <Grid celled='internally'>
               <Grid.Column width={6} stretched>
                 <Segment basic>
-                  <Segment style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+                  <ProductGallerySegment>
                     {product.isCropperOpen ?
                       <ImageCropper
                         isOpen={product.isCropperOpen}
@@ -100,7 +101,7 @@ class AdminGridView extends Component {
                       null
                     }
 
-                  </Segment>
+                  </ProductGallerySegment>
                   <Card.Group itemsPerRow={4}>
                     { !!product.gallery && product.gallery.map((image, i) =>
                       <GalleryAvatarField key={`gallery-${i}`} index={i} product={product}
@@ -113,15 +114,15 @@ class AdminGridView extends Component {
                 </Segment>
               </Grid.Column>
               <Grid.Column width={10} stretched>
-                <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+                <ProductGallerySegment>
                   <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+                </ProductGallerySegment>
+                <ProductGallerySegment>
                   <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
-                <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+                </ProductGallerySegment>
+                <ProductGallerySegment>
                   <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </Segment>
+                </ProductGallerySegment>
               </Grid.Column>
             </Grid>
           </div>

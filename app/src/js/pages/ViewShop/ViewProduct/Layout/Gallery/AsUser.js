@@ -6,6 +6,7 @@ import { pipe, prop, path, length } from 'ramda'
 
 import SocialMenu from 'components/SocialMenu'
 import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
+import ProductGallerySegment from 'components/Product/Segment/GallerySegment'
 
 const productUserId = path(['user', 'id'])
 const productUsername = path(['user', 'username'])
@@ -53,9 +54,9 @@ const UserView = ({
     <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
       <Grid.Column width={8} stretched>
         <Segment basic>
-          <Segment className='avatar-image' style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+          <ProductGallerySegment>
             <Image src={product.image || '/images/productholder.png'} />
-          </Segment>
+          </ProductGallerySegment>
           <Card.Group itemsPerRow={4}>
             { productHasGallery(product) && productGallery(product).map((item, i) =>
               <Card key={`gallery-${i}`} className='gallery-image'>
@@ -66,15 +67,15 @@ const UserView = ({
         </Segment>
       </Grid.Column>
       <Grid.Column width={8} stretched>
-        <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+        <ProductGallerySegment>
           <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
-        </Segment>
-        <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+        </ProductGallerySegment>
+        <ProductGallerySegment>
           <Header as='h4' style={{color: getFont(product)}}>{getDesc(product) || 'No description'}</Header>
-        </Segment>
-        <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+        </ProductGallerySegment>
+        <ProductGallerySegment>
           <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
-        </Segment>
+        </ProductGallerySegment>
       </Grid.Column>
     </Grid>
     <Segment compact>

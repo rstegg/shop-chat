@@ -8,6 +8,7 @@ import { productBuyNow, productAddToCart } from 'actions/orders'
 
 import SocialMenu from 'components/SocialMenu'
 import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
+import ProductImageSegment from 'components/Product/Segment/ImageSegment'
 
 const productUserId = path(['user', 'id'])
 
@@ -40,15 +41,15 @@ const UserView = ({
   <div className='product-container' style={{backgroundColor: getBackground(product)}}>
     <Image src={product.image || '/images/productholder.png'} className='product--image avatar-image product-image-underlay' />
     <Segment basic style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-      <Segment style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+      <ProductImageSegment>
         <Header as='h1' style={{color: getFont(product)}}>{product.name}</Header>
-      </Segment>
-      <Segment style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+      </ProductImageSegment>
+      <ProductImageSegment>
         <Header as='h4' style={{color: getFont(product)}}>{product.description || 'No description'}</Header>
-      </Segment>
-      <Segment style={{pointerEvents: 'auto', background: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+      </ProductImageSegment>
+      <ProductImageSegment>
         <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
-      </Segment>
+      </ProductImageSegment>
     </Segment>
     <Segment basic>
       {user.id === productUserId(product) ?

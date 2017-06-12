@@ -6,6 +6,7 @@ import { pipe, path } from 'ramda'
 
 import ProductAdminMenu from 'components/Product/AdminMenu'
 import ProductSidebar from 'components/Product/Sidebar'
+import ProductImageSegment from 'components/Product/Segment/ImageSegment'
 
 import ImageCropper from 'components/ImageCropper'
 
@@ -64,15 +65,15 @@ class AdminGridView extends Component {
                 <AvatarField className='product-image-underlay' product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
               }
             <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+              <ProductImageSegment>
                 <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-              </Segment>
-              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+              </ProductImageSegment>
+              <ProductImageSegment>
                 <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-              </Segment>
-              <Segment compact style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+              </ProductImageSegment>
+              <ProductImageSegment>
                 <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-              </Segment>
+              </ProductImageSegment>
             </div>
           </div>
           <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />

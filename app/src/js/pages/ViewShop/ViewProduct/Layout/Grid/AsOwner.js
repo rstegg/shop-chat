@@ -6,6 +6,7 @@ import { pipe, path } from 'ramda'
 
 import ProductAdminMenu from 'components/Product/AdminMenu'
 import ProductSidebar from 'components/Product/Sidebar'
+import ProductGridSegment from 'components/Product/Segment/GridSegment'
 
 import ImageCropper from 'components/ImageCropper'
 
@@ -64,29 +65,29 @@ class AdminGridView extends Component {
               <Grid.Row columns={2}>
                 <Grid.Column width={8} stretched>
                   <Segment basic>
-                    <Segment>
+                    <ProductGridSegment>
                       {product.isCropperOpen ?
                         <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
                         :
                         <AvatarField product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
                       }
-                    </Segment>
+                    </ProductGridSegment>
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={8} stretched>
-                  <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+                  <ProductGridSegment>
                     <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                  </Segment>
-                  <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+                  </ProductGridSegment>
+                  <ProductGridSegment>
                     <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                  </Segment>
+                  </ProductGridSegment>
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row columns={2}>
                 <Grid.Column width={8} stretched>
-                  <Segment>
+                  <ProductGridSegment>
                     <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                  </Segment>
+                  </ProductGridSegment>
                 </Grid.Column>
                 <Grid.Column width={8} stretched>
                   <Segment>

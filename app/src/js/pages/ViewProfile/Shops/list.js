@@ -8,7 +8,7 @@ const ShopsList =
 ({
   shops
 }) =>
-  <Card.Group itemsPerRow={2}>
+  <Card.Group itemsPerRow={4}>
     {length(shops) ? shops.map((shop, i) =>
       <ShopItem key={`shop-${i}`} shop={shop} />
     ) :

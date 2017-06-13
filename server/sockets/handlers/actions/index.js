@@ -20,6 +20,12 @@ const getToken = path(['payload', 'user', 'token'])
 
 module.exports = (io, socket, action) => {
   // TODO: use ramda to check the type of action
+  if(action.type === 'WS/FETCH_THREAD_CHAT_MESSAGES') {
+    return fetchThreadChatMessages(io, socket, action)
+  }
+  if(action.type === 'WS/JOIN_THREAD') {
+    return joinChatThread(io, socket, action)
+  }
   authorize(getToken(action))
     .then(token => {
       socket.userId = token.id //TODO: best answer?

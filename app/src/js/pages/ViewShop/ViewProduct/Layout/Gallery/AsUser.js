@@ -1,13 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Card, Grid, Segment, Header, Image, Button } from 'semantic-ui-react'
+import { Card, Grid, Segment, Header, Image } from 'semantic-ui-react'
 import { pipe, prop, path, length } from 'ramda'
 
-import SocialMenu from 'components/SocialMenu'
-import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
+import ProductCartMenu from 'components/Product/Cart/Menu'
 import ProductGallerySegment from 'components/Product/Segment/GallerySegment'
-
-const productUserId = path(['user', 'id'])
 
 const getImage = prop('image')
 const getName = prop('name')
@@ -30,10 +26,8 @@ const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
 
 const UserView = ({
-  orders,
   product,
-  user,
-  switchToProductAdmin
+  user
 }) =>
   <div className='product-container'>
     <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
@@ -63,24 +57,7 @@ const UserView = ({
         </ProductGallerySegment>
       </Grid.Column>
     </Grid>
-    <Segment compact>
-      <Grid.Column width={4} stretched>
-        <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-        <PurchaseButtons />
-        {user.id === productUserId(product) &&
-          <Segment compact style={{width: '100%'}}>
-            <Button fluid basic color='yellow' onClick={switchToProductAdmin}>Edit Product</Button>
-          </Segment>
-        }
-      </Grid.Column>
-    </Segment>
+    <ProductCartMenu />
   </div>
 
-const mapStateToProps = ({orders}) =>
-({
-  orders
-})
-
-export default connect(
-  mapStateToProps
-)(UserView)
+export default UserView

@@ -9,7 +9,7 @@ import UserImageView from './Layout/Image/AsUser'
 import AdminGalleryView from './Layout/Gallery/AsOwner'
 import UserGalleryView from './Layout/Gallery/AsUser'
 
-import { fetchSingleProduct, switchToProductAdmin } from 'actions/products'
+import { fetchSingleProduct } from 'actions/products'
 
 class ViewProduct extends Component {
   componentWillMount() {
@@ -26,7 +26,7 @@ class ViewProduct extends Component {
     }
   }
   render() {
-    const { match: { params }, product, user, switchToProductAdmin } = this.props
+    const { match: { params }, product, user } = this.props
     if(!product) {
       return <Redirect to={`/shop/${params.shopId}`} />
     }
@@ -42,7 +42,7 @@ class ViewProduct extends Component {
           return <AdminGridView {...adminViewProps} />
       }
     }
-    const userViewProps = { product, user, switchToProductAdmin }
+    const userViewProps = { product, user }
     switch(product.layout) {
       case 'image':
         return <UserImageView {...userViewProps} />
@@ -55,18 +55,18 @@ class ViewProduct extends Component {
   }
 }
 
-const mapStateToProps = ({products, user, shops}) =>
+const mapStateToProps = ({products, shops, orders, user}) =>
 ({
   product: products.current,
   isFetchingProduct: products.isFetching,
   shop: shops.current,
   user,
+  orders
 })
 
 const mapDispatchToProps = dispatch =>
 ({
   fetchSingleProduct: (productId, shopId, user) => dispatch(fetchSingleProduct(productId, shopId, user)),
-  switchToProductAdmin: () => dispatch(switchToProductAdmin()),
 })
 
 export default connect(

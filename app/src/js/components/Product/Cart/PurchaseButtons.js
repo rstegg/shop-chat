@@ -12,9 +12,7 @@ const options = times(n => ({ key: n, text: String(n), value: n }), 30)
 const QuantityDropdown = ({value, onChange}) =>
   <Dropdown
     value={value}
-    onChange={(_,data) => {
-      onChange(data.value)
-    }}
+    onChange={(_,data) => onChange(data.value)}
     options={options} />
 
 const PurchaseButtons = ({product, productSetQuantity, productAddToCart, productBuyNow}) =>

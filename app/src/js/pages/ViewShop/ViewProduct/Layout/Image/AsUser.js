@@ -1,15 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Segment, Header, Image, Button } from 'semantic-ui-react'
+import { Segment, Header, Image } from 'semantic-ui-react'
 import { pipe, path } from 'ramda'
 
-import { productBuyNow, productAddToCart } from 'actions/orders'
-
-import SocialMenu from 'components/SocialMenu'
-import PurchaseButtons from 'components/Product/Cart/PurchaseButtons'
+import ProductCartMenu from 'components/Product/Cart/Menu'
 import ProductImageSegment from 'components/Product/Segment/ImageSegment'
-
-const productUserId = path(['user', 'id'])
 
 const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
 const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
@@ -24,12 +18,8 @@ const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
 
 const UserView = ({
-  orders,
   product,
   user,
-  switchToProductAdmin,
-  productBuyNow,
-  productAddToCart,
 }) =>
   <div className='product-container' style={{backgroundColor: getBackground(product)}}>
     <Image src={product.image || '/images/productholder.png'} className='product--image avatar-image product-image-underlay' />
@@ -44,32 +34,7 @@ const UserView = ({
         <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
       </ProductImageSegment>
     </Segment>
-    <Segment basic>
-      {user.id === productUserId(product) ?
-          <Segment compact>
-            <Button fluid basic color='yellow' onClick={switchToProductAdmin}>Edit Product</Button>
-          </Segment>
-        :
-        <Segment compact>
-          <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
-          <PurchaseButtons />
-        </Segment>
-      }
-    </Segment>
+    <ProductCartMenu />
   </div>
 
-const mapStateToProps = ({orders}) =>
-({
-  orders
-})
-
-const mapDispatchToProps = dispatch =>
-({
-  productBuyNow: product => dispatch(productBuyNow(product)),
-  productAddToCart: product => dispatch(productAddToCart(product)),
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserView)
+export default UserView

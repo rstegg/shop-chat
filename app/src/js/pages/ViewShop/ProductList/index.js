@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { path } from 'ramda'
 
 import { Card } from 'semantic-ui-react'
-import ProductsList from './list'
+import ProductList from './list'
 import RouterButton from 'elements/Button/RouterButton'
 
 import { fetchProducts, refreshProducts } from 'actions/products'
@@ -33,7 +33,7 @@ class Products extends Component {
           <Card.Header>Products</Card.Header>
         </Card.Content>
         <Card.Content>
-            <ProductsList
+            <ProductList
               products={products.list}
             />
         </Card.Content>

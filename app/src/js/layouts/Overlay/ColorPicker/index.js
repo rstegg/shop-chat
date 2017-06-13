@@ -12,14 +12,13 @@ const getActiveRGB = path(['activeThemeColor', 'rgb'])
 const getRGB = path(['rgb'])
 
 const ColorPicker = ({ product, user, editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor}) =>
-  !!product.activeTheme && 
+  !!product.activeTheme &&
   <Modal open={!!product.activeTheme} onClose={closeEditProductThemeColor}>
     <Modal.Content>
       <Segment basic style={{display: 'flex', flexDirection: 'column',  alignItems: 'center'}}>
         <Header>{product.activeTheme} color</Header>
         <SketchPicker
           color={getActiveRGB(product) || getRGB(product.themes[product.activeTheme])}
-          onChange={color => editProductThemeColor(product.activeTheme, color)}
           onChangeComplete={color => editProductThemeColor(product.activeTheme, color)}
         />
         <Segment basic compact>

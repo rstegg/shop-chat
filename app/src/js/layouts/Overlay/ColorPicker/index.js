@@ -12,6 +12,7 @@ const getActiveRGB = path(['activeThemeColor', 'rgb'])
 const getRGB = path(['rgb'])
 
 const ColorPicker = ({ product, user, editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor}) =>
+  !!product.activeTheme && 
   <Modal open={!!product.activeTheme} onClose={closeEditProductThemeColor}>
     <Modal.Content>
       <Segment basic style={{display: 'flex', flexDirection: 'column',  alignItems: 'center'}}>

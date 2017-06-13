@@ -11,19 +11,44 @@ const initialState = {
     gallery: [],
     themes: {
       primary: {
-        hex: '#ffffff'
+        rgb: {
+          r: '255',
+          g: '255',
+          b: '255',
+          a: '1'
+        }
       },
       secondary: {
-        hex: '#ffffff'
+        rgb: {
+          r: '255',
+          g: '255',
+          b: '255',
+          a: '1'
+        }
       },
       background: {
-        hex: '#ffffff'
+        rgb: {
+          r: '255',
+          g: '255',
+          b: '255',
+          a: '1'
+        }
       },
       segment: {
-        hex: '#ffffff'
+        rgb: {
+          r: '255',
+          g: '255',
+          b: '255',
+          a: '1'
+        }
       },
       font: {
-        hex: '#000000'
+        rgb: {
+          r: '0',
+          g: '0',
+          b: '0',
+          a: '1'
+        }
       },
     }
   },

@@ -22,17 +22,17 @@ const UserView = ({
   user,
 }) =>
   <div className='product-container' style={{backgroundColor: getBackground(product)}}>
-    <Image src={product.image || '/images/productholder.png'} className='product--image avatar-image product-image-underlay' />
+    <Image src={product.image || '/images/productholder.png'} className='product-image-underlay' />
     <Segment basic style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
       <ProductImageSegment>
         <Header as='h1' style={{color: getFont(product)}}>{product.name}</Header>
       </ProductImageSegment>
       <ProductImageSegment>
-        <Header as='h4' style={{color: getFont(product)}}>{product.description || 'No description'}</Header>
-      </ProductImageSegment>
-      <ProductImageSegment>
         <Header as='h4' style={{color: getFont(product)}}>${product.price}</Header>
       </ProductImageSegment>
+      {!!product.description && <ProductImageSegment>
+        <Header as='h4' style={{color: getFont(product)}}>{product.description || 'No description'}</Header>
+      </ProductImageSegment>}
     </Segment>
     <ProductCartMenu />
   </div>

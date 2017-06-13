@@ -4,7 +4,16 @@
 
 .product-image-underlay {
   position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
   width: 100% !important;
   height: 100% !important;
+}
 
+.product-image-underlay > img {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }

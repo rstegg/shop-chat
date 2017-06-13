@@ -69,8 +69,8 @@ class AdminGridView extends Component {
         <ProductSidebar product={product}>
           <div className='edit-product-container' style={{backgroundColor: getBackground(product)}}>
             <Grid celled='internally'>
-              <Grid.Column width={6} stretched>
-                <Segment basic>
+              <Grid.Column width={8} stretched>
+                <Segment basic style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                   <ProductGallerySegment>
                     {product.isCropperOpen ?
                       <ImageCropper
@@ -107,15 +107,15 @@ class AdminGridView extends Component {
                   </Card.Group>
                 </Segment>
               </Grid.Column>
-              <Grid.Column width={10} stretched>
+              <Grid.Column width={8} stretched>
                 <ProductGallerySegment>
                   <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
                 </ProductGallerySegment>
                 <ProductGallerySegment>
-                  <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
                 </ProductGallerySegment>
                 <ProductGallerySegment>
-                  <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+                  <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
                 </ProductGallerySegment>
               </Grid.Column>
             </Grid>

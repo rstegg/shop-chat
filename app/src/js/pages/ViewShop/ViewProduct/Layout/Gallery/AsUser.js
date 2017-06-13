@@ -32,7 +32,7 @@ const UserView = ({
   <div className='product-container'>
     <Grid celled='internally' style={{backgroundColor: getBackground(product)}}>
       <Grid.Column width={8} stretched>
-        <Segment basic>
+        <Segment basic style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <ProductGallerySegment>
             <Image src={product.image || '/images/productholder.png'} />
           </ProductGallerySegment>
@@ -50,11 +50,11 @@ const UserView = ({
           <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
         </ProductGallerySegment>
         <ProductGallerySegment>
-          <Header as='h4' style={{color: getFont(product)}}>{getDesc(product) || 'No description'}</Header>
-        </ProductGallerySegment>
-        <ProductGallerySegment>
           <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
         </ProductGallerySegment>
+        {getDesc(product) && <ProductGallerySegment>
+          <Header as='h4' style={{color: getFont(product)}}>{getDesc(product) || 'No description'}</Header>
+        </ProductGallerySegment>}
       </Grid.Column>
     </Grid>
     <ProductCartMenu />

@@ -42,9 +42,9 @@ const UserView = ({
       </Grid.Row>
       <Grid.Row columns={2}>
         <Grid.Column width={8} stretched>
-          <ProductGridSegment>
+          {!!product.description && <ProductGridSegment>
             <Header as='h4' style={{color: getFont(product)}}>{product.description || 'No description'}</Header>
-          </ProductGridSegment>
+          </ProductGridSegment>}
         </Grid.Column>
         <Grid.Column width={8} stretched>
           {/*TODO*/}

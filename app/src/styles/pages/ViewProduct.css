@@ -13,7 +13,7 @@
 }
 
 .product-container {
-  
+  display: block;
 }
 
 .edit-product-container {
@@ -28,6 +28,7 @@
   }
 
   .product-container {
+    display: flex;
     width: 100% !important;
     height: 100% !important;
     overflow: auto;

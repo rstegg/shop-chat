@@ -1,8 +1,5 @@
 
 @media (max-width: 768px)  {
-  .product-container {
-
-  }
   .product-cart-menu {
     display: flex;
     justify-content: center;

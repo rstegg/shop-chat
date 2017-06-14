@@ -9,8 +9,6 @@ import ProductElementMenu from './ElementMenu'
 import ProductMediaMenu from './MediaMenu'
 import ProductThemeMenu from './ThemeMenu'
 
-import isMobile from 'utils/isMobile'
-
 const ProductEmptyMenu = () =>
   <Menu vertical inverted style={{width: '100%', height: '100%'}}></Menu>
 

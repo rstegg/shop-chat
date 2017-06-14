@@ -1,0 +1,20 @@
+
+@media (max-width: 768px)  {
+  .product-container {
+
+  }
+  .product-cart-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px)  {
+  .product-cart-menu {
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+}

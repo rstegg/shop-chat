@@ -9,10 +9,12 @@ import PurchaseButtons from './PurchaseButtons'
 
 import { switchToProductAdmin } from 'actions/products'
 
+import isMobile from 'utils/isMobile'
+
 const productUserId = path(['user', 'id'])
 
 const ProductCartMenu = ({user, product, switchToProductAdmin}) =>
-  <Segment basic style={{position: 'absolute', right: '0', top: '0'}}>
+  <Segment basic className='product-cart-menu'>
     { user.id === productUserId(product) ?
         <Segment compact>
           <Button fluid basic color='yellow' onClick={switchToProductAdmin}>Edit Product</Button>

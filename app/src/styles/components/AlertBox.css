@@ -19,7 +19,7 @@
 .alert-box--success {
 	visibility: visible;
 	opacity: 1;
-	margin-top: 0px;
+	margin-top: 0;
 	background-color: #5bbd66
 }
 .alert-box__icon {
@@ -29,7 +29,7 @@
 .alert-box--error {
 	visibility: visible;
 	opacity: 1;
-	margin-top: 0px;
+	margin-top: 0;
 	background: #ff5f5f;
 }
 .alert-box--hiding {

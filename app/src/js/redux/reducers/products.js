@@ -140,12 +140,6 @@ export default function(state = initialState, action) {
     case 'CLOSE_ADD_PRODUCT_ELEMENT':
     case 'CLOSE_ADD_PRODUCT_OPTIONS':
     case 'CLOSE_ADD_PRODUCT_MEDIA':
-      return Object.assign({}, state, {
-        current: {
-          ...state.current,
-          editMode: null
-        }
-      })
     case 'CLOSE_EDIT_PRODUCT_THEME':
       return Object.assign({}, state, {
         current: {

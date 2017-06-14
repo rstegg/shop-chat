@@ -4,9 +4,6 @@ import { connect } from 'react-redux'
 import { Sidebar, Segment, Menu } from 'semantic-ui-react'
 
 import ProductLayoutMenu from './LayoutMenu'
-import ProductOptionMenu from './OptionMenu'
-import ProductElementMenu from './ElementMenu'
-import ProductMediaMenu from './MediaMenu'
 import ProductThemeMenu from './ThemeMenu'
 
 const ProductEmptyMenu = () =>
@@ -16,12 +13,6 @@ const SidebarContent = ({editMode}) => {
   switch(editMode) {
     case 'layout':
       return <ProductLayoutMenu />
-    case 'options':
-      return <ProductOptionMenu />
-    case 'element':
-      return <ProductElementMenu />
-    case 'media':
-      return <ProductMediaMenu />
     case 'theme':
       return <ProductThemeMenu />
     default:

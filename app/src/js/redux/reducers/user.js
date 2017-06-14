@@ -39,35 +39,27 @@ export default function(state = initialState, action) {
       })
     case 'EDIT_PROFILE_SUCCESS':
       return Object.assign({}, state, {
-        ...state,
         ...action.payload.user,
         error: null,
         isLoading: false,
       })
     case 'SAVE_ACCOUNT_SETTINGS_SUCCESS':
       return Object.assign({}, state, {
-        ...state,
         ...action.payload.account,
         error: null,
         isLoading: false,
         isAccountSaved: true
       })
-    case 'SAVE_ACCOUNT_SETTINGS_FAILURE':
-      return Object.assign({}, state, {
-        ...state,
-        error: action.payload.error
-      })
     case 'SAVE_ADDRESS_SETTINGS_SUCCESS':
       return Object.assign({}, state, {
-        ...state,
         address: action.payload.address,
         error: null,
         isLoading: false,
         isAddressSaved: true
       })
+    case 'SAVE_ACCOUNT_SETTINGS_FAILURE':
     case 'SAVE_ADDRESS_SETTINGS_FAILURE':
       return Object.assign({}, state, {
-        ...state,
         error: action.payload.error
       })
     case 'UPLOAD_PROFILE_IMAGE':

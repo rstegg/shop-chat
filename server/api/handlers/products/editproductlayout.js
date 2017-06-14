@@ -5,9 +5,12 @@ const shortId = require('shortid')
 
 const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
+const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
+const validLayouts = ['grid', 'image', 'gallery']
+
 const validField = p => obj => !isNil(path([p], obj))
 
-const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
+const validLayoutField = layout => validLayouts.includes(layout)
 
 const validBody = pipe(
   path(['body']),
@@ -22,6 +25,11 @@ const validParams = pipe(
       validField('shopId')
   ]))
 
+const validLayout = pipe(
+  path(['body', 'layout']),
+  validLayoutField
+)
+
 const getValidParams = (productId, shopId, userId) =>
   Shop.findOne({
     where: { id: shopId, userId }
@@ -34,6 +42,7 @@ const getValidParams = (productId, shopId, userId) =>
 const validate = req => {
   if (!validBody(req)) return Promise.reject('missing fields')
   if (!validParams(req)) return Promise.reject('missing fields')
+  if (!validLayout(req)) return Promise.reject('invalid layout type')
 
   const { shopId, id } = req.params
 

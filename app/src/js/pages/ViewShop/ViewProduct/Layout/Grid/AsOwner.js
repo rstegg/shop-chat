@@ -30,9 +30,9 @@ import { validate } from './validators'
 
 import isMobile from 'utils/isMobile'
 
-const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
-const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
-const getBackgroundRGB = path(['themes', 'background', 'rgb'])
+const getPrimaryRGB = path(['themes', 'primary'])
+const getSecondaryRGB = path(['themes', 'secondary'])
+const getBackgroundRGB = path(['themes', 'background'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 

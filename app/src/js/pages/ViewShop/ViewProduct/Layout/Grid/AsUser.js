@@ -5,10 +5,10 @@ import { pipe, path } from 'ramda'
 import ProductCartMenu from 'components/Product/Cart/Menu'
 import ProductGridSegment from 'components/Product/Segment/GridSegment'
 
-const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
-const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
-const getBackgroundRGB = path(['themes', 'background', 'rgb'])
-const getFontRGB = path(['themes', 'font', 'rgb'])
+const getPrimaryRGB = path(['themes', 'primary'])
+const getSecondaryRGB = path(['themes', 'secondary'])
+const getBackgroundRGB = path(['themes', 'background'])
+const getFontRGB = path(['themes', 'font'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 

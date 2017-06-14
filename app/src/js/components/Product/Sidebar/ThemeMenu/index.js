@@ -6,11 +6,11 @@ import { Header, Menu, Button, Icon } from 'semantic-ui-react'
 
 import { closeEditProductTheme, openEditProductThemeColor, } from 'actions/products'
 
-const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
-const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
-const getBackgroundRGB = path(['themes', 'background', 'rgb'])
-const getSegmentRGB = path(['themes', 'segment', 'rgb'])
-const getFontRGB = path(['themes', 'font', 'rgb'])
+const getPrimaryRGB = path(['themes', 'primary'])
+const getSecondaryRGB = path(['themes', 'secondary'])
+const getBackgroundRGB = path(['themes', 'background'])
+const getSegmentRGB = path(['themes', 'segment'])
+const getFontRGB = path(['themes', 'font'])
 
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
 

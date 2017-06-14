@@ -4,7 +4,7 @@ import { pipe, path, length } from 'ramda'
 
 import EditorField from 'elements/Input/EditorField'
 
-const getFontRGB = path(['themes', 'font', 'rgb'])
+const getFontRGB = path(['themes', 'font'])
 const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(0,0,0,1)`
 const getFont = pipe(getFontRGB, toRGBStyle)
 

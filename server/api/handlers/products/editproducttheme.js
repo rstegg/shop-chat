@@ -3,9 +3,11 @@ const { Product, Shop } = models
 
 const shortId = require('shortid')
 
-const { allPass, assoc, merge, path, pick, pipe, isNil } = require('ramda')
+const { allPass, assoc, merge, path, pick, pipe, is, isNil } = require('ramda')
 
 const validField = p => obj => !isNil(path([p], obj))
+
+const validRGBField = p => obj => is(Object, path(p, obj))
 
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
 
@@ -13,7 +15,8 @@ const validBody = pipe(
   path(['body']),
   allPass([
       validField('theme'),
-      validField('color')
+      validField('color'),
+      validRGBField(['color', 'rgb']),
   ]))
 
 const validParams = pipe(
@@ -44,7 +47,8 @@ const validate = req => {
 module.exports = (req, res) => {
   validate(req)
     .then(product => {
-      const updateTheme = assoc(req.body.theme, req.body.color)
+      const reqRGB = path(['body', 'color', 'rgb'], req)
+      const updateTheme = assoc(req.body.theme, reqRGB)
       const updatedProduct = {
         themes: updateTheme(product.themes)
       }

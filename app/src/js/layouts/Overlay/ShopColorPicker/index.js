@@ -8,7 +8,7 @@ import { SketchPicker } from 'react-color'
 
 import { editShopThemeColor, uploadEditShopTheme, closeEditShopThemeColor } from 'actions/shops'
 
-const getActiveRGB = path(['activeThemeColor', 'rgb'])
+const getActiveRGB = path(['activeThemeColor'])
 const getRGB = path(['rgb'])
 
 const ShopColorPicker = ({ shop, user, editShopThemeColor, uploadEditShopTheme, closeEditShopThemeColor}) =>

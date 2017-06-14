@@ -17,7 +17,7 @@ const QuantityDropdown = ({value, onChange}) =>
 
 const PurchaseButtons = ({product, productSetQuantity, productAddToCart, productBuyNow}) =>
   <Segment compact style={{width: '100%'}}>
-    Qty: <QuantityDropdown value={product.purchasingQuantity} onChange={quantity => productSetQuantity(product, quantity)} />
+    Qty: <QuantityDropdown value={product.purchasingQuantity || 1} onChange={quantity => productSetQuantity(product, quantity)} />
     <Divider />
     <Button.Group fluid vertical>
       <Button basic color='green' as={NavLink} to='/checkout/review' type='button'  onClick={() => productBuyNow(product)} style={{justifyContent: 'center'}}>Buy now</Button>

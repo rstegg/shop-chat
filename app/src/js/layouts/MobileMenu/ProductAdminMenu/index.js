@@ -8,9 +8,6 @@ import PublicField from './PublicField'
 
 import {
   openChangeProductLayout,
-  openAddProductOption,
-  openAddProductElement,
-  openAddProductMedia,
   openEditProductTheme,
   switchToProductUser,
   editProduct
@@ -34,9 +31,6 @@ const mapStateToProps = ({products, user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   openChangeProductLayout:  () => dispatch(openChangeProductLayout()),
-  openAddProductOption:     () => dispatch(openAddProductOption()),
-  openAddProductElement:    () => dispatch(openAddProductElement()),
-  openAddProductMedia:      () => dispatch(openAddProductMedia()),
   openEditProductTheme:     () => dispatch(openEditProductTheme()),
   switchToProductUser:      () => dispatch(switchToProductUser()),
   editProduct: (product, user) => dispatch(editProduct(product, user))

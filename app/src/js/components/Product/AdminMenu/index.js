@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react'
 
 import ProductAdminMenuButton from 'elements/Button/ProductAdminMenuButton'
 
-import { openChangeProductLayout, openAddProductOption, openAddProductElement, openAddProductMedia, openEditProductTheme, switchToProductUser } from 'actions/products'
+import { openChangeProductLayout, openEditProductTheme, switchToProductUser } from 'actions/products'
 
 import isMobile, { isTablet } from 'utils/isMobile'
 //Only renders if this is a tablet or desktop
@@ -27,9 +27,6 @@ const mapStateToProps = ({user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   openChangeProductLayout:  () => dispatch(openChangeProductLayout()),
-  openAddProductOption:     () => dispatch(openAddProductOption()),
-  openAddProductElement:    () => dispatch(openAddProductElement()),
-  openAddProductMedia:      () => dispatch(openAddProductMedia()),
   openEditProductTheme:     () => dispatch(openEditProductTheme()),
   switchToProductUser:      () => dispatch(switchToProductUser()),
 })

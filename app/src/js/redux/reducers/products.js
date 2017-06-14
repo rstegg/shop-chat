@@ -108,27 +108,6 @@ export default function(state = initialState, action) {
           editMode: 'layout'
         }
       })
-    case 'OPEN_ADD_PRODUCT_OPTIONS':
-      return Object.assign({}, state, {
-        current: {
-          ...state.current,
-          editMode: 'options'
-        }
-      })
-    case 'OPEN_ADD_PRODUCT_ELEMENT':
-      return Object.assign({}, state, {
-        current: {
-          ...state.current,
-          editMode: 'element'
-        }
-      })
-    case 'OPEN_ADD_PRODUCT_MEDIA':
-      return Object.assign({}, state, {
-        current: {
-          ...state.current,
-          editMode: 'media'
-        }
-      })
     case 'OPEN_EDIT_PRODUCT_THEME':
       return Object.assign({}, state, {
         current: {
@@ -137,9 +116,6 @@ export default function(state = initialState, action) {
         }
       })
     case 'CLOSE_CHANGE_PRODUCT_LAYOUT':
-    case 'CLOSE_ADD_PRODUCT_ELEMENT':
-    case 'CLOSE_ADD_PRODUCT_OPTIONS':
-    case 'CLOSE_ADD_PRODUCT_MEDIA':
     case 'CLOSE_EDIT_PRODUCT_THEME':
       return Object.assign({}, state, {
         current: {

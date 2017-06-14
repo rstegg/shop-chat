@@ -8,8 +8,8 @@ import { SketchPicker } from 'react-color'
 
 import { editShopThemeColor, uploadEditShopTheme, closeEditShopThemeColor } from 'actions/shops'
 
-const getActiveRGB = path(['activeThemeColor'])
-const getRGB = path(['rgb'])
+const getActiveColor = path(['activeThemeColor', 'rgb'])
+const getInitialTheme = (theme, obj) => path([theme], obj)
 
 const ShopColorPicker = ({ shop, user, editShopThemeColor, uploadEditShopTheme, closeEditShopThemeColor}) =>
   !!shop.activeTheme &&
@@ -18,7 +18,7 @@ const ShopColorPicker = ({ shop, user, editShopThemeColor, uploadEditShopTheme, 
       <Segment basic style={{display: 'flex', flexDirection: 'column',  alignItems: 'center'}}>
         <Header>{shop.activeTheme} color</Header>
         <SketchPicker
-          color={getActiveRGB(shop) || getRGB(shop.themes[shop.activeTheme])}
+          color={getActiveRGB(shop) || getInitialTheme(shop.activeTheme, shop.themes)}
           onChangeComplete={color => editShopThemeColor(shop.activeTheme, color)}
         />
         <Segment basic compact>

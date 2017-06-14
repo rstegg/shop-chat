@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Form } from 'semantic-ui-react'
+import { Checkbox } from 'semantic-ui-react'
 
 import { editProduct } from 'actions/products'
 
 const PublicField = ({product, user, editProduct, style}) =>
-  <Form.Checkbox
+  <Checkbox
     label='Public'
     toggle
     style={style}

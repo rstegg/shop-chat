@@ -19,15 +19,10 @@ import {
 const MobileProductAdminMenu = props =>
   !!props.product.isAdmin &&
   <div className='ui menu product-admin-menu'>
-    <PublicField style={{position: 'absolute', left: '10px', bottom: '15px'}}/>
-    <div style={{position: 'relative', bottom: '25px'}}>
-      <ProductAdminMenuButton onClick={props.openChangeProductLayout} icon='object group' text='change layout' />
-      <ProductAdminMenuButton onClick={props.openAddProductOption} icon='unordered list' text='add options' />
-      <ProductAdminMenuButton onClick={props.openAddProductElement} icon='font' text='add content' />
-      <ProductAdminMenuButton onClick={props.openAddProductMedia} icon='video play outline' text='add media' />
-      <ProductAdminMenuButton onClick={props.openEditProductTheme} icon='theme' text='change theme' />
-    </div>
-    <Button basic positive onClick={props.switchToProductUser} style={{position: 'absolute', right: '10px', bottom: '10px'}}>Done</Button>
+    <PublicField style={{position: 'absolute', left: '10px', bottom: '35px'}}/>
+    <ProductAdminMenuButton onClick={props.openChangeProductLayout} icon='object group' text='change layout' />
+    <ProductAdminMenuButton onClick={props.openEditProductTheme} icon='theme' text='change theme' />
+    <Button basic positive onClick={props.switchToProductUser} style={{position: 'absolute', right: '10px', bottom: '30px'}}>Done</Button>
   </div>
 
 const mapStateToProps = ({products, user}) =>

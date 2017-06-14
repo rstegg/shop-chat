@@ -247,7 +247,10 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, {
         current: {
           ...state.current,
-          isAdmin: false
+          isAdmin: false,
+          editMode: null,
+          activeTheme: false,
+          activeThemeColor: null
         }
       })
     case 'FETCH_PRODUCTS':

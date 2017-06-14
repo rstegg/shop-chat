@@ -28,7 +28,7 @@ export const asyncValidate = (values, dispatch, props, field) => {
   const previousErrors = props.asyncErrors
   return new Promise((resolve, reject) => {
     if(field === 'username') {
-      reject(su.post(`${API_HOST}/signup/validate_username`)
+      reject(su.post(`${API_HOST}/auth/signup/validate_username`)
         .send({ username: values.username })
         .set('Accept', 'application/json')
         .then(res => {
@@ -39,7 +39,7 @@ export const asyncValidate = (values, dispatch, props, field) => {
         }).catch(err => err)
       )
     } else if(field === 'email') {
-      reject(su.post(`${API_HOST}/signup/validate_email`)
+      reject(su.post(`${API_HOST}/auth/signup/validate_email`)
         .send({ email: values.email })
         .set('Accept', 'application/json')
         .then(res => {

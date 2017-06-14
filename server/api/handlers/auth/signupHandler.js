@@ -83,7 +83,7 @@ module.exports = (req, res) => {
       })
       .then(createdUser => {
         const { permalink, verify_token } = createdUser
-        const permalink_url = `https://kuwau.com/api/v1/signup/email_confirmation/${permalink}/${verify_token}`
+        const permalink_url = `https://kuwau.com/api/v1/auth/signup/email_confirmation/${permalink}/${verify_token}`
         const mail = confirmationMail(createdUser, permalink_url)
         sendConfirmation(mail, createdUser)
         const resUser = pick(['id', 'email', 'name', 'username'], createdUser) //TODO: remove sending of userID, change userId checks to username (frontend)

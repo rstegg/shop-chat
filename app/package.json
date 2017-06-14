@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "staging": "rm -rf ../build && mv build ../server/build",
+    "staging": "rm -rf ../server/build && mv build ../server/build",
     "build:staging": "npm-run-all --serial build staging",
     "test": "node scripts/test.js --env=jsdom"
   },

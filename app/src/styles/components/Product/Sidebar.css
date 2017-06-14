@@ -1,0 +1,26 @@
+.product-sidebar-container {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+
+@media (max-width: 768px)  {
+  .ui.sidebar.product-sidebar {
+    position: fixed;
+    top: 45px !important;
+    height: calc(100% - 120px) !important;
+    bottom: 100px !important;
+  }
+}
+
+@media (min-width: 768px)  {
+  .product-sidebar-container {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+  }
+}

@@ -21,7 +21,7 @@ const UserView = ({
   product,
   user,
 }) =>
-  <div className='product-container' style={{backgroundColor: getBackground(product)}}>
+  <div className='ui segment product-container' style={{background: getBackground(product)}}>
     <Image src={product.image || '/images/productholder.png'} className='product-image-underlay' />
     <Segment basic style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
       <ProductImageSegment>

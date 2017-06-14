@@ -28,6 +28,8 @@ import {
 
 import { validate } from './validators'
 
+import isMobile from 'utils/isMobile'
+
 const getPrimaryRGB = path(['themes', 'primary', 'rgb'])
 const getSecondaryRGB = path(['themes', 'secondary', 'rgb'])
 const getBackgroundRGB = path(['themes', 'background', 'rgb'])
@@ -52,9 +54,48 @@ class AdminGridView extends Component {
       onUploadEditProductImageFailure,
     } = this.props
     return (
+    isMobile ?
+      <div className='edit-product-container' style={{background: getBackground(product)}}>
+        <Grid celled='internally'>
+          <Grid.Row columns={2}>
+            <Grid.Column width={8} stretched>
+              <Segment basic>
+                <ProductGridSegment>
+                  {product.isCropperOpen ?
+                    <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
+                    :
+                    <AvatarField product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+                  }
+                </ProductGridSegment>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={8} stretched>
+              <ProductGridSegment>
+                <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </ProductGridSegment>
+              <ProductGridSegment>
+                <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </ProductGridSegment>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={2}>
+            <Grid.Column width={8} stretched>
+              <ProductGridSegment>
+                <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </ProductGridSegment>
+            </Grid.Column>
+            <Grid.Column width={8} stretched>
+              <Segment>
+                <Button fluid basic color='red' onClick={() => deleteProduct(product.id, product.shopId, user)} style={{justifyContent: 'center'}}>Remove listing</Button>
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+      :
       <div>
-        <ProductSidebar product={product}>
-          <div className='edit-product-container' style={{backgroundColor: getBackground(product)}}>
+        <ProductSidebar>
+          <div className='edit-product-container' style={{background: getBackground(product)}}>
             <Grid celled='internally'>
               <Grid.Row columns={2}>
                 <Grid.Column width={8} stretched>

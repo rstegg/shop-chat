@@ -47,7 +47,8 @@
 
 @media (max-width:768px) {
   .main-container {
-    position: absolute;
+    position: relative;
+    width: 100vw;
     height: 100vh;
     top: 63px;
     left: 10px;

@@ -272,11 +272,11 @@ class Dropzone extends React.Component {
       }
       activeStyle = {
         borderStyle: 'solid',
-        backgroundColor: '#eee'
+        background: '#eee'
       }
       rejectStyle = {
         borderStyle: 'solid',
-        backgroundColor: '#ffdddd'
+        background: '#ffdddd'
       }
     }
 

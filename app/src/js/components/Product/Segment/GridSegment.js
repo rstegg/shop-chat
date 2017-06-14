@@ -12,7 +12,7 @@ const getSegment = pipe(getSegmentRGB, toRGBStyle)
 const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 
 const ProductGridSegment = ({product, children}) =>
-  <Segment compact style={{backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+  <Segment compact style={{background: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
     {children}
   </Segment>
 

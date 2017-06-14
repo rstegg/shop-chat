@@ -1,12 +1,12 @@
 import React from 'react'
 
 import AlertBox from './AlertBox'
-import ColorPicker from './ColorPicker'
+import ProductColorPicker from './ProductColorPicker'
 import FormModal from './FormModal'
 
 export default () =>
   <div>
     <AlertBox />
-    <ColorPicker />
+    <ProductColorPicker />
     <FormModal />
   </div>

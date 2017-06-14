@@ -21,7 +21,7 @@ const UserView = ({
   product,
   user
 }) =>
-  <div className='product-container' style={{backgroundColor: getBackground(product)}}>
+  <div className='ui segment product-container' style={{background: getBackground(product)}}>
     <Grid celled='internally'>
       <Grid.Row columns={2}>
         <Grid.Column width={8} stretched>

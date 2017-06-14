@@ -12,7 +12,7 @@ const getSegment = pipe(getSegmentRGB, toRGBStyle)
 const getSegmentAlpha = pipe(getSegmentRGB, hasAlpha)
 
 const ProductImageSegment = ({product, children}) =>
-  <Segment style={{pointerEvents: 'auto', backgroundColor: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
+  <Segment style={{pointerEvents: 'auto', background: getSegment(product), borderColor: getSegment(product), boxShadow: getSegmentAlpha(product)}}>
     {children}
   </Segment>
 

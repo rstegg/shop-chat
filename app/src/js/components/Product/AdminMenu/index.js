@@ -7,7 +7,7 @@ import ProductAdminMenuButton from 'elements/Button/ProductAdminMenuButton'
 
 import { openChangeProductLayout, openEditProductTheme, switchToProductUser } from 'actions/products'
 
-import isMobile, { isTablet } from 'utils/isMobile'
+import isMobile from 'utils/isMobile'
 //Only renders if this is a tablet or desktop
 const BottomNav = ({PublicField, ...props}) =>
   !isMobile && (

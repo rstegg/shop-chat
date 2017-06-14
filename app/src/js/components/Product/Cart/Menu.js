@@ -9,9 +9,8 @@ import PurchaseButtons from './PurchaseButtons'
 
 import { switchToProductAdmin } from 'actions/products'
 
-import isMobile from 'utils/isMobile'
-
 const productUserId = path(['user', 'id'])
+const shopSlug = path(['shop', 'slug'])
 
 const ProductCartMenu = ({user, product, switchToProductAdmin}) =>
   <Segment basic className='product-cart-menu'>
@@ -21,7 +20,7 @@ const ProductCartMenu = ({user, product, switchToProductAdmin}) =>
         </Segment>
       :
       <Segment compact>
-        <SocialMenu url={`https://kuwau.com/product/${product.slug}`} productId={product.id} />
+        <SocialMenu url={`https://kuwau.com/shop/${shopSlug(product)}/product/${product.slug}`} productId={product.id} />
         <PurchaseButtons />
       </Segment>
     }

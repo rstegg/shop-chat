@@ -2,45 +2,11 @@
 
 ## TODO
 
-add actions:
-
-- uploadAddProductOption
-
-- uploadAddProductMedia
-
-- uploadAddProductElement
-
-add ProductOptions:
-- Checkbox
-- Toggle
-- Radio
-- Dropdown
-- Type(?)
-- Color
-- Bundle(?)
-- Coupon(?)
-
-add ProductElements:
-- Header
-- Paragraph
-- List
-- Table
-- Columns
-
-add ProductMedias:
-- Video
-- Line chart(?)
-- Bar chart(?)
-- Pie chart(?)
-- Activity feed(?)
-
-## TODO
-
 ### General
 
 - Checkout:
   - Add shipping
-  - Redo styling
+  - Design
 - Settings:
   - 'Payment options'
     - 'Add a card' - need validation on card
@@ -52,7 +18,6 @@ add ProductMedias:
     - Add page for
 - ViewProduct:
   - 'Add to cart' needs some animation/something happens
-  - redo the layout
 - Add:
   - loading screens
   - 'feed', 'follow', 'suggestions'

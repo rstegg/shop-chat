@@ -59,7 +59,7 @@ class AdminGridView extends Component {
         <Grid celled='internally'>
           <Grid.Row columns={2}>
             <Grid.Column width={8} stretched>
-              <Segment basic>
+              <Segment basic style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <ProductGridSegment>
                   {product.isCropperOpen ?
                     <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
@@ -99,7 +99,7 @@ class AdminGridView extends Component {
             <Grid celled='internally'>
               <Grid.Row columns={2}>
                 <Grid.Column width={8} stretched>
-                  <Segment basic>
+                  <Segment basic style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <ProductGridSegment>
                       {product.isCropperOpen ?
                         <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />

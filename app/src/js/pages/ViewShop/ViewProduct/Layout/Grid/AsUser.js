@@ -25,7 +25,7 @@ const UserView = ({
     <Grid celled='internally'>
       <Grid.Row columns={2}>
         <Grid.Column width={8} stretched>
-          <Segment basic>
+          <Segment basic style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <ProductGridSegment>
               <Image src={product.image || '/images/productholder.png'} />
             </ProductGridSegment>

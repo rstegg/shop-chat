@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Grid, Segment, Header, Image } from 'semantic-ui-react'
 import { pipe, prop, path, length } from 'ramda'
 
-import ProductCartMenu from 'components/Product/Cart/Menu'
+import ProductCartMenu from 'components/Product/CartMenu'
 import ProductGallerySegment from 'components/Product/Segment/GallerySegment'
 
 const getImage = prop('image')

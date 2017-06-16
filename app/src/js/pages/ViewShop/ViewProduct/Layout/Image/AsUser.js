@@ -2,7 +2,7 @@ import React from 'react'
 import { Segment, Header, Image } from 'semantic-ui-react'
 import { pipe, path } from 'ramda'
 
-import ProductCartMenu from 'components/Product/Cart/Menu'
+import ProductCartMenu from 'components/Product/CartMenu'
 import ProductImageSegment from 'components/Product/Segment/ImageSegment'
 
 const getPrimaryRGB = path(['themes', 'primary'])

@@ -20,6 +20,9 @@ const getToken = path(['payload', 'user', 'token'])
 
 module.exports = (io, socket, action) => {
   // TODO: use ramda to check the type of action
+  if(!action.type) {
+    throw new Error('Action type missing')
+  }
   if(action.type === 'WS/FETCH_THREAD_CHAT_MESSAGES') {
     return fetchThreadChatMessages(io, socket, action)
   }

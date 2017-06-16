@@ -12,17 +12,6 @@ const { allPass, not, merge, path, pick, pipe, reduceWhile } = require('ramda')
 
 const bytes = (n) => crypto.randomBytes(n).toString('hex')
 
-const validField = (p) => (obj) => Boolean(path([p], obj))
-
-const validBody = pipe(
-    path(['body', 'user']),
-    allPass([
-        validField('name'),
-        validField('email'),
-        validField('password'),
-        validField('username')
-    ]))
-
 const ipFields = [
   ['ip'],
   ['headers', 'x-forwarded-for'],
@@ -47,10 +36,8 @@ const createThread = user =>
       : { thread, validatedUser: user }
     )
 
-const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
-
-  return User.findOne({
+const validate = req =>
+  User.findOne({
       where: { email: req.body.user.email }
   })
   .then(user =>
@@ -63,7 +50,6 @@ const validate = req => {
         Promise.reject('username taken')
         : createThread(req.body.user)
   )
-}
 
 module.exports = (req, res) => {
     validate(req)

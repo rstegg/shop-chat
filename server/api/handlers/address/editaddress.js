@@ -11,31 +11,15 @@ const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 
 const addressAttributes = ['id', 'name', 'line1', 'line2', 'city', 'region', 'country', 'zip']
 
-const validField = p => obj => !isNil(path([p], obj))
-
-const validAccountFields = pipe(
-    path(['body', 'address']),
-    allPass([
-        validField('name'),
-        validField('line1'),
-        validField('city'),
-        validField('region'),
-        validField('country'),
-        validField('zip'),
-    ]))
-
 const getUserId = path(['user', 'id'])
 const getUserName = path(['user', 'name'])
 
-const validate = req => {
-  if (!validAccountFields(req)) return Promise.reject('missing fields')
-
-  return Address.findOrCreate({
+const validate = req =>
+  Address.findOrCreate({
       where: { userId: getUserId(req) },
       defaults: { name: getUserName(req) }
   })
   .spread(address => address.get({plain: true}))
-}
 
 module.exports = (req, res) =>
   validate(req)

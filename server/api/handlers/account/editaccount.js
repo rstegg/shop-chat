@@ -13,15 +13,6 @@ const accountAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
 
 const validField = p => obj => !isNil(path([p], obj))
 
-const validAccountFields = pipe(
-    path(['body', 'account']),
-    allPass([
-        validField('name'),
-        validField('email'),
-        validField('username'),
-        validField('old_password')
-    ]))
-
 const getAccount = path(['body', 'account'])
 const getOldPassword = path(['body', 'account', 'old_password'])
 const getUsername = path(['body', 'account', 'username'])
@@ -53,10 +44,8 @@ const validatePassword = (user, req) =>
     Promise.reject('invalid password')
     : validateUsername(req)
 
-const validate = req => {
-  if (!validAccountFields(req)) return Promise.reject('missing fields')
-
-  return User.findOne({
+const validate = req =>
+  User.findOne({
       where: { id: req.user.id },
       plain: true
   })
@@ -64,7 +53,6 @@ const validate = req => {
       !user ? Promise.reject('invalid user')
       : validatePassword(user, req)
   )
-}
 
 module.exports = (req, res) =>
   validate(req)

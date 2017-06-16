@@ -7,15 +7,6 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const shopAttributes = ['name', 'is_public', 'image', 'description']
 
-const validField = p => obj => !isNil(path([p], obj))
-
-const validBody = pipe(
-  path(['body', 'shop']),
-  allPass([
-      validField('name'),
-      validField('is_public')
-  ]))
-
 const getValidSlug = (slug, id) =>
   new Promise(resolve =>
     Shop.findOne({
@@ -23,18 +14,13 @@ const getValidSlug = (slug, id) =>
           $ne: id
       }}
     })
-    .then(shop => {
-      if(shop) {
-        return resolve(getValidSlug(Shop, `${slug}-${shortId.generate().slice(0,1)}`))
-      } else {
-        return resolve(slug)
-      }
-    })
+    .then(shop =>
+      !shop ? resolve(slug)
+      : resolve(getValidSlug(Shop, `${slug}-${shortId.generate().slice(0,1)}`))
+    )
   )
 
 const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
-
   const slug =
     req.body.shop.name
       .replace("'", '')

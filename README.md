@@ -2,7 +2,13 @@
 
 ## TODO
 
-### General
+### Server
+
+- Refactor product routes to be more modular, using middleware
+
+### App
+
+- Redo Mobile to be pure css
 
 - Checkout:
   - Add shipping

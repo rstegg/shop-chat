@@ -7,16 +7,6 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const shopAttributes = ['name', 'is_public', 'image']
 
-const validField = p => obj => !isNil(path([p], obj))
-
-const validBody = pipe(
-    path(['body', 'shop']),
-    allPass([
-        validField('name'),
-        validField('is_public')
-    ]))
-
-
 const getValidSlug = (slug, thread) =>
   new Promise(resolve =>
     Shop.findOne({
@@ -37,8 +27,6 @@ const createThread = (name, username, slug) =>
     )
 
 const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
-
   const slug =
     req.body.shop.name
       .replace("'", '')
@@ -49,7 +37,7 @@ const validate = req => {
   return createThread(req.body.shop.name, req.user.username, slug)
 }
 
-module.exports = (req, res) => {
+module.exports = (req, res) =>
   validate(req)
     .then(({slug, thread}) => {
       const newShop = merge({
@@ -61,4 +49,3 @@ module.exports = (req, res) => {
     })
     .then(shop => res.status(200).json({shop}))
     .catch(error => res.status(400).json({error})) //TODO: return custom error handling
-}

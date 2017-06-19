@@ -11,7 +11,7 @@ const ProfileButton = ({username, image}) =>
     <img src={image || '/images/placeholder.png'} alt={username} /> {username}
   </Label>
 
-const DesktopHeader = ({user, logout, location, toHome, toShops, toSettings}) =>
+const DesktopHeader = ({user, logout, location}) =>
   <Menu fluid fixed='top' borderless className='header__container'>
     <Menu.Item header>
       <NavLink to='/'>Kuwau</NavLink>

@@ -1,6 +1,7 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-import { Dropdown, Icon, Header } from 'semantic-ui-react'
+import { Icon, Header, Button, Menu, Dropdown, Label } from 'semantic-ui-react'
 
 const DropItem = ({onClick, icon, text}) =>
   <Header as='h2' name={text} onClick={onClick} className='dropdown--mobile__item' >
@@ -9,20 +10,31 @@ const DropItem = ({onClick, icon, text}) =>
   </Header>
 
 const Flydown = props =>
-  <Dropdown icon='content' basic button className='icon secondary'>
+  <div>
     {props.user.isAuthenticated ?
-      <Dropdown.Menu className='dropdown--mobile'>
+      <Dropdown icon='content' basic button className='icon secondary'>
+      <Dropdown.Menu>
         <DropItem onClick={props.toShops} text='shops' icon='book' />
         <DropItem onClick={props.toSettings} text='settings' icon='setting' />
         <Dropdown.Divider />
         <DropItem onClick={props.logout}  icon='power' text='logout' />
       </Dropdown.Menu>
+      </Dropdown>
       :
-      <Dropdown.Menu className='dropdown--mobile'>
-        <DropItem onClick={props.toLogin} icon='sign in' text='login' />
-        <DropItem onClick={props.toSignup}  icon='add user' text='sign up' />
-      </Dropdown.Menu>
+      <Menu.Item position='right'>
+        <Button.Group>
+          <NavLink to='/login'>
+            <Button primary>Login</Button>
+          </NavLink>
+          <Button.Or />
+          <NavLink to='/signup'>
+            <Button positive>Sign up</Button>
+          </NavLink>
+        </Button.Group>
+      </Menu.Item>
     }
-  </Dropdown>
+  </div>
+
+
 
 export default Flydown

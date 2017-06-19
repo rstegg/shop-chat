@@ -1,5 +1,5 @@
-const { path } = require('ramda')
+const { path, isNil } = require('ramda')
 
-const validField = p => obj => Boolean(path([p], obj))
+const validField = p => obj => !isNil(path([p], obj))
 
 module.exports = validField

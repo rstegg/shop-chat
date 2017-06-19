@@ -14,7 +14,7 @@ const getValidSlug = (slug, thread) =>
     })
     .then(shop =>
       shop ?
-        resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`), thread)
+        resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`, thread))
         : resolve({slug, thread})
     )
   )

@@ -13,18 +13,18 @@ import isMobile from 'utils/isMobile'
 const RootLayout = ({children}) =>
   isMobile ?
     <div className='root'>
-      <Header isMobile={isMobile} />
+      <Header />
+      <ProductSidebar>
         <div className='main'>
-          <ProductSidebar>
-            {children}
-          </ProductSidebar>
+          {children}
         </div>
+      </ProductSidebar>
       <MobileMenu />
       <OverlaySwitch />
     </div>
   :
     <div className='root'>
-      <Header isMobile={isMobile} />
+      <Header />
       <div className='main'>
         {children}
       </div>

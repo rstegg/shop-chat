@@ -32,6 +32,7 @@ const sendThreadChatMessage = (io, socket, action) => {
         }
       })
     )
+    .catch(err => console.log('send err', err))
 }
 
 module.exports = { sendThreadChatMessage }

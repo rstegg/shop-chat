@@ -18,9 +18,9 @@ const msgLength = pipe(getMessages, length)
 
 class ThreadChat extends Component {
   componentWillMount() {
-    const { user, thread, joinChatThread } = this.props
+    const { user, chat, thread, joinChatThread } = this.props
     const threadId = getThreadId(thread)
-    if(!!threadId) {
+    if(!!threadId && threadId !== chat.threadId) {
       joinChatThread(threadId, user)
     }
   }

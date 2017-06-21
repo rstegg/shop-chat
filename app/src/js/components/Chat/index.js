@@ -69,7 +69,7 @@ class ThreadChat extends Component {
             threadType={threadType}
             onSubmit={v => {
             if(!!v.text) {
-              sendThreadChatMessage(v.text, user, getThreadId(thread))
+              sendThreadChatMessage(v.text, getThreadId(thread), user)
               clearThreadChat()
             }
           }} />
@@ -89,7 +89,7 @@ const mapStateToProps = ({user, chat}) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchThreadChatMessages: user => dispatch(fetchThreadChatMessages(user)),
-  sendThreadChatMessage: (msg, user, threadId) => dispatch(sendThreadChatMessage(msg, user, threadId)),
+  sendThreadChatMessage: (msg, threadId, user) => dispatch(sendThreadChatMessage(msg, threadId, user)),
   joinChatThread: (threadId, user) => dispatch(joinChatThread(threadId, user)),
   leaveChatThread: (threadId, user) => dispatch(leaveChatThread(threadId, user)),
   clearThreadChat: () => dispatch(reset('sendThreadChatMessage')),

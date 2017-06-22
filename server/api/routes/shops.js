@@ -20,6 +20,13 @@ const validShop = pipe(
   ])
 )
 
+const validShareShop = allPass([
+  validField('email'),
+  validField('name'),
+  validField('url'),
+  validField('shopId')
+])
+
 module.exports =
   router
     .get(`/:id`,
@@ -38,6 +45,7 @@ module.exports =
       editShopHandler
     )
     .post(`/share`,
+      validateBody(validShareShop),
       shareShopHandler
     )
     .delete(`/:id`,

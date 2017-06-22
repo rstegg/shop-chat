@@ -3,20 +3,10 @@ const { Product, Shop } = models
 
 const shortId = require('shortid')
 
-const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
-
-const validField = p => obj => !isNil(path([p], obj))
+const { merge, pick } = require('ramda')
 
 const updateProductParams = ['name', 'is_public', 'description', 'layout', 'category', 'sub_category', 'price', 'image']
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
-
-const validBody = pipe(
-  path(['body', 'product']),
-  allPass([
-      validField('name'),
-      validField('is_public'),
-      validField('price')
-  ]))
 
 const getValidSlug = (slug, shopId, productId) =>
   new Promise(resolve =>
@@ -40,7 +30,6 @@ const getValidParams = (productId, shopId, userId, slug) =>
   )
 
 const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
 
   const { shopId, id } = req.params
 
@@ -54,7 +43,7 @@ const validate = req => {
   return getValidParams(id, shopId, req.user.id, slug)
 }
 
-module.exports = (req, res) => {
+module.exports = (req, res) =>
   validate(req)
     .then(slug => {
       const updatedProduct = merge({
@@ -67,4 +56,3 @@ module.exports = (req, res) => {
       res.status(200).json({product})
     })
     .catch(error => res.status(400).json({error}))
-}

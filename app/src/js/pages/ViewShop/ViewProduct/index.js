@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { replace } from 'react-router-redux'
+import { push } from 'react-router-redux'
 import { path } from 'ramda'
 
 import AdminGridView from './Layout/Grid/AsOwner'
@@ -15,18 +15,20 @@ import { fetchSingleProduct } from 'actions/products'
 
 const getName = path(['name'])
 const getSlug = path(['slug'])
+const getProductId = path(['productId'])
 const getShopSlug = path(['shop', 'slug'])
 
 class ViewProduct extends Component {
   componentWillMount() {
     const { match: { params }, user, product, fetchSingleProduct, isFetchingProduct } = this.props
-    if(!!product && product.slug !== params.productId && isFetchingProduct !== params.productId) {
+    if(getSlug(product) !== getProductId(params) && isFetchingProduct !== getProductId(params)) {
       fetchSingleProduct(params.productId, params.shopId, user)
     }
   }
   componentWillUpdate(nextProps) {
-    const { match: { params }, user, product, fetchSingleProduct, redirectToNewProduct, isFetchingProduct } = this.props
-    if(!!product && product.slug !== params.productId && isFetchingProduct !== params.productId) {
+    const { user, product, fetchSingleProduct, redirectToNewProduct, isFetchingProduct } = this.props
+    const { match: { params } } = nextProps
+    if(getSlug(product) !== getProductId(params) && isFetchingProduct !== getProductId(params)) {
       console.log("[ViewProduct/componentWillUpdate] If you see this in console, then this block might be useful")
       fetchSingleProduct(params.productId, params.shopId, user)
     }
@@ -77,7 +79,7 @@ const mapStateToProps = ({products, shops, orders, user}) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchSingleProduct: (productId, shopId, user) => dispatch(fetchSingleProduct(productId, shopId, user)),
-  redirectToNewProduct: (shopSlug, productSlug) => dispatch(replace(`/shop/${shopSlug}/product/${productSlug}`))
+  redirectToNewProduct: (shopSlug, productSlug) => dispatch(push(`/shop/${shopSlug}/product/${productSlug}`))
 })
 
 export default connect(

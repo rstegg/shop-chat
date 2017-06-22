@@ -5,8 +5,7 @@ const { pick } = require('ramda')
 
 const shopAttributes = ['id', 'name', 'description', 'is_public', 'slug', 'image', 'userId']
 
-module.exports = (req, res) => {
-  console.log('hitting');
+module.exports = (req, res) =>
   Shop.findOne({
     include: [
       {
@@ -27,4 +26,3 @@ module.exports = (req, res) => {
   )
   .then(shop => res.status(200).json({shop}))
   .catch(error => res.status(400).json({error}))
-}

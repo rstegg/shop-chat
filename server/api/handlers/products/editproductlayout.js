@@ -8,22 +8,7 @@ const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
 const validLayouts = ['grid', 'image', 'gallery']
 
-const validField = p => obj => !isNil(path([p], obj))
-
 const validLayoutField = layout => validLayouts.includes(layout)
-
-const validBody = pipe(
-  path(['body']),
-  allPass([
-      validField('layout')
-  ]))
-
-const validParams = pipe(
-  path(['params']),
-  allPass([
-      validField('id'),
-      validField('shopId')
-  ]))
 
 const validLayout = pipe(
   path(['body', 'layout']),
@@ -40,8 +25,6 @@ const getValidParams = (productId, shopId, userId) =>
   )
 
 const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
-  if (!validParams(req)) return Promise.reject('missing fields')
   if (!validLayout(req)) return Promise.reject('invalid layout type')
 
   const { shopId, id } = req.params
@@ -49,7 +32,7 @@ const validate = req => {
   return getValidParams(id, shopId, req.user.id)
 }
 
-module.exports = (req, res) => {
+module.exports = (req, res) =>
   validate(req)
     .then(shop => {
       const updatedProduct = {
@@ -62,4 +45,3 @@ module.exports = (req, res) => {
       res.status(200).json({product})
     })
     .catch(error => res.status(400).json({error}))
-}

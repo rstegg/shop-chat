@@ -10,51 +10,21 @@ const validField = p => obj => !isNil(path([p], obj))
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
 
 const defaultTheme = {
-  hsl: {
-    h: 247.5,
-    s: 0,
-    l: 1,
-    a: 1,
-  },
-  hex: '#ffffff',
   rgb: {
     r: 255,
     g: 255,
     b: 255,
     a: 1
-  },
-  hsv: {
-    h: 247.5,
-    s: 0,
-    v: 1,
-    a: 1
-  },
-  oldHue: 247.5,
-  source: 'rgb'
+  }
 }
 
 const defaultFontTheme = {
-  hsl: {
-    h: 247.5,
-    s: 0,
-    l: 0,
-    a: 1,
-  },
-  hex: '#000000',
   rgb: {
     r: 0,
     g: 0,
     b: 0,
     a: 1
-  },
-  hsv: {
-    h: 247.5,
-    s: 0,
-    v: 0,
-    a: 1
-  },
-  oldHue: 247.5,
-  source: 'rgb'
+  }
 }
 
 const defaultThemes = {
@@ -64,20 +34,6 @@ const defaultThemes = {
   segment: defaultTheme,
   font: defaultFontTheme,
 }
-
-const validBody = pipe(
-  path(['body', 'product']),
-  allPass([
-      validField('name'),
-      validField('is_public'),
-      validField('price'),
-  ]))
-
-const validParams = pipe(
-  path(['params']),
-  allPass([
-      validField('shopId')
-  ]))
 
 const getValidSlug = (slug, shopId, thread) =>
   new Promise(resolve =>
@@ -108,9 +64,6 @@ const getValidParams = (shopId, userId, slug) =>
   )
 
 const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
-  if (!validParams(req)) return Promise.reject('bad params')
-
   const slug =
     req.body.product.name
       .replace("'", '')
@@ -121,7 +74,7 @@ const validate = req => {
   return getValidParams(req.params.shopId, req.user.id, slug)
 }
 
-module.exports = (req, res) => {
+module.exports = (req, res) =>
   validate(req)
     .then(({slug, thread}) => {
       const newProduct = merge({
@@ -135,4 +88,3 @@ module.exports = (req, res) => {
     })
     .then(product => res.status(200).json({product}))
     .catch(error => res.status(400).json({error})) //TODO: return custom error handling
-}

@@ -3,48 +3,20 @@ const { Product, Shop } = models
 
 const shortId = require('shortid')
 
-const { allPass, assoc, merge, path, pick, pipe, is, isNil } = require('ramda')
-
-const validField = p => obj => !isNil(path([p], obj))
-
-const validRGBField = p => obj => is(Object, path(p, obj))
+const { assoc, path, pick } = require('ramda')
 
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
 
-const validBody = pipe(
-  path(['body']),
-  allPass([
-      validField('theme'),
-      validField('color'),
-      validRGBField(['color', 'rgb']),
-  ]))
-
-const validParams = pipe(
-  path(['params']),
-  allPass([
-      validField('id'),
-      validField('shopId')
-  ]))
-
-const getValidParams = (productId, userId) =>
+const validate = req =>
   Product.findOne({
-    where: { id: productId, userId }
+    where: { id: req.params.id, userId: req.user.id }
   })
   .then(product =>
     !product ? Promise.reject('Invalid permission')
     : product
   )
 
-const validate = req => {
-  if (!validBody(req)) return Promise.reject('missing fields')
-  if (!validParams(req)) return Promise.reject('missing fields')
-
-  const { shopId, id } = req.params
-
-  return getValidParams(id, req.user.id)
-}
-
-module.exports = (req, res) => {
+module.exports = (req, res) =>
   validate(req)
     .then(product => {
       const reqRGB = path(['body', 'color', 'rgb'], req)
@@ -59,4 +31,3 @@ module.exports = (req, res) => {
       res.status(200).json({product})
     })
     .catch(error => res.status(400).json({error}))
-}

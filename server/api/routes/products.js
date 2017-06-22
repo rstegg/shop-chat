@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const passport = require('passport')
-const { allPass, path, pipe, prop } = require('ramda')
+const { allPass, path, pipe, prop, is } = require('ramda')
 
 const createProductHandler = require('../handlers/products/createproduct')
 const editProductHandler = require('../handlers/products/editproduct')
@@ -44,6 +44,25 @@ const validShareProduct =
     validField('productId')
   ])
 
+const validLayoutField = layout => ['grid', 'image', 'gallery'].includes(layout)
+const validRGBField = p => obj => is(Object, path(p, obj))
+
+const validLayout =
+  allPass([
+    validField('layout'),
+    pipe(
+      prop('layout'),
+      validLayoutField
+    )
+  ])
+
+const validTheme =
+  allPass([
+    validField('theme'),
+    validField('color'),
+    validRGBField(['color', 'rgb']),
+  ])
+
 module.exports =
   router
     .get(`/:shopId/:id`,
@@ -64,12 +83,12 @@ module.exports =
       editProductHandler
     )
     .put(`/:shopId/:id/layout`,
-      validateBody(prop('layout'), 'missing layout'),
+      validateBody(validLayout, 'invalid layout'),
       validateParams(validEditProductParams),
       editProductLayoutHandler
     )
     .put(`/:shopId/:id/theme`,
-      validateBody(prop('theme'), 'missing theme'),
+      validateBody(validTheme, 'invalid theme'),
       validateParams(validEditProductParams),
       editProductThemeHandler
     )

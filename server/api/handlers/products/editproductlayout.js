@@ -6,31 +6,15 @@ const shortId = require('shortid')
 const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
-const validLayouts = ['grid', 'image', 'gallery']
 
-const validLayoutField = layout => validLayouts.includes(layout)
-
-const validLayout = pipe(
-  path(['body', 'layout']),
-  validLayoutField
-)
-
-const getValidParams = (productId, shopId, userId) =>
+const validate = req =>
   Shop.findOne({
-    where: { id: shopId, userId }
+    where: { id: req.params.shopId, userId: req.user.id }
   })
   .then(shop =>
     !shop ? Promise.reject('Invalid permission')
     : shop
   )
-
-const validate = req => {
-  if (!validLayout(req)) return Promise.reject('invalid layout type')
-
-  const { shopId, id } = req.params
-
-  return getValidParams(id, shopId, req.user.id)
-}
 
 module.exports = (req, res) =>
   validate(req)

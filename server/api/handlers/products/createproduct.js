@@ -3,9 +3,7 @@ const { Product, Shop, Thread } = models
 
 const shortId = require('shortid')
 
-const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
-
-const validField = p => obj => !isNil(path([p], obj))
+const { merge, pick } = require('ramda')
 
 const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
 

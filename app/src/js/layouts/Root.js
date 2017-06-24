@@ -1,8 +1,5 @@
 import React from 'react'
 
-import { DragDropContext } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
-
 import Header from 'components/Header'
 import ProductSidebar from 'components/Product/Sidebar'
 import OverlaySwitch from './Overlay'
@@ -31,4 +28,4 @@ const RootLayout = ({children}) =>
       <OverlaySwitch />
     </div>
 
-export default DragDropContext(HTML5Backend)(RootLayout)
+export default RootLayout

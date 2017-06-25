@@ -4,9 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const routes = require('./routes')
 
-const configureAuth = require('./service/auth')
-
-configureAuth()
+const passport = require('./service/auth')
 
 module.exports =
   router.use('/', routes)

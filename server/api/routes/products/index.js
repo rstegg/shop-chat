@@ -1,48 +1,26 @@
 const router = require('express').Router()
-const passport = require('passport')
+const passport = apiRequire('service/auth')
 const { allPass, path, pipe, prop, is } = require('ramda')
 
-const createProductHandler = require('./handlers/products/createproduct')
-const editProductHandler = require('./handlers/products/editproduct')
-const editProductLayoutHandler = require('./handlers/products/editproductlayout')
-const editProductThemeHandler = require('./handlers/products/editproducttheme')
-const shareProductHandler = require('./handlers/products/shareproduct')
-const getProductsHandler = require('./handlers/products/getproducts')
-const getProductHandler = require('./handlers/products/getproduct')
-const deleteProductGalleryHandler = require('./handlers/products/deleteproductgallery')
-const deleteProductHandler = require('./handlers/products/deleteproduct')
+const createProductHandler = require('./handlers/create')
+const editProductHandler = require('./handlers/edit')
+const editProductLayoutHandler = require('./handlers/editLayout')
+const editProductThemeHandler = require('./handlers/editTheme')
+const shareProductHandler = require('./handlers/share')
+const getProductsHandler = require('./handlers/getAll')
+const getProductHandler = require('./handlers/get')
+const deleteProductGalleryHandler = require('./handlers/deleteGallery')
+const deleteProductHandler = require('./handlers/delete')
 
-const validateBody = require('../middleware/validate-body')
-const validateParams = require('../middleware/validate-params')
-const validField = require('../middleware/valid-field')
+const validateBody = apiRequire('middleware/validate-body')
+const validateParams = apiRequire('middleware/validate-params')
+const validField = apiRequire('middleware/valid-field')
+const validFields = apiRequire('middleware/valid-fields')
 
-const validProduct = pipe(
-  path(['product']),
-  allPass([
-    validField('name'),
-    validField('is_public'),
-    validField('price'),
-  ])
-)
-
-const validCreateProductParams =
-  allPass([
-      validField('shopId')
-  ])
-
-const validEditProductParams =
-  allPass([
-      validField('shopId'),
-      validField('id'),
-  ])
-
-const validShareProduct =
-  allPass([
-    validField('email'),
-    validField('name'),
-    validField('url'),
-    validField('productId')
-  ])
+const validProduct = validFields('product', ['name', 'is_public', 'price'])
+const validCreateProductParams = validFields(false, ['shopId'])
+const validEditProductParams = validFields(false, ['shopId', 'id'])
+const validShareProduct = validFields(false, ['email', 'name', 'url', 'productId'])
 
 const validLayoutField = layout => ['grid', 'image', 'gallery'].includes(layout)
 const validRGBField = p => obj => is(Object, path(p, obj))
@@ -56,7 +34,7 @@ const validLayout =
     )
   ])
 
-const validTheme =
+const validTheme = validFields(false, ['theme', 'color'])
   allPass([
     validField('theme'),
     validField('color'),

@@ -1,4 +1,4 @@
-const passport = require('passport')
+const passport = apiRequire('service/auth')
 
 const router = require('express').Router()
 
@@ -7,10 +7,10 @@ const multer = require('multer')
 const imager = require('multer-imager')
 const shortId = require('shortid')
 
-const uploadProfileImage = require('./handlers/images/uploadProfileImage')
-const uploadProductImage = require('./handlers/images/uploadProductImage')
-const uploadGalleryProductImage = require('./handlers/images/uploadGalleryProductImage')
-const uploadShopImage = require('./handlers/images/uploadShopImage')
+const uploadProfileImage = require('./handlers/uploadProfileImage')
+const uploadProductImage = require('./handlers/uploadProductImage')
+const uploadGalleryProductImage = require('./handlers/uploadGalleryProductImage')
+const uploadShopImage = require('./handlers/uploadShopImage')
 
 const upload = multer({
   storage: imager({

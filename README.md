@@ -4,7 +4,8 @@
 
 ### Server
 
-- Refactor product routes to be more modular, using middleware
+- Check stripe endpoints to be valid attributes
+- Refactor attributes into scheme or model files
 
 ### App
 

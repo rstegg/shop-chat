@@ -6,10 +6,7 @@ const routes = require('./routes')
 
 const configureAuth = require('./service/auth')
 
-module.exports = () => {
-  //TODO: move configureAuth to local routes
-  configureAuth()
-  
+configureAuth()
+
+module.exports =
   router.use('/', routes)
-  return router
-}

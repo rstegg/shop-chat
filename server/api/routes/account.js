@@ -2,8 +2,8 @@ const router = require('express').Router()
 const passport = require('passport')
 const { allPass, pipe, path } = require('ramda')
 
-const editAccountHandler = require('../handlers/account/editaccount')
-const getAccountHandler = require('../handlers/account/getaccount')
+const editAccountHandler = require('./handlers/account/editaccount')
+const getAccountHandler = require('./handlers/account/getaccount')
 
 const validateBody = require('../middleware/validate-body')
 const validField = require('../middleware/valid-field')

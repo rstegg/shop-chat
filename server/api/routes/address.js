@@ -2,8 +2,8 @@ const router = require('express').Router()
 const passport = require('passport')
 const { allPass, pipe, path } = require('ramda')
 
-const editAddressHandler = require('../handlers/address/editaddress')
-const getAddressHandler = require('../handlers/address/getaddress')
+const editAddressHandler = require('./handlers/address/editaddress')
+const getAddressHandler = require('./handlers/address/getaddress')
 
 const validateBody = require('../middleware/validate-body')
 const validField = require('../middleware/valid-field')

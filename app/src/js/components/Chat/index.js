@@ -5,7 +5,10 @@ import { length, path, pipe } from 'ramda'
 
 import { reset } from 'redux-form'
 
-import { Card, Comment, Message } from 'semantic-ui-react'
+import Card from 'elements/Card'
+import Message from 'elements/Message'
+
+import { Comment,  } from 'semantic-ui-react'
 
 import ThreadChatForm from './form'
 import ThreadChatMessages from './Log'
@@ -48,23 +51,18 @@ class ThreadChat extends Component {
   render() {
     const { user, chat, thread, threadType, sendThreadChatMessage, clearThreadChat } = this.props
     return (
-      <Card className='chat__container'>
-        <Card.Content>
-          <Card.Header>{!!thread && thread.name} chat</Card.Header>
-        </Card.Content>
+      <Card>
+        <Card.Title>{!!thread && thread.name} chat</Card.Title>
         <Card.Content>
           <Comment.Group>
           { msgLength(chat) ?
             ThreadChatMessages(chat.messages)
-            : <Message info>
-                <Message.Header style={{textAlign: 'center'}}>No chat activity 😞</Message.Header>
-                <p style={{textAlign: 'center'}}>Share the link for others to join!</p>
-              </Message>
+            : <Message.Info header='No chat activity 😞' content='Share the link for others to join!' />
           }
             <div className='chat-scroll' ref={el => this.messagesEnd = el}></div>
           </Comment.Group>
         </Card.Content>
-        <Card.Content extra>
+        <Card.Footer>
           <ThreadChatForm
             threadType={threadType}
             onSubmit={v => {
@@ -73,7 +71,7 @@ class ThreadChat extends Component {
               clearThreadChat()
             }
           }} />
-        </Card.Content>
+        </Card.Footer>
       </Card>
     )
   }

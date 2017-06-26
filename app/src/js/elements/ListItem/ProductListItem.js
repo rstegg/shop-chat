@@ -1,14 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { Card, Image } from 'semantic-ui-react'
+import Card from 'elements/Card'
 
-const ProductListItem = ({onClick, shopId, product}) =>
-  <Card as={NavLink} to={`/shop/${product.shop.slug}/product/${product.slug}`}>
-    <Image src={product.image || '/images/productholder.png'} />
-    <Card.Content>
-      <Card.Header>{product.name}</Card.Header>
-    </Card.Content>
-  </Card>
+const ProductListItem = ({product}) =>
+  <NavLink to={`/shop/${product.shop.slug}/product/${product.slug}`}>
+    <Card>
+      <Card.Image src={product.image || '/images/productholder.png'} />
+      <Card.Title>{product.name}</Card.Title>
+      <Card.Content>
+        {!!product.description && <Card.Content>{product.description}</Card.Content>}
+      </Card.Content>
+    </Card>
+  </NavLink>
 
 export default ProductListItem

@@ -49,7 +49,7 @@ const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
         editShop({...shop, name}, user)
       }
     }}>
-    <p className="title">
+    <p className='title'>
       <Header as='h1'>{shop.name}</Header>
     </p>
   </EditorField>
@@ -88,12 +88,12 @@ class AdminView extends Component {
       children,
     } = this.props
     return (
-          <div className="tile is-ancestor">
-            <div className="tile is-vertical is-8">
-              <div className="tile">
-                <div className="tile is-parent is-vertical">
-                  <article className="tile is-child notification is-primary">
-                    <figure className="image is-4by3">
+          <div className='tile is-ancestor shop-container'>
+            <div className='tile is-vertical is-8'>
+              <div className='tile'>
+                <div className='tile is-vertical'>
+                  <article className='tile is-child notification is-primary'>
+                    <figure className='image is-4by3'>
                       {shop.isCropperOpen ?
                         <ImageCropper isOpen={shop.isCropperOpen} image={shop.imagePreview} uploadImage={img => uploadEditShopImage(img, shop, user)} closeCropper={closeEditShopCropper} />
                         :
@@ -101,22 +101,22 @@ class AdminView extends Component {
                       }
                     </figure>
                   </article>
-                  <article className="tile is-child notification is-warning">
+                  <article className='tile is-child notification is-warning'>
                     <NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />
-                    <p className="subtitle"><DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} /></p>
-                    <p className="subtitle"><PublicField shop={shop} user={user} editShop={editShop} /></p>
+                    <p className='subtitle'><DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} /></p>
+                    <p className='subtitle'><PublicField shop={shop} user={user} editShop={editShop} /></p>
                   </article>
                 </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child notification is-info">
+                <div className='tile'>
+                  <article className='tile is-child notification is-info'>
                     {children}
                   </article>
                 </div>
               </div>
-              <div className="tile is-parent">
-                <article className="tile is-child notification is-danger">
-                  <p className="title">Share</p>
-                  <div className="content">
+              <div className='tile'>
+                <article className='tile is-child notification is-danger'>
+                  <p className='title'>Share</p>
+                  <div className='content'>
                     {
                       user.id === shop.userId ?
                       <Button basic onClick={switchToShopUser}>Done</Button>
@@ -127,15 +127,8 @@ class AdminView extends Component {
                 </article>
               </div>
             </div>
-            <div className="tile is-parent">
-              <article className="tile is-child notification is-success">
-                <div className="content">
-                  <p className="title">{shop.name} Chat</p>
-                  <div className="content">
-                    <ShopChat thread={shop} threadType='shop' />
-                  </div>
-                </div>
-              </article>
+            <div className='tile'>
+                <ShopChat thread={shop} threadType='shop' />
             </div>
           </div>
     )

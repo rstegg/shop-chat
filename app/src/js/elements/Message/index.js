@@ -20,4 +20,14 @@ Message.Error = ({header, content}) =>
     </div>
   </article>
 
+Message.Info = ({header, content}) =>
+  <article class='message is-info'>
+    <div class='message-header'>
+      <p><strong>{header}</strong></p>
+    </div>
+    <div class='message-body'>
+      {content}
+    </div>
+  </article>
+
 export default Message

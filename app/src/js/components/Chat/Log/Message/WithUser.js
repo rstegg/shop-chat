@@ -1,18 +1,29 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
-import { Comment } from 'semantic-ui-react'
 
 const MessageWithUserInfo = ({ message }) =>
-  <Comment>
-    <Comment.Avatar src={message.user && (message.user.image || '/images/placeholder.png')} />
-    <Comment.Content>
-      {message.user && <Comment.Author as={NavLink} to={`/user/${message.user.username}`}>{message.user.username}</Comment.Author>}
-      <Comment.Metadata>
-        <div>{moment(message.createdAt).fromNow()}</div>
-      </Comment.Metadata>
-      <Comment.Text>{message.text}</Comment.Text>
-    </Comment.Content>
-  </Comment>
+  <article className="media">
+    <figure className="media-left">
+      <p className="image is-64x64">
+        <img src={message.user && (message.user.image || '/images/placeholder.png')} />
+      </p>
+    </figure>
+    <div className="media-content">
+      <div className="content">
+        <p>
+          <strong>
+            {message.user && <NavLink to={`/user/${message.user.username}`}>{message.user.username}</NavLink>}
+          </strong>
+          <small>
+            &nbsp;·&nbsp;{moment(message.createdAt).fromNow()}
+          </small>
+          <br />
+          {message.text}
+          <br />
+        </p>
+      </div>
+    </div>
+  </article>
 
 export default MessageWithUserInfo

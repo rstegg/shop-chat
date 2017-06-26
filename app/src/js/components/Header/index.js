@@ -33,21 +33,23 @@ const Header = ({user, nav, toggleMobileHeader, logout, location}) =>
           </Nav.Item>
           <Nav.Item>
             <NavLink to='/shops/new'>
-              New Shop
+              Create Shop
             </NavLink>
           </Nav.Item>
           <Nav.Item>
             <NavLink to='/settings/account'>
               Settings
             </NavLink>
-            <button className='button' onClick={() => logout()}>
-              Logout
-            </button>
           </Nav.Item>
           <Nav.Item>
             <NavLink to='/checkout/review'>
               Cart
             </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <button className='button' onClick={() => logout()}>
+              Logout
+            </button>
           </Nav.Item>
         </Nav.Right>
         :

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { Card, Message } from 'semantic-ui-react'
+import Card from 'elements/Card'
+import Message from 'elements/Message'
 
 import { onSignupSubmit, resetSignup } from 'actions/signup'
 
@@ -23,16 +24,16 @@ class Signup extends Component {
     }
     return (
       <Card>
+        <Card.Title>Signup</Card.Title>
         <Card.Content>
-          <Card.Header>Signup</Card.Header>
-          <Card.Description>
-            <SignupForm onSubmit={onSignupSubmit} error={user.error} />
-            {!!user.error && <Message error header='Signup failed' content={user.error} />}
-          </Card.Description>
+          <SignupForm onSubmit={onSignupSubmit} />
+          {!!user.error && <Message.Error header='Signup failed!' content={user.error} />}
         </Card.Content>
-        <Card.Content extra>
-          <RouterButton to='/login' prefix='Have an account?' label='Login' />
-        </Card.Content>
+        <Card.Footer>
+          <Card.Action>
+            <RouterButton to='/login' prefix='Have an account?' label='Login' />
+          </Card.Action>
+        </Card.Footer>
       </Card>
     )
   }

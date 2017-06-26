@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
+import Card from 'elements/Card'
 import { Redirect } from 'react-router-dom'
 
 import AddressForm from './form'
@@ -15,11 +15,9 @@ class Address extends Component {
      }
      return (
       <Card>
+        <Card.Title>Shipping Address</Card.Title>
         <Card.Content>
-          <Card.Header>Shipping Address</Card.Header>
-          <Card.Description>
-            <AddressForm onSubmit={address => onSaveAddressSettings(address, user)} />
-          </Card.Description>
+          <AddressForm onSubmit={address => onSaveAddressSettings(address, user)} />
         </Card.Content>
       </Card>
     )

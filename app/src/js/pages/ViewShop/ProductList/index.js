@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { path } from 'ramda'
 
-import { Card } from 'semantic-ui-react'
+import Card from 'elements/Card'
 import ProductList from './list'
 import RouterButton from 'elements/Button/RouterButton'
 
@@ -29,19 +29,19 @@ class Products extends Component {
     const { products, shop, user } = this.props
     return (
       <Card className='products'>
+        <Card.Title>Products</Card.Title>
         <Card.Content>
-          <Card.Header>Products</Card.Header>
-        </Card.Content>
-        <Card.Content>
-            <ProductList
-              products={products.list}
-            />
+          <ProductList
+            products={products.list}
+          />
         </Card.Content>
         {
           shop.userId === user.id &&
-          <Card.Content extra>
-            <RouterButton to={`/shop/${shop.slug}/products/new`} label='new product' />
-          </Card.Content>
+          <Card.Footer>
+            <Card.Action>
+              <RouterButton to={`/shop/${shop.slug}/products/new`} label='new product' />
+            </Card.Action>
+          </Card.Footer>
         }
       </Card>
     )

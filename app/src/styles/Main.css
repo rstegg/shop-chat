@@ -24,3 +24,9 @@
 @import 'pages/Layout/Gallery.css';
 @import 'pages/Layout/Grid.css';
 @import 'pages/ViewShop.css';
+/*Font Awesome*/
+@import 'font-awesome/font-awesome-brands.css';
+@import 'font-awesome/font-awesome-core.css';
+@import 'font-awesome/font-awesome-light.css';
+@import 'font-awesome/font-awesome-regular.css';
+@import 'font-awesome/font-awesome-solid.css';

@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 
 import user from './user'
+import nav from './nav'
 import card from './card'
 import bank from './bank'
 import bitcoin from './bitcoin'
@@ -15,6 +16,7 @@ import products from './products'
 
 export default combineReducers({
   user,
+  nav,
   card,
   bank,
   bitcoin,

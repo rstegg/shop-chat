@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
+
+import Card from 'elements/Card'
 
 import SettingsForm from './form'
 
@@ -15,11 +16,9 @@ class Settings extends Component {
      }
      return (
       <Card>
+        <Card.Title>Account Settings</Card.Title>
         <Card.Content>
-          <Card.Header>Account Settings</Card.Header>
-          <Card.Description>
-            <SettingsForm onSubmit={account => onSaveAccountSettings(account, user)} />
-          </Card.Description>
+          <SettingsForm onSubmit={account => onSaveAccountSettings(account, user)} />
         </Card.Content>
       </Card>
     )

@@ -20,12 +20,12 @@ const RootLayout = ({children}) =>
       <OverlaySwitch />
     </div>
   :
-    <div className='root'>
-      <Header />
-      <div className='main'>
-        {children}
-      </div>
-      <OverlaySwitch />
+  <div>
+    <Header />
+    <div className='main'>
+      {children}
     </div>
+    <OverlaySwitch />
+  </div>
 
 export default RootLayout

@@ -33,10 +33,10 @@ import GridLayout from 'layouts/Grid'
 import { validate } from './validators'
 
 const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
-  <Dropzone className='ui image editable avatar-image' onDropAccepted={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
-    {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
-    <Image src={shop.image || '/images/productholder.png'} />
-    {shop.image_error && <Label basic color='red'>Invalid image</Label>}
+  <Dropzone className='editable' onDropAccepted={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
+    {shop.image_loading && <div>Loading...</div>}
+    <img src={shop.image || '/images/productholder.png'} alt={shop.name} />
+    {shop.image_error && <div>Invalid image</div>}
   </Dropzone>
 
 const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
@@ -49,7 +49,9 @@ const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
         editShop({...shop, name}, user)
       }
     }}>
-    <Header as='h1'>{shop.name}</Header>
+    <p className="title">
+      <Header as='h1'>{shop.name}</Header>
+    </p>
   </EditorField>
 
 const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
@@ -86,27 +88,56 @@ class AdminView extends Component {
       children,
     } = this.props
     return (
-      <div>
-        <div className='edit-shop-container'>
-          <GridLayout
-            Image={shop.isCropperOpen ?
-              <ImageCropper isOpen={shop.isCropperOpen} image={shop.imagePreview} uploadImage={img => uploadEditShopImage(img, shop, user)} closeCropper={closeEditShopCropper} />
-              :
-              <Avatar shop={shop} openEditShopCropper={img => openEditShopCropper(img[0])} onUploadEditShopImageFailure={onUploadEditShopImageFailure} />
-            }
-            Canopy={children}
-            ChatBox={<ShopChat thread={shop} threadType='shop' />}
-            Header={<NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
-            SubHeader={<DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />}
-            Gutter={<PublicField shop={shop} user={user} editShop={editShop} />}
-            GutterRight={
-              user.id === shop.userId ?
-              <Button basic onClick={switchToShopUser}>Done</Button>
-              :
-              <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
-            } />
-        </div>
-      </div>
+          <div className="tile is-ancestor">
+            <div className="tile is-vertical is-8">
+              <div className="tile">
+                <div className="tile is-parent is-vertical">
+                  <article className="tile is-child notification is-primary">
+                    <figure className="image is-4by3">
+                      {shop.isCropperOpen ?
+                        <ImageCropper isOpen={shop.isCropperOpen} image={shop.imagePreview} uploadImage={img => uploadEditShopImage(img, shop, user)} closeCropper={closeEditShopCropper} />
+                        :
+                        <Avatar shop={shop} openEditShopCropper={img => openEditShopCropper(img[0])} onUploadEditShopImageFailure={onUploadEditShopImageFailure} />
+                      }
+                    </figure>
+                  </article>
+                  <article className="tile is-child notification is-warning">
+                    <NameField isEditing={shop.focused === 'name'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} />
+                    <p className="subtitle"><DescriptionField isEditing={shop.focused === 'description'} shop={shop} user={user} editShop={editShop} editShopField={editShopField} /></p>
+                    <p className="subtitle"><PublicField shop={shop} user={user} editShop={editShop} /></p>
+                  </article>
+                </div>
+                <div className="tile is-parent">
+                  <article className="tile is-child notification is-info">
+                    {children}
+                  </article>
+                </div>
+              </div>
+              <div className="tile is-parent">
+                <article className="tile is-child notification is-danger">
+                  <p className="title">Share</p>
+                  <div className="content">
+                    {
+                      user.id === shop.userId ?
+                      <Button basic onClick={switchToShopUser}>Done</Button>
+                      :
+                      <ShareMenu url={`https://kuwau.com/shop/${shop.slug}`} shopId={shop.id} />
+                    }
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div className="tile is-parent">
+              <article className="tile is-child notification is-success">
+                <div className="content">
+                  <p className="title">{shop.name} Chat</p>
+                  <div className="content">
+                    <ShopChat thread={shop} threadType='shop' />
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
     )
   }
 }

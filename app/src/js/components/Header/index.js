@@ -5,67 +5,77 @@ import { NavLink } from 'react-router-dom'
 
 import { Button, Menu, Dropdown, Label } from 'semantic-ui-react'
 
+import Nav from 'elements/Nav'
+
 import ShoppingLabel from 'elements/Label/ShoppingLabel'
 import HeaderNavLabel from 'elements/Label/HeaderNavLabel'
 
-import isMobile from 'utils/isMobile'
-
-const ProfileButton = ({username, image}) =>
-  <Label as={NavLink} to='#' basic image>
-    <img src={image || '/images/placeholder.png'} alt={username} /> {username}
-  </Label>
-
-const MobileProfileButton = ({image}) =>
-  <Label basic image>
-    <img src={image || '/images/placeholder.png'} alt={image || 'profile'} />
-  </Label>
-
-
-const Header = ({user, logout, location}) =>
-  <Menu fluid fixed='top' borderless className='header__container'>
-    <Menu.Item header>
-      <NavLink to='/'>Kuwau</NavLink>
-    </Menu.Item>
+const Header = ({user, nav, toggleMobileHeader, logout, location}) =>
+  <Nav>
+    <Nav.Left>
+      <Nav.Item>
+        <NavLink to='/'>
+          Kuwau
+        </NavLink>
+      </Nav.Item>
+    </Nav.Left>
+    <span className='nav-toggle' onClick={() => toggleMobileHeader()}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
       {user.isAuthenticated ?
-        <Menu.Item position='right'>
-          <Menu.Menu>
-            <HeaderNavLabel to='/' icon='home' text={!isMobile && 'home'} />
-            <HeaderNavLabel to='/shops' icon='book' text={!isMobile && 'your shops'} />
-            <HeaderNavLabel to='/shops/new' icon='edit' text={!isMobile && 'start a shop'} />
-            <Dropdown trigger={isMobile ? <MobileProfileButton image={user.image} /> : <ProfileButton username={user.username} image={user.image} />} icon={null} pointing='top right'>
-              <Dropdown.Menu>
-                <Dropdown.Item as={NavLink} to={`/user/${user.username}`} text='Profile' active={location.pathname === `/user/${user.username}`} />
-                <Dropdown.Item as={NavLink} to={`/settings/account`} text='Settings' active={location.pathname.startsWith('/settings/')} />
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={logout} text='Sign Out' />
-              </Dropdown.Menu>
-            </Dropdown>
-            <ShoppingLabel />
-          </Menu.Menu>
-        </Menu.Item>
+        <Nav.Right isOpen={nav.isOpen}>
+          <Nav.Item>
+            <NavLink to='/shops'>
+              Shops
+            </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to='/shops/new'>
+              New Shop
+            </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to='/settings/account'>
+              Settings
+            </NavLink>
+            <button className='button' onClick={() => logout()}>
+              Logout
+            </button>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to='/checkout/review'>
+              Cart
+            </NavLink>
+          </Nav.Item>
+        </Nav.Right>
         :
-        <Menu.Item position='right'>
-          <Button.Group>
+        <Nav.Right isOpen={nav.isOpen}>
+          <Nav.Item>
             <NavLink to='/login'>
-              <Button primary>Login</Button>
+              <button className='button is-info'>Login</button>
             </NavLink>
-            <Button.Or />
+          </Nav.Item>
+          <Nav.Item>
             <NavLink to='/signup'>
-              <Button positive>Sign up</Button>
+              <div className='button is-primary'>Sign up</div>
             </NavLink>
-          </Button.Group>
-        </Menu.Item>
+          </Nav.Item>
+        </Nav.Right>
       }
-  </Menu>
+  </Nav>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({user, nav}) =>
 ({
-  user
+  user,
+  nav
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  logout:       () => dispatch({type: 'LOGOUT'})
+  logout:       () => dispatch({type: 'LOGOUT'}),
+  toggleMobileHeader: () => dispatch({type: 'TOGGLE_MOBILE_HEADER'})
 })
 
 export default withRouter(connect(

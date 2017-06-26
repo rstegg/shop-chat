@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { Card } from 'semantic-ui-react'
+import Card from 'elements/Card'
 import ShopsList from './list'
 import RouterButton from 'elements/Button/RouterButton'
 
@@ -22,17 +22,17 @@ class Shops extends Component {
     }
     return (
       <Card className='shops'>
+        <Card.Title>Shops</Card.Title>
         <Card.Content className='shops-list'>
-          <Card.Header>Shops</Card.Header>
-          <Card.Description>
-            <ShopsList
-              shops={shops}
-             />
-          </Card.Description>
+          <ShopsList
+            shops={shops}
+           />
         </Card.Content>
-        <Card.Content extra>
-          <RouterButton to='/shops/new' label='start a shop' />
-        </Card.Content>
+        <Card.Footer>
+          <Card.Action>
+            <RouterButton to='/shops/new' label='start a shop' />
+          </Card.Action>
+        </Card.Footer>
       </Card>
     )
   }

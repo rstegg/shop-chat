@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { Card } from 'semantic-ui-react'
+import Card from 'elements/Card'
 import ShopsList from './list'
 import RouterButton from 'elements/Button/RouterButton'
 
@@ -18,9 +18,11 @@ class Shops extends Component {
              />
           </Card.Description>
         </Card.Content>
-        <Card.Content extra>
-          { profile.id === user.id && <RouterButton to='/shops/new' label='start a shop' /> }
-        </Card.Content>
+        <Card.Footer>
+          { profile.id === user.id && <Card.Action>
+            <RouterButton to='/shops/new' label='start a shop' />
+          </Card.Action> }
+        </Card.Footer>
       </Card>
     )
   }

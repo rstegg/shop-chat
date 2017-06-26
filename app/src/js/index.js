@@ -1,4 +1,4 @@
-import 'semantic-ui-css/semantic.min.css'
+import 'bulma/css/bulma.css'
 import '../styles/Main.css'
 import 'rxjs'
 import React from 'react'

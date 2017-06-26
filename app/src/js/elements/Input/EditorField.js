@@ -38,7 +38,7 @@ class EditorField extends Component {
         <div>
           {children}
         </div>
-        <Icon name='pencil' />
+        <i className='fa fa-pencil'></i>
       </div>
     )
   }

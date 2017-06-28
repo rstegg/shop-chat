@@ -1,5 +1,43 @@
 # kuwau
 
+## Instructions
+
+### Setup
+
+#### Create file `server/.env`
+
+1. start up a postgres server, and use inline notation:
+
+**DATABASE_URL**=_postgres://user:pass@localhost:5432/kuwau-db_
+
+2. set a JWT_SECRET (but leave API_HOST as-is!)
+
+**JWT_SECRET**
+
+**API_HOST**=_/api/v1_
+
+3. set secret and access keys [AWS needs S3 Read/Write Access]
+
+**AWS_ACCESS_KEY_ID**
+
+**AWS_SECRET_ACCESS_KEY**
+
+**STRIPE_SECRET**
+
+**MAILGUN_SECRET**
+
+### To run development
+
+#### Server
+
+1. `cd server && npm install`
+2. `npm run dev`
+
+#### App [server should be running before starting]
+
+1. `cd app && npm i`
+2. `npm start`
+
 ## TODO
 
 ### Server

@@ -1,16 +1,14 @@
 import { onLoginSuccess, onLoginFailure } from 'actions/login'
-import su from 'superagent'
-import { Observable } from 'rxjs/Rx'
+import { path } from 'ramda'
+import { Observable } from 'rxjs'
 
-const API_HOST = '/api/v1'
+import { post } from './helpers/req'
+
+const getError = path(['response', 'text', 'error'])
 
 const api = {
-  login: ({username, password}) => {
-    const request = su.post(`${API_HOST}/auth/login`)
-        .send({username, password})
-        .set('Accept', 'application/json')
-    return Observable.fromPromise(request)
-  }
+  login: ({username, password}) =>
+    post(`auth/login`, { username, password })
 }
 
 const onLoginSubmit = action$ =>
@@ -18,10 +16,9 @@ const onLoginSubmit = action$ =>
     .mergeMap(action =>
       api.login(action.payload)
         .map(onLoginSuccess)
-        .catch(res => {
-          const parsedRes = res.response.text
-          return Observable.of(onLoginFailure(parsedRes.error))
-        })
+        .catch(res => Observable.of(
+          onLoginFailure(getError(res))
+        ))
     )
 
 export default onLoginSubmit

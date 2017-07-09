@@ -20,7 +20,6 @@ module.exports = {
   entry: [
     require.resolve('react-dev-utils/webpackHotDevClient'),
     require.resolve('./polyfills'),
-    require.resolve('./crashOverlay'),
     paths.appIndexJs,
   ],
   output: {

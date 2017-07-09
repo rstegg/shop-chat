@@ -1,3 +1,4 @@
+import { combineEpics } from 'redux-observable'
 import {
   onFetchStripeCardsSuccess,
   onFetchStripeBanksSuccess,
@@ -93,7 +94,7 @@ const api = {
   },
 }
 
-export const fetchStripeCards = action$ =>
+const fetchStripeCards = action$ =>
   action$.ofType('FETCH_STRIPE_CARDS')
     .mergeMap(action =>
       api.fetchStripeCards(action.payload)
@@ -104,7 +105,7 @@ export const fetchStripeCards = action$ =>
         }))
     )
 
-export const addStripeCard = action$ =>
+const addStripeCard = action$ =>
   action$.ofType('ADD_STRIPE_CARD')
     .mergeMap(action =>
       api.addStripeCard(action.payload)
@@ -119,7 +120,7 @@ export const addStripeCard = action$ =>
             )
     )
 
-export const fetchStripeBanks = action$ =>
+const fetchStripeBanks = action$ =>
   action$.ofType('FETCH_STRIPE_BANKS')
     .mergeMap(action =>
       api.fetchStripeBanks(action.payload)
@@ -130,7 +131,7 @@ export const fetchStripeBanks = action$ =>
         }))
     )
 
-export const addStripeBank = action$ =>
+const addStripeBank = action$ =>
   action$.ofType('ADD_STRIPE_BANK')
     .mergeMap(action =>
       api.addStripeBank(action.payload)
@@ -145,7 +146,7 @@ export const addStripeBank = action$ =>
             )
     )
 
-export const fetchStripeBitcoins = action$ =>
+const fetchStripeBitcoins = action$ =>
   action$.ofType('FETCH_STRIPE_BITCOINS')
     .mergeMap(action =>
       api.fetchStripeBitcoins(action.payload)
@@ -156,7 +157,7 @@ export const fetchStripeBitcoins = action$ =>
         }))
     )
 
-export const addStripeBitcoin = action$ =>
+const addStripeBitcoin = action$ =>
   action$.ofType('ADD_STRIPE_BITCOIN')
     .mergeMap(action =>
       api.addStripeBitcoin(action.payload)
@@ -167,7 +168,7 @@ export const addStripeBitcoin = action$ =>
         }))
     )
 
-// export const addStripeBitcoin = action$ =>
+// const addStripeBitcoin = action$ =>
 //   action$.ofType('ADD_STRIPE_BITCOIN')
 //     .mergeMap(action =>
 //       api.addStripeBitcoin(action.payload)
@@ -181,3 +182,13 @@ export const addStripeBitcoin = action$ =>
 //               }))
 //             )
 //     )
+
+export default combineEpics(
+  fetchStripeCards,
+  addStripeCard,
+  fetchStripeBanks,
+  addStripeBank,
+  fetchStripeBitcoins,
+  addStripeBitcoin,
+  addStripeBitcoin
+)

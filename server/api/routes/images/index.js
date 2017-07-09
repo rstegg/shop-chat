@@ -55,7 +55,7 @@ module.exports =
       uploadShopImage
     )
     .post(`/profile`, //EDIT PROFILE IMAGE
-      upload.single('avatar'),
+      upload.single('image'),
       uploadProfileImage
     )
     .post(`/:shopId/product/:id`, //EDIT PRODUCT IMAGE

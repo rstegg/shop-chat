@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 
 import RootRouter from './router'
 
-window.Stripe.setPublishableKey('pk_test_uOGZjFbtEH0nSxSVNqHmWaEq') //TODO: Config
+window.Stripe.setPublishableKey(process.env.STRIPE_PUBLISHABLE) //TODO: Config
 
 render(
   <RootRouter />,

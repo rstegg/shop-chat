@@ -14,6 +14,15 @@ class Products extends Component {
   componentWillMount() {
     const { user, shop, products, refreshProducts, fetchProducts } = this.props
     refreshProducts()
+    console.log(shop);
+    if(getId(shop) && products.fetchable) {
+      fetchProducts(shop.id, user)
+    }
+  }
+  componentDidMount() {
+    const { user, shop, products, refreshProducts, fetchProducts } = this.props
+    refreshProducts()
+    console.log(shop);
     if(getId(shop) && products.fetchable) {
       fetchProducts(shop.id, user)
     }

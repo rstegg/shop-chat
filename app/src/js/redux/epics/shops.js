@@ -1,59 +1,36 @@
-import { onFetchShopsSuccess, onFetchSingleShopSuccess, onCreateShopSuccess, onEditShopSuccess, onDeleteShopSuccess, onUploadShopImageSuccess, onUploadEditShopImageSuccess } from 'actions/shops'
+import { combineEpics } from 'redux-observable'
+import {
+  onFetchShopsSuccess,
+  onFetchSingleShopSuccess,
+  onCreateShopSuccess,
+  onEditShopSuccess,
+  onDeleteShopSuccess,
+  onUploadShopImageSuccess,
+  onUploadEditShopImageSuccess
+} from 'actions/shops'
 import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
 
-const API_HOST = '/api/v1'
+import { authGet, authPost, authImagePost, authPut, authDelete } from './helpers/authReq'
 
 const api = {
-  fetchShops: ({token}) => {
-    const request = su.get(`${API_HOST}/shops`)
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  },
-  fetchSingleShop: ({shopId, token}) => {
-    const request = su.get(`${API_HOST}/shops/${shopId}`)
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  },
-  createShop: ({shop, user}) => {
-   const request = su.post(`${API_HOST}/shops`)
-      .send({shop})
-      .set('Accept', 'application/json')
-      .set('Authorization', user.token)
-    return Observable.fromPromise(request)
-  },
-  editShop: ({shop, user}) => {
-   const request = su.put(`${API_HOST}/shops/${shop.id}`)
-      .send({shop})
-      .set('Accept', 'application/json')
-      .set('Authorization', user.token)
-    return Observable.fromPromise(request)
-  },
-  deleteShop: ({shopId, user}) => {
-   const request = su.delete(`${API_HOST}/shops/${shopId}`)
-      .set('Accept', 'application/json')
-      .set('Authorization', user.token)
-    return Observable.fromPromise(request)
-  },
-  uploadShopImage: ({image, token}) => {
-    const request = su.post(`${API_HOST}/image/shop`)
-      .attach('image', image)
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  },
-  uploadEditShopImage: ({image, shopId, token}) => {
-    const request = su.post(`${API_HOST}/image/shop/${shopId}`)
-      .attach('image', image)
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  }
+  fetchShops: ({token}) =>
+    authGet(`shops`, token),
+  fetchSingleShop: ({shopId, token}) =>
+    authGet(`shops/${shopId}`, token),
+  createShop: ({shop, user}) =>
+    authPost(`shops`, { shop }, user.token),
+  editShop: ({shop, user}) =>
+    authPut(`shops/${shop.id}`, { shop }, user.token),
+  deleteShop: ({shopId, user}) =>
+    authDelete(`shops/${shopId}`, user.token),
+  uploadShopImage: ({image, token}) =>
+    authImagePost(`image/shop`, image, token),
+  uploadEditShopImage: ({image, shopId, token}) =>
+    authImagePost(`image/shop/${shopId}`, image, token),
 }
 
-export const fetchShops = action$ =>
+const fetchShops = action$ =>
   action$.ofType('FETCH_SHOPS')
     .mergeMap(action =>
       api.fetchShops(action.payload)
@@ -63,7 +40,7 @@ export const fetchShops = action$ =>
         }))
       )
 
-export const fetchSingleShop = action$ =>
+const fetchSingleShop = action$ =>
   action$.ofType('FETCH_SINGLE_SHOP')
     .mergeMap(action =>
       api.fetchSingleShop(action.payload)
@@ -73,7 +50,7 @@ export const fetchSingleShop = action$ =>
         }))
       )
 
-export const createShop = action$ =>
+const createShop = action$ =>
   action$.ofType('CREATE_SHOP')
     .mergeMap(action =>
       api.createShop(action.payload)
@@ -83,7 +60,7 @@ export const createShop = action$ =>
         }))
       )
 
-export const editShop = action$ =>
+const editShop = action$ =>
   action$.ofType('EDIT_SHOP')
     .mergeMap(action =>
       api.editShop(action.payload)
@@ -93,7 +70,7 @@ export const editShop = action$ =>
         }))
       )
 
-export const deleteShop = action$ =>
+const deleteShop = action$ =>
   action$.ofType('DELETE_SHOP')
     .mergeMap(action =>
       api.deleteShop(action.payload)
@@ -103,7 +80,7 @@ export const deleteShop = action$ =>
         }))
       )
 
-export const uploadShopImage = action$ =>
+const uploadShopImage = action$ =>
   action$.ofType('UPLOAD_SHOP_IMAGE')
     .mergeMap(action =>
       api.uploadShopImage(action.payload)
@@ -114,7 +91,7 @@ export const uploadShopImage = action$ =>
         }))
       )
 
-export const uploadEditShopImage = action$ =>
+const uploadEditShopImage = action$ =>
   action$.ofType('UPLOAD_EDIT_SHOP_IMAGE')
     .mergeMap(action =>
       api.uploadEditShopImage(action.payload)
@@ -123,3 +100,13 @@ export const uploadEditShopImage = action$ =>
           type: 'UPLOAD_EDIT_SHOP_IMAGE_FAILURE'
         }))
       )
+
+export default combineEpics(
+  fetchShops,
+  fetchSingleShop,
+  createShop,
+  editShop,
+  deleteShop,
+  uploadShopImage,
+  uploadEditShopImage
+)

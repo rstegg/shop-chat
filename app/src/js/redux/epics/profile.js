@@ -1,33 +1,18 @@
+import { combineEpics } from 'redux-observable'
 import { onUploadProfileImageSuccess, onEditProfileSuccess, onFetchProfileSuccess } from 'actions/profile'
-import su from 'superagent'
 import { Observable } from 'rxjs/Rx'
-
-const API_HOST = '/api/v1'
+import { authGet, authImagePost, authPut } from './helpers/authReq'
 
 const api = {
-  fetchProfile: ({username, token}) => {
-    const request = su.get(`${API_HOST}/profile/${username}`)
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  },
-  uploadProfileImage: ({image, token}) => {
-    const request = su.post(`${API_HOST}/image/profile`)
-      .attach('avatar', image)
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  },
-  editProfile: ({profile, token}) => {
-   const request = su.put(`${API_HOST}/profile`)
-      .send({profile})
-      .set('Accept', 'application/json')
-      .set('Authorization', token)
-    return Observable.fromPromise(request)
-  }
+  fetchProfile: ({username, token}) =>
+    authGet(`profile/${username}`, token),
+  editProfile: ({profile, token}) =>
+   authPut(`profile`, { profile }, token),
+  uploadProfileImage: ({image, token}) =>
+    authImagePost(`image/profile`, image, token)
 }
 
-export const fetchProfile = action$ =>
+const fetchProfile = action$ =>
   action$.ofType('FETCH_PROFILE')
     .mergeMap(action =>
       api.fetchProfile(action.payload)
@@ -38,7 +23,17 @@ export const fetchProfile = action$ =>
         }))
     )
 
-export const uploadProfileImage = action$ =>
+const editProfile = action$ =>
+  action$.ofType('EDIT_PROFILE')
+    .mergeMap(action =>
+      api.editProfile(action.payload)
+        .map(onEditProfileSuccess)
+        .catch(error => Observable.of({
+          type: 'EDIT_PROFILE_FAILURE'
+        }))
+    )
+
+const uploadProfileImage = action$ =>
   action$.ofType('UPLOAD_PROFILE_IMAGE')
     .mergeMap(action =>
       api.uploadProfileImage(action.payload)
@@ -48,12 +43,8 @@ export const uploadProfileImage = action$ =>
         }))
     )
 
-export const editProfile = action$ =>
-  action$.ofType('EDIT_PROFILE')
-    .mergeMap(action =>
-      api.editProfile(action.payload)
-        .map(onEditProfileSuccess)
-        .catch(error => Observable.of({
-          type: 'EDIT_PROFILE_FAILURE'
-        }))
-    )
+export default combineEpics(
+  fetchProfile,
+  editProfile,
+  uploadProfileImage
+)

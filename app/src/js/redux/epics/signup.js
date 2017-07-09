@@ -1,16 +1,14 @@
 import { onSignupSuccess, onSignupFailure } from 'actions/signup'
-import su from 'superagent'
+import { path } from 'ramda'
 import { Observable } from 'rxjs/Rx'
 
-const API_HOST = '/api/v1'
+import { post } from './helpers/req'
+
+const getError = path(['response', 'text', 'error'])
 
 const api = {
-  signup: ({user}) => {
-    const request = su.post(`${API_HOST}/auth/signup`)
-        .send({user})
-        .set('Accept', 'application/json')
-    return Observable.fromPromise(request)
-  }
+  signup: ({user}) =>
+    post(`auth/signup`, { user })
 }
 
 const onSignupSubmit = action$ =>
@@ -18,10 +16,9 @@ const onSignupSubmit = action$ =>
     .mergeMap(action =>
       api.signup(action.payload)
         .map(onSignupSuccess)
-        .catch(res => {
-          const parsedRes = res.response.text
-          return Observable.of(onSignupFailure(parsedRes.error))
-        })
+        .catch(res => Observable.of(
+          onSignupFailure(getError(res))
+        ))
       )
 
 export default onSignupSubmit

@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 
 import LandingPage from './Landing'
 
-const Home = ({user}) =>
+const Home = () =>
   <LandingPage />
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

@@ -35,7 +35,7 @@ export default class AppRouter extends Component {
   }
 
   render() {
-    if(!this.state.rehydrated){
+    if (!this.state.rehydrated) {
       return <div>Loading...</div>
     }
     return (

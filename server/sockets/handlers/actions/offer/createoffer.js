@@ -3,7 +3,7 @@ const { Message, User, Offer, Product } = models
 
 const { merge, pick } = require('ramda')
 
-const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
+const offerAttributes = ['id', 'state', 'productName', 'price', 'sellerId']
 const userAttributes = ['id', 'username', 'image']
 
 const validate = productId =>
@@ -29,8 +29,8 @@ const sendShopOffer = (io, socket, action) => {
       const newOffer = merge({
         userId: socket.userId,
         productId: validatedProduct.id,
-        product_name: validatedProduct.name,
-        seller_id: validatedProduct.user.id,
+        productName: validatedProduct.name,
+        sellerId: validatedProduct.user.id,
         state: 'open'
       }, pick(offerAttributes, action.payload))
       return Offer.create(newOffer, { plain: true, })
@@ -41,7 +41,7 @@ const sendShopOffer = (io, socket, action) => {
     )
     .then(validatedOffer => {
       const newMessage = {
-        content_type: 'offer',
+        contentType: 'offer',
         offerId: validatedOffer.id,
         userId: socket.userId,
         threadId

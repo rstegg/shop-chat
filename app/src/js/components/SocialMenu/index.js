@@ -19,8 +19,8 @@ import SocialMenuForm from './form'
 
 import { shareProduct } from 'actions/products'
 
-const SocialMenu = ({url, user, shareProduct, productId}) =>
-  <Segment.Group compact horizontal style={{flexGrow: '0'}}>
+const SocialMenu = ({ url, user, shareProduct, productId }) =>
+  <Segment.Group compact horizontal style={{ flexGrow: '0' }}>
     <Segment>
       <CopyToClipboard text={url}>
         <Button circular basic icon='linkify' size='medium' />
@@ -30,7 +30,7 @@ const SocialMenu = ({url, user, shareProduct, productId}) =>
       <TwitterShareButton
         title='Kool, Wow'
         url={url}
-        style={{cursor: 'pointer'}}>
+        style={{ cursor: 'pointer' }}>
           <TwitterIcon size={32} round={true} />
       </TwitterShareButton>
     </Segment>
@@ -38,13 +38,13 @@ const SocialMenu = ({url, user, shareProduct, productId}) =>
       <Popup wide trigger={<Button circular basic icon='mail' size='medium' />} on='click'>
           <Popup.Header>Share via Email</Popup.Header>
           <Popup.Content>
-            <SocialMenuForm onSubmit={values => shareProduct({...values, productId}, url, user)} />
+            <SocialMenuForm onSubmit={values => shareProduct({ ...values, productId }, url, user)} />
           </Popup.Content>
       </Popup>
     </Segment>
   </Segment.Group>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

@@ -20,7 +20,7 @@ const sendConfirmation = (mail, user) => {
       message: message.toString('ascii')
     }
     mailgun.messages().sendMime(verifyEmail, (sendError, body) => {
-      if(sendError) {
+      if (sendError) {
         console.log(sendError);
         return;
       }

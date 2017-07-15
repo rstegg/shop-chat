@@ -4,12 +4,12 @@ import { Observable } from 'rxjs/Rx'
 import { authGet, authImagePost, authPut } from './helpers/authReq'
 
 const api = {
-  fetchProfile: ({username, token}) =>
+  fetchProfile: ({ username, token }) =>
     authGet(`profile/${username}`, token),
-  editProfile: ({profile, token}) =>
-   authPut(`profile`, { profile }, token),
-  uploadProfileImage: ({image, token}) =>
-    authImagePost(`image/profile`, image, token)
+  editProfile: ({ profile, token }) =>
+   authPut('profile', { profile }, token),
+  uploadProfileImage: ({ image, token }) =>
+    authImagePost('image/profile', image, token)
 }
 
 const fetchProfile = action$ =>
@@ -29,7 +29,8 @@ const editProfile = action$ =>
       api.editProfile(action.payload)
         .map(onEditProfileSuccess)
         .catch(error => Observable.of({
-          type: 'EDIT_PROFILE_FAILURE'
+          type: 'EDIT_PROFILE_FAILURE',
+          error
         }))
     )
 
@@ -39,7 +40,8 @@ const uploadProfileImage = action$ =>
       api.uploadProfileImage(action.payload)
         .map(onUploadProfileImageSuccess)
         .catch(error => Observable.of({
-          type: 'UPLOAD_PROFILE_IMAGE_FAILURE'
+          type: 'UPLOAD_PROFILE_IMAGE_FAILURE',
+          error
         }))
     )
 

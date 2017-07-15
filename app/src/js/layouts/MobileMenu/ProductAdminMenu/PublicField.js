@@ -5,15 +5,15 @@ import { Checkbox } from 'semantic-ui-react'
 
 import { editProduct } from 'actions/products'
 
-const PublicField = ({product, user, editProduct, style}) =>
+const PublicField = ({ product, user, editProduct, style }) =>
   <Checkbox
     label='Public'
     toggle
     style={style}
-    checked={!!product.is_public}
-    onChange={(_,data) => editProduct({ ...product, is_public: data.checked }, user)} />
+    checked={!!product.isPublic}
+    onChange={(_,data) => editProduct({ ...product, isPublic: data.checked }, user)} />
 
-const mapStateToProps = ({products, user}) =>
+const mapStateToProps = ({ products, user }) =>
 ({
   product: products.current,
   user

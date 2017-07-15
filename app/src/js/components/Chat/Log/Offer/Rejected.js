@@ -5,15 +5,15 @@ import { Card, Image, Message } from 'semantic-ui-react'
 
 import { path } from 'ramda'
 
-const getUserImage = path(['user', 'image'])
+const getUserImage = path([ 'user', 'image' ])
 
-const getUsername = path(['user', 'username'])
+const getUsername = path([ 'user', 'username' ])
 
-const getTimestamp = path(['createdAt'])
+const getTimestamp = path([ 'createdAt' ])
 
-const getProductName = path(['offer', 'product_name'])
+const getProductName = path([ 'offer', 'productName' ])
 
-const getOfferPrice = path(['offer', 'price'])
+const getOfferPrice = path([ 'offer', 'price' ])
 
 const RejectedOffer = ({ offer }) =>
   <Card>
@@ -27,8 +27,8 @@ const RejectedOffer = ({ offer }) =>
       </Card.Meta>
       <Card.Description>
         <Message info>
-          <Message.Header style={{textAlign: 'center'}}>Offer rejected 😲</Message.Header>
-          <p style={{textAlign: 'center'}}>Offer for <strong>{getProductName(offer)}</strong> at <strong style={{textDecoration: 'line-through'}}>${getOfferPrice(offer)}</strong></p>
+          <Message.Header style={{ textAlign: 'center' }}>Offer rejected 😲</Message.Header>
+          <p style={{ textAlign: 'center' }}>Offer for <strong>{getProductName(offer)}</strong> at <strong style={{ textDecoration: 'line-through' }}>${getOfferPrice(offer)}</strong></p>
         </Message>
       </Card.Description>
     </Card.Content>

@@ -5,7 +5,7 @@ const shortId = require('shortid')
 
 const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
-const shopAttributes = ['name', 'is_public', 'image', 'description']
+const shopAttributes = ['name', 'isPublic', 'image', 'description']
 
 const getValidSlug = (slug, id) =>
   new Promise(resolve =>
@@ -40,7 +40,7 @@ module.exports = (req, res) => {
       return Shop.update(updatedShop, { where: { id: req.params.id, userId: req.user.id }, returning: true, plain: true })
     })
     .then(savedShop => {
-      const shop = pick(['id', 'name', 'description', 'is_public', 'slug', 'image', 'user', 'userId'], savedShop[1])
+      const shop = pick(['id', 'name', 'description', 'isPublic', 'slug', 'image', 'user', 'userId'], savedShop[1])
       res.status(200).json({shop})
     })
     .catch(error => res.status(400).json({error}))

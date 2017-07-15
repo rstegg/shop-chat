@@ -8,14 +8,14 @@ import { SketchPicker } from 'react-color'
 
 import { editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor } from 'actions/products'
 
-const getActiveColor = path(['activeThemeColor', 'rgb'])
-const getInitialTheme = (theme, obj) => path([theme], obj)
+const getActiveColor = path([ 'activeThemeColor', 'rgb' ])
+const getInitialTheme = (theme, obj) => path([ theme ], obj)
 
-const ColorPicker = ({ product, user, editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor}) =>
+const ColorPicker = ({ product, user, editProductThemeColor, uploadEditProductTheme, closeEditProductThemeColor }) =>
   !!product.activeTheme &&
   <Modal open={!!product.activeTheme} onClose={closeEditProductThemeColor}>
     <Modal.Content>
-      <Segment basic style={{display: 'flex', flexDirection: 'column',  alignItems: 'center'}}>
+      <Segment basic style={{ display: 'flex', flexDirection: 'column',  alignItems: 'center' }}>
         <Header>{product.activeTheme} color</Header>
         <SketchPicker
           color={getActiveColor(product) || getInitialTheme(product.activeTheme, product.themes)}
@@ -33,7 +33,7 @@ const ColorPicker = ({ product, user, editProductThemeColor, uploadEditProductTh
     </Modal.Content>
   </Modal>
 
-const mapStateToProps = ({user, products}) =>
+const mapStateToProps = ({ user, products }) =>
 ({
   product: products.current,
   user,

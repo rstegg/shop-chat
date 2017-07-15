@@ -5,7 +5,7 @@ const shortId = require('shortid')
 
 const { merge, pick } = require('ramda')
 
-const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
+const productParams = ['id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image', 'shopId']
 
 const defaultTheme = {
   rgb: {

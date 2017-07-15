@@ -32,14 +32,14 @@ const categories = [
   { key: 'wedding', value: 'wedding', text: 'Weddings' }
 ]
 
-const CreateProductForm = ({handleSubmit}) =>
+const CreateProductForm = ({ handleSubmit }) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Product name' />
     <Field component={AreaField} name='description' label='Description' placeholder='Product descripton'  />
     <Field component={SelectField} name='category' label='Category' options={categories} />
     <Field component={InputField} name='tags' label='Search Keywords' placeholder='Keywords' />
     <Field component={CurrencyField} name='price' label='Base price' placeholder='0.00' normalize={normalizePrice} />
-    <Field component={CheckboxField} name='is_public' label='Public' />
+    <Field component={CheckboxField} name='isPublic' label='Public' />
     <Form.Button type='submit' primary>Submit</Form.Button>
   </Form>
 
@@ -48,9 +48,9 @@ const ConnectedCreateProductForm = reduxForm({
   validate
 })(CreateProductForm)
 
-const mapStateToProps = state =>
+const mapStateToProps = ({ products }) =>
 ({
-  initialValues: state.products.new
+  initialValues: products.new
 })
 
 export default connect(mapStateToProps)(ConnectedCreateProductForm)

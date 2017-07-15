@@ -8,11 +8,13 @@ module.exports = {
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
-        "jsx": true
+        "jsx": true,
+        "experimentalObjectRestSpread": true
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "class-property"
   ],
   "rules": {
     "array-bracket-spacing": [ "error", "always" ],

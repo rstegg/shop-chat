@@ -13,7 +13,7 @@ module.exports = (req, res) =>
     .then(product => {
       const reqIndexLens = lensIndex(req.params.index)
       const hasIndex = view(reqIndexLens, getGallery(product))
-      if(!hasIndex) {
+      if (!hasIndex) {
         return res.status(200).json({product})
       }
       const updatedGallery = { gallery: [...product.gallery.slice(0, req.params.index), ...product.gallery.slice(req.params.index + 1)] }

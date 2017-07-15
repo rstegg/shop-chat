@@ -15,23 +15,23 @@ class ViewProfile extends Component {
   }
   componentWillUpdate(nextProps) {
     const { profile, match: { params }, history, user, isFetching, fetchProfile, refreshProfileEditing } = this.props
-    if(nextProps.profile.newUsername) {
+    if (nextProps.profile.newUsername) {
       history.replace(`/user/${nextProps.profile.username}`)
       refreshProfileEditing()
     }
-    if(profile.username !== params.id && isFetching !== params.id) {
+    if (profile.username !== params.id && isFetching !== params.id) {
       fetchProfile(params.id, user)
     }
   }
   render() {
     const { user, profile, switchToProfileAdmin } = this.props
-    if(!profile) {
+    if (!profile) {
       return <Redirect to='/' />
     }
-    if(profile.isAdmin) {
+    if (profile.isAdmin) {
       return <AdminView user={user} profile={profile} />
     }
-    if(user.id === profile.userId) {
+    if (user.id === profile.userId) {
       return <UserView user={user} profile={profile} switchToProfileAdmin={switchToProfileAdmin} />
     }
     return <UserView user={user} profile={profile} />

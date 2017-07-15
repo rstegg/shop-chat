@@ -11,7 +11,7 @@ class EditorField extends Component {
   }
   render() {
     const { children, fieldComponent, normalize, onClick, isEditing, placeholder, label, name, type, style, onSubmit } = this.props
-    if(isEditing) {
+    if (isEditing) {
       return (
         <Field
           autoFocus
@@ -22,7 +22,7 @@ class EditorField extends Component {
           name={name}
           normalize={normalize}
           onKeyUp={e => {
-            if(e.keyCode === 13) {
+            if (e.keyCode === 13) {
               onSubmit(e.target.value)
             }}
           }

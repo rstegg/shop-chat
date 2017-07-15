@@ -17,7 +17,7 @@ class WalletSettings extends Component {
   }
   render() {
     const { user, card, bitcoin, openAddCard, openAddBitcoin } = this.props
-    if(!user.isAuthenticated) {
+    if (!user.isAuthenticated) {
       return <Redirect to='/' />
     }
     const cardList = card.list || []

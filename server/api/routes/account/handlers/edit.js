@@ -14,7 +14,7 @@ const accountAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
 const validField = p => obj => !isNil(path([p], obj))
 
 const getAccount = path(['body', 'account'])
-const getOldPassword = path(['body', 'account', 'old_password'])
+const getOldPassword = path(['body', 'account', 'oldPassword'])
 const getUsername = path(['body', 'account', 'username'])
 const getEmail = path(['body', 'account', 'email'])
 const getUserId = path(['user', 'id'])
@@ -58,7 +58,7 @@ module.exports = (req, res) =>
   validate(req)
     .then(validAccount => {
       const verified = (validAccount.email === req.user.email) && req.user.verified
-      const reqPassword = validAccount.new_password || validAccount.old_password
+      const reqPassword = validAccount.newPassword || validAccount.oldPassword
       const updatedPassword = crypto.createHash('md5').update(reqPassword + req.user.salt).digest("hex")
       const updatedUser = merge({
         username: validAccount.username || req.body.account.username,
@@ -70,7 +70,7 @@ module.exports = (req, res) =>
     })
     .then(user => {
       const updatedUser = user[1]
-      if(updatedUser.email !== req.user.email) {
+      if (updatedUser.email !== req.user.email) {
         const { permalink, verify_token } = updatedUser
         const permalink_url = `https://kuwau.com/api/v1/auth/signup/email_confirmation/${permalink}/${verify_token}`
         const mail = confirmationMail(updatedUser, permalink_url)

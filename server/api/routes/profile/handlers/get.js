@@ -5,7 +5,7 @@ const { merge, pick } = require('ramda')
 const threadAttributes = ['id', 'name', 'owner']
 const profileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
 const resProfileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website', 'thread']
-const shopAttributes = ['id', 'name', 'description', 'is_public', 'slug', 'image']
+const shopAttributes = ['id', 'name', 'description', 'isPublic', 'slug', 'image']
 
 const getShops = user =>
   Shop.findAll({

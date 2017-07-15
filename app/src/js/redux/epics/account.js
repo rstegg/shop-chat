@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Rx'
 const API_HOST = '/api/v1'
 
 const api = {
-  saveAccountSettings: ({account, user}) => {
+  saveAccountSettings: ({ account, user }) => {
     const request = su.put(`${API_HOST}/account`)
-        .send({account})
+        .send({ account })
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
     return Observable.fromPromise(request)

@@ -4,35 +4,25 @@ const crypto = require('crypto')
 
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('users', {
-    stripe_bitcoins: {
+    stripeBitcoins: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
     },
-    stripe_cards: {
+    stripeCards: {
       type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
     },
-    stripe_banks: {
+    stripeBanks: {
       type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
     },
-    stripe_customer: {
+    stripeCustomer: {
       type: DataTypes.JSONB,
       allowNull: true,
     },
-    stripe_account: {
+    stripeAccount: {
       type: DataTypes.JSONB,
       allowNull: true,
-    },
-    interest_types: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-      defaultValue: ['general']
-    },
-    interests: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-      defaultValue: ['']
     },
     email: {
       type: DataTypes.STRING,
@@ -103,19 +93,7 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: true
     },
-    send_method: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    receive_method: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    legal_entity: {
-      type: DataTypes.JSONB,
-      allowNull: true
-    },
-    verify_needed: {
+    verifyNeeded: {
       type: DataTypes.JSONB,
       allowNull: true
     }
@@ -133,7 +111,7 @@ module.exports = (sequelize, DataTypes) =>
     instanceMethods: {
       validPassword(password) {
         const testhash = crypto.createHash('md5').update(password + this.salt).digest("hex");
-        if(testhash === this.password) {
+        if (testhash === this.password) {
           return true;
         } else {
           return false;

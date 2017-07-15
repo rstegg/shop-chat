@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: true,
       defaultValue: 'open'
     },
-    product_name: {
+    productName: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: false
     },
-    seller_id: {
+    sellerId: {
       type: DataTypes.INTEGER,
       allowNull: false
     }

@@ -5,8 +5,8 @@ const shortId = require('shortid')
 
 const { merge, pick } = require('ramda')
 
-const updateProductParams = ['name', 'is_public', 'description', 'layout', 'category', 'sub_category', 'price', 'image']
-const productParams = ['id', 'name', 'slug', 'is_public', 'description', 'gallery', 'layout', 'themes', 'category', 'sub_category', 'price', 'image', 'shopId']
+const updateProductParams = ['name', 'isPublic', 'description', 'layout', 'category', 'subCategory', 'price', 'image']
+const productParams = ['id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image', 'shopId']
 
 const getValidSlug = (slug, shopId, productId) =>
   new Promise(resolve =>

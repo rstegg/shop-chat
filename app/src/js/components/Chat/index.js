@@ -12,22 +12,22 @@ import ThreadChatMessages from './Log'
 
 import { sendThreadChatMessage, fetchThreadChatMessages, joinChatThread, leaveChatThread } from 'actions/chat'
 
-const getThreadId = path(['thread', 'id'])
-const getMessages = path(['messages'])
+const getThreadId = path([ 'thread', 'id' ])
+const getMessages = path([ 'messages' ])
 const msgLength = pipe(getMessages, length)
 
 class ThreadChat extends Component {
   componentWillMount() {
     const { user, chat, thread, joinChatThread } = this.props
     const threadId = getThreadId(thread)
-    if(!!threadId && threadId !== chat.threadId) {
+    if (!!threadId && threadId !== chat.threadId) {
       joinChatThread(threadId, user)
     }
   }
   componentWillUpdate(nextProps) {
     const { user, thread, chat, joinChatThread, isFetching } = nextProps
     const threadId = getThreadId(thread)
-    if(!!threadId && threadId !== chat.threadId && isFetching !== threadId) {
+    if (!!threadId && threadId !== chat.threadId && isFetching !== threadId) {
       joinChatThread(threadId, user)
     }
   }
@@ -37,7 +37,7 @@ class ThreadChat extends Component {
   }
   scrollEnd() {
     const node = findDOMNode(this.messagesEnd)
-    node.scrollIntoView({behavior: "smooth"})
+    node.scrollIntoView({ behavior: 'smooth' })
   }
   componentDidMount() {
     this.scrollEnd()
@@ -57,29 +57,29 @@ class ThreadChat extends Component {
           { msgLength(chat) ?
             ThreadChatMessages(chat.messages)
             : <Message info>
-                <Message.Header style={{textAlign: 'center'}}>No chat activity 😞</Message.Header>
-                <p style={{textAlign: 'center'}}>Share the link for others to join!</p>
+                <Message.Header style={{ textAlign: 'center' }}>No chat activity 😞</Message.Header>
+                <p style={{ textAlign: 'center' }}>Share the link for others to join!</p>
               </Message>
           }
-            <div className='chat-scroll' ref={el => this.messagesEnd = el}></div>
+            <div className='chat-scroll' ref={el => { this.messagesEnd = el }}></div>
           </Comment.Group>
         </Card.Content>
         <Card.Content extra>
           <ThreadChatForm
             threadType={threadType}
             onSubmit={v => {
-            if(!!v.text) {
-              sendThreadChatMessage(v.text, getThreadId(thread), user)
-              clearThreadChat()
-            }
-          }} />
+              if (v.text) {
+                sendThreadChatMessage(v.text, getThreadId(thread), user)
+                clearThreadChat()
+              }
+            }} />
         </Card.Content>
       </Card>
     )
   }
 }
 
-const mapStateToProps = ({user, chat}) =>
+const mapStateToProps = ({ user, chat }) =>
 ({
   user,
   chat,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 
-export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}) =>
+const MobileGrid = ({ Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight }) =>
   <Grid className='main-container'>
     <Grid.Row columns={1} stretched>
       {!!Image && <Grid.Column>
@@ -39,3 +39,5 @@ export default ({Image, Canopy, ChatBox, Header, SubHeader, Gutter, GutterRight}
       </Grid.Column>}
     </Grid.Row>
   </Grid>
+
+export default MobileGrid

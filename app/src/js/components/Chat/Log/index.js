@@ -12,33 +12,33 @@ const ChatMessages = messages => {
   // usernames are different between messages, OR if 15 seconds has passed between showing user info
   let timeAcc = 0
   const renderedMessages = messages.map((message, i) => {
-    if(message.content_type === 'offer') {
-      if(message.offer) {
-        switch(message.offer.state) {
-          case 'accepted':
-            return <AcceptedOffer key={i} offer={message} />
-          case 'rejected':
-            return <RejectedOffer key={i} offer={message} />
-          case 'open':
-          default:
-            return <PendingOffer key={i} offer={message} />
+    if (message.contentType === 'offer') {
+      if (message.offer) {
+        switch (message.offer.state) {
+        case 'accepted':
+          return <AcceptedOffer key={i} offer={message} />
+        case 'rejected':
+          return <RejectedOffer key={i} offer={message} />
+        case 'open':
+        default:
+          return <PendingOffer key={i} offer={message} />
         }
       }
     }
     const prevMessage = messages[i-1]
     let shouldShow = true
-      if(prevMessage && (message.user && prevMessage.user && message.user.username === prevMessage.user.username) && prevMessage.content_type !== 'offer') {
-        shouldShow = false
-        const timeDiff = moment.duration(moment(prevMessage.createdAt).diff(moment(message.createdAt)))
-        timeAcc += Math.abs(timeDiff.asMilliseconds())
-        if(timeAcc >= 15000) {
-          shouldShow = true
-          timeAcc = 0
-        }
+    if (prevMessage && (message.user && prevMessage.user && message.user.username === prevMessage.user.username) && prevMessage.contentType !== 'offer') {
+      shouldShow = false
+      const timeDiff = moment.duration(moment(prevMessage.createdAt).diff(moment(message.createdAt)))
+      timeAcc += Math.abs(timeDiff.asMilliseconds())
+      if (timeAcc >= 15000) {
+        shouldShow = true
+        timeAcc = 0
       }
-      if(shouldShow) {
-        return <TextMessage key={i} message={message} withUserInfo />
-      }
+    }
+    if (shouldShow) {
+      return <TextMessage key={i} message={message} withUserInfo />
+    }
     return <TextMessage key={i} message={message} />
   })
   return renderedMessages

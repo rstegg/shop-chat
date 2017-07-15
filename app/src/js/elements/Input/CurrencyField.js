@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Label } from 'semantic-ui-react'
 
-const CurrencyField = ({ input, meta: { asyncValidating, touched, error }, label, placeholder }) =>
+const CurrencyField = ({ input, meta: { touched, error }, label, placeholder }) =>
   <Form.Field>
     <label>{label}</label>
     <div className='ui left icon input'>

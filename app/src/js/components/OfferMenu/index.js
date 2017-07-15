@@ -8,8 +8,8 @@ import ShopChatMenuForm from './form'
 
 import { sendOffer, openOffer, closeOffer } from 'actions/offers'
 
-const getThreadId = path(['thread', 'id'])
-const getList = path(['list'])
+const getThreadId = path([ 'thread', 'id' ])
+const getList = path([ 'list' ])
 const hasLength = pipe(getList, length)
 
 class ShopChatMenu extends Component {
@@ -38,7 +38,7 @@ class ShopChatMenu extends Component {
 }
 
 
-const mapStateToProps = ({user, products, shops, offers}) =>
+const mapStateToProps = ({ user, products, shops, offers }) =>
 ({
   offers,
   user,

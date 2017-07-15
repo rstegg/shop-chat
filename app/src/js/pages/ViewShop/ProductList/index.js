@@ -15,7 +15,7 @@ class Products extends Component {
     const { user, shop, products, refreshProducts, fetchProducts } = this.props
     refreshProducts()
     console.log(shop);
-    if(getId(shop) && products.fetchable) {
+    if (getId(shop) && products.fetchable) {
       fetchProducts(shop.id, user)
     }
   }
@@ -23,13 +23,13 @@ class Products extends Component {
     const { user, shop, products, refreshProducts, fetchProducts } = this.props
     refreshProducts()
     console.log(shop);
-    if(getId(shop) && products.fetchable) {
+    if (getId(shop) && products.fetchable) {
       fetchProducts(shop.id, user)
     }
   }
   componentWillUpdate(nextProps) {
     const { user, shop, products, fetchProducts } = nextProps
-    if(getId(shop) && products.fetchable) {
+    if (getId(shop) && products.fetchable) {
       console.log("[ProductList/componentWillUpdate] componentWillUpdate checking necessary to fetch all products with shop.id and not shop.slug [params.shopId === shop.slug]")
       fetchProducts(getId(shop), user)
     }

@@ -8,7 +8,7 @@ import AreaField from 'elements/Input/AreaField'
 
 import { validate } from './validators'
 
-const SocialMenuForm = ({handleSubmit}) =>
+const SocialMenuForm = ({ handleSubmit }) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Name' />
     <Field component={InputField} type='email' name='email' label='To' placeholder='Email' />

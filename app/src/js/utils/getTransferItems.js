@@ -14,7 +14,7 @@ export default (event, isMultipleAllowed = true) => {
   }
 
   if (dataTransferItemsList.length > 0) {
-    dataTransferItemsList = isMultipleAllowed ? dataTransferItemsList : [dataTransferItemsList[0]]
+    dataTransferItemsList = isMultipleAllowed ? dataTransferItemsList : [ dataTransferItemsList[0] ]
   }
 
   // Convert from DataTransferItemsList to the native Array

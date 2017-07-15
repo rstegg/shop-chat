@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Header } from 'semantic-ui-react'
 
-const ProcessedCheckout = ({cart}) =>
+const ProcessedCheckout = () =>
   <Card>
     <Header>Processed!</Header>
   </Card>

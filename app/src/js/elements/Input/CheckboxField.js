@@ -9,7 +9,7 @@ const CheckboxField = ({ input: { value, onChange }, onSubmit, label, style }) =
     style={style}
     onChange={(_,data) => {
       onChange(data.checked)
-      if(onSubmit) {
+      if (onSubmit) {
         onSubmit(data.checked)
       }
     }} />

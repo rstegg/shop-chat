@@ -20,7 +20,7 @@ const DropdownField = ({ input: { value, onChange }, meta: { asyncValidating, to
       value={value}
       onChange={(_,data) => {
         onChange(data.value)
-        if(onSubmit) {
+        if (onSubmit) {
           onSubmit(data.value)
         }
       }}

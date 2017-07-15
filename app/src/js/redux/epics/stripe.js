@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import { combineEpics } from 'redux-observable'
 import {
   onFetchStripeCardsSuccess,
@@ -15,7 +16,7 @@ const Stripe = window.Stripe
 const API_HOST = '/api/v1'
 
 const api = {
-  fetchStripeCards: ({user}) => {
+  fetchStripeCards: ({ user }) => {
     const request =
       su.get(`${API_HOST}/stripe/cards`)
         .set('Accept', 'application/json')
@@ -23,7 +24,7 @@ const api = {
 
     return Observable.fromPromise(request)
   },
-  fetchStripeBanks: ({user}) => {
+  fetchStripeBanks: ({ user }) => {
     const request =
       su.get(`${API_HOST}/stripe/banks`)
         .set('Accept', 'application/json')
@@ -31,7 +32,7 @@ const api = {
 
     return Observable.fromPromise(request)
   },
-  fetchStripeBitcoins: ({user}) => {
+  fetchStripeBitcoins: ({ user }) => {
     const request =
       su.get(`${API_HOST}/stripe/bitcoins`)
         .set('Accept', 'application/json')
@@ -39,23 +40,23 @@ const api = {
 
     return Observable.fromPromise(request)
   },
-  addStripeBank: ({ bank: { routing_number, account_number, account_holder_name }, user }) => {
+  addStripeBank: ({ bank: { routing_number, account_number, account_holder_name } }) => {
     const request =
       Observable.bindCallback(
         Stripe.bankAccount.createToken,
-        (status, response) => ({ status, response })
+        (_, response) => ({ response })
       )
-      return request({ country: 'US', currency: 'USD', routing_number, account_number, account_holder_name, account_holder_type: 'individual' })
+    return request({ country: 'US', currency: 'USD', routing_number, account_number, account_holder_name, account_holder_type: 'individual' })
   },
   addStripeCard: ({ card: { number, cvc, expirationDate } }) => {
     const request =
       Observable.bindCallback(
         Stripe.card.createToken,
-        (status, response) => ({ status, response })
+        (_, response) => ({ response })
       )
-      const exp_month = expirationDate.split('/')[0]
-      const exp_year = expirationDate.split('/')[1]
-      return request({ currency: 'USD', number, cvc, exp_month, exp_year })
+    const exp_month = expirationDate.split('/')[0]
+    const exp_year = expirationDate.split('/')[1]
+    return request({ currency: 'USD', number, cvc, exp_month, exp_year })
   },
   addStripeBitcoin: ({ bitcoin: { amount, email } }) => {
     const request =
@@ -63,12 +64,12 @@ const api = {
         Stripe.source.create,
         (status, response) => ({ status, response })
       )
-      return request({ type: 'bitcoin', currency: 'USD', amount, owner: { email } })
+    return request({ type: 'bitcoin', currency: 'USD', amount, owner: { email } })
   },
   sendCardResponseToServer: (stripeResponse, user) => {
     const request =
       su.post(`${API_HOST}/stripe/cards`)
-        .send({stripeResponse})
+        .send({ stripeResponse })
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
 
@@ -77,7 +78,7 @@ const api = {
   sendBankResponseToServer: (stripeResponse, user) => {
     const request =
       su.post(`${API_HOST}/stripe/banks`)
-        .send({stripeResponse})
+        .send({ stripeResponse })
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
 
@@ -86,7 +87,7 @@ const api = {
   sendBitcoinResponseToServer: (stripeResponse, user) => {
     const request =
       su.post(`${API_HOST}/stripe/bitcoins`)
-        .send({stripeResponse})
+        .send({ stripeResponse })
         .set('Accept', 'application/json')
         .set('Authorization', user.token)
 
@@ -109,7 +110,7 @@ const addStripeCard = action$ =>
   action$.ofType('ADD_STRIPE_CARD')
     .mergeMap(action =>
       api.addStripeCard(action.payload)
-        .mergeMap(({status, response}) =>
+        .mergeMap(({ response }) =>
           response.error ? Observable.of({ type: 'ADD_STRIPE_CARD_FAILURE', error: response.error })
           : api.sendCardResponseToServer(response, action.payload.user)
               .map(onAddStripeCardSuccess)
@@ -135,7 +136,7 @@ const addStripeBank = action$ =>
   action$.ofType('ADD_STRIPE_BANK')
     .mergeMap(action =>
       api.addStripeBank(action.payload)
-        .mergeMap(({status, response}) =>
+        .mergeMap(({ response }) =>
           response.error ? Observable.of({ type: 'ADD_STRIPE_BANK_FAILURE', error: response.error })
           : api.sendBankResponseToServer(response, action.payload.user)
               .map(onAddStripeBankSuccess)

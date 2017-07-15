@@ -12,7 +12,7 @@ const deleteShopHandler = require('./handlers/delete')
 const validateBody = apiRequire('middleware/validate-body')
 const validFields = apiRequire('middleware/valid-field')
 
-const validShop = validFields('shop', ['name', 'is_public'])
+const validShop = validFields('shop', ['name', 'isPublic'])
 const validShareShop = validFields(false, ['email', 'name', 'url', 'shopId'])
 
 module.exports =

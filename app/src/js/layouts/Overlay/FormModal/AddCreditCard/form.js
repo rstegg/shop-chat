@@ -15,7 +15,7 @@ const FormInput = ({ type, label, placeholder, value, onChange, autoFocus, onFoc
     </div>
   </Form.Field>
 
-const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCardField}) =>
+const AddCreditCardForm = ({ card, onAddCreditCardFormChange, setFocusedCardField }) =>
   <Form>
     <Form.Group>
       <FormInput
@@ -56,7 +56,7 @@ const AddCreditCardForm = ({card, user, onAddCreditCardFormChange, setFocusedCar
     </Form.Group>
   </Form>
 
-const mapStateToProps = ({card}) =>
+const mapStateToProps = ({ card }) =>
 ({
   card
 })

@@ -13,26 +13,18 @@ const productGallery = prop('gallery')
 
 const productHasGallery = pipe(productGallery, length, Boolean)
 
-const getPrimaryRGB = path(['themes', 'primary'])
-const getSecondaryRGB = path(['themes', 'secondary'])
-const getBackgroundRGB = path(['themes', 'background'])
-const getFontRGB = path(['themes', 'font'])
+const getBackgroundRGB = path([ 'themes', 'background' ])
+const getFontRGB = path([ 'themes', 'font' ])
 
-const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : `rgba(255,255,255,1)`
-
-const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
-const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
+const toRGBStyle = rgba => rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : 'rgba(255,255,255,1)'
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 const getFont = pipe(getFontRGB, toRGBStyle)
 
-const UserView = ({
-  product,
-  user
-}) =>
+const UserView = ({ product }) =>
   <div className='ui segment product-container'>
-    <Grid celled='internally' style={{background: getBackground(product)}}>
+    <Grid celled='internally' style={{ background: getBackground(product) }}>
       <Grid.Column width={8} stretched>
-        <Segment basic style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Segment basic style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <ProductGallerySegment>
             <Image src={product.image || '/images/productholder.png'} />
           </ProductGallerySegment>
@@ -47,13 +39,13 @@ const UserView = ({
       </Grid.Column>
       <Grid.Column width={8} stretched>
         <ProductGallerySegment>
-          <Header as='h1' style={{color: getFont(product)}}>{getName(product)}</Header>
+          <Header as='h1' style={{ color: getFont(product) }}>{getName(product)}</Header>
         </ProductGallerySegment>
         <ProductGallerySegment>
-          <Header as='h4' style={{color: getFont(product)}}>${getPrice(product)}</Header>
+          <Header as='h4' style={{ color: getFont(product) }}>${getPrice(product)}</Header>
         </ProductGallerySegment>
         {getDesc(product) && <ProductGallerySegment>
-          <Header as='h4' style={{color: getFont(product)}}>{getDesc(product) || 'No description'}</Header>
+          <Header as='h4' style={{ color: getFont(product) }}>{getDesc(product) || 'No description'}</Header>
         </ProductGallerySegment>}
       </Grid.Column>
     </Grid>

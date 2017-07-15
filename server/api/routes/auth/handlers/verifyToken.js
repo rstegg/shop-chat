@@ -21,7 +21,7 @@ module.exports = (req, res) =>
           name: user.name,
           address: user.email
         }, (err, data) => {
-          if(err) {
+          if (err) {
             console.error(err);
           }
           res.redirect('/')

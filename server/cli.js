@@ -8,11 +8,11 @@ const models = require('./models');
 // node cli.js --username=<user> --password=<pass> --sync
 
 var actions = {};
-if(!argv.sync && argv.username && argv.password){
+if (!argv.sync && argv.username && argv.password){
     actions  = newUser()
-} else if(argv.sync && argv.username && argv.password){
+} else if (argv.sync && argv.username && argv.password){
     actions = sync().then(newUser)
-} else if( argv.sync){
+} else if ( argv.sync){
     actions = sync()
 }
 

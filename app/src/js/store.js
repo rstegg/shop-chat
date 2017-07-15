@@ -59,7 +59,7 @@ const persistConfig = {
 persistStore(store, persistConfig)
 
 // Enable reducer hot reloading in development
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
     module.hot.accept('./redux/reducers/index', () =>
       store.replaceReducer(require('./redux/reducers/index'))

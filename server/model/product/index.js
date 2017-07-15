@@ -38,12 +38,12 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true
     },
-    is_public: {
+    isPublic: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
     },
-    sub_category: {
+    subCategory: {
       type: DataTypes.STRING,
       allowNull: true
     },

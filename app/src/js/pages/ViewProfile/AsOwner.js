@@ -17,9 +17,9 @@ import Shops from './Shops'
 
 const Avatar = ({user, profile, openProfileCropper, onUploadProfileImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openProfileCropper} onDropRejected={onUploadProfileImageFailure}>
-    {profile.image_loading && <Dimmer active><Loader /></Dimmer>}
+    {profile.imageLoading && <Dimmer active><Loader /></Dimmer>}
     <Image src={user.image || profile.image || '/images/placeholder.png'} />
-    {profile.image_error && <Label basic color='red'>Invalid image</Label>}
+    {profile.imageError && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
 const NameField = ({isEditing, user, editProfile, editProfileField}) =>

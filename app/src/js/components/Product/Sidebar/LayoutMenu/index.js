@@ -6,7 +6,7 @@ import { Header, Menu, Button, Icon } from 'semantic-ui-react'
 import { closeChangeProductLayout, uploadEditProductLayout, } from 'actions/products'
 
 const ProductLayoutMenu = ({ product, user, uploadEditProductLayout, closeChangeProductLayout }) =>
-  <Menu icon='labeled' vertical inverted style={{width: '100%', height: '100%'}}>
+  <Menu icon='labeled' vertical inverted style={{ width: '100%', height: '100%' }}>
     <Header block inverted>Layouts</Header>
     <Menu.Item active={product.layout === 'grid'} onClick={() => product.layout === 'grid' ? closeChangeProductLayout() : uploadEditProductLayout('grid', product, user)}>
       <Icon name='block layout' size='massive' />
@@ -20,14 +20,14 @@ const ProductLayoutMenu = ({ product, user, uploadEditProductLayout, closeChange
       <Icon name='indent' size='massive' />
       Gallery
     </Menu.Item>
-    <Menu.Menu style={{position: 'absolute', width: '100%', bottom: '25px'}}>
+    <Menu.Menu style={{ position: 'absolute', width: '100%', bottom: '25px' }}>
       <Menu.Item>
         <Button basic color='teal' onClick={closeChangeProductLayout} size='huge'>Close</Button>
       </Menu.Item>
     </Menu.Menu>
   </Menu>
 
-const mapStateToProps = ({products, user}) =>
+const mapStateToProps = ({ products, user }) =>
 ({
   product: products.current,
   user

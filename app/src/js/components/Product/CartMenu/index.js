@@ -9,10 +9,10 @@ import PurchaseButtons from './PurchaseButtons'
 
 import { switchToProductAdmin } from 'actions/products'
 
-const productUserId = path(['user', 'id'])
-const shopSlug = path(['shop', 'slug'])
+const productUserId = path([ 'user', 'id' ])
+const shopSlug = path([ 'shop', 'slug' ])
 
-const ProductCartMenu = ({user, product, switchToProductAdmin}) =>
+const ProductCartMenu = ({ user, product, switchToProductAdmin }) =>
   <Segment basic className='product-cart-menu'>
     { user.id === productUserId(product) ?
         <Segment compact>
@@ -26,7 +26,7 @@ const ProductCartMenu = ({user, product, switchToProductAdmin}) =>
     }
   </Segment>
 
-const mapStateToProps = ({user, products}) =>
+const mapStateToProps = ({ user, products }) =>
 ({
   product: products.current,
   user

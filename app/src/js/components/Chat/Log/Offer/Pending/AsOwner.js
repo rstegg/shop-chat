@@ -15,10 +15,10 @@ const AdminView = ({ offer, user, acceptOffer, rejectOffer }) =>
         { offer.user.username }
       </Card.Header> }
       <Card.Meta>
-        {moment(offer.createdAt).fromNow()}
+        { moment(offer.createdAt).fromNow() }
       </Card.Meta>
       <Card.Description>
-        Offer for <strong>{offer.offer && offer.offer.product_name}</strong> at <strong>${offer.offer && offer.offer.price}</strong>
+        Offer for <strong>{offer.offer && offer.offer.productName}</strong> at <strong>${offer.offer && offer.offer.price}</strong>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
@@ -29,7 +29,7 @@ const AdminView = ({ offer, user, acceptOffer, rejectOffer }) =>
     </Card.Content>
   </Card>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

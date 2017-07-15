@@ -1,7 +1,7 @@
 const { models } = rootRequire('db')
 const { User, Offer, Message } = models
 
-const offerAttributes = ['id', 'state', 'product_name', 'price', 'productId', 'userId', 'seller_id']
+const offerAttributes = ['id', 'state', 'productName', 'price', 'productId', 'userId', 'sellerId']
 const userAttributes = ['id', 'username', 'image']
 
 const joinChatThread = (io, socket, action) => {
@@ -20,7 +20,7 @@ const joinChatThread = (io, socket, action) => {
     where: { threadId }
   })
   .then(messages => {
-    if(socket.thread) {
+    if (socket.thread) {
       socket.leave(socket.thread)
     }
     socket.join(threadId)
@@ -36,7 +36,7 @@ const joinChatThread = (io, socket, action) => {
 }
 
 const leaveChatThread = (io, socket, action) => {
-  if(action.payload && action.payload.threadId) {
+  if (action.payload && action.payload.threadId) {
     socket.leave(action.payload.threadId)
   }
 }

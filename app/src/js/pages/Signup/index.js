@@ -16,7 +16,7 @@ class Signup extends Component {
   }
   render() {
     const { user, onSignupSubmit } = this.props
-    if(user.isAuthenticated || user.isRegistered) {
+    if (user.isAuthenticated || user.isRegistered) {
       return (
         <Redirect to='/' />
       )

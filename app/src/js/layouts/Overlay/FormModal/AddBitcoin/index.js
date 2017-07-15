@@ -8,10 +8,10 @@ import AddBitcoinForm from './form'
 import { closeAddBitcoin } from 'actions/bitcoin'
 import { addStripeBitcoin } from 'actions/stripe'
 
-const AddBitcoin = ({user, bitcoin, closeAddBitcoin, addStripeBitcoin}) =>
-  <Modal open={bitcoin.isOpen} style={{textAlign: 'center'}}>
+const AddBitcoin = ({ user, bitcoin, closeAddBitcoin, addStripeBitcoin }) =>
+  <Modal open={bitcoin.isOpen} style={{ textAlign: 'center' }}>
     <Modal.Header>Add Bitcoin</Modal.Header>
-    <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+    <Modal.Content style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <AddBitcoinForm />
     </Modal.Content>
     <Modal.Actions>
@@ -24,7 +24,7 @@ const AddBitcoin = ({user, bitcoin, closeAddBitcoin, addStripeBitcoin}) =>
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user, bitcoin, form}) =>
+const mapStateToProps = ({ user, bitcoin }) =>
 ({
   user,
   bitcoin

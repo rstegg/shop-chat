@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 import { Card, Image } from 'semantic-ui-react'
 
-const ShopItem = ({className, onClick, shop}) =>
-  <Card as={NavLink} to={`/shop/${shop.slug}`} style={{maxWidth: '300px'}}>
+const ShopItem = ({ shop }) =>
+  <Card as={NavLink} to={`/shop/${shop.slug}`} style={{ maxWidth: '300px' }}>
     <Image src={shop.image || '/images/productholder.png'} alt={shop.name} />
     <Card.Content>
       <Card.Header>{shop.name}</Card.Header>

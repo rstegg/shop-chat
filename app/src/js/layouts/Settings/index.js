@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import SettingsNav from './nav'
 
-const Settings = ({user, children}) =>
+const Settings = ({ user, children }) =>
   !user.isAuthenticated ?
     <Redirect to='/' />
   :
@@ -13,7 +13,7 @@ const Settings = ({user, children}) =>
     {children}
   </div>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

@@ -6,7 +6,7 @@ import InputField from 'elements/Input/InputField'
 
 import OfferMenu from 'components/OfferMenu'
 
-const ShopChatForm = ({handleSubmit, resetForm, threadType}) =>
+const ShopChatForm = ({ handleSubmit, threadType }) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} label='Message' name='text' placeholder='Type a chat message' />
     <Button.Group fluid>

@@ -12,7 +12,7 @@ export const onFetchStripeCardsSuccess = res =>
 ({
   type: 'FETCH_STRIPE_CARDS_SUCCESS',
   payload: {
-    stripe_cards: res.body.stripe_cards
+    stripeCards: res.body.stripeCards
   }
 })
 
@@ -28,7 +28,7 @@ export const onFetchStripeBanksSuccess = res =>
 ({
   type: 'FETCH_STRIPE_BANKS_SUCCESS',
   payload: {
-    stripe_banks: res.body.stripe_banks
+    stripeBanks: res.body.stripeBanks
   }
 })
 

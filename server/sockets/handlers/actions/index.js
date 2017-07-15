@@ -20,13 +20,13 @@ const getToken = path(['payload', 'user', 'token'])
 
 module.exports = (io, socket, action) => {
   // TODO: use ramda to check the type of action
-  if(!action.type) {
+  if (!action.type) {
     throw new Error('Action type missing')
   }
-  if(action.type === 'WS/FETCH_THREAD_CHAT_MESSAGES') {
+  if (action.type === 'WS/FETCH_THREAD_CHAT_MESSAGES') {
     return fetchThreadChatMessages(io, socket, action)
   }
-  if(action.type === 'WS/JOIN_THREAD') {
+  if (action.type === 'WS/JOIN_THREAD') {
     return joinChatThread(io, socket, action)
   }
   authorize(getToken(action))

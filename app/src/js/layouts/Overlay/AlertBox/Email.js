@@ -4,7 +4,7 @@ import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 import { resetSignup } from 'actions/signup'
 
-const EmailAlert = ({visible, resetSignup}) =>
+const EmailAlert = ({ visible, resetSignup }) =>
   <Modal open={visible} onClose={resetSignup} basic size='small'>
     <Header icon='mail' content='Success!' />
     <Modal.Content>
@@ -17,7 +17,7 @@ const EmailAlert = ({visible, resetSignup}) =>
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user,
   visible: user.isRegistered

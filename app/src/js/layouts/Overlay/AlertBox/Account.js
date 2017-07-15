@@ -4,7 +4,7 @@ import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 import { resetAccount } from 'actions/account'
 
-const EmailAlert = ({visible, resetAccount}) =>
+const EmailAlert = ({ visible, resetAccount }) =>
   <Modal open={visible} onClose={resetAccount} basic size='small'>
     <Header icon='id badge' content='Success!' />
     <Modal.Content>
@@ -17,7 +17,7 @@ const EmailAlert = ({visible, resetAccount}) =>
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user,
   visible: user.isAccountSaved

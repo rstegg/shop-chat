@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { Card } from 'semantic-ui-react'
 
-const Home = ({user}) =>
+const Landing = () =>
   <Card>
     <Card.Content>
       <Card.Header>Shop App</Card.Header>
@@ -13,12 +12,4 @@ const Home = ({user}) =>
     </Card.Content>
   </Card>
 
-
-const mapStateToProps = ({user}) =>
-({
-  user
-})
-
-export default connect(
-  mapStateToProps
-)(Home)
+export default Landing

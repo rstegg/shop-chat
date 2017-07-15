@@ -17,7 +17,7 @@ const validateParams = apiRequire('middleware/validate-params')
 const validField = apiRequire('middleware/valid-field')
 const validFields = apiRequire('middleware/valid-fields')
 
-const validProduct = validFields('product', ['name', 'is_public', 'price'])
+const validProduct = validFields('product', ['name', 'isPublic', 'price'])
 const validCreateProductParams = validFields(false, ['shopId'])
 const validEditProductParams = validFields(false, ['shopId', 'id'])
 const validShareProduct = validFields(false, ['email', 'name', 'url', 'productId'])

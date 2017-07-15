@@ -6,7 +6,7 @@ import { length } from 'ramda'
 
 import { productRemoveFromCart } from 'actions/orders'
 
-const ReviewCheckout = ({cart, user, address}) =>
+const ReviewCheckout = ({ cart, address }) =>
   <Card>
     <Card.Content>
       <Card.Header>Checkout Review</Card.Header>
@@ -33,8 +33,8 @@ const ReviewCheckout = ({cart, user, address}) =>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-      {length(cart) ?
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+      { length(cart) ?
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Header>Review items and shipping</Header>
         <List>
           {cart.map((product, i) =>
@@ -43,15 +43,14 @@ const ReviewCheckout = ({cart, user, address}) =>
         </List>
         TODO: SHIPPING LOL
         <Header>Total: ${cart.reduce((acc, product) => parseFloat(product.price, 10) + acc, 0)}</Header>
-        <Button basic onClick={() => {}}>Place your order</Button>
+        <Button basic>Place your order</Button>
       </div>
-      : 'Go Shop!'}
+      : 'Go Shop!' }
     </Card.Content>
   </Card>
 
-const mapStateToProps = ({user, orders}) =>
+const mapStateToProps = ({ user, orders }) =>
 ({
-  user,
   address: user.address,
   cart: orders.cart
 })

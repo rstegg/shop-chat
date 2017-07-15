@@ -5,7 +5,7 @@ const shortId = require('shortid')
 
 const { allPass, merge, path, pick, pipe, isNil } = require('ramda')
 
-const shopAttributes = ['name', 'is_public', 'image']
+const shopAttributes = ['name', 'isPublic', 'image']
 
 const getValidSlug = (slug, thread) =>
   new Promise(resolve =>

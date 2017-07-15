@@ -13,7 +13,7 @@ class ImageCropper extends Component {
   }
   render() {
     const { image, isOpen, closeCropper } = this.props
-    if(!isOpen) {
+    if (!isOpen) {
       return null
     }
     return (

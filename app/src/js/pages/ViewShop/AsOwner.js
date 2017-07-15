@@ -14,7 +14,7 @@ import Dropzone from 'components/Dropzone'
 import CheckboxField from 'elements/Input/CheckboxField'
 import EditorField from 'elements/Input/EditorField'
 
-const getName = path(['name'])
+const getName = path([ 'name' ])
 
 import {
   deleteShop,
@@ -32,43 +32,43 @@ import GridLayout from 'layouts/Grid'
 
 import { validate } from './validators'
 
-const Avatar = ({shop, openEditShopCropper, onUploadEditShopImageFailure}) =>
+const Avatar = ({ shop, openEditShopCropper, onUploadEditShopImageFailure }) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openEditShopCropper} onDropRejected={onUploadEditShopImageFailure}>
-    {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
+    {shop.imageLoading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
-    {shop.image_error && <Label basic color='red'>Invalid image</Label>}
+    {shop.imageError && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
-const NameField = ({isEditing, shop, user, editShop, editShopField}) =>
+const NameField = ({ isEditing, shop, user, editShop, editShopField }) =>
   <EditorField
-    isEditing={shop.focused === 'name'}
+    isEditing={isEditing}
     placeholder='Name' name='name'
     onClick={() => editShopField('name')} onClickOutside={() => editShopField(null)}
     onSubmit={name => {
-      if(length(name)) {
-        editShop({...shop, name}, user)
+      if (length(name)) {
+        editShop({ ...shop, name }, user)
       }
     }}>
     <Header as='h1'>{shop.name}</Header>
   </EditorField>
 
-const DescriptionField = ({isEditing, shop, user, editShop, editShopField}) =>
+const DescriptionField = ({ isEditing, shop, user, editShop, editShopField }) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Description' name='description'
     onClick={() => editShopField('description')} onClickOutside={() => editShopField(null)}
-    onSubmit={description => editShop({...shop, description}, user)}>
+    onSubmit={description => editShop({ ...shop, description }, user)}>
     <Header as='h4'>{shop.description || 'Add a description'}</Header>
   </EditorField>
 
-const PublicField = ({shop, user, editShop}) =>
-  <Field component={CheckboxField} name='is_public' label='Public' onSubmit={is_public => editShop({...shop, is_public}, user)} />
+const PublicField = ({ shop, user, editShop }) =>
+  <Field component={CheckboxField} name='isPublic' label='Public' onSubmit={isPublic => editShop({ ...shop, isPublic }, user)} />
 
 class AdminView extends Component {
   componentWillUpdate(nextProps) {
     const nextShop = nextProps.shop
     const { shop, redirectToNewStore } = this.props
-    if(getName(nextShop) !== getName(shop)) {
+    if (getName(nextShop) !== getName(shop)) {
       redirectToNewStore(nextShop.slug)
     }
   }
@@ -117,7 +117,7 @@ const ConnectedAdminView = reduxForm({
   validate
 })(AdminView)
 
-const mapStateToProps = ({shops, user}) =>
+const mapStateToProps = ({ shops, user }) =>
 ({
   user: user,
   shop: shops.current,
@@ -140,5 +140,5 @@ const mapDispatchToProps = dispatch =>
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ConnectedAdminView)

@@ -12,14 +12,14 @@ const findHighest = (current, componentNode, ignoreClass) => {
   if (current === componentNode) {
     return true
   }
-
-  while(current.parentNode) {
+  let currentNode = current
+  while (currentNode.parentNode) {
     if (isNodeFound(current, componentNode, ignoreClass)) {
       return true
     }
-    current = current.parentNode
+    currentNode = current.parentNode
   }
-  return current
+  return currentNode
 }
 
 const clickedScrollbar = evt => {
@@ -35,7 +35,7 @@ export default (componentNode, eventHandler, ignoreClass, excludeScrollbar, prev
       evt.stopPropagation()
     }
     const current = evt.target
-    if((excludeScrollbar && clickedScrollbar(evt)) || (findHighest(current, componentNode, ignoreClass) !== document)) {
+    if ( (excludeScrollbar && clickedScrollbar(evt)) || (findHighest(current, componentNode, ignoreClass) !== document) ) {
       return
     }
     eventHandler(evt)

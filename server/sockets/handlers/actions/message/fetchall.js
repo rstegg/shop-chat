@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const { models } = rootRequire('db')
 const { User, Offer, Message } = models
 
-const offerAttributes = ['id', 'state', 'product_name', 'price', 'seller_id']
+const offerAttributes = ['id', 'state', 'productName', 'price', 'sellerId']
 const userAttributes = ['id', 'username', 'image']
 
 const fetchThreadChatMessages = (io, socket, action) => {

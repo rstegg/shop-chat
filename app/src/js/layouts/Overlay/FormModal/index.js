@@ -5,10 +5,12 @@ import AddBitcoin from './AddBitcoin'
 import WithdrawBitcoin from './WithdrawBitcoin'
 import WithdrawBank from './WithdrawBank'
 
-export default () =>
+const FormModal = () =>
   <div>
     <AddCreditCard />
     <AddBitcoin />
     <WithdrawBank />
     <WithdrawBitcoin />
   </div>
+
+export default FormModal

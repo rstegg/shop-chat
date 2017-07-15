@@ -3,7 +3,7 @@ const { Shop, User, Thread } = models
 
 const { pick } = require('ramda')
 
-const shopAttributes = ['id', 'name', 'description', 'is_public', 'slug', 'image', 'userId']
+const shopAttributes = ['id', 'name', 'description', 'isPublic', 'slug', 'image', 'userId']
 
 module.exports = (req, res) =>
   Shop.findOne({

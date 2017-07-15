@@ -6,7 +6,7 @@ import MessageWithoutUserInfo from './WithoutUser'
 class TextMessage extends Component {
   render() {
     const { message, withUserInfo } = this.props
-    if(withUserInfo) {
+    if (withUserInfo) {
       return <MessageWithUserInfo message={message} />
     }
     return <MessageWithoutUserInfo message={message} />

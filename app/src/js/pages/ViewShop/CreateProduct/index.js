@@ -14,18 +14,18 @@ const tagsArray = tags => tags.split(' ')
 
 const Avatar = ({product, openCropper, onUploadProductImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openCropper} onDropRejected={onUploadProductImageFailure}>
-    {product.image_loading && <Dimmer active><Loader /></Dimmer>}
+    {product.imageLoading && <Dimmer active><Loader /></Dimmer>}
     <Image src={product.image || '/images/productholder.png'} />
-    {product.image_error && <Label basic color='red'>Invalid image</Label>}
+    {product.imageError && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
 class CreateProduct extends Component {
   render() {
     const { user, shop, product, createProduct, openCreateProductCropper, closeCreateProductCropper, uploadProductImage, onUploadProductImageFailure } = this.props
-    if(!user.isAuthenticated) {
+    if (!user.isAuthenticated) {
       return <Redirect to='/login' />
     }
-    if(product.isCreated || user.id !== shop.userId) {
+    if (product.isCreated || user.id !== shop.userId) {
       return <Redirect to={`/shop/${shop.slug}`} />
     }
     return (

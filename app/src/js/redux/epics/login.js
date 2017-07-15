@@ -4,11 +4,11 @@ import { Observable } from 'rxjs'
 
 import { post } from './helpers/req'
 
-const getError = path(['response', 'text', 'error'])
+const getError = path([ 'response', 'text', 'error' ])
 
 const api = {
-  login: ({username, password}) =>
-    post(`auth/login`, { username, password })
+  login: ({ username, password }) =>
+    post('auth/login', { username, password })
 }
 
 const onLoginSubmit = action$ =>

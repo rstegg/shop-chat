@@ -25,13 +25,13 @@ test('action save account', () => {
     name: 'My Name',
     email: 'test@test.com',
     username: 'user',
-    old_password: 'pass',
+    oldPassword: 'pass',
   }
   const user = {
     name: 'My Name',
     email: 'test@test.com',
     username: 'user',
-    old_password: 'pass',
+    oldPassword: 'pass',
   }
   expect(onSaveAccountSettings(account, user))
   .toEqual(actionPayload('SAVE_ACCOUNT_SETTINGS', { account, user }))

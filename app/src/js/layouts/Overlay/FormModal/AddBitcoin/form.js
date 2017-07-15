@@ -13,7 +13,7 @@ const FormInput = ({ type, label, placeholder, value, onChange, autoFocus, onFoc
     </div>
   </Form.Field>
 
-const AddBitcoinForm = ({bitcoin, user, onAddBitcoinFormChange, setFocusedBitcoinField}) =>
+const AddBitcoinForm = ({ bitcoin, onAddBitcoinFormChange, setFocusedBitcoinField }) =>
   <Form>
     <FormInput
       label='Email'
@@ -33,7 +33,7 @@ const AddBitcoinForm = ({bitcoin, user, onAddBitcoinFormChange, setFocusedBitcoi
       onBlur={() => setFocusedBitcoinField(null)} />
   </Form>
 
-const mapStateToProps = ({bitcoin}) =>
+const mapStateToProps = ({ bitcoin }) =>
 ({
   bitcoin
 })

@@ -14,20 +14,20 @@ const getShopId = prop('shopId')
 class ViewShop extends Component {
   componentWillMount() {
     const { match: { params }, user, shop, fetchSingleShop, isFetching } = this.props
-    if(getShopSlug(shop) !== getShopId(params) && isFetching !== getShopId(params)) {
+    if (getShopSlug(shop) !== getShopId(params) && isFetching !== getShopId(params)) {
       fetchSingleShop(getShopId(params), user)
     }
   }
   componentWillUpdate(nextProps) {
     const { match: { params }, user, shop, fetchSingleShop, isFetching } = nextProps
-    if(getShopSlug(shop) !== getShopId(params) && isFetching !== getShopId(params)) {
+    if (getShopSlug(shop) !== getShopId(params) && isFetching !== getShopId(params)) {
       console.log("[ViewShop/componentWillUpdate] If you see this in console, then this block is useful")
       fetchSingleShop(params.shopId, user)
     }
   }
   render() {
     const { shop, isFetching, children } = this.props
-    if(!shop && !isFetching) {
+    if (!shop && !isFetching) {
       return <Redirect to='/' />
     }
     const Hoc = shop.isAdmin ? AdminView : UserView

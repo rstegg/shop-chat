@@ -4,7 +4,7 @@ import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 import { resetAddress } from 'actions/address'
 
-const EmailAlert = ({visible, resetAddress}) =>
+const EmailAlert = ({ visible, resetAddress }) =>
   <Modal open={visible} onClose={resetAddress} basic size='small'>
     <Header icon='address card' content='Success!' />
     <Modal.Content>
@@ -17,7 +17,7 @@ const EmailAlert = ({visible, resetAddress}) =>
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user,
   visible: user.isAddressSaved

@@ -10,14 +10,14 @@ import { fetchShops, refreshShops } from 'actions/shops'
 
 class Shops extends Component {
   componentDidMount() {
-    if(this.props.user.isAuthenticated) {
+    if (this.props.user.isAuthenticated) {
       this.props.fetchShops(this.props.user)
       this.props.refreshShops()
     }
   }
   render() {
     const { shops, user } = this.props
-    if(!user.isAuthenticated) {
+    if (!user.isAuthenticated) {
       return <Redirect to='/login' />
     }
     return (

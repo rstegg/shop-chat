@@ -1,7 +1,7 @@
 const { models } = rootRequire('db')
 const { Message, User, Offer } = models
 
-const offerAttributes = ['id', 'state', 'product_name', 'price', 'productId', 'userId', 'seller_id']
+const offerAttributes = ['id', 'state', 'productName', 'price', 'productId', 'userId', 'sellerId']
 const userAttributes = ['id', 'username', 'image']
 
 const acceptOffer = (io, socket, action) => {

@@ -2,7 +2,9 @@ import React from 'react'
 
 import ProductAdminMenu from './ProductAdminMenu'
 
-export default () =>
+const MobileMenu = () =>
   <div>
     <ProductAdminMenu />
   </div>
+
+export default MobileMenu

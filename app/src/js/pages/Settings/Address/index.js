@@ -10,7 +10,7 @@ import { onSaveAddressSettings } from 'actions/address'
 class Address extends Component {
    render() {
      const { user, onSaveAddressSettings } = this.props
-     if(!user.isAuthenticated) {
+     if (!user.isAuthenticated) {
        return <Redirect to='/' />
      }
      return (

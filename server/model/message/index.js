@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('messages', {
-    content_type: {
+    contentType: {
       type: DataTypes.STRING,
       allowNull: false,
     },

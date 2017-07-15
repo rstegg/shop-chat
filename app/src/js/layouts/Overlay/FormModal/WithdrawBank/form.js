@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -15,7 +16,7 @@ const FormInput = ({ type, label, placeholder, value, onChange, autoFocus, onFoc
     </div>
   </Form.Field>
 
-const AddBankForm = ({bank, user, onAddBankFormChange, setFocusedBankField}) =>
+const AddBankForm = ({ bank, onAddBankFormChange, setFocusedBankField }) =>
   <Form>
     <FormInput
       autoFocus={true}
@@ -44,7 +45,7 @@ const AddBankForm = ({bank, user, onAddBankFormChange, setFocusedBankField}) =>
       onBlur={() => setFocusedBankField(null)} />
   </Form>
 
-const mapStateToProps = ({bank}) =>
+const mapStateToProps = ({ bank }) =>
 ({
   bank
 })

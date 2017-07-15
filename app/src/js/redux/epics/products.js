@@ -18,29 +18,29 @@ import { Observable } from 'rxjs/Rx'
 import { authGet, authPost, authImagePost, authPut, authDelete } from './helpers/authReq'
 
 const api = {
-  fetchProducts: ({shopId, token}) =>
+  fetchProducts: ({ shopId, token }) =>
     authGet(`products/${shopId}`, token),
-  fetchSingleProduct: ({productId, shopId, token}) =>
+  fetchSingleProduct: ({ productId, shopId, token }) =>
     authGet(`products/${shopId}/${productId}`, token),
-  createProduct: ({product, shopId, token}) =>
+  createProduct: ({ product, shopId, token }) =>
     authPost(`products/${shopId}`, { product }, token),
-  shareProduct: ({name, email, message, token, url, productId}) =>
-    authPost(`products/share`, {name, email, message, token, url, productId}, token),
-  uploadProductImage: ({image, token}) =>
-    authImagePost(`image/product`, image, token),
-  uploadEditProductImage: ({image, product, token}) =>
+  shareProduct: ({ name, email, message, token, url, productId }) =>
+    authPost('products/share', { name, email, message, token, url, productId }, token),
+  uploadProductImage: ({ image, token }) =>
+    authImagePost('image/product', image, token),
+  uploadEditProductImage: ({ image, product, token }) =>
     authImagePost(`image/${product.shopId}/product/${product.id}`, image, token),
-  uploadGalleryProductImage: ({image, index, product, user}) =>
+  uploadGalleryProductImage: ({ image, index, product, user }) =>
     authImagePost(`image/${product.shopId}/product/${product.id}/gallery/${index}`, image, user.token),
-  deleteProductGalleryImage: ({index, product, user}) =>
+  deleteProductGalleryImage: ({ index, product, user }) =>
     authDelete(`products/${product.shopId}/${product.id}/gallery/${index}`, user.token),
-  uploadEditProductLayout: ({layout, product, user}) =>
+  uploadEditProductLayout: ({ layout, product, user }) =>
     authPut(`products/${product.shopId}/${product.id}/layout`, { layout }, user.token),
-  uploadEditProductTheme: ({theme, color, product, user}) =>
+  uploadEditProductTheme: ({ theme, color, product, user }) =>
     authPut(`products/${product.shopId}/${product.id}/theme`, { theme, color }, user.token),
-  editProduct: ({product, shopId, token}) =>
+  editProduct: ({ product, shopId, token }) =>
     authPut(`products/${shopId}/${product.id}`, { product }, token),
-  deleteProduct: ({id, shopId, token}) =>
+  deleteProduct: ({ id, shopId, token }) =>
     authDelete(`products/${shopId}/${id}`, token),
 }
 
@@ -50,7 +50,8 @@ const fetchProducts = action$ =>
       api.fetchProducts(action.payload)
         .map(onFetchProductsSuccess)
         .catch(error => Observable.of({
-          type: 'FETCH_PRODUCTS_FAILURE'
+          type: 'FETCH_PRODUCTS_FAILURE',
+          error
         }))
       )
 
@@ -60,7 +61,8 @@ const fetchSingleProduct = action$ =>
       api.fetchSingleProduct(action.payload)
         .map(onFetchSingleProductSuccess)
         .catch(error => Observable.of({
-          type: 'FETCH_SINGLE_PRODUCT_FAILURE'
+          type: 'FETCH_SINGLE_PRODUCT_FAILURE',
+          error
         }))
       )
 
@@ -70,7 +72,8 @@ const shareProduct = action$ =>
       api.shareProduct(action.payload)
         .map(onShareProductSuccess)
         .catch(error => Observable.of({
-          type: 'SHARE_PRODUCT_FAILURE'
+          type: 'SHARE_PRODUCT_FAILURE',
+          error
         }))
       )
 
@@ -80,7 +83,8 @@ const createProduct = action$ =>
       api.createProduct(action.payload)
         .map(onCreateProductSuccess)
         .catch(error => Observable.of({
-          type: 'CREATE_PRODUCT_FAILURE'
+          type: 'CREATE_PRODUCT_FAILURE',
+          error
         }))
       )
 
@@ -148,7 +152,8 @@ const editProduct = action$ =>
       api.editProduct(action.payload)
         .map(onEditProductSuccess)
         .catch(error => Observable.of({
-          type: 'EDIT_PRODUCT_FAILURE'
+          type: 'EDIT_PRODUCT_FAILURE',
+          error
         }))
       )
 
@@ -158,7 +163,8 @@ const deleteProduct = action$ =>
       api.deleteProduct(action.payload)
         .map(onDeleteProductSuccess)
         .catch(error => Observable.of({
-          type: 'DELETE_PRODUCT_FAILURE'
+          type: 'DELETE_PRODUCT_FAILURE',
+          error
         }))
       )
 
@@ -168,7 +174,8 @@ const deleteProductGalleryImage = action$ =>
       api.deleteProductGalleryImage(action.payload)
         .map(onDeleteProductGalleryImageSuccess)
         .catch(error => Observable.of({
-          type: 'DELETE_PRODUCT_GALLERY_IMAGE_FAILURE'
+          type: 'DELETE_PRODUCT_GALLERY_IMAGE_FAILURE',
+          error
         }))
       )
 

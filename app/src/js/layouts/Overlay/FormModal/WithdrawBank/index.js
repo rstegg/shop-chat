@@ -8,10 +8,10 @@ import AddBankForm from './form'
 import { closeWithdrawBank } from 'actions/bank'
 import { addStripeBank } from 'actions/stripe'
 
-const AddBank = ({user, bank, closeWithdrawBank, addStripeBank}) =>
-  <Modal open={bank.isWithdrawOpen} style={{textAlign: 'center'}}>
+const AddBank = ({ user, bank, closeWithdrawBank, addStripeBank }) =>
+  <Modal open={bank.isWithdrawOpen} style={{ textAlign: 'center' }}>
     <Modal.Header>Add Bank</Modal.Header>
-    <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+    <Modal.Content style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <AddBankForm />
     </Modal.Content>
     <Modal.Actions>
@@ -24,7 +24,7 @@ const AddBank = ({user, bank, closeWithdrawBank, addStripeBank}) =>
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user, bank, form}) =>
+const mapStateToProps = ({ user, bank }) =>
 ({
   user,
   bank

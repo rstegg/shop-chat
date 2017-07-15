@@ -17,7 +17,7 @@ class WithdrawSettings extends Component {
   }
   render() {
     const { user, bank, openWithdrawBank, openWithdrawBitcoin } = this.props
-    if(!user.isAuthenticated) {
+    if (!user.isAuthenticated) {
       return <Redirect to='/' />
     }
     return (

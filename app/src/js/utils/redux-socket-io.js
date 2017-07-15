@@ -1,6 +1,7 @@
 const isFunction = x => typeof x === 'function'
 const isString = x => typeof x === 'string'
 const isArray = x => Array.isArray(x)
+
 const isSocketAction = (action, prefix) => {
   if (!action || !action.type) {
     return false

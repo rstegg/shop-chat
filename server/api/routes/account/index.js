@@ -8,7 +8,7 @@ const getAccountHandler = require('./handlers/get')
 const validateBody = apiRequire('middleware/validate-body')
 const validFields = apiRequire('middleware/valid-fields')
 
-const validAccountUser = validFields('account', ['name', 'email', 'username', 'old_password'])
+const validAccountUser = validFields('account', ['name', 'email', 'username', 'oldPassword'])
 
 module.exports =
   router

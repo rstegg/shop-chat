@@ -4,9 +4,11 @@ import AlertBox from './AlertBox'
 import ProductColorPicker from './ProductColorPicker'
 import FormModal from './FormModal'
 
-export default () =>
+const OverlayLayout = () =>
   <div>
     <AlertBox />
     <ProductColorPicker />
     <FormModal />
   </div>
+
+export default OverlayLayout

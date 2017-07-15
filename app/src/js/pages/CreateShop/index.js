@@ -12,7 +12,7 @@ import Dropzone from 'components/Dropzone'
 
 const Avatar = ({shop, openCropper, onUploadShopImageFailure}) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openCropper} onDropRejected={onUploadShopImageFailure}>
-    {shop.image_loading && <Dimmer active><Loader /></Dimmer>}
+    {shop.imageLoading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
   </Dropzone>
 
@@ -27,10 +27,10 @@ class CreateShop extends Component {
       uploadShopImage,
       onUploadShopImageFailure
     } = this.props
-    if(!user.isAuthenticated) {
+    if (!user.isAuthenticated) {
       return <Redirect to='/login' />
     }
-    if(shop.isCreated) {
+    if (shop.isCreated) {
       return <Redirect to='/shops' />
     }
     return (
@@ -40,7 +40,7 @@ class CreateShop extends Component {
           :
           <Avatar shop={shop} openCropper={img => openCreateShopCropper(img[0])} onUploadShopImageFailure={onUploadShopImageFailure} />
         }
-        {shop.image_error && <Label basic color='red'>Invalid image</Label>}
+        {shop.imageError && <Label basic color='red'>Invalid image</Label>}
         <Card.Content>
           <Card.Header>New Shop</Card.Header>
           <Card.Description>

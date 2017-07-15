@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Rx'
 
 import { post } from './helpers/req'
 
-const getError = path(['response', 'text', 'error'])
+const getError = path([ 'response', 'text', 'error' ])
 
 const api = {
-  signup: ({user}) =>
-    post(`auth/signup`, { user })
+  signup: ({ user }) =>
+    post('auth/signup', { user })
 }
 
 const onSignupSubmit = action$ =>

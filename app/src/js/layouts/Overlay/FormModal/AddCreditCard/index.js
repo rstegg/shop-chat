@@ -8,10 +8,10 @@ import AddCreditCardForm from './form'
 import { closeAddCard } from 'actions/card'
 import { addStripeCard } from 'actions/stripe'
 
-const AddCreditCard = ({user, card, closeAddCard, addStripeCard}) =>
-  <Modal open={card.isOpen} style={{textAlign: 'center'}}>
+const AddCreditCard = ({ user, card, closeAddCard, addStripeCard }) =>
+  <Modal open={card.isOpen} style={{ textAlign: 'center' }}>
     <Modal.Header>Add a Card</Modal.Header>
-    <Modal.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+    <Modal.Content style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <AddCreditCardForm />
     </Modal.Content>
     <Modal.Actions>
@@ -24,7 +24,7 @@ const AddCreditCard = ({user, card, closeAddCard, addStripeCard}) =>
     </Modal.Actions>
   </Modal>
 
-const mapStateToProps = ({user, card, form}) =>
+const mapStateToProps = ({ user, card }) =>
 ({
   user,
   card

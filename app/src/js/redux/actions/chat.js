@@ -26,7 +26,7 @@ export const sendThreadChatMessage = (text, threadId, user) =>
   }
 })
 
-export const fetchThreadChatMessages = (user, shop) =>
+export const fetchThreadChatMessages = user =>
 ({
   type: 'WS/FETCH_THREAD_CHAT_MESSAGES',
   payload: {

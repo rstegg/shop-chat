@@ -4,13 +4,16 @@ module.exports = {
     "es6": true,
     "node": true
   },
-  "extends": [ "eslint:recommended" ],
+  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
         "jsx": true
     }
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "array-bracket-spacing": [ "error", "always" ],
     "arrow-spacing": [ "error" ],
@@ -23,7 +26,6 @@ module.exports = {
     "indent": [ "error", 2 ],
     "keyword-spacing": [ "error" ],
     "linebreak-style": [ "error", "unix" ],
-    "max-len": [ "error" ],
     "no-else-return": [ "error" ],
     "no-empty-function": [ "error" ],
     "no-lone-blocks": [ "error" ],
@@ -41,6 +43,7 @@ module.exports = {
     "object-curly-spacing": [ "error", "always" ],
     "quotes": [ "error", "single" ],
     "semi": [ "error", "never" ],
-    "yoda": [ "error" ]
+    "yoda": [ "error" ],
+    "react/prop-types": 0,
   }
 };

@@ -17,7 +17,6 @@ const paths = {
 }
 
 const alias = {
-   'react-native': 'react-native-web',
    'actions': path.join(paths.src, 'js/redux/actions'),
    'components': path.join(paths.src, 'js/components'),
    'elements': path.join(paths.src, 'js/elements'),
@@ -53,6 +52,7 @@ if (process.env.npm_lifecycle_event === 'bundle') {
   module.exports = merge(common, {
     devtool: 'cheap-module-source-map',
     devServer: {
+      historyApiFallback: true,
       publicPath: '/',
       contentBase: paths.dev,
       port: 3000,

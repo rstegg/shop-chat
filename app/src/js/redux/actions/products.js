@@ -196,7 +196,7 @@ export const switchToProductUser = () =>
   type: 'SWITCH_TO_PRODUCT_USER'
 })
 
-export const shareProduct = ({name, email, message, productId}, url, user) =>
+export const shareProduct = ({ name, email, message, productId }, url, user) =>
 ({
   type: 'SHARE_PRODUCT',
   payload: {

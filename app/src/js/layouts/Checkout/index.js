@@ -6,16 +6,16 @@ import { productRemoveFromCart } from 'actions/orders'
 
 import CheckoutNav from './nav'
 
-const Checkout = ({user, cart, productRemoveFromCart, children}) =>
+const Checkout = ({ user, cart, productRemoveFromCart, children }) =>
   !user.isAuthenticated ?
     <Redirect to='/' />
   :
-  <div className='checkout'>
-    <CheckoutNav cart={cart} productRemoveFromCart={productRemoveFromCart} />
-    {children}
-  </div>
+    <div className='checkout'>
+      <CheckoutNav cart={cart} productRemoveFromCart={productRemoveFromCart} />
+      {children}
+    </div>
 
-const mapStateToProps = ({user, orders}) =>
+const mapStateToProps = ({ user, orders }) =>
 ({
   user,
   cart: orders.cart

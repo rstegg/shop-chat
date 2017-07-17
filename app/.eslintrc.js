@@ -5,11 +5,11 @@ module.exports = {
     "node": true
   },
   "extends": [ "eslint:recommended", "plugin:react/recommended" ],
+  "parser": "babel-eslint",
   "parserOptions": {
-    "sourceType": "module",
     "ecmaFeatures": {
-        "jsx": true,
-        "experimentalObjectRestSpread": true
+      "jsx": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "plugins": [

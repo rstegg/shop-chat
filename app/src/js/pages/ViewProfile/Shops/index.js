@@ -27,5 +27,5 @@ const mapStateToProps = ({ user, profile }) =>
 })
 
 export default connect(
-  mapStateToProps,
+  mapStateToProps
 )(Shops)

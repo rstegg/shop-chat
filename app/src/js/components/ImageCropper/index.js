@@ -17,16 +17,16 @@ class ImageCropper extends Component {
       return null
     }
     return (
-      <Modal open={isOpen} style={{textAlign: 'center'}}>
+      <Modal open={isOpen} style={{ textAlign: 'center' }}>
         <Modal.Header>Position and size your photo</Modal.Header>
         <Modal.Content>
           <AvatarEditor
-            ref={ref => this.editor = ref}
+            ref={ref => { this.editor = ref }}
             image={image.preview}
             width={300}
             height={300}
             border={50}
-            color={[255, 255, 255, 0.6]}
+            color={[ 255, 255, 255, 0.6 ]}
             scale={1}
           />
         </Modal.Content>

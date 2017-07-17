@@ -7,7 +7,7 @@ import ProfileChat from 'components/Chat'
 import GridLayout from 'layouts/Grid'
 import Shops from './Shops'
 
-const Avatar = ({image}) =>
+const Avatar = ({ image }) =>
   <div className='ui image shop--image avatar-image'>
     <Image src={image || '/images/placeholder.png'} />
   </div>

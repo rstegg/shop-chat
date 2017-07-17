@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { pipe, path } from 'ramda'
@@ -28,37 +28,49 @@ import { validate } from './validators'
 
 import isMobile from 'utils/isMobile'
 
-const getPrimaryRGB = path(['themes', 'primary'])
-const getSecondaryRGB = path(['themes', 'secondary'])
-const getBackgroundRGB = path(['themes', 'background'])
+const getBackgroundRGB = path([ 'themes', 'background' ])
 
-const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : 'rgba(255,255,255,1)'
-
-const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
-const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
+const toRGBStyle = rgba => rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : 'rgba(255,255,255,1)'
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 
-class AdminGridView extends Component {
-  render() {
-    const {
-      user,
-      product,
-      editProduct,
-      editProductField,
-      openEditProductCropper,
-      closeEditProductCropper,
-      uploadEditProductImage,
-      onUploadEditProductImageFailure,
-    } = this.props
-    return (
-    isMobile ?
-      <div className='edit-product-container' style={{background: getBackground(product)}}>
+const AdminGridView = ({
+  user,
+  product,
+  editProduct,
+  editProductField,
+  openEditProductCropper,
+  closeEditProductCropper,
+  uploadEditProductImage,
+  onUploadEditProductImageFailure,
+}) =>
+  isMobile ?
+    <div className='edit-product-container' style={{ background: getBackground(product) }}>
+        {product.isCropperOpen ?
+          <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
+          :
+          <AvatarField className='product-image-underlay' product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+        }
+      <div style={{ display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+        <ProductImageSegment>
+          <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+        </ProductImageSegment>
+        <ProductImageSegment>
+          <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+        </ProductImageSegment>
+        <ProductImageSegment>
+          <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+        </ProductImageSegment>
+      </div>
+    </div>
+  :
+    <ProductSidebar>
+      <div className='edit-product-container' style={{ background: getBackground(product) }}>
           {product.isCropperOpen ?
             <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
             :
             <AvatarField className='product-image-underlay' product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
           }
-        <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{ display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
           <ProductImageSegment>
             <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
           </ProductImageSegment>
@@ -70,38 +82,15 @@ class AdminGridView extends Component {
           </ProductImageSegment>
         </div>
       </div>
-      :
-      <ProductSidebar>
-        <div className='edit-product-container' style={{background: getBackground(product)}}>
-            {product.isCropperOpen ?
-              <ImageCropper isOpen={product.isCropperOpen} image={product.imagePreview} uploadImage={img => uploadEditProductImage(img, product, user)} closeCropper={closeEditProductCropper} />
-              :
-              <AvatarField className='product-image-underlay' product={product} openEditProductCropper={img => openEditProductCropper(img[0])} onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-            }
-          <div style={{display: 'flex', width: '100%', pointerEvents: 'none', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-            <ProductImageSegment>
-              <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </ProductImageSegment>
-            <ProductImageSegment>
-              <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </ProductImageSegment>
-            <ProductImageSegment>
-              <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </ProductImageSegment>
-          </div>
-        </div>
-        <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
-      </ProductSidebar>
-    )
-  }
-}
+      <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{ position: 'absolute', left: '25px' }} />} />
+    </ProductSidebar>
 
 const ConnectedAdminGridView = reduxForm({
   form: 'editProduct',
   validate
 })(AdminGridView)
 
-const mapStateToProps = ({user, products}) =>
+const mapStateToProps = ({ user, products }) =>
 ({
   user,
   product: products.current,
@@ -120,5 +109,5 @@ const mapDispatchToProps = dispatch =>
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ConnectedAdminGridView)

@@ -13,10 +13,10 @@ import UserGalleryView from './Layout/Gallery/AsUser'
 
 import { fetchSingleProduct } from 'actions/products'
 
-const getName = path(['name'])
-const getSlug = path(['slug'])
-const getProductId = path(['productId'])
-const getShopSlug = path(['shop', 'slug'])
+const getName = path([ 'name' ])
+const getSlug = path([ 'slug' ])
+const getProductId = path([ 'productId' ])
+const getShopSlug = path([ 'shop', 'slug' ])
 
 class ViewProduct extends Component {
   componentWillMount() {
@@ -29,7 +29,6 @@ class ViewProduct extends Component {
     const { user, product, fetchSingleProduct, redirectToNewProduct, isFetchingProduct } = this.props
     const { match: { params } } = nextProps
     if (getSlug(product) !== getProductId(params) && isFetchingProduct !== getProductId(params)) {
-      console.log("[ViewProduct/componentWillUpdate] If you see this in console, then this block might be useful")
       fetchSingleProduct(params.productId, params.shopId, user)
     }
     const nextProduct = nextProps.product
@@ -44,30 +43,30 @@ class ViewProduct extends Component {
     }
     if (product.isAdmin) {
       const adminViewProps = { product, user }
-      switch(product.layout) {
-        case 'image':
-          return <AdminImageView {...adminViewProps} />
-        case 'gallery':
-          return <AdminGalleryView {...adminViewProps} />
-        case 'grid':
-        default:
-          return <AdminGridView {...adminViewProps} />
+      switch (product.layout) {
+      case 'image':
+        return <AdminImageView {...adminViewProps} />
+      case 'gallery':
+        return <AdminGalleryView {...adminViewProps} />
+      case 'grid':
+      default:
+        return <AdminGridView {...adminViewProps} />
       }
     }
     const userViewProps = { product, user }
-    switch(product.layout) {
-      case 'image':
-        return <UserImageView {...userViewProps} />
-      case 'gallery':
-        return <UserGalleryView {...userViewProps} />
-      case 'grid':
-      default:
-        return <UserGridView {...userViewProps} />
+    switch (product.layout) {
+    case 'image':
+      return <UserImageView {...userViewProps} />
+    case 'gallery':
+      return <UserGalleryView {...userViewProps} />
+    case 'grid':
+    default:
+      return <UserGridView {...userViewProps} />
     }
   }
 }
 
-const mapStateToProps = ({products, shops, orders, user}) =>
+const mapStateToProps = ({ products, shops, orders, user }) =>
 ({
   product: products.current,
   isFetchingProduct: products.isFetching,

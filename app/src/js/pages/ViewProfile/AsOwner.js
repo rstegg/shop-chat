@@ -15,38 +15,38 @@ import { editProfile, switchToProfileUser, openProfileCropper, closeProfileCropp
 import GridLayout from 'layouts/Grid'
 import Shops from './Shops'
 
-const Avatar = ({user, profile, openProfileCropper, onUploadProfileImageFailure}) =>
+const Avatar = ({ user, profile, openProfileCropper, onUploadProfileImageFailure }) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openProfileCropper} onDropRejected={onUploadProfileImageFailure}>
     {profile.imageLoading && <Dimmer active><Loader /></Dimmer>}
     <Image src={user.image || profile.image || '/images/placeholder.png'} />
     {profile.imageError && <Label basic color='red'>Invalid image</Label>}
   </Dropzone>
 
-const NameField = ({isEditing, user, editProfile, editProfileField}) =>
+const NameField = ({ isEditing, user, editProfile, editProfileField }) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Name'
     name='username'
     onClick={() => editProfileField('username')} onClickOutside={() => editProfileField(null)}
-    onSubmit={username => editProfile({...user, username}, user)}>
+    onSubmit={username => editProfile({ ...user, username }, user)}>
     <Header as='h1'>{user.username}</Header>
   </EditorField>
 
-const BioField = ({isEditing, user, editProfile, editProfileField}) =>
+const BioField = ({ isEditing, user, editProfile, editProfileField }) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Bio' name='bio'
     onClick={() => editProfileField('bio')} onClickOutside={() => editProfileField(null)}
-    onSubmit={bio => editProfile({...user, bio}, user)}>
+    onSubmit={bio => editProfile({ ...user, bio }, user)}>
     <Header as='h4'>{user.bio || 'Add a bio'}</Header>
   </EditorField>
 
-const WebsiteField = ({isEditing, user, editProfile, editProfileField}) =>
+const WebsiteField = ({ isEditing, user, editProfile, editProfileField }) =>
   <EditorField
     isEditing={isEditing}
     placeholder='Website' name='website'
     onClick={() => editProfileField('website')} onClickOutside={() => editProfileField(null)}
-    onSubmit={website => editProfile({...user, website}, user)}>
+    onSubmit={website => editProfile({ ...user, website }, user)}>
     <Header as='h4'>{user.website || 'Website'}</Header>
   </EditorField>
 
@@ -94,7 +94,7 @@ const ConnectedAdminView = reduxForm({
   // validate
 })(AdminView)
 
-const mapStateToProps = ({user, profile}) =>
+const mapStateToProps = ({ user, profile }) =>
 ({
   user,
   profile,

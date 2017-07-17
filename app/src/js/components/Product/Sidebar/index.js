@@ -7,9 +7,9 @@ import ProductLayoutMenu from './LayoutMenu'
 import ProductThemeMenu from './ThemeMenu'
 
 const ProductEmptyMenu = () =>
-  <Menu vertical inverted style={{width: '100%', height: '100%'}}></Menu>
+  <Menu vertical inverted style={{ width: '100%', height: '100%' }}></Menu>
 
-const SidebarContent = ({editMode}) => {
+const SidebarContent = ({ editMode }) => {
   switch (editMode) {
   case 'layout':
     return <ProductLayoutMenu />

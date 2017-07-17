@@ -8,7 +8,7 @@ import CheckboxField from 'elements/Input/CheckboxField'
 
 import { validate } from './validators'
 
-const CreateShopForm = ({handleSubmit}) =>
+const CreateShopForm = ({ handleSubmit }) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' type='text' label='Shop name' placeholder='Name' />
     <Field component={CheckboxField} name='isPublic' label='Public' />
@@ -20,7 +20,7 @@ const ConnectedCreateShopForm = reduxForm({
   validate
 })(CreateShopForm)
 
-const mapStateToProps = ({shops}) =>
+const mapStateToProps = ({ shops }) =>
 ({
   initialValues: shops.new
 })

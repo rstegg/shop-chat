@@ -38,7 +38,7 @@ class ViewProfile extends Component {
   }
 }
 
-const mapStateToProps = ({user, profile}) =>
+const mapStateToProps = ({ user, profile }) =>
 ({
   user,
   profile,

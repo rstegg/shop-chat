@@ -3,7 +3,7 @@ export const resetLogin = () =>
   type: 'RESET_LOGIN'
 })
 
-export const onLoginSubmit = ({username, password}) =>
+export const onLoginSubmit = ({ username, password }) =>
 ({
   type: 'LOGIN_SUBMIT',
   payload: {

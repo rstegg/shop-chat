@@ -8,13 +8,12 @@ import RouterButton from 'elements/Button/RouterButton'
 
 import { fetchProducts, refreshProducts } from 'actions/products'
 
-const getId = path(['id'])
+const getId = path([ 'id' ])
 
 class Products extends Component {
   componentWillMount() {
     const { user, shop, products, refreshProducts, fetchProducts } = this.props
     refreshProducts()
-    console.log(shop);
     if (getId(shop) && products.fetchable) {
       fetchProducts(shop.id, user)
     }
@@ -22,7 +21,6 @@ class Products extends Component {
   componentDidMount() {
     const { user, shop, products, refreshProducts, fetchProducts } = this.props
     refreshProducts()
-    console.log(shop);
     if (getId(shop) && products.fetchable) {
       fetchProducts(shop.id, user)
     }
@@ -30,7 +28,6 @@ class Products extends Component {
   componentWillUpdate(nextProps) {
     const { user, shop, products, fetchProducts } = nextProps
     if (getId(shop) && products.fetchable) {
-      console.log("[ProductList/componentWillUpdate] componentWillUpdate checking necessary to fetch all products with shop.id and not shop.slug [params.shopId === shop.slug]")
       fetchProducts(getId(shop), user)
     }
   }
@@ -56,7 +53,8 @@ class Products extends Component {
     )
   }
 }
-const mapStateToProps = ({products, user, shops}) =>
+
+const mapStateToProps = ({ products, user, shops }) =>
 ({
   products,
   user,
@@ -71,5 +69,5 @@ const mapDispatchToProps = dispatch =>
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Products)

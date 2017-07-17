@@ -10,7 +10,7 @@ import { createShop, openCreateShopCropper, closeCreateShopCropper, uploadShopIm
 import ImageCropper from 'components/ImageCropper'
 import Dropzone from 'components/Dropzone'
 
-const Avatar = ({shop, openCropper, onUploadShopImageFailure}) =>
+const Avatar = ({ shop, openCropper, onUploadShopImageFailure }) =>
   <Dropzone className='ui image editable avatar-image' onDropAccepted={openCropper} onDropRejected={onUploadShopImageFailure}>
     {shop.imageLoading && <Dimmer active><Loader /></Dimmer>}
     <Image src={shop.image || '/images/productholder.png'} />
@@ -46,7 +46,7 @@ class CreateShop extends Component {
           <Card.Description>
             <CreateShopForm
               shop={shop}
-              onSubmit={values => createShop({...values, image: shop.image}, user)}
+              onSubmit={values => createShop({ ...values, image: shop.image }, user)}
             />
           </Card.Description>
         </Card.Content>
@@ -56,7 +56,7 @@ class CreateShop extends Component {
 }
 
 
-const mapStateToProps = ({user, shops}) =>
+const mapStateToProps = ({ user, shops }) =>
 ({
   user,
   shop: shops.new

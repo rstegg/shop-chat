@@ -2,7 +2,7 @@ import su from 'superagent'
 import { length, path, pipe } from 'ramda'
 const API_HOST = '/api/v1'
 
-const getUsername = path(['username'])
+const getUsername = path([ 'username' ])
 const usernameLength = pipe(getUsername, length)
 
 export const validate = values => {

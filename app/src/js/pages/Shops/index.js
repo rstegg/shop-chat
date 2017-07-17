@@ -37,7 +37,8 @@ class Shops extends Component {
     )
   }
 }
-const mapStateToProps = ({shops, user}) =>
+
+const mapStateToProps = ({ shops, user }) =>
 ({
   shops: shops.list,
   user

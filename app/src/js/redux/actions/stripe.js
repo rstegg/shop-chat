@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+
 // FETCHING
 
 export const fetchStripeCards = user =>

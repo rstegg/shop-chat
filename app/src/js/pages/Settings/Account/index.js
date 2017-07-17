@@ -8,12 +8,12 @@ import SettingsForm from './form'
 import { onSaveAccountSettings } from 'actions/account'
 
 class Settings extends Component {
-   render() {
-     const { user, onSaveAccountSettings } = this.props
-     if (!user.isAuthenticated) {
-       return <Redirect to='/' />
-     }
-     return (
+  render() {
+    const { user, onSaveAccountSettings } = this.props
+    if (!user.isAuthenticated) {
+      return <Redirect to='/' />
+    }
+    return (
       <Card>
         <Card.Content>
           <Card.Header>Account Settings</Card.Header>
@@ -26,7 +26,7 @@ class Settings extends Component {
   }
 }
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

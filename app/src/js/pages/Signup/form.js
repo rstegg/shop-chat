@@ -6,7 +6,7 @@ import InputField from 'elements/Input/InputField'
 
 import { validate, asyncValidate } from './validators'
 
-const SignupForm = ({handleSubmit, submitting, error}) =>
+const SignupForm = ({ handleSubmit, submitting }) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' label='Name' placeholder='Name' />
     <Field component={InputField} name='username' label='Username' placeholder='Username' />
@@ -19,5 +19,5 @@ export default reduxForm({
   form: 'signup',
   validate,
   asyncValidate,
-  asyncBlurFields: ['username', 'email']
+  asyncBlurFields: [ 'username', 'email' ]
 })(SignupForm)

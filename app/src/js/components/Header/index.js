@@ -10,18 +10,18 @@ import HeaderNavLabel from 'elements/Label/HeaderNavLabel'
 
 import isMobile from 'utils/isMobile'
 
-const ProfileButton = ({username, image}) =>
+const ProfileButton = ({ username, image }) =>
   <Label as={NavLink} to='#' basic image>
     <img src={image || '/images/placeholder.png'} alt={username} /> {username}
   </Label>
 
-const MobileProfileButton = ({image}) =>
+const MobileProfileButton = ({ image }) =>
   <Label basic image>
     <img src={image || '/images/placeholder.png'} alt={image || 'profile'} />
   </Label>
 
 
-const Header = ({user, logout, location}) =>
+const Header = ({ user, logout, location }) =>
   <Menu fluid fixed='top' borderless className='header__container'>
     <Menu.Item header>
       <NavLink to='/'>Kuwau</NavLink>
@@ -35,7 +35,7 @@ const Header = ({user, logout, location}) =>
             <Dropdown trigger={isMobile ? <MobileProfileButton image={user.image} /> : <ProfileButton username={user.username} image={user.image} />} icon={null} pointing='top right'>
               <Dropdown.Menu>
                 <Dropdown.Item as={NavLink} to={`/user/${user.username}`} text='Profile' active={location.pathname === `/user/${user.username}`} />
-                <Dropdown.Item as={NavLink} to={`/settings/account`} text='Settings' active={location.pathname.startsWith('/settings/')} />
+                <Dropdown.Item as={NavLink} to='/settings/account' text='Settings' active={location.pathname.startsWith('/settings/')} />
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={logout} text='Sign Out' />
               </Dropdown.Menu>
@@ -58,14 +58,14 @@ const Header = ({user, logout, location}) =>
       }
   </Menu>
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  logout:       () => dispatch({type: 'LOGOUT'})
+  logout:       () => dispatch({ type: 'LOGOUT' })
 })
 
 export default withRouter(connect(

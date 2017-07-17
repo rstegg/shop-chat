@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Card, Grid, Segment } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form'
@@ -38,158 +38,147 @@ import { validate } from './validators'
 
 import isMobile from 'utils/isMobile'
 
-const getPrimaryRGB = path(['themes', 'primary'])
-const getSecondaryRGB = path(['themes', 'secondary'])
-const getBackgroundRGB = path(['themes', 'background'])
+const getBackgroundRGB = path([ 'themes', 'background' ])
 
-const toRGBStyle = rgba => !!rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : 'rgba(255,255,255,1)'
-
-const getPrimary = pipe(getPrimaryRGB, toRGBStyle)
-const getSecondary = pipe(getSecondaryRGB, toRGBStyle)
+const toRGBStyle = rgba => rgba ? `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})` : 'rgba(255,255,255,1)'
 const getBackground = pipe(getBackgroundRGB, toRGBStyle)
 
-class AdminGridView extends Component {
-  render() {
-    const {
-      user,
-      product,
-      editProduct,
-      editProductField,
-      addGalleryImage,
-      deleteProductGalleryImage,
-      uploadGalleryProductImage,
-      onUploadGalleryProductImageFailure,
-      openAddGalleryProductCropper,
-      closeAddGalleryProductCropper,
-      openEditProductCropper,
-      closeEditProductCropper,
-      uploadEditProductImage,
-      onUploadEditProductImageFailure,
-    } = this.props
-    return (
-    isMobile ?
-      <div className='edit-product-container' style={{background: getBackground(product)}}>
-        <Grid celled='internally'>
-          <Grid.Column width={8} stretched>
-            <Segment basic style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+const AdminGridView = ({
+  user,
+  product,
+  editProduct,
+  editProductField,
+  addGalleryImage,
+  deleteProductGalleryImage,
+  uploadGalleryProductImage,
+  onUploadGalleryProductImageFailure,
+  openAddGalleryProductCropper,
+  closeAddGalleryProductCropper,
+  openEditProductCropper,
+  closeEditProductCropper,
+  uploadEditProductImage,
+  onUploadEditProductImageFailure,
+}) =>
+  isMobile ?
+    <div className='edit-product-container' style={{ background: getBackground(product) }}>
+      <Grid celled='internally'>
+        <Grid.Column width={8} stretched>
+          <Segment basic style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <ProductGallerySegment>
+              {product.isCropperOpen ?
+                <ImageCropper
+                  isOpen={product.isCropperOpen}
+                  image={product.imagePreview}
+                  uploadImage={img => uploadEditProductImage(img, product, user)}
+                  closeCropper={closeEditProductCropper} />
+                :
+                <AvatarField
+                  product={product}
+                  openEditProductCropper={img => openEditProductCropper(img[0])}
+                  onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+              }
+              {product.isGalleryCropperOpen ?
+                <ImageCropper
+                  isGalleryImage={true}
+                  isOpen={product.isGalleryCropperOpen}
+                  image={product.imagePreview}
+                  uploadImage={img => uploadGalleryProductImage(img, product.galleryActiveIndex, product, user)}
+                  closeCropper={closeAddGalleryProductCropper} />
+                :
+                null
+              }
+
+            </ProductGallerySegment>
+            <Card.Group itemsPerRow={4}>
+              { !!product.gallery && product.gallery.map((image, i) =>
+                <GalleryAvatarField key={`gallery-${i}`} index={i} product={product}
+                  onDeleteGalleryImage={index => deleteProductGalleryImage(index, product, user)}
+                  openAddGalleryProductCropper={img => openAddGalleryProductCropper(img[0], i)}
+                  onUploadGalleryProductImageFailure={onUploadGalleryProductImageFailure} />)}
+
+              { !!product.gallery && product.gallery.length < 4 ? <AddGalleryImageButton addGalleryImage={() => addGalleryImage()} /> : null}
+            </Card.Group>
+          </Segment>
+        </Grid.Column>
+        <Grid.Column width={8} stretched>
+          <ProductGallerySegment>
+            <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+          </ProductGallerySegment>
+          <ProductGallerySegment>
+            <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+          </ProductGallerySegment>
+          <ProductGallerySegment>
+            <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+          </ProductGallerySegment>
+        </Grid.Column>
+      </Grid>
+    </div>
+  :
+    <div>
+      <ProductSidebar>
+        <div className='edit-product-container' style={{ background: getBackground(product) }}>
+          <Grid celled='internally'>
+            <Grid.Column width={8} stretched>
+              <Segment basic style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <ProductGallerySegment>
+                  {product.isCropperOpen ?
+                    <ImageCropper
+                      isOpen={product.isCropperOpen}
+                      image={product.imagePreview}
+                      uploadImage={img => uploadEditProductImage(img, product, user)}
+                      closeCropper={closeEditProductCropper} />
+                    :
+                    <AvatarField
+                      product={product}
+                      openEditProductCropper={img => openEditProductCropper(img[0])}
+                      onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
+                  }
+                  {product.isGalleryCropperOpen ?
+                    <ImageCropper
+                      isGalleryImage={true}
+                      isOpen={product.isGalleryCropperOpen}
+                      image={product.imagePreview}
+                      uploadImage={img => uploadGalleryProductImage(img, product.galleryActiveIndex, product, user)}
+                      closeCropper={closeAddGalleryProductCropper} />
+                    :
+                    null
+                  }
+
+                </ProductGallerySegment>
+                <Card.Group itemsPerRow={4}>
+                  { !!product.gallery && product.gallery.map((image, i) =>
+                    <GalleryAvatarField key={`gallery-${i}`} index={i} product={product}
+                      onDeleteGalleryImage={index => deleteProductGalleryImage(index, product, user)}
+                      openAddGalleryProductCropper={img => openAddGalleryProductCropper(img[0], i)}
+                      onUploadGalleryProductImageFailure={onUploadGalleryProductImageFailure} />)}
+
+                  { !!product.gallery && product.gallery.length < 4 ? <AddGalleryImageButton addGalleryImage={() => addGalleryImage()} /> : null}
+                </Card.Group>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={8} stretched>
               <ProductGallerySegment>
-                {product.isCropperOpen ?
-                  <ImageCropper
-                    isOpen={product.isCropperOpen}
-                    image={product.imagePreview}
-                    uploadImage={img => uploadEditProductImage(img, product, user)}
-                    closeCropper={closeEditProductCropper} />
-                  :
-                  <AvatarField
-                    product={product}
-                    openEditProductCropper={img => openEditProductCropper(img[0])}
-                    onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-                }
-                {product.isGalleryCropperOpen ?
-                  <ImageCropper
-                    isGalleryImage={true}
-                    isOpen={product.isGalleryCropperOpen}
-                    image={product.imagePreview}
-                    uploadImage={img => uploadGalleryProductImage(img, product.galleryActiveIndex, product, user)}
-                    closeCropper={closeAddGalleryProductCropper} />
-                  :
-                  null
-                }
-
+                <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
               </ProductGallerySegment>
-              <Card.Group itemsPerRow={4}>
-                { !!product.gallery && product.gallery.map((image, i) =>
-                  <GalleryAvatarField key={`gallery-${i}`} index={i} product={product}
-                    onDeleteGalleryImage={index => deleteProductGalleryImage(index, product, user)}
-                    openAddGalleryProductCropper={img => openAddGalleryProductCropper(img[0], i)}
-                    onUploadGalleryProductImageFailure={onUploadGalleryProductImageFailure} />)}
-
-                { !!product.gallery && product.gallery.length < 4 ? <AddGalleryImageButton addGalleryImage={() => addGalleryImage()} /> : null}
-              </Card.Group>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column width={8} stretched>
-            <ProductGallerySegment>
-              <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </ProductGallerySegment>
-            <ProductGallerySegment>
-              <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </ProductGallerySegment>
-            <ProductGallerySegment>
-              <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-            </ProductGallerySegment>
-          </Grid.Column>
-        </Grid>
-      </div>
-      :
-      <div>
-        <ProductSidebar>
-          <div className='edit-product-container' style={{background: getBackground(product)}}>
-            <Grid celled='internally'>
-              <Grid.Column width={8} stretched>
-                <Segment basic style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                  <ProductGallerySegment>
-                    {product.isCropperOpen ?
-                      <ImageCropper
-                        isOpen={product.isCropperOpen}
-                        image={product.imagePreview}
-                        uploadImage={img => uploadEditProductImage(img, product, user)}
-                        closeCropper={closeEditProductCropper} />
-                      :
-                      <AvatarField
-                        product={product}
-                        openEditProductCropper={img => openEditProductCropper(img[0])}
-                        onUploadEditProductImageFailure={onUploadEditProductImageFailure} />
-                    }
-                    {product.isGalleryCropperOpen ?
-                      <ImageCropper
-                        isGalleryImage={true}
-                        isOpen={product.isGalleryCropperOpen}
-                        image={product.imagePreview}
-                        uploadImage={img => uploadGalleryProductImage(img, product.galleryActiveIndex, product, user)}
-                        closeCropper={closeAddGalleryProductCropper} />
-                      :
-                      null
-                    }
-
-                  </ProductGallerySegment>
-                  <Card.Group itemsPerRow={4}>
-                    { !!product.gallery && product.gallery.map((image, i) =>
-                      <GalleryAvatarField key={`gallery-${i}`} index={i} product={product}
-                        onDeleteGalleryImage={index => deleteProductGalleryImage(index, product, user)}
-                        openAddGalleryProductCropper={img => openAddGalleryProductCropper(img[0], i)}
-                        onUploadGalleryProductImageFailure={onUploadGalleryProductImageFailure} />)}
-
-                    { !!product.gallery && product.gallery.length < 4 ? <AddGalleryImageButton addGalleryImage={() => addGalleryImage()} /> : null}
-                  </Card.Group>
-                </Segment>
-              </Grid.Column>
-              <Grid.Column width={8} stretched>
-                <ProductGallerySegment>
-                  <NameField isEditing={product.focused === 'name'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </ProductGallerySegment>
-                <ProductGallerySegment>
-                  <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </ProductGallerySegment>
-                <ProductGallerySegment>
-                  <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
-                </ProductGallerySegment>
-              </Grid.Column>
-            </Grid>
-          </div>
-          <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{position: 'absolute', left: '25px'}} />} />
-        </ProductSidebar>
-      </div>
-    )
-  }
-}
+              <ProductGallerySegment>
+                <PriceField isEditing={product.focused === 'price'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </ProductGallerySegment>
+              <ProductGallerySegment>
+                <DescriptionField isEditing={product.focused === 'description'} product={product} user={user} editProduct={editProduct} editProductField={editProductField} />
+              </ProductGallerySegment>
+            </Grid.Column>
+          </Grid>
+        </div>
+        <ProductAdminMenu PublicField={<PublicField product={product} user={user} editProduct={editProduct} style={{ position: 'absolute', left: '25px' }} />} />
+      </ProductSidebar>
+    </div>
 
 const ConnectedAdminGridView = reduxForm({
   form: 'editProduct',
   validate
 })(AdminGridView)
 
-const mapStateToProps = ({user, products}) =>
+const mapStateToProps = ({ user, products }) =>
 ({
   user,
   product: products.current,
@@ -214,5 +203,5 @@ const mapDispatchToProps = dispatch =>
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ConnectedAdminGridView)

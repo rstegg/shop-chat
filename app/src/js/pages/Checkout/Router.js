@@ -6,10 +6,12 @@ import ProcessedCheckout from './Processed'
 
 import CheckoutLayout from 'layouts/Checkout'
 
-export default () =>
+const CheckoutRouter = () =>
   <CheckoutLayout>
     <Switch>
       <Route exact path='/checkout/review' component={ReviewCheckout} />
       <Route exact path='/checkout/processed' component={ProcessedCheckout} />
     </Switch>
   </CheckoutLayout>
+
+export default CheckoutRouter

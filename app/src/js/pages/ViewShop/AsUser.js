@@ -9,13 +9,13 @@ import ShopChat from 'components/Chat'
 
 import GridLayout from 'layouts/Grid'
 
-const Avatar = ({image}) =>
+const Avatar = ({ image }) =>
   <div className='ui image shop--image avatar-image'>
     <Image src={image || '/images/productholder.png'} />
   </div>
 
-const getUsername = path(['user', 'username'])
-const getUserImage = path(['user', 'image'])
+const getUsername = path([ 'user', 'username' ])
+const getUserImage = path([ 'user', 'image' ])
 
 const UserView = ({
   shop,

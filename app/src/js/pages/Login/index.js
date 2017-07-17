@@ -36,7 +36,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user,
 })

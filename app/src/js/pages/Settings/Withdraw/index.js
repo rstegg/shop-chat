@@ -31,7 +31,7 @@ class WithdrawSettings extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button basic onClick={openWithdrawBank}>Add a bank</Button>
             <Button basic onClick={openWithdrawBitcoin}>Add bitcoin</Button>
           </div>
@@ -41,7 +41,7 @@ class WithdrawSettings extends Component {
   }
 }
 
-const mapStateToProps = ({user, bank, bitcoin}) =>
+const mapStateToProps = ({ user, bank, bitcoin }) =>
 ({
   user,
   bank,

@@ -39,7 +39,7 @@ class Signup extends Component {
 }
 
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

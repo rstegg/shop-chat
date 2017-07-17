@@ -21,7 +21,6 @@ class ViewShop extends Component {
   componentWillUpdate(nextProps) {
     const { match: { params }, user, shop, fetchSingleShop, isFetching } = nextProps
     if (getShopSlug(shop) !== getShopId(params) && isFetching !== getShopId(params)) {
-      console.log("[ViewShop/componentWillUpdate] If you see this in console, then this block is useful")
       fetchSingleShop(params.shopId, user)
     }
   }
@@ -39,7 +38,7 @@ class ViewShop extends Component {
   }
 }
 
-const mapStateToProps = ({shops, user}) =>
+const mapStateToProps = ({ shops, user }) =>
 ({
   shop: shops.current,
   isFetching: shops.isFetching,

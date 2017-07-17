@@ -6,7 +6,7 @@ import InputField from './InputField'
 import onClickOutside from 'components/OnClickOutside'
 
 class EditorField extends Component {
-  handleClickOutside = evt => {
+  handleClickOutside = () => {
     this.props.onClickOutside()
   }
   render() {
@@ -24,8 +24,8 @@ class EditorField extends Component {
           onKeyUp={e => {
             if (e.keyCode === 13) {
               onSubmit(e.target.value)
-            }}
-          }
+            }
+          }}
           onClick={v => onSubmit(v)}
           pointing='left'
           className='ignore-onclickoutside'

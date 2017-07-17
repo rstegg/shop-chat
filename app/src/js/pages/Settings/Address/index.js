@@ -8,12 +8,12 @@ import AddressForm from './form'
 import { onSaveAddressSettings } from 'actions/address'
 
 class Address extends Component {
-   render() {
-     const { user, onSaveAddressSettings } = this.props
-     if (!user.isAuthenticated) {
-       return <Redirect to='/' />
-     }
-     return (
+  render() {
+    const { user, onSaveAddressSettings } = this.props
+    if (!user.isAuthenticated) {
+      return <Redirect to='/' />
+    }
+    return (
       <Card>
         <Card.Content>
           <Card.Header>Shipping Address</Card.Header>
@@ -26,7 +26,7 @@ class Address extends Component {
   }
 }
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   user
 })

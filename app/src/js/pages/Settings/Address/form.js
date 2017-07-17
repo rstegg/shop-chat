@@ -10,7 +10,7 @@ import InputField from 'elements/Input/InputField'
 
 import { validate } from './validators'
 
-const DropdownField = ({ input: { value, onChange }, meta: { asyncValidating, touched, error }, label, onSubmit, placeholder, options }) =>
+const DropdownField = ({ input: { value, onChange }, meta: { touched, error }, label, onSubmit, placeholder, options }) =>
   <Form.Field>
     <Dropdown
       label={label}
@@ -28,7 +28,7 @@ const DropdownField = ({ input: { value, onChange }, meta: { asyncValidating, to
     {touched && error && <Label basic color='red' pointing>{error}</Label>}
   </Form.Field>
 
-const AddressForm = ({handleSubmit, submitting}) =>
+const AddressForm = ({ handleSubmit, submitting }) =>
   <Form onSubmit={handleSubmit}>
     <Field component={InputField} name='name' type='text' label='Full Name' placeholder='' />
     <Field component={InputField} name='line1' type='text' label='Address' placeholder='Street and number, P.O. box, c/o.' />
@@ -46,7 +46,7 @@ const ConnectedAddressForm = reduxForm({
   validate
 })(AddressForm)
 
-const mapStateToProps = ({user}) =>
+const mapStateToProps = ({ user }) =>
 ({
   initialValues: user.address
 })

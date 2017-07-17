@@ -302,7 +302,7 @@ class Dropzone extends React.Component {
       type: 'file',
       style: { display: 'none' },
       multiple,
-      ref: el => this.fileInputEl = el,
+      ref: el => { this.fileInputEl = el },
       onChange: this.onDrop
     }
 
@@ -354,7 +354,7 @@ Dropzone.defaultProps = {
   disableClick: false,
   multiple: false,
   maxSize: Infinity,
-  accept: "image/*",
+  accept: 'image/*',
   minSize: 0
 }
 

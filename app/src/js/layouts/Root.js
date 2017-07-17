@@ -7,7 +7,7 @@ import MobileMenu from './MobileMenu'
 
 import isMobile from 'utils/isMobile'
 
-const RootLayout = ({children}) =>
+const RootLayout = ({ children }) =>
   isMobile ?
     <div className='root'>
       <Header />

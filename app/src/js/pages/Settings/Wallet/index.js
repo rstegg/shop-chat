@@ -34,7 +34,7 @@ class WalletSettings extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button basic onClick={openAddCard}>Add a card</Button>
             <Button basic onClick={openAddBitcoin}>Add bitcoin</Button>
           </div>
@@ -44,7 +44,7 @@ class WalletSettings extends Component {
   }
 }
 
-const mapStateToProps = ({user, card, bitcoin}) =>
+const mapStateToProps = ({ user, card, bitcoin }) =>
 ({
   user,
   card,

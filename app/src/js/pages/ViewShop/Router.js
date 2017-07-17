@@ -7,7 +7,7 @@ import ProductList from './ProductList'
 import CreateProduct from './CreateProduct'
 import ViewProduct from './ViewProduct'
 
-export default ({match}) =>
+const ViewShopRouter = ({ match }) =>
   <ShopLayout match={match}>
     <Switch>
       <Route exact path='/shop/:shopId' component={ProductList} />
@@ -15,3 +15,5 @@ export default ({match}) =>
       <Route exact path='/shop/:shopId/product/:productId' component={ViewProduct} />
     </Switch>
   </ShopLayout>
+
+export default ViewShopRouter

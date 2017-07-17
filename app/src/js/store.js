@@ -54,7 +54,7 @@ const store = createStore(
 
 // ReduxPersist config to only cache these reducers
 const persistConfig = {
-  whitelist: ['user']
+  whitelist: [ 'user' ]
 }
 persistStore(store, persistConfig)
 

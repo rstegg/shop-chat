@@ -8,7 +8,7 @@ import AddressSettings from './Address'
 import WalletSettings from './Wallet'
 import WithdrawSettings from './Withdraw'
 
-export default () =>
+const SettingsRouter = () =>
   <SettingsLayout>
     <Switch>
       <Route exact path='/settings/account' component={AccountSettings} />
@@ -17,3 +17,5 @@ export default () =>
       <Route exact path='/settings/withdraw' component={WithdrawSettings} />
     </Switch>
   </SettingsLayout>
+
+export default SettingsRouter

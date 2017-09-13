@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const { models } = rootRequire('db')
+const models = requireDb
 const { User, Offer, Message } = models
 
 const offerAttributes = ['id', 'state', 'productName', 'price', 'sellerId']

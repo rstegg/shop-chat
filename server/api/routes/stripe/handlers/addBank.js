@@ -1,4 +1,4 @@
-const { models } = requireDb
+const models = requireDb
 const { User } = models
 const stripe = apiRequire('service/stripe')
 

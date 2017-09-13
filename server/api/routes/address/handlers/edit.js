@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Address } = models
+const { Address } = requireDb
 
 const crypto = require('crypto')
 const mailcomposer = require('mailcomposer')

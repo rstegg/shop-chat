@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Shop, User, Thread } = models
+const { Shop, User, Thread } = requireDb
 
 const { pick } = require('ramda')
 

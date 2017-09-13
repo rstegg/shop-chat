@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User, Shop, Thread } = models
+const { User, Shop, Thread } = requireDb
 const { merge, pick } = require('ramda')
 
 const threadAttributes = ['id', 'name', 'owner']

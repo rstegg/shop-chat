@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Shop } = models
+const { Shop } = requireDb
 
 const shortId = require('shortid')
 

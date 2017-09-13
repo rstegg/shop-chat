@@ -1,3 +1,4 @@
+// Redux helpers
 import { applyMiddleware, createStore, compose } from 'redux'
 // Persist store to localstorage
 import { persistStore, autoRehydrate } from 'redux-persist'
@@ -9,7 +10,7 @@ import createHistory from 'history/createBrowserHistory'
 // SocketIO
 import createSocketIoMiddleware from 'utils/redux-socket-io'
 import io from 'socket.io-client'
-const socket = io()
+const socket = io({ path: '/WSS' })
 // All actions beginning with 'WS/' will be emitted
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'WS/')
 
@@ -25,7 +26,7 @@ const epicMiddleware = createEpicMiddleware(rootEpic)
 import rootReducer from './redux/reducers'
 
 // Enable redux dev tools in development
-const composeEnhancers = process.env.NODE_ENV === 'development' ?
+const composeEnhancers = process.env.NODE_ENV !== 'production' ?
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     : compose
 

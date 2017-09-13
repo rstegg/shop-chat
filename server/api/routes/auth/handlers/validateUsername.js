@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 
 module.exports = (req, res) => {
     User

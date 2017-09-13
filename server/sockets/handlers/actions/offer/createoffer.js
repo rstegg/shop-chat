@@ -1,4 +1,4 @@
-const { models } = rootRequire('db')
+const models = requireDb
 const { Message, User, Offer, Product } = models
 
 const { merge, pick } = require('ramda')

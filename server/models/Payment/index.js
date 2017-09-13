@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) =>
-  sequelize.define('payments', {
+module.exports = (sequelize, DataTypes) => {
+  const Payment = sequelize.define('payment', {
     processor: {
       type: DataTypes.STRING,
       allowNull: false
@@ -31,13 +31,12 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: true
       // allowedValues: ['authorize', 'capture', 'refund', 'cancel', 'void']
     },
-  }, {
-    freezeTableName: true,
-    classMethods: {
-      associate () {
-        this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasManu(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        // this.hasMany(sequelize.models['transactions'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      }
-    }
   })
+
+  Payment.associate = ({ User }) => {
+    Payment.belongsTo(User)
+    // this.hasMany(sequelize.models['transactions'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+  }
+
+  return Payment
+}

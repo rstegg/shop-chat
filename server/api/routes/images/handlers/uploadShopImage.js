@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Shop } = models
+const { Shop } = requireDb
 
 module.exports = (req, res) =>
   Shop.update(

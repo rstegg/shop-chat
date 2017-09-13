@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) =>
-  sequelize.define('addresses', {
+module.exports = (sequelize, DataTypes) => {
+  const Address = sequelize.define('address', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -32,12 +32,11 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    freezeTableName: true,
-    classMethods: {
-      associate () {
-        this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasMany(sequelize.models['shippings'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      }
-    }
   })
+
+  Address.associate = ({ User, Shipping }) => {
+    Address.belongsTo(User)
+    Address.hasMany(Shipping)
+  }
+  return Address
+}

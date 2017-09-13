@@ -1,4 +1,4 @@
-const { models } = rootRequire('db')
+const models = requireDb
 const { User, Message } = models
 
 const userAttributes = ['id', 'username', 'image']

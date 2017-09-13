@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Shop, User } = models
+const { Shop, User } = requireDb
 
 module.exports = (req, res) =>
   Shop.findAll({where: { userId: req.user.id }})

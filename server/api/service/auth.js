@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 
 const jwt = require('jsonwebtoken')
 
@@ -20,7 +19,7 @@ const localStrategy = new LocalStrategy(
         : !user.validPassword(password) ? done(null, false, { message: 'Incorrect password' })
         : done(null, user)
       )
-      .catch(err => done(null, false, { message: 'Incorrect username or password' }))
+      .catch(err => done(err))
 )
 
 const jwtOptions = {}

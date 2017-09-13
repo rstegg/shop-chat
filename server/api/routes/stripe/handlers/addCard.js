@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 const stripe = apiRequire('service/stripe')
 
 const { allPass, path, pick, pipe, merge, isNil } = require('ramda')

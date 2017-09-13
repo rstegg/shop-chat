@@ -10,7 +10,7 @@ import { Card, Comment, Message } from 'semantic-ui-react'
 import ThreadChatForm from './form'
 import ThreadChatMessages from './Log'
 
-import { sendThreadChatMessage, fetchThreadChatMessages, joinChatThread, leaveChatThread } from 'actions/chat'
+import { sendThreadChatMessage, joinChatThread, leaveChatThread } from 'actions/chat'
 
 const getThreadId = path([ 'thread', 'id' ])
 const getMessages = path([ 'messages' ])
@@ -88,7 +88,6 @@ const mapStateToProps = ({ user, chat }) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchThreadChatMessages: user => dispatch(fetchThreadChatMessages(user)),
   sendThreadChatMessage: (msg, threadId, user) => dispatch(sendThreadChatMessage(msg, threadId, user)),
   joinChatThread: (threadId, user) => dispatch(joinChatThread(threadId, user)),
   leaveChatThread: (threadId, user) => dispatch(leaveChatThread(threadId, user)),

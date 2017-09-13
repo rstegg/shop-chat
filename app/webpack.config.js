@@ -56,7 +56,17 @@ if (process.env.npm_lifecycle_event === 'bundle') {
       publicPath: '/',
       contentBase: paths.dev,
       port: 3000,
-      hot: true
+      hot: true,
+      proxy: {
+        '/api/v1': {
+          target: 'http://localhost:3030',
+          secure: false
+        },
+        '/WSS': {
+          target: 'http://localhost:3030',
+          secure: false
+        },
+      }
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -65,8 +75,8 @@ if (process.env.npm_lifecycle_event === 'bundle') {
     module: {
       rules: [
         { test: /\.jsx?$/, include: paths.src, enforce: 'pre', use: [{ loader: 'eslint-loader', options: { emitWarning: true } }] },
-        { loader: 'file-loader', exclude: fileLoaderExcluded, options: { name: 'static/media/[name].[hash:8].[ext]' } },
-        { test: urlLoaderTest, loader: 'url-loader', options: { limit: 10000, name: 'static/media/[name].[hash:8].[ext]' } },
+        { loader: 'file-loader', exclude: fileLoaderExcluded, options: { name: '/static/media/[name].[hash:8].[ext]' } },
+        { test: urlLoaderTest, loader: 'url-loader', options: { limit: 10000, name: '/static/media/[name].[hash:8].[ext]' } },
         { test: /\.css$/, use: [ 'style-loader',
             { loader: 'css-loader', options: { importLoaders: 1, } },
             { loader: 'postcss-loader', options: { ident: 'postcss', plugins: postcssPlugins } }

@@ -1,5 +1,6 @@
-module.exports = (sequelize, DataTypes) =>
-  sequelize.define('shippings', {
+module.exports = (sequelize, DataTypes) => {
+
+  const Shipping = sequelize.define('shipping', {
     carrier: {
       type: DataTypes.STRING,
       allowNull: true
@@ -39,12 +40,13 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    freezeTableName: true,
-    classMethods: {
-      associate () {
-        this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.belongsTo(sequelize.models['addresses'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      }
-    }
   })
+
+  Shipping.associate = ({ User, Address }) => {
+    Shipping.belongsTo(User)
+    Shipping.belongsTo(Address)
+  }
+
+  return Shipping
+
+}

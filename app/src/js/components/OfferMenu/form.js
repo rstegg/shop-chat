@@ -29,7 +29,7 @@ const CurrencyField = ({ input, meta: { touched, error } }) =>
     {touched && error && <Label basic color='red' pointing='left' floating  style={{ top: '45%' }}>{error}</Label>}
   </Form.Field>
 
-const SocialMenuForm = ({ handleSubmit, products }) =>
+const OfferMenuForm = ({ handleSubmit, products }) =>
   <Form onSubmit={handleSubmit}>
     {length(products) && <Field component={SelectField} name='productId' label='Product' placeholder='Product' options={createOptions(products)} />}
     <Field component={CurrencyField} name='price' />
@@ -40,4 +40,4 @@ const SocialMenuForm = ({ handleSubmit, products }) =>
 export default reduxForm({
   form: 'shopOffer',
   validate
-})(SocialMenuForm)
+})(OfferMenuForm)

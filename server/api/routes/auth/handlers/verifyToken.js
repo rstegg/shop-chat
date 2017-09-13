@@ -1,9 +1,7 @@
-const { models } = requireDb
-const { User } = models
-
+const { User } = requireDb
 const { mailgun } = apiRequire('service/mail')
 
-const {pathEq} = require('ramda')
+const { pathEq } = require('ramda')
 
 module.exports = (req, res) =>
   User.findOne({ where: { permalink: req.params.permalink }})

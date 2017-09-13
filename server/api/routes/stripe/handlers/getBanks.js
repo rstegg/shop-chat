@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 const { merge, pick } = require('ramda')
 
 const userAttributes = ['id', 'stripeBanks']

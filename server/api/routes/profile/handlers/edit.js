@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 
 const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 

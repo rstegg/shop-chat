@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Address } = models
+const { Address } = requireDb
 
 const addressAttributes = ['id', 'name', 'line1', 'line2', 'city', 'region', 'country', 'zip']
 

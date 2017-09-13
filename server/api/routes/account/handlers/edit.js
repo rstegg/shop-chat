@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 
 const crypto = require('crypto')
 const mailcomposer = require('mailcomposer')
@@ -9,9 +8,7 @@ const { confirmationMail, sendConfirmation } = apiRequire('service/mail')
 
 const { allPass, path, pick, pipe, merge, isNil } = require('ramda')
 
-const accountAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
-
-const validField = p => obj => !isNil(path([p], obj))
+const accountAttributes = [ 'id', 'name', 'username', 'image', 'bio', 'website' ]
 
 const getAccount = path(['body', 'account'])
 const getOldPassword = path(['body', 'account', 'oldPassword'])

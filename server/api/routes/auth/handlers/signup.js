@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User, Thread } = models
+const { User, Thread } = requireDb
 const jwt = require('jsonwebtoken')
 
 const crypto = require('crypto')

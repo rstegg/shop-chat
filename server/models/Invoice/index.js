@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) =>
-  sequelize.define('invoices', {
+module.exports = (sequelize, DataTypes) => {
+  const Invoice = sequelize.define('invoice', {
     transaction: {
       type: DataTypes.STRING,
       allowNull: true
@@ -27,11 +27,11 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
-    freezeTableName: true,
-    classMethods: {
-      associate () {
-        this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      }
-    }
   })
+
+  Invoice.associate = ({ User }) => {
+    Invoice.belongsTo(User)
+  }
+
+  return Invoice
+}

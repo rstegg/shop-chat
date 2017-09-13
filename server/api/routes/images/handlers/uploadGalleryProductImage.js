@@ -1,6 +1,4 @@
-const { models } = requireDb
-const { Product } = models
-
+const { Product } = requireDb
 const { length } = require('ramda')
 
 module.exports = (req, res) => {

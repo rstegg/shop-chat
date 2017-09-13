@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Product } = models
+const { Product } = requireDb
 
 const { mailgun } = apiRequire('service/mail')
 

@@ -2,8 +2,8 @@ const crypto = require('crypto')
 
 //TODO: Clean up model
 
-module.exports = (sequelize, DataTypes) =>
-  sequelize.define('users', {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('user', {
     stripeBitcoins: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
@@ -92,30 +92,25 @@ module.exports = (sequelize, DataTypes) =>
     image: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    verifyNeeded: {
-      type: DataTypes.JSONB,
-      allowNull: true
-    }
-  }, {
-    freezeTableName: true,
-    classMethods: {
-      associate () {
-        this.belongsTo(sequelize.models['threads'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasMany(sequelize.models['shops'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasMany(sequelize.models['products'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasMany(sequelize.models['messages'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasMany(sequelize.models['offers'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      }
-    },
-    instanceMethods: {
-      validPassword(password) {
-        const testhash = crypto.createHash('md5').update(password + this.salt).digest("hex");
-        if (testhash === this.password) {
-          return true;
-        } else {
-          return false;
-        }
-      }
     }
   })
+
+  User.associate = ({ Thread, Shop, Product, Message, Offer }) => {
+    User.belongsTo(Thread)
+    User.hasMany(Shop)
+    User.hasMany(Product)
+    User.hasMany(Message)
+    User.hasMany(Offer)
+  }
+
+  User.prototype.validPassword = function(password) {
+    const testhash = crypto.createHash('md5').update(password + this.salt).digest("hex");
+    if (testhash === this.password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return User
+}

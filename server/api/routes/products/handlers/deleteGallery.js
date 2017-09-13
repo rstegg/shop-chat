@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { Product } = models
+const { Product } = requireDb
 const { view, lensIndex, prop } = require('ramda')
 
 const getGallery = prop('gallery')

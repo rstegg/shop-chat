@@ -1,5 +1,7 @@
-module.exports = (sequelize, DataTypes) =>
-  sequelize.define('products', {
+const { curry } = require('ramda')
+
+module.exports = (sequelize, DataTypes) => {
+  const Product = sequelize.define('product', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -60,14 +62,26 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    freezeTableName: true,
-    classMethods: {
-      associate () {
-        this.belongsTo(sequelize.models['shops'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.belongsTo(sequelize.models['users'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.belongsTo(sequelize.models['threads'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-        this.hasMany(sequelize.models['offers'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      }
-    }
   })
+
+  Product.associate = ({ Shop, User, Thread, Offer }) => {
+    Product.belongsTo(Shop)
+    Product.belongsTo(User)
+    Product.belongsTo(Thread)
+    Product.hasMany(Offer)
+  }
+
+  Product.getProductsByShop = (slug, shop) =>
+    Product.findOne({
+      include: SingleProductAssociations,
+      where: { slug, shopId: shop.id },
+      attributes: productParams
+    })
+    .then(product =>
+      !product ? Promise.reject('Invalid product id')
+      : product
+    )
+
+  return Product
+
+}

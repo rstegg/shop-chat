@@ -1,5 +1,4 @@
-const { models } = requireDb
-const { User } = models
+const { User } = requireDb
 
 const accountAttributes = ['id', 'name', 'username', 'image', 'bio', 'website'] //TODO: accountAttributes (placeholder = profileAttributes)
 

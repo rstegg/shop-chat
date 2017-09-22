@@ -23,7 +23,8 @@ fs.readdirSync(__dirname)
   .filter(fileIsModelDir)
   .forEach(file => {
     const model = sequelize.import(file + '/index.js')
-    db[upperFirst(model.name)] = model
+    const ModelRef = upperFirst(model.name) // user -> User
+    db[ModelRef] = model
   })
 
 Object.keys(db).forEach(modelName => {
@@ -34,7 +35,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
-
-sequelize.sync({ force: true })
 
 module.exports = db

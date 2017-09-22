@@ -1,13 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('message', {
-    contentType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    text: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    }
+    contentType: DataTypes.STRING,
+    text: DataTypes.STRING
   })
 
   Message.associate = ({ User, Thread, Offer }) => {

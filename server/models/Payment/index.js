@@ -1,41 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
   const Payment = sequelize.define('payment', {
-    processor: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    paymentPackageId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    paymentSettingsKey: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    storedCard: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    method: {
-      type: DataTypes.STRING,
-      // allowedValues: ['credit', 'debit', 'shipping-credit'],
-      allowNull: true
-    },
+    processor: DataTypes.STRING,
+    paymentPackageId: DataTypes.STRING,
+    paymentSettingsKey: DataTypes.STRING,
+    storedCard: DataTypes.STRING,
+    method: DataTypes.STRING, // allowedValues: ['credit', 'debit', 'shipping-credit'],
     status: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 'new'
     },
-    mode: {
-      type: DataTypes.STRING,
-      allowNull: true
-      // allowedValues: ['authorize', 'capture', 'refund', 'cancel', 'void']
-    },
+    mode: DataTypes.STRING, // allowedValues: ['authorize', 'capture', 'refund', 'cancel', 'void']
   })
 
   Payment.associate = ({ User }) => {
     Payment.belongsTo(User)
-    // this.hasMany(sequelize.models['transactions'], { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+    // Payment.hasMany(Transactions)
   }
 
   return Payment

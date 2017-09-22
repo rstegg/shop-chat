@@ -1,27 +1,17 @@
+const Unique = type =>
+({
+  type,
+  allowNull: false,
+  defaultValue: false
+})
+
 module.exports = (sequelize, DataTypes) => {
   const Shop = sequelize.define('shop', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    isPublic: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    slug: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    name: DataTypes.STRING,
+    description: DataTypes.STRING,
+    isPublic: DataTypes.BOOLEAN,
+    slug: Unique(DataTypes.STRING),
+    image: DataTypes.STRING
   })
 
   Shop.associate = ({ User, Thread, Product }) => {

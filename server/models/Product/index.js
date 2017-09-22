@@ -2,66 +2,28 @@ const { curry } = require('ramda')
 
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('product', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    slug: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    name: DataTypes.STRING,
+    description: DataTypes.STRING,
+    category: DataTypes.STRING,
+    slug: DataTypes.STRING,
     layout: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 'grid'
     },
-    gallery: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true,
-      defaultValue: []
-    },
-    themes: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
-    elements: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: true
-    },
-    options: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: true
-    },
-    isPublic: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    subCategory: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    tags: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
-    },
+    gallery: DataTypes.ARRAY(DataTypes.STRING),
+    themes: DataTypes.JSONB,
+    elements: DataTypes.ARRAY(DataTypes.JSONB),
+    options: DataTypes.ARRAY(DataTypes.JSONB),
+    isPublic: DataTypes.BOOLEAN,
+    subCategory: DataTypes.STRING,
+    tags: DataTypes.ARRAY(DataTypes.STRING),
     price: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: '0'
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    image: DataTypes.STRING
   })
 
   Product.associate = ({ Shop, User, Thread, Offer }) => {
@@ -71,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasMany(Offer)
   }
 
-  Product.getProductsByShop = (slug, shop) =>
+  Product.getProductByShop = curry((slug, shop) =>
     Product.findOne({
       include: SingleProductAssociations,
       where: { slug, shopId: shop.id },
@@ -81,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       !product ? Promise.reject('Invalid product id')
       : product
     )
+  )
 
   return Product
 

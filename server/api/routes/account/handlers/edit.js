@@ -68,8 +68,8 @@ module.exports = (req, res) =>
     .then(user => {
       const updatedUser = user[1]
       if (updatedUser.email !== req.user.email) {
-        const { permalink, verify_token } = updatedUser
-        const permalink_url = `https://kuwau.com/api/v1/auth/signup/email_confirmation/${permalink}/${verify_token}`
+        const { permalink, verifyToken } = updatedUser
+        const permalink_url = `https://kuwau.com/api/v1/auth/signup/email_confirmation/${permalink}/${verifyToken}`
         const mail = confirmationMail(updatedUser, permalink_url)
         sendConfirmation(mail, updatedUser)
       }

@@ -20,6 +20,6 @@ const SingleProductAssociations = [
 
 module.exports = (req, res) =>
   Shop.findShopBySlug(req.params.shopId)
-  .then(Product.getProductsByShop(req.params.id))
+  .then(Product.getProductByShop(req.params.id))
   .then(product => res.status(200).json({product}))
   .catch(error => res.status(400).json({error}))

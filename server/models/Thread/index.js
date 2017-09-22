@@ -1,13 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Thread = sequelize.define('thread', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    owner: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    }
+    name: DataTypes.STRING,
+    owner: DataTypes.STRING
   })
 
   Thread.associate = ({ User, Message, Shop, Product }) => {

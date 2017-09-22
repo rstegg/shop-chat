@@ -1,45 +1,22 @@
+const False = type =>
+({
+  type,
+  allowNull: true,
+  defaultValue: false
+})
+
 module.exports = (sequelize, DataTypes) => {
 
   const Shipping = sequelize.define('shipping', {
-    carrier: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    tracking: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    method: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    rate: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    packed: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: false
-    },
-    shipped: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: false
-    },
-    delivered: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: false
-    },
-    shippingLabelUrl: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    customsLabelUrl: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    carrier: DataTypes.STRING,
+    tracking: DataTypes.STRING,
+    method: DataTypes.STRING,
+    rate: DataTypes.STRING,
+    packed: False(DataTypes.BOOLEAN),
+    shipped: False(DataTypes.BOOLEAN),
+    delivered: False(DataTypes.BOOLEAN),
+    shippingLabelUrl: DataTypes.STRING,
+    customsLabelUrl: DataTypes.STRING
   })
 
   Shipping.associate = ({ User, Address }) => {

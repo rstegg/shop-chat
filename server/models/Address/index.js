@@ -1,37 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
   const Address = sequelize.define('address', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    line1: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    line2: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    region: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    zip: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    phone: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    name: DataTypes.STRING,
+    line1: DataTypes.STRING,
+    line2: DataTypes.STRING,
+    city: DataTypes.STRING,
+    region: DataTypes.STRING,
+    country: DataTypes.STRING,
+    zip: DataTypes.STRING,
+    phone: DataTypes.STRING
   })
 
   Address.associate = ({ User, Shipping }) => {

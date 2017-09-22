@@ -10,6 +10,7 @@ const verifyTokenHandler = require('./handlers/verifyToken')
 
 const validateBody = apiRequire('middleware/validate-body')
 const validFields = apiRequire('middleware/valid-fields')
+const hashPassword = apiRequire('middleware/hash-password')
 
 const validSignupUser = validFields('user', ['name', 'email', 'username', 'password'])
 
@@ -21,6 +22,7 @@ module.exports =
     )
     .post(`/signup`,
       validateBody(validSignupUser),
+      hashPassword,
       signupHandler
     )
    .post(`/signup/validate_email`,
@@ -31,6 +33,6 @@ module.exports =
       validateBody(prop('username'), 'missing username'),
       validateUsernameHandler
     )
-    .get(`/signup/email_confirmation/:permalink/:verify_token`,
+    .get(`/signup/email_confirmation/:permalink/:verifyToken`,
       verifyTokenHandler
     )

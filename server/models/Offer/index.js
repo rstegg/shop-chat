@@ -1,22 +1,15 @@
+const Default = (type, defaultValue) =>
+({
+  type,
+  defaultValue
+})
+
 module.exports = (sequelize, DataTypes) => {
   const Offer = sequelize.define('offer', {
-    state: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: 'open'
-    },
-    productName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    price: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    sellerId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
+    state: Default(DataTypes.STRING, 'open'),
+    productName: DataTypes.STRING,
+    price: DataTypes.STRING,
+    sellerId: DataTypes.INTEGER
   })
 
   Offer.associate = ({ User, Product, Message }) => {

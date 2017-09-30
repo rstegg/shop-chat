@@ -11,7 +11,7 @@ const CheckoutCart = ({ cart, productRemoveFromCart }) =>
         <Button.Group vertical>
           {length(cart) ? cart.map((product, i) =>
             <Segment key={i}>
-              <Label to={`/shop/${product.shop.slug}/product/${product.slug}`} as={NavLink} basic image>
+              <Label to={`/user/${product.username}/product/${product.slug}`} as={NavLink} basic image>
                 <img src={product.image || '/images/productholder.png'} alt={product.name} /> {product.name}
               </Label>
               <Label basic color='red' icon='delete' onClick={() => productRemoveFromCart(product)} style={{ border: 'none' }}/>

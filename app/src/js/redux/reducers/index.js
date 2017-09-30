@@ -10,7 +10,6 @@ import chat from './chat'
 import offers from './offers'
 import orders from './orders'
 import profile from './profile'
-import shops from './shops'
 import products from './products'
 
 export default combineReducers({
@@ -22,7 +21,6 @@ export default combineReducers({
   offers,
   orders,
   profile,
-  shops,
   products,
   form: formReducer,
   router: routerReducer

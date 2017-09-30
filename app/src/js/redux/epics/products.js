@@ -18,30 +18,30 @@ import { Observable } from 'rxjs/Rx'
 import { authGet, authPost, authImagePost, authPut, authDelete } from './helpers/authReq'
 
 const api = {
-  fetchProducts: ({ shopId, token }) =>
-    authGet(`products/${shopId}`, token),
-  fetchSingleProduct: ({ productId, shopId, token }) =>
-    authGet(`products/${shopId}/${productId}`, token),
-  createProduct: ({ product, shopId, token }) =>
-    authPost(`products/${shopId}`, { product }, token),
+  fetchProducts: ({ profileId, token }) =>
+    authGet(`products/${profileId}`, token),
+  fetchSingleProduct: ({ productId, token }) =>
+    authGet(`products/${productId}`, token),
+  createProduct: ({ product, token }) =>
+    authPost('products', { product }, token),
   shareProduct: ({ name, email, message, token, url, productId }) =>
     authPost('products/share', { name, email, message, token, url, productId }, token),
   uploadProductImage: ({ image, token }) =>
     authImagePost('image/product', image, token),
   uploadEditProductImage: ({ image, product, token }) =>
-    authImagePost(`image/${product.shopId}/product/${product.id}`, image, token),
+    authImagePost(`image/${product.userId}/product/${product.id}`, image, token),
   uploadGalleryProductImage: ({ image, index, product, user }) =>
-    authImagePost(`image/${product.shopId}/product/${product.id}/gallery/${index}`, image, user.token),
+    authImagePost(`image/product/${product.id}/gallery/${index}`, image, user.token),
   deleteProductGalleryImage: ({ index, product, user }) =>
-    authDelete(`products/${product.shopId}/${product.id}/gallery/${index}`, user.token),
+    authDelete(`products/${product.id}/gallery/${index}`, user.token),
   uploadEditProductLayout: ({ layout, product, user }) =>
-    authPut(`products/${product.shopId}/${product.id}/layout`, { layout }, user.token),
+    authPut(`products/${product.id}/layout`, { layout }, user.token),
   uploadEditProductTheme: ({ theme, color, product, user }) =>
-    authPut(`products/${product.shopId}/${product.id}/theme`, { theme, color }, user.token),
-  editProduct: ({ product, shopId, token }) =>
-    authPut(`products/${shopId}/${product.id}`, { product }, token),
-  deleteProduct: ({ id, shopId, token }) =>
-    authDelete(`products/${shopId}/${id}`, token),
+    authPut(`products/${product.id}/theme`, { theme, color }, user.token),
+  editProduct: ({ product, token }) =>
+    authPut(`products/${product.id}`, { product }, token),
+  deleteProduct: ({ product, token }) =>
+    authDelete(`products/${product.id}`, token),
 }
 
 const fetchProducts = action$ =>

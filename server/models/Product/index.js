@@ -1,8 +1,11 @@
 const { curry } = require('ramda')
 
+const productParams = [ 'id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image' ]
+
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('product', {
     name: DataTypes.STRING,
+    username: DataTypes.STRING,
     description: DataTypes.STRING,
     category: DataTypes.STRING,
     slug: DataTypes.STRING,
@@ -26,24 +29,31 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING
   })
 
-  Product.associate = ({ Shop, User, Thread, Offer }) => {
-    Product.belongsTo(Shop)
+  Product.associate = ({ User, Thread, Offer }) => {
     Product.belongsTo(User)
     Product.belongsTo(Thread)
     Product.hasMany(Offer)
   }
 
-  Product.getProductByShop = curry((slug, shop) =>
+  Product.getProductBySlug = (slug, User, Thread) =>
     Product.findOne({
-      include: SingleProductAssociations,
-      where: { slug, shopId: shop.id },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username', 'image']
+        },
+        {
+          model: Thread,
+          attributes: [ 'id', 'name', 'owner' ]
+        }
+      ],
+      where: { slug },
       attributes: productParams
     })
     .then(product =>
       !product ? Promise.reject('Invalid product id')
       : product
     )
-  )
 
   return Product
 

@@ -45,9 +45,8 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING
   })
 
-  User.associate = ({ Account, Thread, Shop, Product, Message, Offer }) => {
+  User.associate = ({ Account, Thread, Product, Message, Offer }) => {
     User.belongsTo(Thread)
-    User.hasMany(Shop)
     User.hasMany(Product)
     User.hasMany(Message)
     User.hasMany(Offer)

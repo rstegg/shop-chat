@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Card, Image } from 'semantic-ui-react'
 
 const ProductListItem = ({ product }) =>
-  <Card as={NavLink} to={`/shop/${product.shop.slug}/product/${product.slug}`}>
+  <Card as={NavLink} to={`/user/${product.username}/product/${product.slug}`}>
     <Image src={product.image || '/images/productholder.png'} />
     <Card.Content>
       <Card.Header>{product.name}</Card.Header>

@@ -4,7 +4,7 @@ import 'rxjs'
 import React from 'react'
 import { render } from 'react-dom'
 
-import RootRouter from './router'
+import RootRouter from 'navigation'
 
 window.Stripe.setPublishableKey(process.env.STRIPE_PUBLISHABLE)
 

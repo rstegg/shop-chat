@@ -1,10 +1,10 @@
-const { Product, Shop } = requireDb
+const { Product } = requireDb
 
 const shortId = require('shortid')
 
 const { assoc, path, pick } = require('ramda')
 
-const productParams = ['id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image', 'shopId']
+const productParams = ['id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image', 'userId']
 
 const validate = req =>
   Product.findOne({
@@ -23,10 +23,10 @@ module.exports = (req, res) =>
       const updatedProduct = {
         themes: updateTheme(product.themes)
       }
-      return Product.update(updatedProduct, { where: { id: req.params.id, shopId: req.params.shopId, userId: req.user.id }, returning: true, plain: true })
+      return Product.update(updatedProduct, { where: { id: req.params.id, userId: req.user.id }, returning: true, plain: true })
     })
     .then(savedProduct => {
       const product = pick(productParams, savedProduct[1])
-      res.status(200).json({product})
+      res.status(200).json({ product })
     })
-    .catch(error => res.status(400).json({error}))
+    .catch(error => res.status(400).json({ error }))

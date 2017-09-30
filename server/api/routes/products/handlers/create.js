@@ -1,9 +1,9 @@
-const { Product, Shop, Thread } = requireDb
+const { Product, Thread } = requireDb
 const shortId = require('shortid')
 
 const { merge, pick } = require('ramda')
 
-const productParams = ['id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image', 'shopId']
+const ProductParams = [ 'id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image' ]
 
 const defaultTheme = {
   rgb: {
@@ -31,33 +31,24 @@ const defaultThemes = {
   font: defaultFontTheme,
 }
 
-const getValidSlug = (slug, shopId, thread) =>
+const getValidSlug = (slug, userId, thread) =>
   new Promise(resolve =>
     Product.findOne({
-      where: { slug, shopId }
+      where: { slug, userId }
     })
     .then(product =>
       product ?
-        resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`), shopId)
-        : resolve({slug, thread})
+        resolve(getValidSlug(`${slug}-${shortId.generate().slice(0,1)}`, userId, thread))
+        : resolve({ slug, thread })
     )
   )
 
-const createThread = (shopId, username, slug) =>
-  Thread.create({ title: slug, owner: username }, { plain: true })
+const createThread = (user, slug) =>
+  Thread.create({ title: slug, owner: user.username }, { plain: true })
     .then(thread =>
       !thread ? Promise.reject('Thread not created')
-      : getValidSlug(slug, shopId, thread)
+      : getValidSlug(slug, user.id, thread)
     )
-
-const getValidParams = (shopId, userId, slug) =>
-  Shop.findOne({
-    where: { id: shopId, userId }
-  })
-  .then(shop =>
-    !shop ? Promise.reject('Invalid permission')
-    : createThread(shopId, userId, slug)
-  )
 
 const validate = req => {
   const slug =
@@ -67,20 +58,20 @@ const validate = req => {
       .toLowerCase()
       .trim()
 
-  return getValidParams(req.params.shopId, req.user.id, slug)
+  return createThread(req.user, slug)
 }
 
 module.exports = (req, res) =>
   validate(req)
-    .then(({slug, thread}) => {
+    .then(({ slug, thread }) => {
       const newProduct = merge({
         slug,
         themes: defaultThemes,
-        shopId: req.params.shopId,
         threadId: thread.id,
-        userId: req.user.id
-      }, pick(productParams, req.body.product))
+        userId: req.user.id,
+        username: req.user.username,
+      }, pick(ProductParams, req.body.product))
       return Product.create(newProduct, { plain: true })
     })
-    .then(product => res.status(200).json({product}))
-    .catch(error => res.status(400).json({error})) //TODO: return custom error handling
+    .then(product => res.status(200).json({ product }))
+    .catch(error => res.status(400).json({ error })) //TODO: return custom error handling

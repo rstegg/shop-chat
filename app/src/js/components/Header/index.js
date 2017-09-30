@@ -30,8 +30,8 @@ const Header = ({ user, logout, location }) =>
         <Menu.Item position='right'>
           <Menu.Menu>
             <HeaderNavLabel to='/' icon='home' text={!isMobile && 'home'} />
-            <HeaderNavLabel to='/shops' icon='book' text={!isMobile && 'your shops'} />
-            <HeaderNavLabel to='/shops/new' icon='edit' text={!isMobile && 'start a shop'} />
+            <HeaderNavLabel to={`/user/${user.username}`} icon='book' text={!isMobile && 'your products'} />
+            <HeaderNavLabel to='/products/new' icon='edit' text={!isMobile && 'start a product'} />
             <Dropdown trigger={isMobile ? <MobileProfileButton image={user.image} /> : <ProfileButton username={user.username} image={user.image} />} icon={null} pointing='top right'>
               <Dropdown.Menu>
                 <Dropdown.Item as={NavLink} to={`/user/${user.username}`} text='Profile' active={location.pathname === `/user/${user.username}`} />

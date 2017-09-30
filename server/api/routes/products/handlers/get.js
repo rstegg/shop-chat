@@ -1,13 +1,23 @@
-const { Product, Shop, User, Thread } = requireDb
+const { Product, User, Thread } = requireDb
 const { curry } = require('ramda')
 
-const productParams = ['id', 'name', 'slug', 'isPublic', 'description', 'gallery', 'layout', 'themes', 'category', 'subCategory', 'price', 'image', 'shopId']
+const ProductAttrs = [
+  'id',
+  'name',
+  'slug',
+  'isPublic',
+  'description',
+  'gallery',
+  'layout',
+  'themes',
+  'category',
+  'subCategory',
+  'price',
+  'image',
+  'userId'
+]
 
-const SingleProductAssociations = [
-  {
-    model: Shop,
-    attributes: ['image', 'name', 'slug']
-  },
+const ProductAssociations = [
   {
     model: User,
     attributes: ['id', 'username', 'image']
@@ -18,8 +28,18 @@ const SingleProductAssociations = [
   }
 ]
 
+const getProductBySlug = slug =>
+  Product.findOne({
+    include: ProductAssociations,
+    where: { slug },
+    attributes: ProductAttrs
+  })
+  .then(product =>
+    !product ? Promise.reject('Invalid product id')
+    : product
+  )
+
 module.exports = (req, res) =>
-  Shop.findShopBySlug(req.params.shopId)
-  .then(Product.getProductByShop(req.params.id))
-  .then(product => res.status(200).json({product}))
-  .catch(error => res.status(400).json({error}))
+  getProductBySlug(req.params.id)
+  .then(product => res.status(200).json({ product }))
+  .catch(error => res.status(400).json({ error }))

@@ -10,7 +10,6 @@ const shortId = require('shortid')
 const uploadProfileImage = require('./handlers/uploadProfileImage')
 const uploadProductImage = require('./handlers/uploadProductImage')
 const uploadGalleryProductImage = require('./handlers/uploadGalleryProductImage')
-const uploadShopImage = require('./handlers/uploadShopImage')
 
 const upload = multer({
   storage: imager({
@@ -42,27 +41,19 @@ const success =
 module.exports =
   router
     .use(passport.authenticate('jwt', { session: false }))
-    .post(`/shop`,
-      upload.single('image'),
-      success
-    )
-    .post(`/product`,
-      upload.single('image'),
-      success
-    )
-    .post(`/shop/:id`, //EDIT SHOP IMAGE
-      upload.single('image'),
-      uploadShopImage
-    )
-    .post(`/profile`, //EDIT PROFILE IMAGE
+    .post('/profile', //EDIT PROFILE IMAGE
       upload.single('image'),
       uploadProfileImage
     )
-    .post(`/:shopId/product/:id`, //EDIT PRODUCT IMAGE
+    .post('/product',
+      upload.single('image'), //UPLOAD PRODUCT IMAGE
+      success
+    )
+    .post('/product/:id', //EDIT PRODUCT IMAGE
       upload.single('image'),
       uploadProductImage
     )
-    .post(`/:shopId/product/:id/gallery/:index`, //EDIT PRODUCT GALLERY
+    .post('/product/:id/gallery/:index', //EDIT PRODUCT GALLERY
       upload.single('image'),
       uploadGalleryProductImage
     )

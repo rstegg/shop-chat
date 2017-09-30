@@ -3,7 +3,7 @@ import { Icon } from 'semantic-ui-react'
 import { Field } from 'redux-form'
 
 import InputField from './InputField'
-import onClickOutside from 'components/OnClickOutside'
+import onClickOutside from 'react-onclickoutside'
 
 class EditorField extends Component {
   handleClickOutside = () => {

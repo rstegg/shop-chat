@@ -3,7 +3,7 @@ const { Product } = requireDb
 module.exports = (req, res) =>
   Product.update(
     { image: req.file.location },
-    { where: { id: req.params.id, shopId: req.params.shopId, userId: req.user.id },
+    { where: { id: req.params.id, userId: req.params.profileId, userId: req.user.id },
       returning: true,
       plain: true
    })

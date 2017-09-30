@@ -3,7 +3,7 @@
 @import 'Root.css';
 @import 'components/Product/AdminMenu.css';
 @import 'components/Product/CartMenu.css';
-@import 'components/Product/Sidebar.css';
+@import 'components/Sidebar.css';
 @import 'components/Header.css';
 @import 'components/Chat.css';
 @import 'components/Dropzone.css';

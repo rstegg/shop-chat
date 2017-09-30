@@ -4,13 +4,13 @@ const { length } = require('ramda')
 module.exports = (req, res) => {
   const { index } = req.params
 
-  Product.findOne({ where: { id: req.params.id, shopId: req.params.shopId, userId: req.user.id } })
+  Product.findOne({ where: { id: req.params.id, userId: req.params.profileId, userId: req.user.id } })
     .then(product => {
       const { gallery } = product
       const updatedGallery = { gallery: [...product.gallery.slice(0, index), req.file.location, ...product.gallery.slice(index + 1)] }
       Product.update(
         updatedGallery,
-        { where: { id: req.params.id, shopId: req.params.shopId, userId: req.user.id },
+        { where: { id: req.params.id, userId: req.params.profileId, userId: req.user.id },
         returning: true,
         plain: true
         }

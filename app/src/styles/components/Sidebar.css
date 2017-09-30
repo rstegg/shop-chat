@@ -1,0 +1,17 @@
+.product-sidebar-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  margin: 0 !important;
+}
+
+.ui.bottom.sidebar.product-sidebar {
+  position: fixed;
+  bottom: 100px !important;
+}
+
+.pusher {
+  z-index: auto !important;
+}

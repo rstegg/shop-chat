@@ -21,6 +21,7 @@ const alias = {
    'components': path.join(paths.src, 'js/components'),
    'elements': path.join(paths.src, 'js/elements'),
    'layouts': path.join(paths.src, 'js/layouts'),
+   'navigation': path.join(paths.src, 'js/navigation'),
    'pages': path.join(paths.src, 'js/pages'),
    'utils': path.join(paths.src, 'js/utils')
 }

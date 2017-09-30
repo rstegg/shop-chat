@@ -217,12 +217,11 @@ export const onShareProductSuccess = res =>
   }
 })
 
-export const deleteProduct = (id, shopId, user) =>
+export const deleteProduct = (product, user) =>
 ({
   type: 'DELETE_PRODUCT',
   payload: {
-    id,
-    shopId,
+    product,
     token: user.token
   }
 })
@@ -235,12 +234,12 @@ export const onDeleteProductSuccess = res =>
   }
 })
 
-export const fetchProducts = (shopId, user) =>
+export const fetchProducts = (profileId, user) =>
 ({
   type: 'FETCH_PRODUCTS',
   payload: {
     token: user.token,
-    shopId
+    profileId
   }
 })
 
@@ -253,12 +252,11 @@ export const onFetchProductsSuccess = res =>
 })
 
 
-export const fetchSingleProduct = (productId, shopId, user) =>
+export const fetchSingleProduct = (productId, user) =>
 ({
   type: 'FETCH_SINGLE_PRODUCT',
   payload: {
     productId,
-    shopId,
     token: user.token
   }
 })
@@ -271,12 +269,11 @@ export const onFetchSingleProductSuccess = res =>
   }
 })
 
-export const createProduct = (product, shopId, user) =>
+export const createProduct = (product, user) =>
 ({
   type: 'CREATE_PRODUCT',
   payload: {
     product,
-    shopId,
     token: user.token
   }
 })
@@ -312,7 +309,7 @@ export const uploadEditProductImage = (image, product, user) =>
   payload: {
     image,
     product,
-    shopId: product.shopId,
+    profileId: product.profileId,
     token: user.token,
   }
 })
@@ -338,7 +335,7 @@ export const editProduct = (product, user) =>
   type: 'EDIT_PRODUCT',
   payload: {
     product,
-    shopId: product.shopId,
+    profileId: product.profileId,
     token: user.token,
   }
 })

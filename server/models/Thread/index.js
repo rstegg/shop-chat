@@ -4,10 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     owner: DataTypes.STRING
   })
 
-  Thread.associate = ({ User, Message, Shop, Product }) => {
+  Thread.associate = ({ User, Message, Product }) => {
     Thread.hasMany(User)
     Thread.hasMany(Message)
-    Thread.hasMany(Shop)
     Thread.hasMany(Product)
   }
 

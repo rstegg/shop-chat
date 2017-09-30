@@ -17,10 +17,9 @@ const validateParams = apiRequire('middleware/validate-params')
 const validField = apiRequire('middleware/valid-field')
 const validFields = apiRequire('middleware/valid-fields')
 
-const validProduct = validFields('product', ['name', 'isPublic', 'price'])
-const validCreateProductParams = validFields(false, ['shopId'])
-const validEditProductParams = validFields(false, ['shopId', 'id'])
-const validShareProduct = validFields(false, ['email', 'name', 'url', 'productId'])
+const validProduct = validFields('product', [ 'name', 'isPublic', 'price' ])
+const validEditProductParams = validFields(false, [ 'id'])
+const validShareProduct = validFields(false, [ 'email', 'name', 'url' ])
 
 const validLayoutField = layout => ['grid', 'image', 'gallery'].includes(layout)
 const validRGBField = p => obj => is(Object, path(p, obj))
@@ -43,40 +42,36 @@ const validTheme = validFields(false, ['theme', 'color'])
 
 module.exports =
   router
-    .get(`/:shopId/:id`,
+    .get('/:id',
       getProductHandler
     )
     .use(passport.authenticate('jwt', { session: false }))
-    .get(`/:shopId`,
-      getProductsHandler
-    )
-    .post(`/:shopId`,
+    .post('/',
       validateBody(validProduct),
-      validateParams(validCreateProductParams),
       createProductHandler
     )
-    .put(`/:shopId/:id`,
+    .put('/:id',
       validateBody(validProduct),
       validateParams(validEditProductParams),
       editProductHandler
     )
-    .put(`/:shopId/:id/layout`,
+    .put('/:id/layout',
       validateBody(validLayout, 'invalid layout'),
       validateParams(validEditProductParams),
       editProductLayoutHandler
     )
-    .put(`/:shopId/:id/theme`,
+    .put('/:id/theme',
       validateBody(validTheme, 'invalid theme'),
       validateParams(validEditProductParams),
       editProductThemeHandler
     )
-    .post(`/share`,
+    .post('/share',
       validateBody(validShareProduct),
       shareProductHandler
     )
-    .delete(`/:shopId/:id/gallery/:index`,
+    .delete('/:id/gallery/:index',
       deleteProductGalleryHandler
     )
-    .delete(`/:shopId/:id`,
+    .delete('/:id',
       deleteProductHandler
     )

@@ -1,5 +1,5 @@
 .product-admin-menu {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   height: 100px;
@@ -7,7 +7,7 @@
   width: 100%;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 200;
 }
 
 .menu--button {
@@ -21,7 +21,7 @@
   font-size: 2.75vh !important;
 }
 
-@media (min-width: 768px)  {
+@media only and (min-width: 769px)  {
   .product-admin-menu {
     display: flex;
     justify-content: center;
@@ -31,35 +31,7 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    z-index: 100;
-  }
-
-  .product-admin-menu--left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    position: absolute;
-    width: 100px;
-    bottom: 0;
-    left: 5vw;
-    z-index: 100;
-    right: auto;
-    top: auto;
-  }
-
-  .product-admin-menu--right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
-    height: 90%;
-    position: fixed;
-    bottom: 0;
-    left: auto;
-    right: 5vw;
-    top: auto;
+    z-index: 200;
   }
 
   .menu__container {

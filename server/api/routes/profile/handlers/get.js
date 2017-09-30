@@ -1,36 +1,36 @@
-const { User, Shop, Thread } = requireDb
+const { User, Product, Thread } = requireDb
 const { merge, pick } = require('ramda')
 
-const threadAttributes = ['id', 'name', 'owner']
-const profileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website']
-const resProfileAttributes = ['id', 'name', 'username', 'image', 'bio', 'website', 'thread']
-const shopAttributes = ['id', 'name', 'description', 'isPublic', 'slug', 'image']
+const ThreadAttributes = [ 'id', 'name', 'owner' ]
+const ProfileAttributes = [ 'id', 'name', 'username', 'image', 'bio', 'website' ]
+const ResProfileAttributes = [ 'id', 'name', 'username', 'image', 'bio', 'website', 'thread' ]
+const ProductAttributes = [ 'id', 'name', 'username', 'description', 'isPublic', 'slug', 'image' ]
 
-const getShops = user =>
-  Shop.findAll({
+const getProducts = user =>
+  Product.findAll({
     where: { userId: user.id },
-    attributes: shopAttributes
+    attributes: ProductAttributes
   })
-  .then(shops => merge({ shops }, pick(resProfileAttributes, user)))
+  .then(products => merge({ products }, pick(ResProfileAttributes, user)))
 
 const validate = req =>
   User.findOne({
     include: [
       {
         model: Thread,
-        attributes: threadAttributes
+        attributes: ThreadAttributes
       }
     ],
     where: { username: req.params.username },
-    attributes: profileAttributes
+    attributes: ProfileAttributes
   })
   .then(user =>
       !user ?
           Promise.reject('invalid username')
-          : getShops(user)
+          : getProducts(user)
   )
 
 module.exports = (req, res) =>
   validate(req)
-    .then(profile => res.status(200).json({profile}))
-    .catch(error => res.status(400).json({error}))
+    .then(profile => res.status(200).json({ profile }))
+    .catch(error => res.status(400).json({ error }))

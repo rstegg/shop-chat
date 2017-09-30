@@ -86,7 +86,7 @@ export const onEditProfileSuccess = res =>
   }
 })
 
-export const refreshProfileEditing = () =>
+export const refreshProfile = () =>
 ({
-  type: 'REFRESH_PROFILE_EDITING'
+  type: 'REFRESH_PROFILE'
 })

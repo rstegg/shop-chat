@@ -402,6 +402,13 @@ export default function(state = initialState, action) {
     return Object.assign({}, state, {
       current: action.payload.product
     })
+  case 'REFRESH_PROFILE':
+    return Object.assign({}, state, {
+      new: {
+        ...initialState.new,
+        isCreated: false
+      }
+    })
   case 'REFRESH_PRODUCTS':
     return initialState
   case 'FETCH_PRODUCTS_FAILURE':

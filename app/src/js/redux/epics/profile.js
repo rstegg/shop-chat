@@ -5,9 +5,9 @@ import { authGet, authImagePost, authPut } from './helpers/authReq'
 
 const api = {
   fetchProfile: ({ username, token }) =>
-    authGet(`profile/${username}`, token),
+    authGet(`user/${username}`, token),
   editProfile: ({ profile, token }) =>
-   authPut('profile', { profile }, token),
+   authPut('user', { profile }, token),
   uploadProfileImage: ({ image, token }) =>
     authImagePost('image/profile', image, token)
 }

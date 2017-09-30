@@ -68,7 +68,7 @@ export default function(state = initialState, action) {
       imageLoading: false,
       imageError: false
     })
-  case 'REFRESH_PROFILE_EDITING':
+  case 'REFRESH_PROFILE':
     return Object.assign({}, state, {
       isLoading: false,
       isEdited: false,

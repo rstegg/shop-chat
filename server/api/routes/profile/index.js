@@ -12,10 +12,10 @@ const validProfile = validFields('profile', ['name', 'username'])
 
 module.exports =
   router
-    .get(`/:username`,
+    .get('/:username',
       getProfileHandler
     )
-    .put(`/`,
+    .put('/',
       passport.authenticate('jwt', { session: false }),
       validateBody(validProfile),
       editProfileHandler
